@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clase 11 — El Cómic | Academia Da Vinci IA</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap');
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue:#4A90D9; --purple:#8E44AD; --gold:#F39C12;
+      --green:#27AE60; --red:#E74C3C; --dark:#0F1626;
+    }
+    body { font-family:'Poppins',sans-serif; background:var(--dark); color:#E8EAF0; }
+
+    /* ── NAV ── */
+    .nav {
+      position:sticky; top:0; z-index:100;
+      background:rgba(15,22,38,0.92); backdrop-filter:blur(12px);
+      border-bottom:1px solid rgba(255,255,255,0.07);
+      padding:14px 40px; display:flex; align-items:center; gap:16px;
+    }
+    .nav-back {
+      color:rgba(255,255,255,0.4); font-size:13px; text-decoration:none;
+      display:flex; align-items:center; gap:6px; transition:color .2s;
+    }
+    .nav-back:hover { color:#fff; }
+    .nav-title { font-weight:700; font-size:15px; color:#fff; }
+    .nav-title span { color:var(--green); }
+    .nav-spacer { flex:1; }
+    .nav-progress {
+      display:flex; align-items:center; gap:8px;
+      font-size:12px; color:rgba(255,255,255,0.4);
+    }
+    .progress-bar {
+      width:100px; height:4px; background:rgba(255,255,255,0.1);
+      border-radius:4px; overflow:hidden;
+    }
+    .progress-fill {
+      height:100%; width:75%; background:var(--green);
+      border-radius:4px;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position:relative; min-height:100vh;
+      display:flex; flex-direction:column;
+      align-items:center; justify-content:center;
+      text-align:center; overflow:hidden; padding:60px 20px;
+    }
+    .hero-video {
+      position:absolute; inset:0;
+      width:100%; height:100%; object-fit:cover;
+      opacity:.2; z-index:0;
+    }
+    .hero-overlay {
+      position:absolute; inset:0;
+      background:linear-gradient(180deg,rgba(15,22,38,.3) 0%,rgba(15,22,38,.65) 60%,var(--dark) 100%);
+      z-index:1;
+    }
+    .hero-content { position:relative; z-index:2; max-width:720px; }
+
+    .hero-badge {
+      display:inline-block;
+      background:rgba(39,174,96,.15); border:1px solid rgba(39,174,96,.35);
+      color:#82E0AA; padding:8px 24px; border-radius:50px;
+      font-size:11px; font-weight:700; letter-spacing:3px;
+      text-transform:uppercase; margin-bottom:24px;
+    }
+    .hero-modulo {
+      font-size:13px; font-weight:600; letter-spacing:3px;
+      text-transform:uppercase; color:rgba(255,255,255,.4); margin-bottom:10px;
+    }
+    .hero h1 {
+      font-size:clamp(42px,7vw,72px); font-weight:900; color:#fff;
+      line-height:1.05; margin-bottom:12px;
+    }
+    .hero h1 span { color:var(--green); }
+    .hero-sub {
+      font-size:18px; color:rgba(255,255,255,.6); margin-bottom:36px;
+      line-height:1.5;
+    }
+
+    .robotsin-float {
+      width:160px; height:160px; margin:0 auto 28px;
+      position:relative;
+    }
+    .robotsin-float img {
+      width:100%; height:100%; object-fit:contain;
+      filter:drop-shadow(0 0 30px rgba(39,174,96,.5));
+      animation:float 3s ease-in-out infinite;
+    }
+    .robotsin-float .fallback { font-size:90px; line-height:160px; }
+    @keyframes float {
+      0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)}
+    }
+
+    .robotsin-bubble {
+      background:rgba(39,174,96,.12);
+      border:1px solid rgba(39,174,96,.3);
+      border-radius:16px; padding:16px 22px;
+      position:relative; font-size:15px;
+      color:rgba(255,255,255,.85); font-style:italic;
+      margin-bottom:32px;
+      max-width:480px; margin-left:auto; margin-right:auto;
+    }
+    .robotsin-bubble::before {
+      content:''; position:absolute;
+      top:-8px; left:50%;
+      width:14px; height:14px;
+      background:rgba(39,174,96,.25);
+      border-top:1px solid rgba(39,174,96,.3);
+      border-left:1px solid rgba(39,174,96,.3);
+      transform:translateX(-50%) rotate(45deg);
+    }
+
+    .hero-chips {
+      display:flex; gap:12px; flex-wrap:wrap; justify-content:center;
+    }
+    .chip {
+      background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1);
+      padding:8px 18px; border-radius:50px; font-size:13px;
+      color:rgba(255,255,255,.7);
+    }
+
+    .divider {
+      height:1px;
+      background:linear-gradient(90deg,transparent,rgba(39,174,96,.3),transparent);
+    }
+
+    /* ── SECCIÓN BASE ── */
+    .section { max-width:900px; margin:0 auto; padding:72px 40px; }
+    .section-header { display:flex; align-items:flex-start; gap:20px; margin-bottom:36px; }
+    .section-robotsin {
+      width:72px; height:72px; flex-shrink:0;
+      border-radius:50%;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08);
+      display:flex; align-items:center; justify-content:center;
+      overflow:hidden;
+    }
+    .section-robotsin img { width:100%; height:100%; object-fit:cover; }
+    .section-robotsin .fallback { font-size:32px; }
+    .section-label {
+      color:var(--green); font-size:11px; font-weight:700;
+      letter-spacing:3px; text-transform:uppercase; margin-bottom:6px;
+    }
+    .section-title {
+      font-size:clamp(24px,4vw,36px); font-weight:800; color:#fff;
+      line-height:1.2;
+    }
+    .section-title span { color:var(--green); }
+
+    /* ── MISIÓN BOX ── */
+    .mision-box {
+      background:linear-gradient(135deg,rgba(39,174,96,.12),rgba(74,144,217,.06));
+      border:1px solid rgba(39,174,96,.3);
+      border-radius:20px; padding:32px; margin-bottom:32px;
+      display:flex; gap:24px; align-items:flex-start;
+    }
+    .mision-icon { font-size:48px; flex-shrink:0; }
+    .mision-box h3 {
+      font-size:18px; font-weight:700; color:var(--green); margin-bottom:8px;
+    }
+    .mision-box p { font-size:15px; color:rgba(255,255,255,.75); line-height:1.7; }
+    .mision-box strong { color:#82E0AA; }
+
+    /* ── OBJETIVOS ── */
+    .obj-grid {
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:16px;
+    }
+    .obj-card {
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.07);
+      border-radius:16px; padding:24px;
+    }
+    .obj-card .ico { font-size:28px; margin-bottom:12px; }
+    .obj-card h4 { font-size:15px; font-weight:700; color:#fff; margin-bottom:6px; }
+    .obj-card p { font-size:13px; color:rgba(255,255,255,.5); }
+
+    /* ── ROBOTSIN INLINE ── */
+    .robotsin-inline {
+      display:flex; gap:20px; align-items:flex-start;
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.07);
+      border-radius:16px; padding:24px;
+      margin:28px 0;
+    }
+    .ri-avatar {
+      width:64px; height:64px; flex-shrink:0;
+      border-radius:50%; overflow:hidden;
+      background:rgba(255,255,255,.05);
+      display:flex; align-items:center; justify-content:center;
+    }
+    .ri-avatar img { width:100%; height:100%; object-fit:cover; }
+    .ri-avatar .fallback { font-size:30px; }
+    .ri-name {
+      font-size:11px; font-weight:700; letter-spacing:2px;
+      text-transform:uppercase; color:var(--green); margin-bottom:4px;
+    }
+    .ri-text { font-size:15px; color:rgba(255,255,255,.8); line-height:1.7; }
+    .ri-text strong { color:#82E0AA; }
+    .ri-text em { color:var(--gold); font-style:normal; font-weight:600; }
+
+    .ri-blue { border-color:rgba(74,144,217,.2); }
+    .ri-blue .ri-name { color:var(--blue); }
+    .ri-blue .ri-text strong { color:#74B9FF; }
+    .ri-gold { border-color:rgba(243,156,18,.2); }
+    .ri-gold .ri-name { color:var(--gold); }
+    .ri-green { border-color:rgba(39,174,96,.2); }
+    .ri-green .ri-name { color:var(--green); }
+
+    /* ── CONCEPTO BOX ── */
+    .concepto {
+      background:linear-gradient(135deg,rgba(39,174,96,.08),rgba(74,144,217,.05));
+      border:1px solid rgba(39,174,96,.2);
+      border-left:4px solid var(--green);
+      border-radius:12px; padding:24px 28px; margin:20px 0;
+    }
+    .concepto p { font-size:16px; color:rgba(255,255,255,.85); line-height:1.75; }
+    .concepto strong { color:#82E0AA; }
+
+    /* ── DIAGRAMA ── */
+    .diagram-card {
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(39,174,96,.15);
+      border-radius:20px; padding:28px; margin:24px 0;
+    }
+    .diagram-title {
+      font-size:11px; font-weight:700; letter-spacing:2px;
+      text-transform:uppercase; color:var(--green); margin-bottom:16px;
+    }
+    .diagram-card img { width:100%; border-radius:10px; background:#fff; }
+
+    /* ── GLOSARIO COMIC ── */
+    .comic-glosario {
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(175px,1fr));
+      gap:12px; margin:20px 0;
+    }
+    .glos-card {
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(39,174,96,.15);
+      border-radius:12px; padding:18px;
+      text-align:center;
+    }
+    .glos-card .ico { font-size:28px; margin-bottom:8px; }
+    .glos-card h5 { font-size:13px; font-weight:700; color:var(--green); margin-bottom:4px; }
+    .glos-card p { font-size:11px; color:rgba(255,255,255,.45); line-height:1.5; }
+
+    /* ── TABLA PROMPTS ── */
+    .prompt-code {
+      background:#0A1628; border:1px solid rgba(39,174,96,.25);
+      border-radius:12px; padding:24px; margin:16px 0;
+      font-family:'Courier New',monospace; font-size:14px;
+      line-height:1.9; color:#A8E6C0;
+    }
+    .prompt-code .plabel {
+      font-family:'Poppins',sans-serif; font-size:10px;
+      letter-spacing:2px; text-transform:uppercase;
+      color:rgba(255,255,255,.25); margin-bottom:12px;
+      display:block;
+    }
+
+    /* ── ACTIVIDADES ── */
+    .act-list { list-style:none; }
+    .act-item {
+      display:flex; gap:18px; padding:22px;
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.07);
+      border-radius:16px; margin-bottom:10px;
+    }
+    .act-num {
+      min-width:46px; height:46px; border-radius:12px;
+      display:flex; align-items:center; justify-content:center;
+      font-size:18px; font-weight:800; flex-shrink:0;
+    }
+    .act-body { flex:1; }
+    .act-body h4 { font-size:15px; font-weight:700; color:#fff; margin-bottom:4px; }
+    .act-body p { font-size:13px; color:rgba(255,255,255,.55); }
+    .act-time {
+      background:rgba(255,255,255,.06); border-radius:8px;
+      padding:4px 12px; font-size:11px; color:rgba(255,255,255,.4);
+      align-self:center; white-space:nowrap; flex-shrink:0;
+    }
+    .a1 .act-num { background:rgba(39,174,96,.2); color:#2ECC71; }
+    .a2 .act-num { background:rgba(74,144,217,.2); color:#74B9FF; }
+    .a3 .act-num { background:rgba(243,156,18,.2); color:#F9CA74; }
+
+    /* ── TAREA ── */
+    .tarea-box {
+      background:linear-gradient(135deg,rgba(243,156,18,.12),rgba(230,126,34,.08));
+      border:1px solid rgba(243,156,18,.25);
+      border-radius:20px; padding:32px;
+      display:flex; gap:24px; align-items:flex-start;
+    }
+    .tarea-icon { font-size:48px; flex-shrink:0; }
+    .tarea-box h3 { font-size:18px; font-weight:700; color:var(--gold); margin-bottom:8px; }
+    .tarea-box p { font-size:15px; color:rgba(255,255,255,.75); line-height:1.7; }
+
+    /* ── INSIGNIA ── */
+    .insignia-section {
+      text-align:center; padding:60px 40px;
+      background:linear-gradient(135deg,rgba(39,174,96,.08),rgba(74,144,217,.05));
+    }
+    .insignia-robotsin {
+      width:100px; height:100px; margin:0 auto 20px;
+      border-radius:50%; overflow:hidden;
+      background:rgba(255,255,255,.05);
+      display:flex; align-items:center; justify-content:center;
+      border:2px solid rgba(39,174,96,.3);
+    }
+    .insignia-robotsin img { width:100%; height:100%; object-fit:cover; }
+    .insignia-robotsin .fallback { font-size:48px; }
+    .insignia-badge {
+      width:120px; height:120px; margin:0 auto 20px;
+      background:linear-gradient(135deg,#27AE60,#4A90D9);
+      border-radius:50%; display:flex; flex-direction:column;
+      align-items:center; justify-content:center;
+      box-shadow:0 0 40px rgba(39,174,96,.4);
+      font-size:40px;
+    }
+    .insignia-title {
+      font-size:22px; font-weight:800; color:#fff; margin-bottom:8px;
+    }
+    .insignia-desc { font-size:14px; color:rgba(255,255,255,.5); }
+
+    /* ── CIERRE ── */
+    .cierre-grid {
+      display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:28px;
+    }
+    .cierre-card {
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.07);
+      border-radius:14px; padding:22px; text-align:center;
+    }
+    .cierre-card .ico { font-size:32px; margin-bottom:10px; }
+    .cierre-card h4 { font-size:14px; font-weight:700; color:#fff; margin-bottom:6px; }
+    .cierre-card p { font-size:12px; color:rgba(255,255,255,.45); }
+
+    .next-box {
+      background:linear-gradient(135deg,rgba(39,174,96,.12),rgba(74,144,217,.08));
+      border:1px solid rgba(39,174,96,.25);
+      border-radius:16px; padding:24px 28px;
+      display:flex; align-items:center; gap:20px;
+    }
+    .next-box h4 {
+      font-size:11px; text-transform:uppercase; letter-spacing:2px;
+      color:rgba(255,255,255,.35); margin-bottom:4px;
+    }
+    .next-box p { font-size:17px; font-weight:700; color:#fff; }
+    .next-box p span { color:var(--green); }
+
+    /* ── LESSON NAV ── */
+    .lesson-nav { display:flex; align-items:stretch; gap:12px; max-width:900px; margin:48px auto 0; padding:32px 40px 0; border-top:1px solid rgba(255,255,255,.06); }
+    .lesson-nav-btn { flex:1; display:flex; align-items:center; gap:14px; padding:18px 22px; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); border-radius:16px; text-decoration:none; color:#fff; transition:background .2s, border-color .2s, transform .15s; }
+    .lesson-nav-btn:hover { background:rgba(255,255,255,.07); border-color:rgba(255,255,255,.18); transform:translateY(-2px); }
+    .lesson-nav-btn.next { justify-content:flex-end; text-align:right; }
+    .nav-arrow { font-size:26px; color:var(--green); flex-shrink:0; line-height:1; }
+    .nav-label { font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,.3); margin-bottom:3px; }
+    .nav-title-btn { font-size:14px; font-weight:700; color:#fff; }
+    .lesson-nav-home { display:flex; align-items:center; justify-content:center; width:52px; flex-shrink:0; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); border-radius:16px; font-size:20px; text-decoration:none; transition:background .2s, border-color .2s; }
+    .lesson-nav-home:hover { background:rgba(255,255,255,.08); border-color:rgba(255,255,255,.2); }
+
+    footer {
+      text-align:center; padding:40px;
+      border-top:1px solid rgba(255,255,255,.06);
+      color:rgba(255,255,255,.2); font-size:12px;
+    }
+    footer strong { color:rgba(255,255,255,.45); }
+
+    @media(max-width:600px){
+      .section{padding:60px 20px;}
+      .mision-box{flex-direction:column;}
+      .cierre-grid{grid-template-columns:1fr;}
+      .nav{padding:14px 20px;}
+      .lesson-nav{flex-wrap:wrap; padding:24px 20px 0;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav class="nav">
+  <a href="index.html" class="nav-back">← Inicio</a>
+  <div class="nav-title">Módulo 3 · <span>La Historia</span></div>
+  <div class="nav-spacer"></div>
+  <div class="nav-progress">
+    <span>Clase 11/12</span>
+    <div class="progress-bar"><div class="progress-fill"></div></div>
+    <span>75%</span>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <video class="hero-video" autoplay loop muted playsinline>
+    <source src="../robotsin/videos/Robot_floating_in_cosmic_space_202606010114.mp4" type="video/mp4">
+    <source src="../robotsin/videos/Robot_floats_in_cosmic_space_202606010118.mp4" type="video/mp4">
+    <source src="../robotsin/videos/Robot_conducting_STEAM_elements_202606010101.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">✍️ Módulo 3 — La Historia</div>
+    <div class="hero-modulo">Academia Da Vinci IA · Clase 11 de 12</div>
+
+    <div class="robotsin-float">
+      <img src="../robotsin/robotsin_escritor.png" alt="D-IA Vinci Escritor"
+           onerror="this.style.display='none'; this.parentElement.querySelector('.fallback').style.display='block'">
+      <div class="fallback" style="display:none">✍️</div>
+    </div>
+
+    <div class="robotsin-bubble">
+      "El guion tiene palabras... ahora el pergamino pide <strong>imágenes</strong>.<br>
+      ¡Vamos a transformar tu historia en un cómic épico con IA!"
+    </div>
+
+    <h1>El <span>Cómic</span></h1>
+    <p class="hero-sub">Hoy conviertes tu guion en imágenes con IA<br>y armas tu primera página de cómic en Canva.</p>
+    <div class="hero-chips">
+      <div class="chip">🎨 Cómic digital</div>
+      <div class="chip">⏱️ 60 minutos</div>
+      <div class="chip">🛠️ ChatGPT + Canva</div>
+      <div class="chip">🖼️ Viñetas con IA</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ MISIÓN ═══ -->
+<div class="divider"></div>
+<div class="section">
+  <div class="mision-box">
+    <div class="mision-icon">🎨</div>
+    <div>
+      <h3>⚡ Misión de hoy: El Pergamino Ilustrado</h3>
+      <p>
+        El guion ya tiene palabras — pero Robotsin Escritor dice que el pergamino mágico ahora pide imágenes.
+        ¡Hay que <strong>transformar el guion en un cómic épico con IA</strong>!<br><br>
+        Tu misión: aprender los elementos de un cómic profesional, generar las imágenes de tus escenas
+        con inteligencia artificial y ensamblar tu primera página completa en Canva.
+      </p>
+    </div>
+  </div>
+
+  <div class="section-header">
+    <div class="section-robotsin">
+      <img src="../robotsin/robotsin_escritor.png" alt="Robotsin"
+           onerror="this.style.display:'none'; this.parentElement.querySelector('.fallback').style.display='flex'">
+      <div class="fallback" style="display:none; width:100%; height:100%; align-items:center; justify-content:center; font-size:30px;">✍️</div>
+    </div>
+    <div>
+      <div class="section-label">Lo que aprenderás hoy</div>
+      <div class="section-title">Objetivos de la <span>Clase</span></div>
+    </div>
+  </div>
+
+  <div class="obj-grid">
+    <div class="obj-card">
+      <div class="ico">📖</div>
+      <h4>Anatomía del Cómic</h4>
+      <p>Conocer viñetas, bocadillos, onomatopeyas y splash pages como un profesional.</p>
+    </div>
+    <div class="obj-card">
+      <div class="ico">🤖</div>
+      <h4>Prompts para Escenas</h4>
+      <p>Aprender a describir escenas del guion para que la IA genere las imágenes perfectas.</p>
+    </div>
+    <div class="obj-card">
+      <div class="ico">📄</div>
+      <h4>Página Completa en Canva</h4>
+      <p>Armar 4 viñetas con diálogos en una página de cómic profesional lista para compartir.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ TEORÍA 1: ANATOMÍA DEL CÓMIC ═══ -->
+<div class="divider"></div>
+<div class="section" style="background:rgba(255,255,255,.02);">
+  <div class="section-header">
+    <div class="section-robotsin">
+      <img src="../robotsin/robotsin_escritor.png" alt="Robotsin"
+           onerror="this.style.display:'none'; this.parentElement.querySelector('.fallback').style.display='flex'">
+      <div class="fallback" style="display:none; width:100%; height:100%; align-items:center; justify-content:center; font-size:30px;">✍️</div>
+    </div>
+    <div>
+      <div class="section-label">Teoría · Parte 1 · 10 min</div>
+      <div class="section-title">La <span>Anatomía del Cómic</span></div>
+    </div>
+  </div>
+
+  <div class="concepto">
+    <p>Un cómic no es solo imágenes con texto — tiene un <strong>lenguaje visual propio</strong>.
+    Cada elemento tiene un nombre y una función específica. Cuando los dominas,
+    puedes contar historias tan complejas como una película,
+    usando solo dibujos y palabras en la misma página.</p>
+  </div>
+
+  <div class="comic-glosario">
+    <div class="glos-card">
+      <div class="ico">🔲</div>
+      <h5>Viñeta</h5>
+      <p>El cuadro que contiene una escena. Es la unidad básica del cómic.</p>
+    </div>
+    <div class="glos-card">
+      <div class="ico">💭</div>
+      <h5>Bocadillo</h5>
+      <p>La nube con el texto del diálogo. Cola apunta al personaje que habla.</p>
+    </div>
+    <div class="glos-card">
+      <div class="ico">🫧</div>
+      <h5>Pensamiento</h5>
+      <p>Bocadillo redondo con burbujas. Muestra lo que piensa el personaje.</p>
+    </div>
+    <div class="glos-card">
+      <div class="ico">💥</div>
+      <h5>Onomatopeya</h5>
+      <p>Texto que representa un sonido. ¡BOOM! ¡ZAP! ¡CRASH! ¡POW!</p>
+    </div>
+    <div class="glos-card">
+      <div class="ico">⚡</div>
+      <h5>Splash Page</h5>
+      <p>Una sola imagen ocupa toda la página. Para momentos épicos o impactantes.</p>
+    </div>
+  </div>
+
+  <div class="robotsin-inline ri-blue">
+    <div class="ri-avatar">
+      <img src="../robotsin/robotsin_escritor.png" alt="Robotsin"
+           onerror="this.style.display:'none'; this.parentElement.querySelector('.fallback').style.display='block'">
+      <div class="fallback" style="display:none">✍️</div>
+    </div>
+    <div>
+      <div class="ri-name">D-IA Vinci Escritor explica:</div>
+      <div class="ri-text">
+        "¿Cómo se lee un cómic? <strong>De izquierda a derecha, de arriba a abajo</strong>,
+        igual que un libro. Pero los ojos van primero a la imagen más grande o con más color.
+        <em>¡Eso lo usan los diseñadores para guiar tu atención sin que lo notes!</em>"
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ TEORÍA 2: DEL GUION AL CÓMIC CON IA ═══ -->
+<div class="divider"></div>
+<div class="section">
+  <div class="section-header">
+    <div class="section-robotsin">
+      <img src="../robotsin/robotsin_escritor.png" alt="Robotsin"
+           onerror="this.style.display:'none'; this.parentElement.querySelector('.fallback').style.display='flex'">
+      <div class="fallback" style="display:none; width:100%; height:100%; align-items:center; justify-content:center; font-size:30px;">✍️</div>
+    </div>
+    <div>
+      <div class="section-label">Teoría · Parte 2 · 10 min</div>
+      <div class="section-title">Del <span>Guion al Cómic</span> con IA</div>
+    </div>
+  </div>
+
+  <div class="diagram-card">
+    <div class="diagram-title">📊 Diagrama — El Proceso Completo: Guion → Página de Cómic</div>
+    <img src="../diagrams/clase11_del_guion_al_comic.png" alt="Del guion al cómic con IA">
+  </div>
+
+  <p style="font-size:15px; font-weight:700; color:rgba(255,255,255,.8); margin:24px 0 12px;">Prompts para generar imágenes de cómic:</p>
+
+  <div class="prompt-code">
+    <span class="plabel">Prompt para escena de acción</span>
+    "Crea una viñeta de cómic estilo Marvel de <span style="color:#82E0AA">[describe al héroe]</span>,
+    en posición de <span style="color:#82E0AA">[acción específica]</span>,
+    fondo <span style="color:#82E0AA">[describe el escenario]</span>,
+    estilo comic book americano, colores vibrantes, líneas de contorno negras, alta calidad"
+  </div>
+  <div class="prompt-code">
+    <span class="plabel">Prompt para escena de diálogo</span>
+    "Viñeta de cómic: <span style="color:#82E0AA">[héroe]</span> y <span style="color:#82E0AA">[aliado]</span>
+    mirándose frente a frente, expresión de <span style="color:#82E0AA">[emoción]</span>,
+    fondo <span style="color:#82E0AA">[lugar]</span>, estilo manga / cartoon, colores planos"
+  </div>
+
+  <div class="robotsin-inline ri-gold">
+    <div class="ri-avatar">
+      <img src="../robotsin/robotsin_escritor.png" alt="Robotsin"
+           onerror="this.style.display:'none'; this.parentElement.querySelector('.fallback').style.display='block'">
+      <div class="fallback" style="display:none">✍️</div>
+    </div>
+    <div>
+      <div class="ri-name">Analogía de Robotsin:</div>
+      <div class="ri-text">
+        "El primer cómic de <strong>Superman</strong> fue dibujado a lápiz por un chico de 17 años
+        llamado Joe Shuster en su cuarto. Lo rechazaron 15 veces antes de publicarlo.
+        <em>Tú tienes IA — ¡ya ganaste la mitad de la batalla!</em>"
+      </div>
+    </div>
+  </div>
+
+  <div class="robotsin-inline ri-green">
+    <div class="ri-avatar">
+      <img src="../robotsin/robotsin_escritor.png" alt="Robotsin"
+           onerror="this.style.display:'none'; this.parentElement.querySelector('.fallback').style.display='block'">
+      <div class="fallback" style="display:none">✍️</div>
+    </div>
+    <div>
+      <div class="ri-name">Tip Pro de Robotsin:</div>
+      <div class="ri-text">
+        "<strong>4 viñetas cuentan una historia completa</strong>: situación → problema → acción → resultado.
+        Es como un mini episodio dentro del episodio.
+        <em>¡Los mejores cómics de un solo strip del periódico tienen exactamente eso!</em>"
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ ACTIVIDADES ═══ -->
+<div class="divider"></div>
+<div class="section" style="background:rgba(255,255,255,.02);">
+  <div class="section-header">
+    <div class="section-robotsin">
+      <img src="../robotsin/robotsin_escritor.png" alt="Robotsin"
+           onerror="this.style.display:'none'; this.parentElement.querySelector('.fallback').style.display='flex'">
+      <div class="fallback" style="display:none; width:100%; height:100%; align-items:center; justify-content:center; font-size:30px;">✍️</div>
+    </div>
+    <div>
+      <div class="section-label">Parte práctica · 35 min</div>
+      <div class="section-title">¡Crea tu <span>Cómic, Genio</span>!</div>
+    </div>
+  </div>
+
+  <ul class="act-list">
+    <li class="act-item a1">
+      <div class="act-num">1</div>
+      <div class="act-body">
+        <h4>🎨 "La Primera Viñeta" — Genera la escena inicial</h4>
+        <p>Toma la escena del inicio de tu episodio (Acto 1) y escribe un prompt detallado en ChatGPT para generarla como imagen de cómic. Genera 3 variantes y elige la mejor. Guárdala en tu dispositivo.</p>
+      </div>
+      <div class="act-time">⏱️ 12 min</div>
+    </li>
+    <li class="act-item a2">
+      <div class="act-num">2</div>
+      <div class="act-body">
+        <h4>📄 "La Página Completa" — 4 viñetas en Canva</h4>
+        <p>Genera las imágenes para las 3 escenas restantes (clímax, reconciliación y resolución). En Canva, crea una página de cómic con 4 viñetas: usa una plantilla de cómic o cuadrantes simples. Coloca cada imagen en su viñeta.</p>
+      </div>
+      <div class="act-time">⏱️ 15 min</div>
+    </li>
+    <li class="act-item a3">
+      <div class="act-num">3</div>
+      <div class="act-body">
+        <h4>💬 "El Cómic Terminado" — Agrega los diálogos</h4>
+        <p>Añade bocadillos de diálogo a cada viñeta usando los diálogos que escribiste en la Clase 10. Agrega al menos una onomatopeya (¡BOOM!, ¡ZAP!, etc.) en la escena de acción. Exporta la página como imagen.</p>
+      </div>
+      <div class="act-time">⏱️ 8 min</div>
+    </li>
+  </ul>
+</div>
+
+<!-- ═══ TAREA ═══ -->
+<div class="divider"></div>
+<div class="section">
+  <div class="section-label">Para la próxima clase</div>
+  <h2 style="font-size:32px;font-weight:800;color:#fff;margin-bottom:28px;">
+    📝 Tu <span style="color:var(--gold)">Tarea</span>
+  </h2>
+
+  <div class="tarea-box">
+    <div class="tarea-icon">📖</div>
+    <div>
+      <h3>Cómic de 4 viñetas guardado como imagen</h3>
+      <p>Termina y guarda tu cómic completo del episodio: 4 viñetas con imágenes generadas por IA,
+      diálogos en bocadillos y al menos una onomatopeya.<br><br>
+      <strong style="color:var(--gold)">Trae el archivo a la Clase 12</strong> — es el corazón de tu episodio completo.</p>
+    </div>
+  </div>
+
+  <div class="robotsin-inline" style="margin-top:24px; border-color:rgba(243,156,18,.2);">
+    <div class="ri-avatar">
+      <img src="../robotsin/robotsin_escritor.png" alt="Robotsin"
+           onerror="this.style.display:'none'; this.parentElement.querySelector('.fallback').style.display='block'">
+      <div class="fallback" style="display:none">✍️</div>
+    </div>
+    <div>
+      <div class="ri-name" style="color:var(--gold)">Robotsin te dice:</div>
+      <div class="ri-text">
+        "¿Recuerdas que en la Clase 1 creaste tu <strong>primera imagen con IA</strong>?
+        Ahora usas imágenes IA para contar una historia completa con personajes, diálogos y acción.
+        <em>¡Eso se llama crecer como artista creativo!</em>"
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ INSIGNIA ═══ -->
+<div class="divider"></div>
+<div class="insignia-section">
+  <div class="insignia-robotsin">
+    <img src="../robotsin/robotsin_escritor.png" alt="Robotsin"
+         onerror="this.style.display:'none'; this.parentElement.querySelector('.fallback').style.display='block'">
+    <div class="fallback" style="display:none">✍️</div>
+  </div>
+  <div class="insignia-badge">📖</div>
+  <div class="insignia-title">¡Insignia Desbloqueada!</div>
+  <div class="insignia-desc" style="font-size:17px; color:rgba(255,255,255,.7); margin-bottom:8px;">
+    <strong style="color:#82E0AA">Historietista Digital</strong>
+  </div>
+  <div class="insignia-desc">Completaste la Clase 11 · Módulo 3 — La Historia<br>Certificado por D-IA Vinci Escritor</div>
+</div>
+
+<!-- ═══ CIERRE ═══ -->
+<div class="divider"></div>
+<div class="section">
+  <div class="section-label">Resumen · 5 min</div>
+  <h2 style="font-size:32px;font-weight:800;color:#fff;margin-bottom:28px;">
+    Lo que <span style="color:var(--green)">aprendiste hoy</span>
+  </h2>
+
+  <div class="cierre-grid">
+    <div class="cierre-card">
+      <div class="ico">🔲</div>
+      <h4>Los Elementos del Cómic</h4>
+      <p>Viñeta, bocadillo, onomatopeya, splash page — el vocabulario del artista visual.</p>
+    </div>
+    <div class="cierre-card">
+      <div class="ico">🤖</div>
+      <h4>Prompts para Imágenes</h4>
+      <p>Cómo describir personajes y escenas para que la IA genere exactamente lo que imaginas.</p>
+    </div>
+    <div class="cierre-card">
+      <div class="ico">📄</div>
+      <h4>Canva como Estudio</h4>
+      <p>Ensamblar imágenes IA con texto y diseño para crear páginas de cómic profesionales.</p>
+    </div>
+    <div class="cierre-card">
+      <div class="ico">4️⃣</div>
+      <h4>La Fórmula de 4 Viñetas</h4>
+      <p>Situación → Problema → Acción → Resultado. Una historia completa en media página.</p>
+    </div>
+  </div>
+
+  <div class="next-box">
+    <div style="font-size:32px">▶️</div>
+    <div>
+      <h4>Última misión del módulo</h4>
+      <p>Clase 12 — <span>"Episodio Completo"</span>: edición, portada y publicación de tu obra</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ NAVEGACIÓN ═══ -->
+<nav class="lesson-nav">
+  <a href="clase10_los_dialogos.html" class="lesson-nav-btn">
+    <span class="nav-arrow">←</span>
+    <div>
+      <div class="nav-label">Anterior</div>
+      <div class="nav-title-btn">Clase 10 — Los Diálogos</div>
+    </div>
+  </a>
+  <a href="index.html" class="lesson-nav-home">🏠</a>
+  <a href="clase12_episodio_completo.html" class="lesson-nav-btn next">
+    <div>
+      <div class="nav-label">Siguiente</div>
+      <div class="nav-title-btn">Clase 12 — Episodio Completo</div>
+    </div>
+    <span class="nav-arrow">→</span>
+  </a>
+</nav>
+
+<footer>
+  <strong>Academia Da Vinci IA</strong> · Pequeños Genios Creativos<br>
+  Módulo 3 — La Historia · Clase 11 de 12<br>
+  Por Ing. Jhonnatan Azael Vázquez Espinoza
+</footer>
+
+<!-- ── Supabase Auth + Progreso ─────────────────────────────────── -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="js/supabase-client.js"></script>
+<script src="js/auth.js"></script>
+
+</body>
+</html>

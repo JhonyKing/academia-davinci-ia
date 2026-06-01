@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel del Instructor — Academia Da Vinci IA</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&display=swap');
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue:   #4A90D9;
+      --purple: #8E44AD;
+      --gold:   #F39C12;
+      --green:  #27AE60;
+      --red:    #E74C3C;
+      --teal:   #16A085;
+      --dark:   #0F1626;
+      --dark2:  #1A2744;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--dark);
+      color: #E8EAF0;
+      min-height: 100vh;
+    }
+
+    /* ── NAV ── */
+    .nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(15,22,38,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      padding: 14px 40px;
+      display: flex; align-items: center; gap: 16px;
+    }
+    .nav-logo {
+      font-weight: 900; font-size: 16px; color: #fff;
+    }
+    .nav-logo span { color: var(--purple); }
+    .nav-badge {
+      background: rgba(243,156,18,0.15);
+      border: 1px solid rgba(243,156,18,0.3);
+      color: var(--gold);
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 3px 10px; border-radius: 20px;
+    }
+    .nav-spacer { flex: 1; }
+    .nav-user {
+      font-size: 12px; color: rgba(255,255,255,0.4);
+    }
+    .nav-user strong { color: rgba(255,255,255,0.7); }
+    .btn-logout {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.4);
+      padding: 6px 14px; border-radius: 20px;
+      font-family: 'Poppins', sans-serif; font-size: 12px;
+      cursor: pointer; transition: all .2s;
+    }
+    .btn-logout:hover { color: #fff; border-color: rgba(255,255,255,0.4); }
+
+    /* ── CONTENIDO ── */
+    .container {
+      max-width: 1200px; margin: 0 auto;
+      padding: 40px 32px;
+    }
+
+    .page-header { margin-bottom: 32px; }
+    .page-header h1 {
+      font-size: 28px; font-weight: 800; color: #fff;
+    }
+    .page-header h1 span { color: var(--purple); }
+    .page-header p {
+      color: rgba(255,255,255,0.4); font-size: 13px; margin-top: 6px;
+    }
+
+    /* ── STAT CARDS ── */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 36px;
+    }
+    .stat-card {
+      background: rgba(26,39,68,0.7);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 16px;
+      padding: 20px 24px;
+      transition: border-color .2s;
+    }
+    .stat-card:hover { border-color: rgba(255,255,255,0.14); }
+    .stat-label {
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: rgba(255,255,255,0.35); margin-bottom: 8px;
+    }
+    .stat-value {
+      font-size: 36px; font-weight: 900; color: #fff; line-height: 1;
+    }
+    .stat-value.blue   { color: var(--blue); }
+    .stat-value.purple { color: var(--purple); }
+    .stat-value.green  { color: var(--green); }
+    .stat-value.gold   { color: var(--gold); }
+    .stat-sub {
+      font-size: 11px; color: rgba(255,255,255,0.3); margin-top: 4px;
+    }
+
+    /* ── TOOLBAR ── */
+    .toolbar {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 20px; flex-wrap: wrap;
+    }
+    .search-input {
+      flex: 1; min-width: 200px; max-width: 340px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      padding: 10px 16px;
+      font-family: 'Poppins', sans-serif; font-size: 13px;
+      color: #E8EAF0; outline: none;
+      transition: border-color .2s;
+    }
+    .search-input::placeholder { color: rgba(255,255,255,0.25); }
+    .search-input:focus { border-color: rgba(142,68,173,0.5); }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--purple), #6C3483);
+      border: none; border-radius: 10px;
+      padding: 10px 20px;
+      font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 600;
+      color: #fff; cursor: pointer;
+      transition: transform .2s, box-shadow .2s;
+      box-shadow: 0 4px 16px rgba(142,68,173,0.3);
+      white-space: nowrap;
+    }
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(142,68,173,0.45);
+    }
+    .btn-sm {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 5px 12px;
+      font-family: 'Poppins', sans-serif; font-size: 11px; font-weight: 600;
+      color: rgba(255,255,255,0.5); cursor: pointer;
+      transition: all .2s;
+    }
+    .btn-sm:hover { background: rgba(255,255,255,0.1); color: #fff; }
+    .btn-sm.danger:hover { background: rgba(231,76,60,0.15); color: #E74C3C; border-color: rgba(231,76,60,0.3); }
+
+    /* ── TABLA ── */
+    .table-wrapper {
+      background: rgba(26,39,68,0.5);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    table {
+      width: 100%; border-collapse: collapse;
+    }
+    thead th {
+      padding: 14px 16px;
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      background: rgba(255,255,255,0.03);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      text-align: left;
+      white-space: nowrap;
+    }
+    tbody tr {
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      transition: background .15s;
+    }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: rgba(255,255,255,0.03); }
+    tbody td {
+      padding: 14px 16px;
+      font-size: 13px; color: #E8EAF0;
+      vertical-align: middle;
+    }
+    td.muted { color: rgba(255,255,255,0.35); font-size: 12px; }
+
+    .avatar {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--purple), var(--blue));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; font-weight: 700; color: #fff;
+      flex-shrink: 0;
+    }
+    .alumno-info {
+      display: flex; align-items: center; gap: 12px;
+    }
+    .alumno-nombre { font-weight: 600; }
+    .alumno-email  { font-size: 11px; color: rgba(255,255,255,0.35); }
+
+    /* ── Barra de progreso ── */
+    .prog-bar-wrap {
+      display: flex; align-items: center; gap: 8px;
+    }
+    .prog-bar {
+      flex: 1; height: 6px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 4px; overflow: hidden;
+      min-width: 80px;
+    }
+    .prog-fill {
+      height: 100%; border-radius: 4px;
+      background: linear-gradient(90deg, var(--purple), var(--blue));
+      transition: width .5s ease;
+    }
+    .prog-pct {
+      font-size: 11px; font-weight: 700;
+      color: rgba(255,255,255,0.5); white-space: nowrap;
+    }
+
+    .clase-badge {
+      display: inline-block;
+      background: rgba(74,144,217,0.12);
+      border: 1px solid rgba(74,144,217,0.2);
+      color: var(--blue);
+      font-size: 11px; font-weight: 700;
+      padding: 2px 10px; border-radius: 20px;
+    }
+
+    /* ── Estado cargando ── */
+    .loading-row td {
+      text-align: center; padding: 48px;
+      color: rgba(255,255,255,0.25); font-size: 13px;
+    }
+    .spinner-inline {
+      display: inline-block;
+      width: 18px; height: 18px;
+      border: 2px solid rgba(255,255,255,0.1);
+      border-top-color: var(--purple);
+      border-radius: 50%;
+      animation: spin .7s linear infinite;
+      vertical-align: middle; margin-right: 8px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── MODAL crear alumno ── */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 200;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(6px);
+      display: none; align-items: center; justify-content: center;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: var(--dark2);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px;
+      padding: 36px 40px;
+      width: 100%; max-width: 420px;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.6);
+      animation: modalIn .3s ease both;
+    }
+    @keyframes modalIn {
+      from { opacity: 0; transform: scale(.95) translateY(16px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .modal h2 {
+      font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 6px;
+    }
+    .modal p {
+      font-size: 12px; color: rgba(255,255,255,0.35); margin-bottom: 24px;
+    }
+    .form-group { margin-bottom: 16px; }
+    .form-label {
+      display: block; font-size: 11px; font-weight: 600;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      color: rgba(255,255,255,0.4); margin-bottom: 7px;
+    }
+    .form-input {
+      width: 100%;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-family: 'Poppins', sans-serif; font-size: 13px;
+      color: #E8EAF0; outline: none;
+      transition: border-color .2s;
+    }
+    .form-input::placeholder { color: rgba(255,255,255,0.2); }
+    .form-input:focus { border-color: rgba(142,68,173,0.5); }
+    .modal-actions {
+      display: flex; gap: 10px; margin-top: 24px;
+    }
+    .btn-cancel {
+      flex: 1;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      padding: 12px;
+      font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 600;
+      color: rgba(255,255,255,0.5); cursor: pointer;
+      transition: all .2s;
+    }
+    .btn-cancel:hover { background: rgba(255,255,255,0.1); color: #fff; }
+    .modal .btn-primary { flex: 1; }
+    .modal-alert {
+      border-radius: 8px; padding: 10px 14px;
+      font-size: 12px; margin-bottom: 16px;
+      display: none;
+    }
+    .modal-alert.show { display: block; }
+    .modal-alert.error {
+      background: rgba(231,76,60,0.12);
+      border: 1px solid rgba(231,76,60,0.3);
+      color: #F1948A;
+    }
+    .modal-alert.success {
+      background: rgba(39,174,96,0.12);
+      border: 1px solid rgba(39,174,96,0.3);
+      color: #82E0AA;
+    }
+
+    /* ── Acceso denegado ── */
+    .denied {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center;
+      display: none;
+    }
+    .denied-card {
+      background: rgba(26,39,68,0.8);
+      border: 1px solid rgba(231,76,60,0.2);
+      border-radius: 20px; padding: 48px 40px; max-width: 380px;
+    }
+    .denied-icon { font-size: 48px; margin-bottom: 16px; }
+    .denied h2 { font-size: 22px; font-weight: 800; color: #fff; margin-bottom: 8px; }
+    .denied p { font-size: 13px; color: rgba(255,255,255,0.4); margin-bottom: 24px; }
+
+    @media (max-width: 768px) {
+      .container { padding: 24px 16px; }
+      .nav { padding: 12px 16px; }
+      table { font-size: 12px; }
+      thead th, tbody td { padding: 10px 10px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Pantalla de acceso denegado (oculta por defecto) -->
+<div class="denied" id="denied-screen">
+  <div class="denied-card">
+    <div class="denied-icon">🔒</div>
+    <h2>Acceso restringido</h2>
+    <p>Este panel es exclusivo para instructores de la Academia Da Vinci IA.</p>
+    <button class="btn-primary" onclick="window.location.href='index.html'">
+      Volver al curso
+    </button>
+  </div>
+</div>
+
+<!-- Panel principal (oculto hasta verificar rol) -->
+<div id="admin-panel" style="display:none">
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-logo">Da Vinci <span>IA</span></div>
+    <div class="nav-badge">Instructor</div>
+    <div class="nav-spacer"></div>
+    <div class="nav-user">Hola, <strong id="nav-nombre">...</strong></div>
+    <button class="btn-logout" id="logout-btn">Cerrar sesión</button>
+  </nav>
+
+  <div class="container">
+
+    <!-- Header -->
+    <div class="page-header">
+      <h1>Panel del <span>Instructor</span></h1>
+      <p>Gestión de alumnos y seguimiento de progreso — Academia Da Vinci IA</p>
+    </div>
+
+    <!-- Stat cards -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-label">Total alumnos</div>
+        <div class="stat-value blue" id="stat-total">—</div>
+        <div class="stat-sub">inscritos en el curso</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Promedio progreso</div>
+        <div class="stat-value purple" id="stat-avg">—</div>
+        <div class="stat-sub">clases completadas</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Activos esta semana</div>
+        <div class="stat-value green" id="stat-active">—</div>
+        <div class="stat-sub">con acceso reciente</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Clases totales</div>
+        <div class="stat-value gold">24</div>
+        <div class="stat-sub">en el programa</div>
+      </div>
+    </div>
+
+    <!-- Toolbar -->
+    <div class="toolbar">
+      <input
+        type="search"
+        class="search-input"
+        id="search-input"
+        placeholder="🔍  Buscar alumno por nombre..."
+      >
+      <button class="btn-primary" id="crear-alumno-btn">
+        + Crear alumno
+      </button>
+      <button class="btn-sm" id="reload-btn">↻ Actualizar</button>
+    </div>
+
+    <!-- Tabla alumnos -->
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Alumno</th>
+            <th>Clase actual</th>
+            <th>Completadas</th>
+            <th>Progreso</th>
+            <th>Último acceso</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="alumnos-tbody">
+          <tr class="loading-row">
+            <td colspan="6">
+              <span class="spinner-inline"></span>
+              Cargando alumnos...
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div><!-- /container -->
+</div><!-- /admin-panel -->
+
+<!-- MODAL: Crear alumno -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal">
+    <h2>Crear alumno</h2>
+    <p>Se enviará una invitación al correo del alumno para que establezca su contraseña.</p>
+
+    <div class="modal-alert error" id="modal-error"></div>
+    <div class="modal-alert success" id="modal-success"></div>
+
+    <div class="form-group">
+      <label class="form-label" for="m-nombre">Nombre completo</label>
+      <input type="text" id="m-nombre" class="form-input" placeholder="Nombre del alumno">
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="m-email">Correo electrónico</label>
+      <input type="email" id="m-email" class="form-input" placeholder="alumno@correo.com">
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn-cancel" id="modal-cancel">Cancelar</button>
+      <button class="btn-primary" id="modal-crear">Crear e invitar</button>
+    </div>
+  </div>
+</div>
+
+<!-- CDN Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="js/supabase-client.js"></script>
+<script>
+;(function () {
+  'use strict'
+
+  const sb           = window._supabase
+  const TOTAL_CLASES = 24
+
+  // ── Helpers ─────────────────────────────────────────────────────────────
+  function formatDate(iso) {
+    if (!iso) return '—'
+    const d = new Date(iso)
+    const now = new Date()
+    const diffMs = now - d
+    const diffDays = Math.floor(diffMs / 86400000)
+    if (diffDays === 0) return 'Hoy'
+    if (diffDays === 1) return 'Ayer'
+    if (diffDays < 7)  return `hace ${diffDays} días`
+    return d.toLocaleDateString('es-MX', { day:'2-digit', month:'short' })
+  }
+
+  function getInitials(nombre) {
+    return nombre
+      .split(' ')
+      .slice(0, 2)
+      .map(n => n[0])
+      .join('')
+      .toUpperCase()
+  }
+
+  // ── Verificar sesión y rol ───────────────────────────────────────────────
+  async function checkAuth() {
+    const { data: { session } } = await sb.auth.getSession()
+
+    if (!session) {
+      window.location.href = 'login.html'
+      return null
+    }
+
+    // Obtener perfil con rol
+    const { data: profile, error } = await sb
+      .from('profiles')
+      .select('nombre, rol')
+      .eq('id', session.user.id)
+      .single()
+
+    if (error || !profile) {
+      window.location.href = 'login.html'
+      return null
+    }
+
+    if (profile.rol !== 'instructor') {
+      // No es instructor → mostrar pantalla denegado
+      document.getElementById('denied-screen').style.display = 'flex'
+      return null
+    }
+
+    // Es instructor → mostrar panel
+    document.getElementById('admin-panel').style.display = 'block'
+    document.getElementById('nav-nombre').textContent = profile.nombre
+    return session.user
+  }
+
+  // ── Cargar datos de alumnos ──────────────────────────────────────────────
+  async function loadAlumnos() {
+    const tbody = document.getElementById('alumnos-tbody')
+    tbody.innerHTML = `
+      <tr class="loading-row">
+        <td colspan="6"><span class="spinner-inline"></span> Cargando alumnos...</td>
+      </tr>`
+
+    // 1. Obtener todos los perfiles que son alumnos
+    const { data: profiles, error: pErr } = await sb
+      .from('profiles')
+      .select('id, nombre, email, fecha_inicio, ultimo_acceso')
+      .eq('rol', 'alumno')
+      .order('fecha_inicio', { ascending: false })
+
+    if (pErr) {
+      tbody.innerHTML = `<tr class="loading-row"><td colspan="6" style="color:#E74C3C">Error al cargar: ${pErr.message}</td></tr>`
+      return
+    }
+    if (!profiles || profiles.length === 0) {
+      tbody.innerHTML = `<tr class="loading-row"><td colspan="6" style="color:rgba(255,255,255,0.3)">No hay alumnos registrados aún.</td></tr>`
+      updateStats([], [])
+      return
+    }
+
+    // 2. Obtener todo el progreso de esos alumnos
+    const userIds = profiles.map(p => p.id)
+    const { data: progress } = await sb
+      .from('progress')
+      .select('user_id, clase_num')
+      .in('user_id', userIds)
+      .eq('completada', true)
+
+    const progressByUser = {}
+    ;(progress || []).forEach(row => {
+      if (!progressByUser[row.user_id]) progressByUser[row.user_id] = []
+      progressByUser[row.user_id].push(row.clase_num)
+    })
+
+    // 3. Renderizar tabla
+    window._alumnos = profiles.map(p => ({
+      ...p,
+      clases: progressByUser[p.id] || [],
+    }))
+
+    updateStats(window._alumnos, progress || [])
+    renderTable(window._alumnos)
+  }
+
+  // ── Actualizar stat cards ────────────────────────────────────────────────
+  function updateStats(alumnos, progress) {
+    document.getElementById('stat-total').textContent = alumnos.length
+
+    if (alumnos.length > 0) {
+      const totalCompleted = alumnos.reduce((s, a) => s + a.clases.length, 0)
+      const avg = (totalCompleted / alumnos.length).toFixed(1)
+      document.getElementById('stat-avg').textContent = avg
+    } else {
+      document.getElementById('stat-avg').textContent = '0'
+    }
+
+    const weekAgo = new Date(Date.now() - 7 * 86400000)
+    const activeCount = alumnos.filter(a =>
+      a.ultimo_acceso && new Date(a.ultimo_acceso) >= weekAgo
+    ).length
+    document.getElementById('stat-active').textContent = activeCount
+  }
+
+  // ── Renderizar filas de la tabla ─────────────────────────────────────────
+  function renderTable(alumnos) {
+    const tbody = document.getElementById('alumnos-tbody')
+    if (alumnos.length === 0) {
+      tbody.innerHTML = `<tr class="loading-row"><td colspan="6" style="color:rgba(255,255,255,0.3)">Ningún alumno coincide con la búsqueda.</td></tr>`
+      return
+    }
+
+    tbody.innerHTML = alumnos.map(a => {
+      const completadas = a.clases.length
+      const pct = Math.round((completadas / TOTAL_CLASES) * 100)
+      const claseActual = a.clases.length > 0 ? Math.max(...a.clases) : 0
+
+      return `
+        <tr data-id="${a.id}">
+          <td>
+            <div class="alumno-info">
+              <div class="avatar">${getInitials(a.nombre)}</div>
+              <div>
+                <div class="alumno-nombre">${esc(a.nombre)}</div>
+                <div class="alumno-email">${esc(a.email)}</div>
+              </div>
+            </div>
+          </td>
+          <td>
+            ${claseActual > 0
+              ? `<span class="clase-badge">Clase ${claseActual}</span>`
+              : `<span style="color:rgba(255,255,255,0.25);font-size:12px">Sin inicio</span>`}
+          </td>
+          <td style="font-weight:700; color: ${completadas > 0 ? 'var(--green)' : 'rgba(255,255,255,0.3)'}">
+            ${completadas} / ${TOTAL_CLASES}
+          </td>
+          <td>
+            <div class="prog-bar-wrap">
+              <div class="prog-bar">
+                <div class="prog-fill" style="width:${pct}%"></div>
+              </div>
+              <span class="prog-pct">${pct}%</span>
+            </div>
+          </td>
+          <td class="muted">${formatDate(a.ultimo_acceso)}</td>
+          <td>
+            <button class="btn-sm danger" onclick="resetProgreso('${a.id}', '${esc(a.nombre)}')">
+              Reset
+            </button>
+          </td>
+        </tr>`
+    }).join('')
+  }
+
+  function esc(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+  }
+
+  // ── Búsqueda en tiempo real ──────────────────────────────────────────────
+  document.getElementById('search-input').addEventListener('input', function () {
+    const q = this.value.toLowerCase().trim()
+    if (!window._alumnos) return
+    const filtered = q
+      ? window._alumnos.filter(a =>
+          a.nombre.toLowerCase().includes(q) || a.email.toLowerCase().includes(q))
+      : window._alumnos
+    renderTable(filtered)
+  })
+
+  // ── Reset progreso ───────────────────────────────────────────────────────
+  window.resetProgreso = async function (userId, nombre) {
+    if (!confirm(`¿Seguro que quieres resetear el progreso de ${nombre}?\nEsta acción no se puede deshacer.`)) return
+
+    const { error } = await sb
+      .from('progress')
+      .delete()
+      .eq('user_id', userId)
+
+    if (error) {
+      alert('Error al resetear: ' + error.message)
+      return
+    }
+
+    // Actualizar localmente
+    const alumno = window._alumnos.find(a => a.id === userId)
+    if (alumno) alumno.clases = []
+    renderTable(window._alumnos)
+    updateStats(window._alumnos, [])
+    alert(`Progreso de ${nombre} reseteado correctamente.`)
+  }
+
+  // ── Modal crear alumno ───────────────────────────────────────────────────
+  const modalOverlay = document.getElementById('modal-overlay')
+
+  document.getElementById('crear-alumno-btn').addEventListener('click', () => {
+    document.getElementById('m-nombre').value = ''
+    document.getElementById('m-email').value  = ''
+    document.getElementById('modal-error').classList.remove('show')
+    document.getElementById('modal-success').classList.remove('show')
+    modalOverlay.classList.add('open')
+    document.getElementById('m-nombre').focus()
+  })
+
+  document.getElementById('modal-cancel').addEventListener('click', () => {
+    modalOverlay.classList.remove('open')
+  })
+  modalOverlay.addEventListener('click', (e) => {
+    if (e.target === modalOverlay) modalOverlay.classList.remove('open')
+  })
+
+  document.getElementById('modal-crear').addEventListener('click', async () => {
+    const nombre = document.getElementById('m-nombre').value.trim()
+    const email  = document.getElementById('m-email').value.trim()
+    const errEl  = document.getElementById('modal-error')
+    const okEl   = document.getElementById('modal-success')
+
+    errEl.classList.remove('show')
+    okEl.classList.remove('show')
+
+    if (!nombre || !email) {
+      errEl.textContent = 'Completa el nombre y el correo del alumno.'
+      errEl.classList.add('show')
+      return
+    }
+
+    const btn = document.getElementById('modal-crear')
+    btn.disabled = true
+    btn.textContent = 'Creando...'
+
+    // Usar inviteUserByEmail (disponible en supabase-js cliente con service_role no requerido para invite)
+    // Nota: inviteUserByEmail puede requerir que en Supabase → Auth → Settings
+    // esté activado "Enable email confirmations" y el dominio de redirect configurado.
+    const { data, error } = await sb.auth.admin
+      ? sb.auth.admin.inviteUserByEmail(email, {
+          data: { nombre, rol: 'alumno' }
+        })
+      : await sb.auth.signInWithOtp({ email, options: { data: { nombre, rol: 'alumno' } } })
+
+    btn.disabled = false
+    btn.textContent = 'Crear e invitar'
+
+    if (error) {
+      errEl.textContent = 'Error: ' + error.message
+      errEl.classList.add('show')
+      return
+    }
+
+    okEl.textContent = `¡Invitación enviada a ${email}! El alumno recibirá un correo para establecer su contraseña.`
+    okEl.classList.add('show')
+
+    // Recargar tabla después de 2s
+    setTimeout(() => {
+      modalOverlay.classList.remove('open')
+      loadAlumnos()
+    }, 2500)
+  })
+
+  // ── Botón recargar ───────────────────────────────────────────────────────
+  document.getElementById('reload-btn').addEventListener('click', loadAlumnos)
+
+  // ── Logout ───────────────────────────────────────────────────────────────
+  document.getElementById('logout-btn').addEventListener('click', async () => {
+    await sb.auth.signOut()
+    window.location.href = 'login.html'
+  })
+
+  // ── Arrancar ─────────────────────────────────────────────────────────────
+  ;(async function () {
+    const user = await checkAuth()
+    if (user) await loadAlumnos()
+  })()
+
+})()
+</script>
+
+</body>
+</html>

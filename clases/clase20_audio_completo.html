@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clase 20 — Audio Completo | Academia Da Vinci IA</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap');
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue:#4A90D9; --purple:#8E44AD; --gold:#F39C12;
+      --green:#27AE60; --red:#E74C3C; --dark:#0F1626;
+    }
+    body { font-family:'Poppins',sans-serif; background:var(--dark); color:#E8EAF0; }
+
+    /* ── NAV ── */
+    .nav { position:sticky; top:0; z-index:100; background:rgba(15,22,38,0.92); backdrop-filter:blur(12px); border-bottom:1px solid rgba(255,255,255,0.07); padding:14px 40px; display:flex; align-items:center; gap:16px; }
+    .nav-back { color:rgba(255,255,255,0.4); font-size:13px; text-decoration:none; display:flex; align-items:center; gap:6px; transition:color .2s; }
+    .nav-back:hover { color:#fff; }
+    .nav-title { font-weight:700; font-size:15px; color:#fff; }
+    .nav-title span { color:var(--gold); }
+    .nav-spacer { flex:1; }
+    .nav-progress { display:flex; align-items:center; gap:8px; font-size:12px; color:rgba(255,255,255,0.4); }
+    .progress-bar { width:100px; height:4px; background:rgba(255,255,255,0.1); border-radius:4px; overflow:hidden; }
+    .progress-fill { height:100%; width:100%; background:linear-gradient(90deg,var(--gold),#E67E22); border-radius:4px; }
+
+    /* ── HERO ── */
+    .hero { position:relative; min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; overflow:hidden; padding:60px 20px; }
+    .hero-video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.25; z-index:0; }
+    .hero-overlay { position:absolute; inset:0; background:linear-gradient(180deg,rgba(15,22,38,.2) 0%,rgba(15,22,38,.55) 60%,var(--dark) 100%); z-index:1; }
+    .hero-content { position:relative; z-index:2; max-width:720px; }
+    .hero-badge { display:inline-block; background:rgba(243,156,18,.2); border:2px solid rgba(243,156,18,.5); color:#F9C74F; padding:10px 28px; border-radius:50px; font-size:12px; font-weight:800; letter-spacing:3px; text-transform:uppercase; margin-bottom:24px; box-shadow:0 0 30px rgba(243,156,18,.3); }
+    .hero-modulo { font-size:13px; font-weight:600; letter-spacing:3px; text-transform:uppercase; color:rgba(255,255,255,.4); margin-bottom:10px; }
+    .hero h1 { font-size:clamp(42px,7vw,80px); font-weight:900; color:#fff; line-height:1.05; margin-bottom:12px; }
+    .hero h1 span { color:var(--gold); text-shadow:0 0 40px rgba(243,156,18,.5); }
+    .hero-sub { font-size:18px; color:rgba(255,255,255,.7); margin-bottom:36px; line-height:1.5; }
+    .robotsin-float { width:180px; height:180px; margin:0 auto 28px; position:relative; }
+    .robotsin-float img { width:100%; height:100%; object-fit:contain; filter:drop-shadow(0 0 40px rgba(243,156,18,.7)); animation:float 3s ease-in-out infinite; }
+    .robotsin-float .fallback { font-size:100px; line-height:180px; }
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-14px)} }
+    .robotsin-bubble { background:rgba(243,156,18,.15); border:2px solid rgba(243,156,18,.4); border-radius:16px; padding:18px 26px; position:relative; font-size:16px; color:rgba(255,255,255,.9); font-style:italic; margin-bottom:32px; max-width:520px; margin-left:auto; margin-right:auto; box-shadow:0 0 20px rgba(243,156,18,.2); }
+    .robotsin-bubble::before { content:''; position:absolute; top:-8px; left:50%; width:14px; height:14px; background:rgba(243,156,18,.3); border-top:2px solid rgba(243,156,18,.4); border-left:2px solid rgba(243,156,18,.4); transform:translateX(-50%) rotate(45deg); }
+    .hero-chips { display:flex; gap:12px; flex-wrap:wrap; justify-content:center; }
+    .chip { background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); padding:8px 18px; border-radius:50px; font-size:13px; color:rgba(255,255,255,.7); }
+    .divider { height:1px; background:linear-gradient(90deg,transparent,rgba(243,156,18,.4),transparent); }
+
+    /* ── BANNER CELEBRACIÓN ── */
+    .celebracion-banner {
+      background:linear-gradient(135deg,rgba(243,156,18,.2),rgba(230,126,34,.12));
+      border:2px solid rgba(243,156,18,.4);
+      border-radius:20px; padding:28px 36px; margin-bottom:36px;
+      text-align:center; position:relative; overflow:hidden;
+    }
+    .celebracion-banner::before {
+      content:''; position:absolute; inset:0;
+      background:linear-gradient(135deg,transparent 40%,rgba(243,156,18,.05));
+    }
+    .celebracion-banner .stars { font-size:32px; margin-bottom:10px; }
+    .celebracion-banner h2 { font-size:24px; font-weight:900; color:var(--gold); margin-bottom:8px; }
+    .celebracion-banner p { font-size:15px; color:rgba(255,255,255,.75); }
+
+    /* ── SECCIÓN BASE ── */
+    .section { max-width:900px; margin:0 auto; padding:72px 40px; }
+    .section-header { display:flex; align-items:flex-start; gap:20px; margin-bottom:36px; }
+    .section-robotsin { width:72px; height:72px; flex-shrink:0; border-radius:50%; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); display:flex; align-items:center; justify-content:center; overflow:hidden; }
+    .section-robotsin img { width:100%; height:100%; object-fit:cover; }
+    .section-robotsin .fallback { font-size:32px; }
+    .section-label { color:var(--gold); font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; margin-bottom:6px; }
+    .section-title { font-size:clamp(24px,4vw,36px); font-weight:800; color:#fff; line-height:1.2; }
+    .section-title span { color:var(--gold); }
+
+    /* ── MISIÓN ── */
+    .mision-box { background:linear-gradient(135deg,rgba(243,156,18,.18),rgba(230,126,34,.1)); border:2px solid rgba(243,156,18,.35); border-radius:20px; padding:32px; margin-bottom:32px; display:flex; gap:24px; align-items:flex-start; }
+    .mision-icon { font-size:56px; flex-shrink:0; }
+    .mision-box h3 { font-size:20px; font-weight:700; color:var(--gold); margin-bottom:8px; }
+    .mision-box p { font-size:15px; color:rgba(255,255,255,.8); line-height:1.7; }
+    .mision-box strong { color:#F9C74F; }
+
+    /* ── OBJETIVOS ── */
+    .obj-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px; }
+    .obj-card { background:rgba(255,255,255,.04); border:1px solid rgba(243,156,18,.2); border-radius:16px; padding:24px; }
+    .obj-card .ico { font-size:28px; margin-bottom:12px; }
+    .obj-card h4 { font-size:15px; font-weight:700; color:#fff; margin-bottom:6px; }
+    .obj-card p { font-size:13px; color:rgba(255,255,255,.5); }
+
+    /* ── ROBOTSIN INLINE ── */
+    .robotsin-inline { display:flex; gap:20px; align-items:flex-start; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.07); border-radius:16px; padding:24px; margin:28px 0; }
+    .ri-avatar { width:64px; height:64px; flex-shrink:0; border-radius:50%; overflow:hidden; background:rgba(255,255,255,.05); display:flex; align-items:center; justify-content:center; }
+    .ri-avatar img { width:100%; height:100%; object-fit:cover; }
+    .ri-avatar .fallback { font-size:30px; }
+    .ri-name { font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--gold); margin-bottom:4px; }
+    .ri-text { font-size:15px; color:rgba(255,255,255,.8); line-height:1.7; }
+    .ri-text strong { color:#F9C74F; }
+    .ri-text em { color:var(--gold); font-style:normal; font-weight:600; }
+    .ri-blue { border-color:rgba(74,144,217,.2); }
+    .ri-blue .ri-name { color:var(--blue); }
+    .ri-blue .ri-text strong { color:#74B9FF; }
+    .ri-gold { border-color:rgba(243,156,18,.25); background:rgba(243,156,18,.04); }
+    .ri-gold .ri-name { color:var(--gold); }
+    .ri-green { border-color:rgba(39,174,96,.2); }
+    .ri-green .ri-name { color:var(--green); }
+    .ri-green .ri-text strong { color:#55D98D; }
+
+    /* ── CONCEPTO ── */
+    .concepto { background:linear-gradient(135deg,rgba(243,156,18,.1),rgba(230,126,34,.06)); border:1px solid rgba(243,156,18,.2); border-left:4px solid var(--gold); border-radius:12px; padding:24px 28px; margin:20px 0; }
+    .concepto p { font-size:16px; color:rgba(255,255,255,.85); line-height:1.75; }
+    .concepto strong { color:#F9C74F; }
+
+    /* ── DIAGRAMA ── */
+    .diagram-card { background:rgba(255,255,255,.03); border:1px solid rgba(243,156,18,.2); border-radius:20px; padding:28px; margin:24px 0; }
+    .diagram-title { font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--gold); margin-bottom:16px; }
+    .diagram-card img { width:100%; border-radius:10px; background:#fff; }
+
+    /* ── MEZCLA TABLE ── */
+    .mezcla-table { width:100%; border-collapse:separate; border-spacing:0 6px; margin:20px 0; }
+    .mezcla-table th { text-align:left; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,.3); padding:0 14px 6px; }
+    .mezcla-table td { padding:16px 14px; background:rgba(255,255,255,.04); border:1px solid rgba(243,156,18,.12); font-size:14px; }
+    .mezcla-table td:first-child { border-radius:10px 0 0 10px; font-weight:700; color:var(--gold); }
+    .mezcla-table td:last-child { border-radius:0 10px 10px 0; }
+    .vol-bar-wrap { display:flex; align-items:center; gap:12px; }
+    .vol-bar { height:8px; border-radius:4px; background:rgba(243,156,18,.3); }
+    .vol-bar.v100 { width:100px; background:linear-gradient(90deg,#F39C12,#E67E22); }
+    .vol-bar.v65 { width:65px; background:linear-gradient(90deg,#F39C12,#E67E22); }
+    .vol-bar.v30 { width:30px; background:linear-gradient(90deg,#F39C12,#E67E22); }
+    .vol-bar.v20 { width:20px; background:linear-gradient(90deg,#F39C12,#E67E22); }
+
+    /* ── ACTIVIDADES ── */
+    .act-list { list-style:none; }
+    .act-item { display:flex; gap:18px; padding:24px; background:rgba(255,255,255,.04); border:1px solid rgba(243,156,18,.15); border-radius:16px; margin-bottom:10px; }
+    .act-num { min-width:50px; height:50px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:20px; font-weight:800; flex-shrink:0; }
+    .act-body { flex:1; }
+    .act-body h4 { font-size:16px; font-weight:700; color:#fff; margin-bottom:4px; }
+    .act-body p { font-size:13px; color:rgba(255,255,255,.55); }
+    .act-time { background:rgba(243,156,18,.12); border:1px solid rgba(243,156,18,.2); border-radius:8px; padding:4px 12px; font-size:11px; color:var(--gold); align-self:center; white-space:nowrap; flex-shrink:0; font-weight:600; }
+    .a1 .act-num { background:rgba(39,174,96,.2); color:#2ECC71; }
+    .a2 .act-num { background:rgba(243,156,18,.25); color:#F39C12; }
+    .a3 .act-num { background:rgba(74,144,217,.2); color:#4A90D9; }
+
+    /* ── TAREA ── */
+    .tarea-box { background:linear-gradient(135deg,rgba(243,156,18,.15),rgba(230,126,34,.1)); border:2px solid rgba(243,156,18,.3); border-radius:20px; padding:36px; display:flex; gap:24px; align-items:flex-start; }
+    .tarea-icon { font-size:56px; flex-shrink:0; }
+    .tarea-box h3 { font-size:20px; font-weight:700; color:var(--gold); margin-bottom:8px; }
+    .tarea-box p { font-size:15px; color:rgba(255,255,255,.8); line-height:1.8; }
+
+    /* ── INSIGNIA FINAL MÓDULO ── */
+    .insignia-section {
+      text-align:center; padding:80px 40px;
+      background:linear-gradient(135deg,rgba(243,156,18,.15),rgba(230,126,34,.08),rgba(243,156,18,.1));
+      position:relative; overflow:hidden;
+    }
+    .insignia-section::before {
+      content:''; position:absolute; top:20px; left:50%; transform:translateX(-50%);
+      width:600px; height:600px;
+      background:radial-gradient(circle, rgba(243,156,18,.1) 0%, transparent 70%);
+      pointer-events:none;
+    }
+    .insignia-robotsin {
+      width:120px; height:120px; margin:0 auto 24px;
+      border-radius:50%; overflow:hidden;
+      background:rgba(255,255,255,.06);
+      display:flex; align-items:center; justify-content:center;
+      border:3px solid rgba(243,156,18,.5);
+      box-shadow:0 0 40px rgba(243,156,18,.4);
+    }
+    .insignia-robotsin img { width:100%; height:100%; object-fit:cover; }
+    .insignia-robotsin .fallback { font-size:60px; }
+    .insignia-badge-final {
+      width:160px; height:160px; margin:0 auto 24px;
+      background:linear-gradient(135deg,#F39C12,#D35400,#F39C12);
+      border-radius:50%; display:flex; flex-direction:column;
+      align-items:center; justify-content:center;
+      box-shadow:0 0 60px rgba(243,156,18,.6), 0 0 120px rgba(243,156,18,.3);
+      font-size:60px;
+      animation:pulse-glow 2s ease-in-out infinite;
+    }
+    @keyframes pulse-glow {
+      0%,100% { box-shadow:0 0 60px rgba(243,156,18,.6), 0 0 120px rgba(243,156,18,.3); transform:scale(1); }
+      50% { box-shadow:0 0 80px rgba(243,156,18,.8), 0 0 160px rgba(243,156,18,.5); transform:scale(1.05); }
+    }
+    .insignia-modulo-label {
+      font-size:12px; font-weight:800; letter-spacing:4px; text-transform:uppercase;
+      color:rgba(243,156,18,.7); margin-bottom:8px;
+    }
+    .insignia-title { font-size:32px; font-weight:900; color:#fff; margin-bottom:6px; }
+    .insignia-gold-title { font-size:28px; font-weight:900; color:var(--gold); margin-bottom:16px; text-shadow:0 0 30px rgba(243,156,18,.5); }
+    .insignia-desc { font-size:15px; color:rgba(255,255,255,.6); max-width:500px; margin:0 auto; line-height:1.7; }
+
+    /* ── CIERRE FINAL MÓDULO ── */
+    .cierre-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:28px; }
+    .cierre-card { background:rgba(255,255,255,.03); border:1px solid rgba(243,156,18,.2); border-radius:14px; padding:22px; text-align:center; }
+    .cierre-card.highlight { background:rgba(243,156,18,.08); border:2px solid rgba(243,156,18,.35); }
+    .cierre-card .ico { font-size:32px; margin-bottom:10px; }
+    .cierre-card h4 { font-size:14px; font-weight:700; color:#fff; margin-bottom:6px; }
+    .cierre-card.highlight h4 { color:var(--gold); }
+    .cierre-card p { font-size:12px; color:rgba(255,255,255,.45); }
+    .next-box-modulo {
+      background:linear-gradient(135deg,rgba(22,160,133,.12),rgba(39,174,96,.06));
+      border:2px solid rgba(22,160,133,.3);
+      border-radius:20px; padding:28px 32px;
+      display:flex; align-items:center; gap:24px;
+    }
+    .next-box-modulo .modulo-preview { font-size:48px; flex-shrink:0; }
+    .next-box-modulo h3 { font-size:12px; text-transform:uppercase; letter-spacing:2px; color:rgba(255,255,255,.35); margin-bottom:6px; }
+    .next-box-modulo h2 { font-size:20px; font-weight:800; color:#fff; margin-bottom:4px; }
+    .next-box-modulo h2 span { color:#1ABC9C; }
+    .next-box-modulo p { font-size:14px; color:rgba(255,255,255,.5); line-height:1.5; }
+
+    /* ── LESSON NAV ── */
+    .lesson-nav { display:flex; align-items:stretch; gap:12px; max-width:900px; margin:48px auto 0; padding:32px 40px 0; border-top:1px solid rgba(255,255,255,.06); }
+    .lesson-nav-btn { flex:1; display:flex; align-items:center; gap:14px; padding:18px 22px; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); border-radius:16px; text-decoration:none; color:#fff; transition:background .2s, border-color .2s, transform .15s; }
+    .lesson-nav-btn:hover { background:rgba(255,255,255,.07); border-color:rgba(255,255,255,.18); transform:translateY(-2px); }
+    .lesson-nav-btn.next { justify-content:flex-end; text-align:right; background:rgba(22,160,133,.06); border-color:rgba(22,160,133,.2); }
+    .lesson-nav-btn.next:hover { background:rgba(22,160,133,.12); border-color:rgba(22,160,133,.35); }
+    .nav-arrow { font-size:26px; color:var(--gold); flex-shrink:0; line-height:1; }
+    .nav-arrow.next-arrow { color:#1ABC9C; }
+    .nav-label { font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,.3); margin-bottom:3px; }
+    .nav-title-text { font-size:14px; font-weight:700; color:#fff; }
+    .lesson-nav-home { display:flex; align-items:center; justify-content:center; width:52px; flex-shrink:0; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); border-radius:16px; font-size:20px; text-decoration:none; transition:background .2s, border-color .2s; }
+    .lesson-nav-home:hover { background:rgba(255,255,255,.08); border-color:rgba(255,255,255,.2); }
+
+    footer { text-align:center; padding:40px; border-top:1px solid rgba(255,255,255,.06); color:rgba(255,255,255,.2); font-size:12px; }
+    footer strong { color:rgba(255,255,255,.45); }
+    @media(max-width:600px){ .section{padding:60px 20px;} .mision-box{flex-direction:column;} .cierre-grid{grid-template-columns:1fr;} .nav{padding:14px 20px;} .lesson-nav{flex-direction:column; padding:24px 20px 0;} }
+  </style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav class="nav">
+  <a href="index.html" class="nav-back">← Inicio</a>
+  <div class="nav-title">Módulo 5 · <span>La Música</span></div>
+  <div class="nav-spacer"></div>
+  <div class="nav-progress">
+    <span>Clase 4/4 · FINAL</span>
+    <div class="progress-bar"><div class="progress-fill"></div></div>
+    <span>100%</span>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <video class="hero-video" autoplay loop muted playsinline>
+    <source src="../robotsin/videos/Robot_floating_in_cosmic_space_202606010114.mp4" type="video/mp4">
+    <source src="../robotsin/videos/Robot_floats_in_cosmic_space_202606010118.mp4" type="video/mp4">
+    <source src="../robotsin/videos/Robot_conducting_STEAM_elements_202606010101.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">🎵 Módulo 5 — Final de Módulo</div>
+    <div class="hero-modulo">Academia Da Vinci IA · Clase 20 de 20 · Última del Módulo</div>
+
+    <div class="robotsin-float">
+      <img src="../robotsin/robotsin_musico.png" alt="D-IA Vinci Músico"
+           onerror="this.style.display='none'; this.parentElement.querySelector('.fallback').style.display='block'">
+      <div class="fallback" style="display:none">🎵</div>
+    </div>
+
+    <div class="robotsin-bubble">
+      "¡El Estudio de Grabación Da Vinci abre sus puertas!<br>
+      Hoy sale el episodio completamente sonorizado. ¡La industria no ha visto nada igual! 🎙️"
+    </div>
+
+    <h1>Audio <span>Completo</span></h1>
+    <p class="hero-sub">El episodio final sale hoy con mezcla profesional —<br>música, voz y efectos perfectamente sincronizados.</p>
+    <div class="hero-chips">
+      <div class="chip">🎚️ Mezcla de audio</div>
+      <div class="chip">⏱️ 60 minutos</div>
+      <div class="chip">🎬 Episodio final</div>
+      <div class="chip">🏆 Final de Módulo 5</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ MISIÓN ═══ -->
+<div class="divider"></div>
+<div class="section">
+  <div class="celebracion-banner">
+    <div class="stars">🎵 🎙️ 🔊 🎚️ 🎶</div>
+    <h2>¡Llegaste a la Clase Final del Módulo 5!</h2>
+    <p>Tienes el tema musical, la voz del personaje y los efectos de sonido. Hoy los unes todos y nace el episodio con audio profesional completo.</p>
+  </div>
+
+  <div class="mision-box">
+    <div class="mision-icon">🎙️</div>
+    <div>
+      <h3>⚡ Misión final: El Estudio de Grabación</h3>
+      <p>
+        Robotsin Músico anunció que el <strong>Estudio de Grabación Da Vinci</strong> abre sus puertas hoy
+        por primera y única vez. Los mejores productores del mundo esperan afuera.
+        La industria del entretenimiento IA jamás ha visto un episodio completamente producido
+        por un genio creativo de 9 a 13 años.<br><br>
+        Tu misión: aprender la mezcla de audio profesional, sincronizar todo con el video
+        y <strong>exportar el episodio completamente sonorizado</strong>.
+        Cuando termines, Robotsin te entregará la insignia más valiosa del Módulo 5.
+      </p>
+    </div>
+  </div>
+
+  <div class="section-header">
+    <div class="section-robotsin">
+      <img src="../robotsin/robotsin_musico.png" alt="Robotsin"
+           onerror="this.style.display='none'; this.parentElement.querySelector('.fallback').style.display='flex'">
+      <div class="fallback" style="display:none; width:100%; height:100%; align-items:center; justify-content:center; font-size:30px;">🎵</div>
+    </div>
+    <div>
+      <div class="section-label">Lo que aprenderás hoy</div>
+      <div class="section-title">Objetivos de la <span>Clase Final</span></div>
+    </div>
+  </div>
+
+  <div class="obj-grid">
+    <div class="obj-card">
+      <div class="ico">🎚️</div>
+      <h4>Mezcla de audio profesional</h4>
+      <p>Balance de volúmenes, fade in/out y sincronización — las 3 técnicas esenciales.</p>
+    </div>
+    <div class="obj-card">
+      <div class="ico">🔄</div>
+      <h4>Sincronización con imagen</h4>
+      <p>Alinear la voz del personaje con el movimiento de boca en cada escena de diálogo.</p>
+    </div>
+    <div class="obj-card">
+      <div class="ico">🎬</div>
+      <h4>Episodio completo</h4>
+      <p>El episodio entero con las 3 capas de audio mezcladas y listo para compartir.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ TEORÍA: MEZCLA DE AUDIO ═══ -->
+<div class="divider"></div>
+<div class="section" style="background:rgba(255,255,255,.02);">
+  <div class="section-header">
+    <div class="section-robotsin">
+      <img src="../robotsin/robotsin_musico.png" alt="Robotsin"
+           onerror="this.style.display='none'; this.parentElement.querySelector('.fallback').style.display='flex'">
+      <div class="fallback" style="display:none; width:100%; height:100%; align-items:center; justify-content:center; font-size:30px;">🎵</div>
+    </div>
+    <div>
+      <div class="section-label">La técnica final · 15 min</div>
+      <div class="section-title">Mezcla de Audio — <span>Como los Profesionales</span></div>
+    </div>
+  </div>
+
+  <div class="concepto">
+    <p>La <strong>mezcla de audio</strong> es el arte de balancear todas las pistas de sonido para que juntas suenen perfectas. Es la diferencia entre un video casero y un episodio de televisión. Y hoy tú lo vas a hacer.</p>
+  </div>
+
+  <table class="mezcla-table">
+    <thead>
+      <tr>
+        <th>Pista de Audio</th>
+        <th>Volumen</th>
+        <th>Barra visual</th>
+        <th>Nota importante</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>🎙️ Voz del personaje</td>
+        <td>100%</td>
+        <td><div class="vol-bar-wrap"><div class="vol-bar v100"></div><span style="font-size:13px;color:rgba(255,255,255,.6)">100%</span></div></td>
+        <td style="font-size:13px;color:rgba(255,255,255,.6)">Siempre la más alta — el espectador debe entender todo</td>
+      </tr>
+      <tr>
+        <td>🔊 Efectos de acción</td>
+        <td>65%</td>
+        <td><div class="vol-bar-wrap"><div class="vol-bar v65"></div><span style="font-size:13px;color:rgba(255,255,255,.6)">65%</span></div></td>
+        <td style="font-size:13px;color:rgba(255,255,255,.6)">Bajar al 30% si hay voz encima del efecto</td>
+      </tr>
+      <tr>
+        <td>🌍 Ambiente del escenario</td>
+        <td>20%</td>
+        <td><div class="vol-bar-wrap"><div class="vol-bar v20"></div><span style="font-size:13px;color:rgba(255,255,255,.6)">20%</span></div></td>
+        <td style="font-size:13px;color:rgba(255,255,255,.6)">Siempre de fondo — se escucha pero no distrae</td>
+      </tr>
+      <tr>
+        <td>🎵 Tema musical</td>
+        <td>25-30%</td>
+        <td><div class="vol-bar-wrap"><div class="vol-bar v30"></div><span style="font-size:13px;color:rgba(255,255,255,.6)">25%</span></div></td>
+        <td style="font-size:13px;color:rgba(255,255,255,.6)">Subir al 80% solo en escenas sin diálogo</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="diagram-card">
+    <div class="diagram-title">🎛️ Flujo completo — Del material de los 3 módulos al episodio final</div>
+    <img src="../diagrams/clase20_mezcla_audio.png" alt="Flujo mezcla de audio">
+  </div>
+
+  <div class="robotsin-inline ri-blue">
+    <div class="ri-avatar">
+      <img src="../robotsin/robotsin_musico.png" alt="Robotsin"
+           onerror="this.style.display='none'; this.parentElement.querySelector('.fallback').style.display='block'">
+      <div class="fallback" style="display:none">🎵</div>
+    </div>
+    <div>
+      <div class="ri-name">D-IA Vinci explica:</div>
+      <div class="ri-text">
+        "El <strong>fade in</strong> es cuando el audio sube lentamente al inicio — como cuando entras al cine y la música empieza muy bajita antes del título. El <strong>fade out</strong> es cuando baja lentamente al final — como cuando la pantalla se pone negra y la música se desvanece. <em>Estos 2 efectos simples hacen que tu episodio se sienta CINEMATOGRÁFICO.</em> Sin ellos, el audio corta de golpe y suena amateur."
+      </div>
+    </div>
+  </div>
+
+  <div class="robotsin-inline ri-gold">
+    <div class="ri-avatar">
+      <img src="../robotsin/robotsin_musico.png" alt="Robotsin"
+           onerror="this.style.display='none'; this.parentElement.querySelector('.fallback').style.display='block'">
+      <div class="fallback" style="display:none">🎵</div>
+    </div>
+    <div>
+      <div class="ri-name">D-IA Vinci — El gran secreto:</div>
+      <div class="ri-text">
+        "¿Quieres saber algo increíble? <strong>Cada episodio de Pixar tiene más de 350 personas trabajando 4 años</strong> para que el audio suene perfecto. Tú vas a lograrlo hoy, solo, en 60 minutos, usando herramientas de IA. <em>Eso no es trampa — eso es el futuro. Y tú lo estás viviendo antes que casi todos los adultos del planeta.</em>"
+      </div>
+    </div>
+  </div>
+
+  <div class="robotsin-inline ri-green">
+    <div class="ri-avatar">
+      <img src="../robotsin/robotsin_musico.png" alt="Robotsin"
+           onerror="this.style.display='none'; this.parentElement.querySelector('.fallback').style.display='block'">
+      <div class="fallback" style="display:none">🎵</div>
+    </div>
+    <div>
+      <div class="ri-name">D-IA Vinci — Tip final:</div>
+      <div class="ri-text">
+        "Antes de exportar, escucha el episodio completo <strong>una vez con oídos de espectador</strong>, no de editor. Cierra los ojos y escucha como si fuera la primera vez. Si algo te saca del mood — una música demasiado alta, un efecto en el momento equivocado — <em>ese es el problema que hay que corregir</em>. Tu instinto como espectador es más preciso que cualquier técnica."
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ ACTIVIDADES ═══ -->
+<div class="divider"></div>
+<div class="section">
+  <div class="section-header">
+    <div class="section-robotsin">
+      <img src="../robotsin/robotsin_musico.png" alt="Robotsin"
+           onerror="this.style.display='none'; this.parentElement.querySelector('.fallback').style.display='flex'">
+      <div class="fallback" style="display:none; width:100%; height:100%; align-items:center; justify-content:center; font-size:30px;">🎵</div>
+    </div>
+    <div>
+      <div class="section-label">El Estudio de Grabación · 40 min</div>
+      <div class="section-title">Actividades <span>Finales</span></div>
+    </div>
+  </div>
+
+  <ul class="act-list">
+    <li class="act-item a1">
+      <div class="act-num">1</div>
+      <div class="act-body">
+        <h4>La Mezcla del Episodio</h4>
+        <p>En CapCut, importa el video completo del episodio y agrega las 4 pistas de audio: voz del monólogo (M18), efectos de la escena de clímax (M19), ambiente del mundo, y tema musical de fondo (M17). Ajusta los volúmenes según la tabla de mezcla.</p>
+      </div>
+      <div class="act-time">⏱️ 20 min</div>
+    </li>
+    <li class="act-item a2">
+      <div class="act-num">2</div>
+      <div class="act-body">
+        <h4>La Sincronización Final</h4>
+        <p>Revisa cada escena de diálogo y alinea el audio de la voz con el movimiento de la animación. Agrega fade in al inicio del episodio (música sube 3 segundos) y fade out al final (todo baja en los últimos 4 segundos).</p>
+      </div>
+      <div class="act-time">⏱️ 10 min</div>
+    </li>
+    <li class="act-item a3">
+      <div class="act-num">3</div>
+      <div class="act-body">
+        <h4>El Episodio Sonoro — La Primera Vista</h4>
+        <p>Cierra los ojos, escucha el episodio completo una vez como espectador. Haz los últimos ajustes que necesites. Luego exporta en la máxima calidad disponible y comparte con el grupo — este es el primer estreno oficial de tu serie con audio profesional.</p>
+      </div>
+      <div class="act-time">⏱️ 15 min</div>
+    </li>
+  </ul>
+</div>
+
+<!-- ═══ TAREA ═══ -->
+<div class="divider"></div>
+<div class="section" style="background:rgba(255,255,255,.02);">
+  <div class="section-header">
+    <div class="section-robotsin">
+      <img src="../robotsin/robotsin_musico.png" alt="Robotsin"
+           onerror="this.style.display='none'; this.parentElement.querySelector('.fallback').style.display='flex'">
+      <div class="fallback" style="display:none; width:100%; height:100%; align-items:center; justify-content:center; font-size:30px;">🎵</div>
+    </div>
+    <div>
+      <div class="section-label">Tu última misión del módulo</div>
+      <div class="section-title">Tarea <span>Final</span></div>
+    </div>
+  </div>
+
+  <div class="tarea-box">
+    <div class="tarea-icon">🎬</div>
+    <div>
+      <h3>Compartir el episodio con audio completo</h3>
+      <p>
+        Comparte el episodio con audio profesional con tu familia y amigos.
+        Observa sus reacciones — cuando alguien escucha la música de tu serie por primera vez
+        y entiende todo el diálogo perfectamente, esa reacción te dirá si lograste tu misión.<br><br>
+        Guarda el archivo como <strong>episodio_final_audio_[nombre-serie].mp4</strong>.<br><br>
+        <em>En el Módulo 6, el Maestro te está esperando con el desafío final:
+        unir absolutamente todo — personaje, mundo, historia, video, música —
+        en el proyecto más épico que hayas creado en tu vida.</em>
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ INSIGNIA FINAL MÓDULO ═══ -->
+<div class="divider"></div>
+<div class="insignia-section">
+  <div class="insignia-robotsin">
+    <img src="../robotsin/robotsin_musico.png" alt="D-IA Vinci Músico"
+         onerror="this.style.display='none'; this.parentElement.querySelector('.fallback').style.display='block'">
+    <div class="fallback" style="display:none">🎵</div>
+  </div>
+  <div class="insignia-badge-final">🎙️</div>
+  <div class="insignia-modulo-label">Insignia de Módulo Completo</div>
+  <div class="insignia-title">¡Módulo 5 desbloqueado!</div>
+  <div class="insignia-gold-title">Productor Musical — Nivel 5</div>
+  <p class="insignia-desc">
+    Completaste el módulo más técnico y creativo del curso. Tienes un tema musical original,
+    la voz de tu personaje, los efectos de sonido del mundo y la mezcla profesional completa.
+    Tu serie ya suena como si viniera de un estudio real. Eso es porque viene de algo mejor:
+    viene de un Genio Creativo.
+  </p>
+</div>
+
+<!-- ═══ CIERRE FINAL MÓDULO ═══ -->
+<div class="divider"></div>
+<div class="section">
+  <div class="section-header">
+    <div class="section-robotsin">
+      <img src="../robotsin/robotsin_musico.png" alt="Robotsin"
+           onerror="this.style.display='none'; this.parentElement.querySelector('.fallback').style.display='flex'">
+      <div class="fallback" style="display:none; width:100%; height:100%; align-items:center; justify-content:center; font-size:30px;">🎵</div>
+    </div>
+    <div>
+      <div class="section-label">Todo lo que dominaste en el Módulo 5</div>
+      <div class="section-title">Resumen del <span>Módulo</span></div>
+    </div>
+  </div>
+
+  <div class="cierre-grid">
+    <div class="cierre-card highlight">
+      <div class="ico">🎼</div>
+      <h4>Clase 17 — El Tema Musical</h4>
+      <p>Los 4 elementos musicales y el prompt perfecto en Suno.ai para el tema de la serie.</p>
+    </div>
+    <div class="cierre-card highlight">
+      <div class="ico">🎙️</div>
+      <h4>Clase 18 — La Voz del Personaje</h4>
+      <p>TTS con ElevenLabs, el perfil de voz y el monólogo oficial de 30 segundos.</p>
+    </div>
+    <div class="cierre-card highlight">
+      <div class="ico">🔊</div>
+      <h4>Clase 19 — Efectos de Sonido</h4>
+      <p>Las 3 capas de audio, fuentes gratuitas y la primera escena completamente sonorizada.</p>
+    </div>
+    <div class="cierre-card highlight">
+      <div class="ico">🎬</div>
+      <h4>Clase 20 — Audio Completo</h4>
+      <p>Mezcla profesional, sincronización y el episodio final con audio cinematográfico.</p>
+    </div>
+  </div>
+
+  <div class="next-box-modulo">
+    <div class="modulo-preview">🏆</div>
+    <div>
+      <h3>Siguiente Módulo</h3>
+      <h2>Módulo 6 — <span>El Proyecto Final</span></h2>
+      <p>D-IA Vinci Maestro reúne todos los artefactos creados en los 5 módulos. El personaje, el mundo, la historia, el video y la música se unen en el gran proyecto final. La graduación está cerca.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ NAVEGACIÓN ═══ -->
+<nav class="lesson-nav">
+  <a href="clase19_efectos_de_sonido.html" class="lesson-nav-btn">
+    <span class="nav-arrow">←</span>
+    <div>
+      <div class="nav-label">Clase anterior</div>
+      <div class="nav-title-text">Clase 19 — Efectos de Sonido</div>
+    </div>
+  </a>
+  <a href="index.html" class="lesson-nav-home">🏠</a>
+  <a href="clase21_ensamble_final.html" class="lesson-nav-btn next">
+    <div>
+      <div class="nav-label">Siguiente módulo</div>
+      <div class="nav-title-text">Clase 21 — Ensamble Final</div>
+    </div>
+    <span class="nav-arrow next-arrow">🎵</span>
+  </a>
+</nav>
+
+<footer>
+  <strong>Academia Da Vinci IA</strong> · Pequeños Genios Creativos · Módulo 5 — La Música · Clase Final<br>
+  D-IA Vinci Músico · ¡Productor Musical Nivel 5 desbloqueado!
+</footer>
+
+<!-- ── Supabase Auth + Progreso ─────────────────────────────────── -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="js/supabase-client.js"></script>
+<script src="js/auth.js"></script>
+
+</body>
+</html>

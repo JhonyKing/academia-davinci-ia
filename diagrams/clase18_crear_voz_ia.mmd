@@ -1,0 +1,11 @@
+flowchart TD
+    A[🎙️ Elegir Voz Base\nElevenLabs / alternativa gratuita] --> B[⚙️ Ajustar Parámetros\nVelocidad · Tono · Emoción]
+    B --> C[✍️ Escribir el Texto\nCon puntuación para pausas]
+    C --> D[▶️ Generar Audio]
+    D --> E{¿Suena como\ntu personaje?}
+    E -->|Sí| F[✅ Guardar como MP3\nMonólogo del personaje]
+    E -->|Velocidad incorrecta| G[🔧 Ajustar velocidad\nen el panel]
+    E -->|Tono incorrecto| H[🔧 Ajustar tono\nmás grave o agudo]
+    G --> D
+    H --> D
+    F --> I[🎬 Listo para usar\nen el video del episodio]
