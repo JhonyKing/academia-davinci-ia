@@ -5,8 +5,8 @@
 //  los valores de tu proyecto en supabase.com
 // ──────────────────────────────────────────────
 
-const SUPABASE_URL     = 'https://TU_PROYECTO.supabase.co'
-const SUPABASE_ANON_KEY = 'TU_ANON_KEY'
+const SUPABASE_URL     = 'https://joiuvopzkorvmxegnjqg.supabase.co'
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpvaXV2b3B6a29ydm14ZWduanFnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAyOTc3OTEsImV4cCI6MjA5NTg3Mzc5MX0.Xf9wf5zngrvpaeZTbee0zd0LL5YoFtX8hwoYxCwrWnc'
 
 // Carga la librería de Supabase desde CDN si todavía no existe
 // (permite incluir este script antes del CDN tag si es necesario)
