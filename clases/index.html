@@ -424,8 +424,20 @@
 </section>
 
 <script>
-// Carga el progreso del alumno y muestra la barra en el hero
 ;(function loadProgress() {
+  const CLASE_NOMBRES = {
+    1:'Bienvenido, Genio', 2:'Nace el Personaje', 3:'Retrato Oficial',
+    4:'Tarjeta Oficial', 5:'Los 12 Arquetipos', 6:'El Universo',
+    7:'Aliados y Villanos', 8:'Mapa del Mundo', 9:'Galería del Mundo',
+    10:'El Guion', 11:'Los Diálogos', 12:'El Cómic', 13:'Episodio Completo',
+    14:'Primera Animación', 15:'Planos y Cámara', 16:'Las Escenas',
+    17:'Edición Básica', 18:'El Tráiler', 19:'El Tema Musical',
+    20:'La Voz del Personaje', 21:'Efectos de Sonido', 22:'Audio Completo',
+    23:'Ensamble Final', 24:'Revisión y Edición', 25:'Estreno Privado',
+    26:'Graduación de Genios'
+  }
+  const TOTAL = 26
+
   function tryInit() {
     const sb = window._supabase
     if (!sb) { setTimeout(tryInit, 200); return }
@@ -436,26 +448,41 @@
         .eq('user_id', session.user.id)
         .eq('completada', true)
         .then(({ data }) => {
-          const total = 26
-          const done  = data ? data.length : 0
-          const pct   = Math.round((done / total) * 100)
-          const wrap  = document.getElementById('dv-progress-bar-wrap')
-          if (!wrap) return
-          wrap.style.display = 'block'
-          document.getElementById('dv-progress-label').textContent =
-            done === 0 ? '¡Empieza tu primera clase hoy!' :
-            done === total ? '🎓 ¡Curso completado! Eres un Genio Creativo.' :
-            `${done} de ${total} clases completadas`
-          document.getElementById('dv-progress-pct').textContent = pct + '%'
-          document.getElementById('dv-progress-fill').style.width = pct + '%'
-          if (done > 0 && done < total) {
-            const next = done + 1
-            document.getElementById('dv-next-clase').textContent =
-              `▶ Siguiente: Clase ${next}`
+          const completadas = new Set((data || []).map(r => r.clase_num))
+          const done = completadas.size
+          const pct  = Math.round((done / TOTAL) * 100)
+
+          // Primera clase no completada (no necesariamente done+1)
+          let nextNum = null
+          for (let i = 1; i <= TOTAL; i++) {
+            if (!completadas.has(i)) { nextNum = i; break }
           }
+
+          const wrap = document.getElementById('dv-progress-bar-wrap')
+          if (!wrap) return
+
+          document.getElementById('dv-progress-label').textContent =
+            done === 0    ? '¡Empieza tu primera clase hoy!' :
+            done === TOTAL ? '🎓 ¡Curso completado! Eres un Genio Creativo.' :
+            `${done} de ${TOTAL} clases completadas`
+          document.getElementById('dv-progress-pct').textContent = pct + '%'
+
+          if (nextNum && done > 0 && done < TOTAL) {
+            document.getElementById('dv-next-clase').textContent =
+              `▶ Siguiente: Clase ${nextNum} — ${CLASE_NOMBRES[nextNum] || ''}`
+          }
+
+          // Mostrar el contenedor primero, luego animar la barra en el siguiente frame
+          wrap.style.display = 'block'
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              document.getElementById('dv-progress-fill').style.width = pct + '%'
+            })
+          })
         })
     })
   }
+
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => setTimeout(tryInit, 300))
   } else {
