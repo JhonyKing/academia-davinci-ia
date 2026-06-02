@@ -352,12 +352,18 @@
           payload.arquetipo_nombre = info?.nombre || arquetipo
         }
 
+        const esPrimeraEntrega = !existente
         await guardarEntrega(userId, claseNum, payload)
 
         msg.style.color = '#27AE60'
         msg.textContent = '✅ ¡Misión entregada! Sigue con la siguiente clase.'
         btn.textContent = '✅ Entregado'
         btn.style.background = '#27AE60'
+
+        // Celebración solo en primera entrega
+        if (esPrimeraEntrega && window.CelebrationSystem) {
+          setTimeout(() => window.CelebrationSystem.showEntregaSuccess(), 400)
+        }
 
         // Scroll suave a la navegación de lección si existe
         setTimeout(() => {

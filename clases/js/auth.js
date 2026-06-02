@@ -20,14 +20,35 @@
   }
 
   const CLASE_NUM       = detectClaseNum()
-  const TOTAL_CLASES    = 24
+  const TOTAL_CLASES    = 26
   const SCROLL_TRIGGER  = 0.90   // 90 % de scroll para marcar completada
+
+  // ── 1b. Carga celebration.js de forma diferida ──────────────────────────
+  function loadCelebration() {
+    if (window.CelebrationSystem) return Promise.resolve()
+    return new Promise(resolve => {
+      const s = document.createElement('script')
+      s.src = 'js/celebration.js'
+      s.onload = resolve
+      s.onerror = resolve  // si falla, no bloquear
+      document.head.appendChild(s)
+    })
+  }
 
   // ── 2. Marcar clase como completada en Supabase ─────────────────────────
   async function markClassComplete(userId) {
     if (!CLASE_NUM) return
     const sb = window._supabase
-    // upsert: si ya existe la fila no lanza error
+
+    // Verificar si ya estaba completada (para mostrar celebración solo la primera vez)
+    const { data: existing } = await sb
+      .from('progress')
+      .select('completada')
+      .eq('user_id', userId)
+      .eq('clase_num', CLASE_NUM)
+      .maybeSingle()
+    const wasAlreadyComplete = existing?.completada === true
+
     const { error } = await sb
       .from('progress')
       .upsert(
@@ -43,6 +64,14 @@
       if (badge) {
         badge.textContent = '✓ Completada'
         badge.style.color = 'var(--green, #27AE60)'
+      }
+      // Celebración solo la primera vez que se completa
+      if (!wasAlreadyComplete) {
+        loadCelebration().then(() => {
+          if (window.CelebrationSystem) {
+            window.CelebrationSystem.showClassComplete(CLASE_NUM)
+          }
+        })
       }
     }
   }

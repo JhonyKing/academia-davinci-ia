@@ -403,8 +403,63 @@
       <div class="stat"><span class="num">9–13</span><span class="label">Años</span></div>
       <div class="stat"><span class="num">STEAM</span><span class="label">Metodología</span></div>
     </div>
+
+    <!-- Contador de progreso del alumno (se muestra al cargar sesión) -->
+    <div id="dv-progress-bar-wrap" style="display:none; margin-top:28px; max-width:480px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+        <span id="dv-progress-label" style="font-size:13px; font-weight:700; color:#E8EAF0;"></span>
+        <span id="dv-progress-pct" style="font-size:13px; font-weight:800; color:#4A90D9;"></span>
+      </div>
+      <div style="height:8px; background:rgba(255,255,255,0.08); border-radius:8px; overflow:hidden;">
+        <div id="dv-progress-fill"
+             style="height:100%; background:linear-gradient(90deg,#4A90D9,#8E44AD);
+                    border-radius:8px; transition:width 1s ease; width:0%;"></div>
+      </div>
+      <div id="dv-next-clase" style="margin-top:10px; font-size:12px; color:rgba(232,234,240,0.45);"></div>
+    </div>
   </div>
 </section>
+
+<script>
+// Carga el progreso del alumno y muestra la barra en el hero
+;(function loadProgress() {
+  function tryInit() {
+    const sb = window._supabase
+    if (!sb) { setTimeout(tryInit, 200); return }
+    sb.auth.getSession().then(({ data: { session } }) => {
+      if (!session) return
+      sb.from('progress')
+        .select('clase_num')
+        .eq('user_id', session.user.id)
+        .eq('completada', true)
+        .then(({ data }) => {
+          const total = 26
+          const done  = data ? data.length : 0
+          const pct   = Math.round((done / total) * 100)
+          const wrap  = document.getElementById('dv-progress-bar-wrap')
+          if (!wrap) return
+          wrap.style.display = 'block'
+          document.getElementById('dv-progress-label').textContent =
+            done === 0 ? '¡Empieza tu primera clase hoy!' :
+            done === total ? '🎓 ¡Curso completado! Eres un Genio Creativo.' :
+            `${done} de ${total} clases completadas`
+          document.getElementById('dv-progress-pct').textContent = pct + '%'
+          document.getElementById('dv-progress-fill').style.width = pct + '%'
+          if (done > 0 && done < total) {
+            const next = done + 1
+            document.getElementById('dv-next-clase').textContent =
+              `▶ Siguiente: Clase ${next}`
+          }
+        })
+    })
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => setTimeout(tryInit, 300))
+  } else {
+    setTimeout(tryInit, 300)
+  }
+})()
+</script>
 
 <!-- ═══ STEAM ═══ -->
 <div class="divider"></div>
