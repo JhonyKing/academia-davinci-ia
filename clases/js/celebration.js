@@ -86,6 +86,15 @@
 
       .dv-hint { font-family:'Poppins',sans-serif; font-size: 11px;
                  color: rgba(255,255,255,0.2); margin-top: 10px; }
+      .dv-close {
+        position: absolute; top: 14px; right: 14px;
+        background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+        color: rgba(255,255,255,0.5); border-radius: 50%;
+        width: 32px; height: 32px; font-size: 14px; line-height: 1;
+        cursor: pointer; display: flex; align-items: center; justify-content: center;
+        transition: all .2s; font-family: sans-serif;
+      }
+      .dv-close:hover { background: rgba(255,255,255,0.18); color: #fff; }
     `
     document.head.appendChild(s)
   }
@@ -146,7 +155,8 @@
       : ''
 
     ov.innerHTML = `
-      <div class="dv-modal" style="--dv-accent:${color}">
+      <div class="dv-modal" style="--dv-accent:${color}" onclick="event.stopPropagation()">
+        <button class="dv-close" onclick="this.closest('.dv-ov').remove()" title="Cerrar">✕</button>
         <div class="dv-confetti-wrap"></div>
         ${imgHTML}
         <span class="dv-emoji">${emoji}</span>
@@ -179,7 +189,7 @@
           subtitle: `"${mod.name}" — ¡Insignia desbloqueada, genio!`,
           color: mod.color,
           robotsinSrc: 'robotsin/robotsin_completo.png',
-          ms: 5500,
+          ms: 10000,
         })
       } else {
         playChime(CHIME_CLASS)
