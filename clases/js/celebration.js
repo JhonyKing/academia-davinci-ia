@@ -194,15 +194,15 @@
       }
     },
 
-    showEntregaSuccess() {
+    showEntregaSuccess(mensaje) {
       playChime(CHIME_ENTREGA)
       showModal({
         emoji: '📬',
         title: '¡Robotsin recibió tu entrega!',
-        subtitle: 'Tu trabajo quedó guardado. ¡Misión cumplida, genio!',
+        subtitle: mensaje || 'Tu trabajo quedó guardado. ¡Misión cumplida, genio!',
         color: '#27AE60',
         robotsinSrc: 'robotsin/robotsin_artista.png',
-        ms: 3500,
+        ms: 5000,
       })
     },
   }

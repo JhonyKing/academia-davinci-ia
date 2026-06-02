@@ -360,9 +360,25 @@
         btn.textContent = '✅ Entregado'
         btn.style.background = '#27AE60'
 
-        // Celebración solo en primera entrega
-        if (esPrimeraEntrega && window.CelebrationSystem) {
-          setTimeout(() => window.CelebrationSystem.showEntregaSuccess(), 400)
+        // Feedback + celebración solo en primera entrega
+        if (esPrimeraEntrega) {
+          // Cargar feedback.js si no está listo
+          function runCelebrationWithFeedback() {
+            if (window.DvFeedback && window.CelebrationSystem) {
+              window.DvFeedback.generateFeedback(claseNum, config.tipo, payload)
+                .then(msg => window.CelebrationSystem.showEntregaSuccess(msg))
+            } else if (window.CelebrationSystem) {
+              window.CelebrationSystem.showEntregaSuccess()
+            }
+          }
+          if (!window.DvFeedback) {
+            const s = document.createElement('script')
+            s.src = 'js/feedback.js'
+            s.onload = () => setTimeout(runCelebrationWithFeedback, 400)
+            document.head.appendChild(s)
+          } else {
+            setTimeout(runCelebrationWithFeedback, 400)
+          }
         }
 
         // Scroll suave a la navegación de lección si existe
