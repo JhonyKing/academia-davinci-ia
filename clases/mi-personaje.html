@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mi Personaje — Academia Da Vinci IA</title>
+  <link rel="icon" type="image/svg+xml" href="robotsin/favicon.svg">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap');
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -489,6 +490,20 @@
       html += `</div>`
     }
 
+    // Botón para crear nuevo personaje
+    html += `
+      <div style="margin-top:20px;text-align:right;">
+        <button onclick="window.iniciarNuevoPersonaje()"
+          style="background:transparent;border:1px solid rgba(231,76,60,.4);
+                 color:#E74C3C;padding:9px 20px;border-radius:8px;
+                 font-family:'Poppins',sans-serif;font-size:13px;font-weight:600;
+                 cursor:pointer;transition:all .2s;"
+          onmouseover="this.style.background='rgba(231,76,60,.1)'"
+          onmouseout="this.style.background='transparent'">
+          🔄 Crear nuevo personaje
+        </button>
+      </div>`
+
     el.innerHTML = html
 
     // Función expandir descripción
@@ -518,13 +533,18 @@
 
     let html = `<div class="secundarios-grid">`
     for (const sec of secundarios) {
-      const tipo   = (sec.tipo || 'neutro').toLowerCase()
-      const tipoLabel = { aliado: '✅ Aliado', villano: '⚠️ Villano', neutro: '◎ Neutro' }[tipo] || tipo
-      const inicial = (sec.nombre || '?').charAt(0).toUpperCase()
+      const tipo      = (sec.tipo || 'neutro').toLowerCase()
+      const tipoLabel = {
+        aliado: '✅ Aliado', villano: '⚠️ Villano',
+        neutro: '◎ Neutro', neutral: '◎ Neutro',
+        protagonista_anterior: '🌟 Protagonista Anterior'
+      }[tipo] || tipo
+      const tipoClass = ['aliado','villano','neutro'].includes(tipo) ? tipo : 'neutro'
+      const inicial   = (sec.nombre || '?').charAt(0).toUpperCase()
 
       let imgHTML = inicial
-      if (sec.imagen_url) {
-        const signedUrl = await getSignedUrl(sec.imagen_url)
+      if (sec.imagen_retrato_url) {
+        const signedUrl = await getSignedUrl(sec.imagen_retrato_url)
         if (signedUrl) {
           imgHTML = `<img src="${signedUrl}" alt="${sec.nombre || ''}"
                          style="width:100%;height:100%;object-fit:cover;border-radius:50%;"
@@ -534,9 +554,9 @@
 
       html += `
         <div class="secundario-card">
-          <div class="sec-avatar ${tipo}">${imgHTML}</div>
+          <div class="sec-avatar ${tipoClass}">${imgHTML}</div>
           <div class="sec-name">${sec.nombre || 'Sin nombre'}</div>
-          <div class="sec-tipo ${tipo}">${tipoLabel}</div>
+          <div class="sec-tipo ${tipoClass}">${tipoLabel}</div>
           ${sec.arquetipo ? `<div class="sec-arquetipo">${sec.arquetipo}</div>` : ''}
         </div>`
     }
@@ -707,6 +727,64 @@
 
     html += `</div></div>` // /clases-grid /card
     el.innerHTML = html
+  }
+
+  // ── Crear nuevo personaje (mueve el actual a secundarios) ────────────
+  window.iniciarNuevoPersonaje = async function () {
+    const ok = confirm(
+      '¿Quieres crear un nuevo personaje?\n\n' +
+      'Tu personaje actual se guardará como "Protagonista Anterior" en personajes secundarios.\n\n' +
+      '¡No perderás nada de lo que ya creaste!'
+    )
+    if (!ok) return
+
+    const sb = window._supabase
+    const { data: { session } } = await sb.auth.getSession()
+    if (!session) return
+    const userId = session.user.id
+
+    try {
+      const [personajeRes, entregasRes] = await Promise.all([
+        sb.from('personaje').select('*').eq('user_id', userId).maybeSingle(),
+        sb.from('entregas').select('*').eq('user_id', userId).in('clase_num', [2, 3, 4, 5])
+      ])
+
+      const personaje  = personajeRes.data
+      const entregas   = entregasRes.data || []
+      const entrega2   = entregas.find(e => e.clase_num === 2)
+      const entrega3   = entregas.find(e => e.clase_num === 3)
+      const entrega5   = entregas.find(e => e.clase_num === 5)
+
+      const nombre     = personaje?.nombre
+                      || entrega2?.contenido_texto?.split('\n')[0]?.slice(0, 40)
+                      || 'Personaje anterior'
+      const arquetipo  = personaje?.arquetipo || entrega5?.arquetipo_nombre || ''
+      const descripcion = personaje?.descripcion || entrega2?.contenido_texto || ''
+      const imagen_retrato_url = personaje?.imagen_retrato_url || entrega3?.archivo_url || null
+
+      const { error: insertError } = await sb.from('personajes_secundarios').insert({
+        user_id: userId,
+        nombre,
+        arquetipo,
+        tipo: 'protagonista_anterior',
+        descripcion,
+        imagen_retrato_url,
+      })
+
+      if (insertError) {
+        alert('Error al guardar el personaje anterior: ' + insertError.message)
+        return
+      }
+
+      if (personaje) {
+        await sb.from('personaje').delete().eq('user_id', userId)
+      }
+
+      alert('¡Listo! Tu personaje anterior está guardado como secundario.\nAhora puedes crear tu nuevo personaje.')
+      window.location.href = 'clase2_nace_el_personaje.html'
+    } catch (err) {
+      alert('Error inesperado: ' + err.message)
+    }
   }
 
   // ── FUNCIÓN PRINCIPAL ─────────────────────────────────────────────────

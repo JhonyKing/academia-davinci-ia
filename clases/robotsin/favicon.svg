@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Dark background -->
+  <rect width="64" height="64" rx="12" fill="#0F1626"/>
+  <!-- Antenna stem -->
+  <rect x="30" y="5" width="4" height="10" rx="2" fill="#4A90D9"/>
+  <!-- Antenna ball -->
+  <circle cx="32" cy="4" r="4" fill="#F39C12"/>
+  <!-- Robot head -->
+  <rect x="8" y="14" width="48" height="40" rx="10" fill="#4A90D9"/>
+  <!-- Eye whites -->
+  <circle cx="22" cy="30" r="8" fill="#fff"/>
+  <circle cx="42" cy="30" r="8" fill="#fff"/>
+  <!-- Eye pupils -->
+  <circle cx="22" cy="30" r="4.5" fill="#0F1626"/>
+  <circle cx="42" cy="30" r="4.5" fill="#0F1626"/>
+  <!-- Eye gleam -->
+  <circle cx="24" cy="27" r="2" fill="#fff"/>
+  <circle cx="44" cy="27" r="2" fill="#fff"/>
+  <!-- Mouth panel -->
+  <rect x="16" y="44" width="32" height="6" rx="3" fill="rgba(255,255,255,0.25)"/>
+  <!-- Mouth lights -->
+  <circle cx="24" cy="47" r="2" fill="#F39C12"/>
+  <circle cx="32" cy="47" r="2" fill="#27AE60"/>
+  <circle cx="40" cy="47" r="2" fill="#E74C3C"/>
+  <!-- Side ears -->
+  <rect x="3" y="22" width="5" height="14" rx="2.5" fill="#357ABD"/>
+  <rect x="56" y="22" width="5" height="14" rx="2.5" fill="#357ABD"/>
+</svg>
