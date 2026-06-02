@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>¡Bienvenido, Genio! — Academia Da Vinci IA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Poppins', sans-serif; background: #0F1626; color: #E8EAF0; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; }
+    .card { max-width: 580px; width: 100%; background: #1A2540; border: 1px solid rgba(39,174,96,0.3); border-top: 4px solid #27AE60; border-radius: 24px; padding: 56px 48px; text-align: center; }
+    .emoji { font-size: 72px; margin-bottom: 24px; display: block; animation: pop .5s cubic-bezier(.34,1.56,.64,1) both; }
+    @keyframes pop { from{transform:scale(0)} to{transform:scale(1)} }
+    h1 { font-size: clamp(24px,4vw,36px); font-weight: 900; color: #fff; margin-bottom: 12px; }
+    h1 span { color: #27AE60; }
+    .sub { font-size: 16px; color: rgba(232,234,240,0.6); margin-bottom: 40px; line-height: 1.6; }
+    .steps { text-align: left; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 16px; padding: 28px; margin-bottom: 36px; }
+    .step { display: flex; gap: 16px; align-items: flex-start; margin-bottom: 18px; }
+    .step:last-child { margin-bottom: 0; }
+    .step-num { width: 32px; height: 32px; border-radius: 50%; background: #27AE60; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; flex-shrink: 0; }
+    .step p { font-size: 14px; color: #E8EAF0; line-height: 1.5; margin: 0; padding-top: 5px; }
+    .step p strong { color: #fff; display: block; margin-bottom: 2px; }
+    .btn { display: inline-block; padding: 16px 40px; background: linear-gradient(135deg,#4A90D9,#8E44AD); color: #fff; border-radius: 50px; font-size: 16px; font-weight: 700; text-decoration: none; transition: transform .2s, box-shadow .2s; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(74,144,217,0.4); }
+    .nota { font-size: 13px; color: rgba(232,234,240,0.4); margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <span class="emoji">🎉</span>
+    <h1>¡Bienvenido a la<br><span>Academia Da Vinci IA!</span></h1>
+    <p class="sub">El pago fue exitoso. En los próximos minutos recibirás un correo con las instrucciones de acceso para tu hijo.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <p><strong>Revisa tu correo</strong>Busca un email de Academia Da Vinci IA con las credenciales de acceso. Puede tardar hasta 5 minutos.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <p><strong>Crea la contraseña</strong>El correo incluye un enlace para que el alumno elija su contraseña personal.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <p><strong>¡Empieza la Clase 1!</strong>D-IA Vinci Robotsin está esperando para guiar al nuevo genio en su primera misión.</p>
+      </div>
+    </div>
+
+    <a href="login.html" class="btn">Ir al login →</a>
+    <p class="nota">¿No llegó el correo? Revisa spam o escríbenos a <strong>jhonykingmusic@hotmail.com</strong></p>
+  </div>
+</body>
+</html>

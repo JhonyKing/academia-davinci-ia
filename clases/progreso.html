@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reporte de Progreso — Academia Da Vinci IA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="js/supabase-client.js"></script>
+  <script src="js/auth.js"></script>
+  <style>
+    :root {
+      --bg:     #0F1626;
+      --bg2:    #1A2540;
+      --blue:   #4A90D9;
+      --purple: #8E44AD;
+      --gold:   #F39C12;
+      --green:  #27AE60;
+      --red:    #E74C3C;
+      --teal:   #16A085;
+      --text:   #E8EAF0;
+      --muted:  rgba(232,234,240,0.55);
+      --radius: 12px;
+      --shadow: 0 4px 24px rgba(0,0,0,0.4);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* ── NAV ─────────────────────────────────────────────── */
+    nav {
+      background: var(--bg2);
+      border-bottom: 1px solid rgba(74,144,217,0.2);
+      padding: 0 24px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-logo {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--blue);
+      text-decoration: none;
+      letter-spacing: -0.3px;
+    }
+    .nav-logo:hover { color: var(--text); }
+    .nav-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--muted);
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .btn-print {
+      background: transparent;
+      border: 1px solid rgba(74,144,217,0.4);
+      color: var(--blue);
+      padding: 6px 16px;
+      border-radius: 8px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-print:hover {
+      background: var(--blue);
+      color: #fff;
+    }
+
+    /* ── CONTENEDOR ──────────────────────────────────────── */
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 32px 24px 64px;
+    }
+
+    /* ── LOADING ─────────────────────────────────────────── */
+    #loading-state {
+      text-align: center;
+      padding: 80px 24px;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+    #main-content { display: none; }
+
+    /* ── HERO ────────────────────────────────────────────── */
+    .hero {
+      background: var(--bg2);
+      border-radius: var(--radius);
+      padding: 32px;
+      margin-bottom: 28px;
+      border: 1px solid rgba(74,144,217,0.15);
+    }
+    .hero-nombre {
+      font-size: 1.9rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .hero-nombre span {
+      background: linear-gradient(135deg, var(--blue), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-subtitle {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .hero-fecha {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+    .hero-fecha strong { color: var(--text); }
+
+    /* Stat cards */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .stat-card {
+      background: var(--bg);
+      border-radius: 10px;
+      padding: 18px 16px;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .stat-value {
+      font-size: 1.8rem;
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--muted);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+    .stat-card:nth-child(1) .stat-value { color: var(--blue); }
+    .stat-card:nth-child(2) .stat-value { color: var(--purple); }
+    .stat-card:nth-child(3) .stat-value { color: var(--gold); }
+    .stat-card:nth-child(4) .stat-value { color: var(--teal); }
+
+    /* ── BARRA GENERAL ───────────────────────────────────── */
+    .progress-section {
+      background: var(--bg2);
+      border-radius: var(--radius);
+      padding: 24px 28px;
+      margin-bottom: 28px;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .section-title {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 14px;
+    }
+    .progress-bar-wrap {
+      background: rgba(255,255,255,0.08);
+      border-radius: 99px;
+      height: 12px;
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      border-radius: 99px;
+      background: linear-gradient(90deg, var(--blue), var(--purple));
+      transition: width 0.8s ease;
+    }
+    .progress-label {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    .progress-label strong { color: var(--text); }
+
+    /* ── MÓDULOS GRID ────────────────────────────────────── */
+    .modulos-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-bottom: 28px;
+    }
+    .modulo-card {
+      background: var(--bg2);
+      border-radius: var(--radius);
+      padding: 20px 20px 20px 24px;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-left-width: 4px;
+      position: relative;
+    }
+    .modulo-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 14px;
+      gap: 8px;
+    }
+    .modulo-info {}
+    .modulo-num {
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--muted);
+      margin-bottom: 2px;
+    }
+    .modulo-nombre {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .modulo-conteo {
+      font-size: 0.8rem;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .badge-completado {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(39,174,96,0.18);
+      color: var(--green);
+      border: 1px solid rgba(39,174,96,0.35);
+      border-radius: 99px;
+      padding: 3px 10px;
+      font-size: 0.72rem;
+      font-weight: 600;
+    }
+    .clases-dots {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .dot {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+      font-weight: 600;
+      transition: opacity 0.2s;
+    }
+    .dot-done {
+      background: rgba(39,174,96,0.25);
+      color: var(--green);
+      border: 1px solid rgba(39,174,96,0.5);
+    }
+    .dot-pending {
+      background: rgba(255,255,255,0.05);
+      color: var(--muted);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    /* ── ACTIVIDAD RECIENTE ──────────────────────────────── */
+    .actividad-section {
+      background: var(--bg2);
+      border-radius: var(--radius);
+      padding: 24px 28px;
+      margin-bottom: 28px;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .actividad-empty {
+      color: var(--muted);
+      font-size: 0.88rem;
+      padding: 12px 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    thead th {
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--muted);
+      padding: 0 0 12px 0;
+      text-align: left;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    tbody tr {
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    tbody tr:last-child { border-bottom: none; }
+    tbody td {
+      padding: 11px 0;
+      font-size: 0.85rem;
+      color: var(--text);
+    }
+    td.clase-num {
+      font-weight: 700;
+      color: var(--blue);
+      width: 60px;
+    }
+    td.clase-fecha {
+      color: var(--muted);
+      font-size: 0.8rem;
+      text-align: right;
+    }
+
+    /* ── FOOTER ──────────────────────────────────────────── */
+    footer {
+      text-align: center;
+      padding: 32px 24px;
+      color: var(--muted);
+      font-size: 0.8rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    footer a {
+      color: var(--blue);
+      text-decoration: none;
+    }
+    footer a:hover { text-decoration: underline; }
+    footer p + p { margin-top: 4px; }
+
+    /* ── RESPONSIVE ──────────────────────────────────────── */
+    @media (max-width: 680px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .modulos-grid {
+        grid-template-columns: 1fr;
+      }
+      .nav-title { display: none; }
+      .hero-nombre { font-size: 1.5rem; }
+    }
+
+    @media (max-width: 420px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* ── PRINT ───────────────────────────────────────────── */
+    @media print {
+      :root {
+        --bg:   #ffffff;
+        --bg2:  #f5f5f5;
+        --text: #111111;
+        --muted: #666666;
+      }
+
+      body { background: #fff; color: #111; }
+
+      nav { display: none; }
+
+      .btn-print { display: none; }
+
+      .container { padding: 0; max-width: 100%; }
+
+      .hero,
+      .progress-section,
+      .modulo-card,
+      .actividad-section {
+        background: #f5f5f5 !important;
+        border: 1px solid #ddd !important;
+        box-shadow: none !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .progress-bar-fill {
+        background: #333 !important;
+      }
+
+      .dot-done {
+        background: #d4edda !important;
+        color: #155724 !important;
+        border-color: #c3e6cb !important;
+      }
+
+      .dot-pending {
+        background: #f0f0f0 !important;
+        color: #999 !important;
+        border-color: #ddd !important;
+      }
+
+      .hero-nombre span {
+        -webkit-text-fill-color: #111 !important;
+      }
+
+      a { color: #111 !important; text-decoration: none !important; }
+
+      * { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="index.html">🤖 Academia Da Vinci IA</a>
+    <span class="nav-title">Reporte de Progreso</span>
+    <button class="btn-print" onclick="window.print()">🖨️ Imprimir</button>
+  </nav>
+
+  <div class="container">
+
+    <!-- LOADING -->
+    <div id="loading-state">
+      <p style="color:var(--muted);font-size:1rem;">Cargando reporte…</p>
+    </div>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div id="main-content">
+
+      <!-- HERO -->
+      <div class="hero">
+        <div class="hero-nombre">Progreso de <span id="alumno-nombre">—</span></div>
+        <div class="hero-subtitle">Academia Da Vinci IA · Cine Digital con IA</div>
+        <div class="hero-fecha">Inscrito desde: <strong id="fecha-inicio">—</strong></div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-value" id="stat-clases">—</div>
+            <div class="stat-label">Clases completadas</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="stat-pct">—</div>
+            <div class="stat-label">Porcentaje</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="stat-modulos">—</div>
+            <div class="stat-label">Módulos terminados</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="stat-entregas">—</div>
+            <div class="stat-label">Entregas realizadas</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BARRA DE PROGRESO GENERAL -->
+      <div class="progress-section">
+        <div class="section-title">Progreso general del curso</div>
+        <div class="progress-bar-wrap">
+          <div class="progress-bar-fill" id="barra-fill" style="width:0%"></div>
+        </div>
+        <div class="progress-label" id="barra-label">
+          <strong>0</strong> de <strong>26</strong> clases completadas
+        </div>
+      </div>
+
+      <!-- MÓDULOS -->
+      <div class="section-title" style="margin-bottom:14px;">Avance por módulo</div>
+      <div class="modulos-grid" id="modulos-container">
+        <!-- generado por JS -->
+      </div>
+
+      <!-- ACTIVIDAD RECIENTE -->
+      <div class="actividad-section">
+        <div class="section-title">Actividad reciente</div>
+        <div id="actividad-container">
+          <p class="actividad-empty">Sin actividad registrada aún.</p>
+        </div>
+      </div>
+
+    </div><!-- /main-content -->
+
+  </div><!-- /container -->
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Este reporte fue generado desde <a href="https://academia-davinci-ia.vercel.app" target="_blank">Academia Da Vinci IA</a></p>
+    <p>Si tienes preguntas, contacta al instructor.</p>
+  </footer>
+
+  <script>
+    // ── DATOS DEL CURSO ──────────────────────────────────────
+    const MODULOS = [
+      { num:1, nombre:'El Genio Creativo',      color:'#4A90D9', clases:[1,2,3,4,5]     },
+      { num:2, nombre:'El Mundo del Genio',      color:'#8E44AD', clases:[6,7,8,9]        },
+      { num:3, nombre:'La Historia del Genio',   color:'#F39C12', clases:[10,11,12,13]    },
+      { num:4, nombre:'El Genio en Movimiento',  color:'#27AE60', clases:[14,15,16,17,18] },
+      { num:5, nombre:'La Voz del Genio',        color:'#16A085', clases:[19,20,21,22]    },
+      { num:6, nombre:'El Genio al Mundo',       color:'#E74C3C', clases:[23,24,25,26]    },
+    ]
+
+    const CLASE_NOMBRES = {
+       1:'Bienvenido, Genio',    2:'Nace el Personaje',    3:'Retrato Oficial',
+       4:'Tarjeta Oficial',      5:'Los 12 Arquetipos',    6:'El Universo',
+       7:'Aliados y Villanos',   8:'Mapa del Mundo',        9:'Galería del Mundo',
+      10:'El Guion',            11:'Los Diálogos',         12:'El Cómic',
+      13:'Episodio Completo',   14:'Primera Animación',    15:'Planos y Cámara',
+      16:'Las Escenas',         17:'Edición Básica',       18:'El Tráiler',
+      19:'El Tema Musical',     20:'La Voz del Personaje', 21:'Efectos de Sonido',
+      22:'Audio Completo',      23:'Ensamble Final',       24:'Revisión y Edición',
+      25:'Estreno Privado',     26:'Graduación de Genios'
+    }
+
+    const TOTAL_CLASES = 26
+
+    // ── UTILS ────────────────────────────────────────────────
+    function fmtFecha(iso) {
+      if (!iso) return '—'
+      return new Date(iso).toLocaleDateString('es-MX', {
+        day: 'numeric', month: 'short', year: 'numeric'
+      })
+    }
+
+    // ── RENDER: MÓDULOS ──────────────────────────────────────
+    function renderModulos(completadasSet) {
+      const container = document.getElementById('modulos-container')
+      container.innerHTML = ''
+
+      MODULOS.forEach(mod => {
+        const total = mod.clases.length
+        const hechas = mod.clases.filter(c => completadasSet.has(c)).length
+        const completo = hechas === total
+
+        const dots = mod.clases.map(c => {
+          const done = completadasSet.has(c)
+          return `<div class="dot ${done ? 'dot-done' : 'dot-pending'}" title="Clase ${c}: ${CLASE_NOMBRES[c]}">${c}</div>`
+        }).join('')
+
+        const badge = completo
+          ? `<span class="badge-completado">✓ Completado</span>`
+          : `<span class="modulo-conteo">${hechas} / ${total} clases</span>`
+
+        container.insertAdjacentHTML('beforeend', `
+          <div class="modulo-card" style="border-left-color:${mod.color}">
+            <div class="modulo-header">
+              <div class="modulo-info">
+                <div class="modulo-num">Módulo ${mod.num}</div>
+                <div class="modulo-nombre">${mod.nombre}</div>
+              </div>
+              ${badge}
+            </div>
+            <div class="clases-dots">${dots}</div>
+          </div>
+        `)
+      })
+    }
+
+    // ── RENDER: ACTIVIDAD RECIENTE ───────────────────────────
+    function renderActividad(progress) {
+      const container = document.getElementById('actividad-container')
+      const recientes = [...progress]
+        .filter(p => p.completada_at)
+        .sort((a, b) => new Date(b.completada_at) - new Date(a.completada_at))
+        .slice(0, 8)
+
+      if (recientes.length === 0) {
+        container.innerHTML = '<p class="actividad-empty">Sin actividad registrada aún.</p>'
+        return
+      }
+
+      const filas = recientes.map(p => `
+        <tr>
+          <td class="clase-num">#${p.clase_num}</td>
+          <td>${CLASE_NOMBRES[p.clase_num] || 'Clase ' + p.clase_num}</td>
+          <td class="clase-fecha">${fmtFecha(p.completada_at)}</td>
+        </tr>
+      `).join('')
+
+      container.innerHTML = `
+        <table>
+          <thead>
+            <tr>
+              <th>Clase</th>
+              <th>Nombre</th>
+              <th style="text-align:right">Fecha completada</th>
+            </tr>
+          </thead>
+          <tbody>${filas}</tbody>
+        </table>
+      `
+    }
+
+    // ── CARGA PRINCIPAL ──────────────────────────────────────
+    async function loadData() {
+      const sb = window._supabase
+
+      // Verificar sesión
+      const { data: { session } } = await sb.auth.getSession()
+      if (!session) {
+        window.location.href = 'login.html'
+        return
+      }
+      const userId = session.user.id
+
+      // Cargar datos en paralelo
+      const [profileRes, progressRes, entregasRes] = await Promise.all([
+        sb.from('profiles').select('nombre,rol,created_at').eq('id', userId).single(),
+        sb.from('progress').select('clase_num,completada_at').eq('user_id', userId).eq('completada', true),
+        sb.from('entregas').select('clase_num', { count: 'exact', head: true }).eq('user_id', userId),
+      ])
+
+      const nombre        = profileRes.data?.nombre || session.user.email.split('@')[0]
+      const createdAt     = profileRes.data?.created_at
+      const progress      = progressRes.data || []
+      const totalEntregas = entregasRes.count || 0
+
+      // Calcular métricas
+      const completadasSet = new Set(progress.map(p => p.clase_num))
+      const completadas    = completadasSet.size
+      const pct            = Math.round((completadas / TOTAL_CLASES) * 100)
+
+      const modulosTerminados = MODULOS.filter(mod =>
+        mod.clases.every(c => completadasSet.has(c))
+      ).length
+
+      // ── Actualizar DOM ──
+      document.getElementById('alumno-nombre').textContent  = nombre
+      document.getElementById('fecha-inicio').textContent   = fmtFecha(createdAt)
+      document.getElementById('stat-clases').textContent    = `${completadas} / ${TOTAL_CLASES}`
+      document.getElementById('stat-pct').textContent       = `${pct}%`
+      document.getElementById('stat-modulos').textContent   = `${modulosTerminados} / ${MODULOS.length}`
+      document.getElementById('stat-entregas').textContent  = totalEntregas
+
+      // Barra de progreso
+      document.getElementById('barra-fill').style.width = `${pct}%`
+      document.getElementById('barra-label').innerHTML =
+        `<strong>${completadas}</strong> de <strong>${TOTAL_CLASES}</strong> clases completadas`
+
+      // Módulos y actividad
+      renderModulos(completadasSet)
+      renderActividad(progress)
+
+      // Mostrar contenido
+      document.getElementById('loading-state').style.display = 'none'
+      document.getElementById('main-content').style.display  = 'block'
+    }
+
+    // ── INIT ─────────────────────────────────────────────────
+    document.addEventListener('DOMContentLoaded', loadData)
+  </script>
+</body>
+</html>
