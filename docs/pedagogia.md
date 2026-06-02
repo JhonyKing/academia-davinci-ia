@@ -87,6 +87,43 @@ Cada clase tiene:
 
 ---
 
+## Taxonomía de Bloom aplicada
+
+Benjamin Bloom (1956, revisada por Anderson 2001) identificó 6 niveles cognitivos en orden de complejidad:
+
+**Recordar → Entender → Aplicar → Analizar → Evaluar → Crear**
+
+La educación tradicional opera en los primeros tres niveles. Este curso opera en el nivel más alto — **Crear** — desde la Clase 1. El alumno no recuerda datos sobre IA ni entiende cómo funciona en abstracto: la usa para producir algo que antes no existía.
+
+**Por qué importa como argumento de venta**: La mayoría de cursos para niños están en "Recordar" (memorizar tablas, repetir hechos). Decirle a un padre que su hijo opera en el nivel más alto de la Taxonomía de Bloom desde el día 1 es un diferenciador brutal.
+
+**Aplicado al curso**:
+- Clase 1: El alumno ya crea (su primer personaje) — nivel Crear
+- Clases 2-4: Crea con más capas (retrato, tarjeta, tarjeta oficial) — nivel Crear
+- Módulo 4: Analiza cómo funciona el cine (planos, movimientos) para Crear mejor — niveles Analizar + Crear
+- Módulo 6: Evalúa su propio proyecto y lo presenta — niveles Evaluar + Crear
+
+---
+
+## Mentalidad de Crecimiento (Carol Dweck, Stanford)
+
+Dweck demostró que los niños tienen una de dos mentalidades sobre su inteligencia:
+- **Mentalidad fija**: "Soy inteligente" o "no soy inteligente" — el talento es innato
+- **Mentalidad de crecimiento**: "Puedo aprender esto con esfuerzo" — la habilidad se construye
+
+**La mentalidad fija es el enemigo del aprendizaje creativo**: un niño que cree que "no es bueno para el dibujo" no intentará ilustrar a su personaje. Un niño con mentalidad de crecimiento intenta, falla, ajusta.
+
+**Cómo lo aplica este curso**:
+- Robotsin nunca dice "eres talentoso" — dice "lo lograste", "eso que creaste no existía antes"
+- El nombre "Genio" no implica talento innato — implica esfuerzo creativo acumulado
+- El sistema de desbloqueo recompensa la acción (completar la clase), no el resultado
+- Las entregas no tienen calificación — tienen reconocimiento: "Tu personaje ya existe en el mundo"
+- Las insignias se otorgan por completar, no por "hacer bien" — refuerzan el esfuerzo, no el juicio
+
+**Frase de diseño**: Nunca decimos "está bien hecho". Decimos "existe. Lo creaste tú."
+
+---
+
 ## Qué NO es este curso
 
 - No es un curso de programación (no se escribe código)
