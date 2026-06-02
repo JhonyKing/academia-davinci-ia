@@ -1,0 +1,36 @@
+flowchart TD
+    A["🔍 CONTROL DE CALIDAD\n5 Puntos de Revisión"] --> B
+    B{"📺 1. Imagen\n¿Se ve nítida?"}
+    B --> |"✅ Sí"| C
+    B --> |"❌ No"| B2
+    B2["🔧 Verificar\nexportación 1080p"] --> C
+    C{"🔊 2. Audio\n¿Está sincronizado?"}
+    C --> |"✅ Sí"| D
+    C --> |"❌ No"| C2
+    C2["⏱️ Ajustar en\ntimeline"] --> D
+    D{"💬 3. Subtítulos\n¿Son correctos?"}
+    D --> |"✅ Sí"| E
+    D --> |"❌ No"| D2
+    D2["✏️ Editar\ntexto"] --> E
+    E{"🎞️ 4. Créditos\n¿Están completos?"}
+    E --> |"✅ Sí"| F
+    E --> |"❌ No"| E2
+    E2["➕ Agregar\ninfo faltante"] --> F
+    F{"⏱️ 5. Duración\n¿Es adecuada?"}
+    F --> |"✅ Sí"| G
+    F --> |"❌ No"| F2
+    F2["✂️ Cortar o\nagregar"] --> G
+    G["🏆 VERSIÓN FINAL\nLista para estreno"]
+
+    style A fill:#16A085,color:#fff
+    style G fill:#27AE60,color:#fff
+    style B fill:#4A90D9,color:#fff
+    style C fill:#4A90D9,color:#fff
+    style D fill:#4A90D9,color:#fff
+    style E fill:#4A90D9,color:#fff
+    style F fill:#4A90D9,color:#fff
+    style B2 fill:#E74C3C,color:#fff
+    style C2 fill:#E74C3C,color:#fff
+    style D2 fill:#E74C3C,color:#fff
+    style E2 fill:#E74C3C,color:#fff
+    style F2 fill:#E74C3C,color:#fff

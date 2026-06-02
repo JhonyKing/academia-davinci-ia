@@ -1,0 +1,11 @@
+flowchart TD
+    A[🎬 Identificar la Escena\n¿Qué tipo de lugar y acción?] --> B[📋 Listar Sonidos Necesarios\nAmbiente + Efectos + Música]
+    B --> C[🔍 Buscar o Generar\nFreesound · Pixabay · ElevenLabs SFX]
+    C --> D[🎚️ Ajustar Volúmenes\nAmbiente 20% · Efectos 65% · Música 25%]
+    D --> E[📍 Colocar en Timeline\nSincronizar con imagen]
+    E --> F{¿Suena equilibrado?}
+    F -->|Sí| G[✅ Escena sonorizada\nlista para el episodio]
+    F -->|Muy cargado| H[🔧 Bajar volumen\nde música o ambiente]
+    F -->|Muy vacío| I[🔧 Agregar más\nefectos de acción]
+    H --> F
+    I --> F

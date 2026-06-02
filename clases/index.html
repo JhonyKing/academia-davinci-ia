@@ -211,9 +211,10 @@
       display: flex; align-items: center; justify-content: center;
       font-size: 10px;
     }
-    .status-ready { background: rgba(39,174,96,0.2); color: #2ECC71; }
-    .status-soon  { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.3); }
-    .status-lock  { background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.2); }
+    .status-ready   { background: rgba(39,174,96,0.2); color: #2ECC71; }
+    .status-pending { background: rgba(243,156,18,0.15); color: #F39C12; }
+    .status-soon    { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.3); }
+    .status-lock    { background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.2); }
 
     .modulo-footer {
       padding: 16px 28px;
@@ -371,23 +372,26 @@
 <nav class="nav">
   <div class="nav-logo">Academia <span>Da Vinci IA</span></div>
   <div class="nav-spacer"></div>
+  <a href="mi-personaje.html" style="color:#F39C12;font-weight:700;font-size:14px;text-decoration:none;margin-right:20px;display:flex;align-items:center;gap:6px;">
+    ⭐ Mi Personaje
+  </a>
   <div class="nav-tag">🎓 Pequeños Genios Creativos</div>
 </nav>
 
 <!-- ═══ HERO ═══ -->
 <section class="hero">
   <video class="hero-video" autoplay loop muted playsinline>
-    <source src="../robotsin/videos/Robot_floating_in_cosmic_space_202606010114.mp4" type="video/mp4">
-    <source src="../robotsin/videos/Robot_conducting_STEAM_elements_202606010101.mp4" type="video/mp4">
-    <source src="../robotsin/videos/Robot_floats_in_cosmic_space_202606010118.mp4" type="video/mp4">
-    <source src="../robotsin/videos/Robot_conducting_STEAM_elements_202606010101 (2).mp4" type="video/mp4">
+    <source src="robotsin/videos/Robot_floating_in_cosmic_space_202606010114.mp4" type="video/mp4">
+    <source src="robotsin/videos/Robot_conducting_STEAM_elements_202606010101.mp4" type="video/mp4">
+    <source src="robotsin/videos/Robot_floats_in_cosmic_space_202606010118.mp4" type="video/mp4">
+    <source src="robotsin/videos/Robot_conducting_STEAM_elements_202606010101 (2).mp4" type="video/mp4">
   </video>
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <div class="hero-badge">⚗️ Metodología STEAM + IA</div>
 
     <div class="robotsin-hero">
-      <img src="../robotsin/robotsin_completo.png" alt="D-IA Vinci Robotsin"
+      <img src="robotsin/robotsin_completo.png" alt="D-IA Vinci Robotsin"
            onerror="this.style.display='none'">
     </div>
 
@@ -395,7 +399,7 @@
     <p class="hero-sub">Donde la imaginación y la inteligencia artificial se encuentran</p>
     <div class="hero-stats">
       <div class="stat"><span class="num">6</span><span class="label">Módulos</span></div>
-      <div class="stat"><span class="num">24</span><span class="label">Clases</span></div>
+      <div class="stat"><span class="num">26</span><span class="label">Clases</span></div>
       <div class="stat"><span class="num">9–13</span><span class="label">Años</span></div>
       <div class="stat"><span class="num">STEAM</span><span class="label">Metodología</span></div>
     </div>
@@ -484,9 +488,15 @@
           <span class="clase-time">60 min</span>
           <span class="clase-status status-ready">✓</span>
         </a>
+        <a href="clase5_los_arquetipos.html" class="clase-item">
+          <span class="clase-dot"></span>
+          <span class="clase-title">Clase 5 — Los 12 Arquetipos</span>
+          <span class="clase-time">60 min</span>
+          <span class="clase-status status-pending">⏳</span>
+        </a>
       </div>
       <div class="modulo-footer">
-        <span class="modulo-tag">4 clases · 2 semanas</span>
+        <span class="modulo-tag">5 clases · 2 semanas</span>
         <span class="modulo-arrow" style="color:var(--purple)">→</span>
       </div>
     </div>
@@ -505,10 +515,10 @@
         Construyen el universo donde vive su personaje. Escenarios, aliados, villanos. Aprenden composición visual y world-building con IA.
       </div>
       <div class="clases-list">
-        <a href="clase5_el_universo.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 5 — El Universo</span><span class="clase-time">60 min</span><span class="clase-status status-ready">✓</span></a>
-        <a href="clase6_aliados_villanos.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 6 — Aliados y Villanos</span><span class="clase-time">60 min</span><span class="clase-status status-ready">✓</span></a>
-        <a href="clase7_mapa_del_mundo.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 7 — El Mapa del Mundo</span><span class="clase-time">60 min</span><span class="clase-status status-ready">✓</span></a>
-        <a href="clase8_galeria_del_mundo.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 8 — Galería del Mundo</span><span class="clase-time">60 min</span><span class="clase-status status-ready">✓</span></a>
+        <a href="clase6_el_universo.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 6 — El Universo</span><span class="clase-time">60 min</span><span class="clase-status status-ready">✓</span></a>
+        <a href="clase7_aliados_villanos.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 7 — Aliados y Villanos</span><span class="clase-time">60 min</span><span class="clase-status status-ready">✓</span></a>
+        <a href="clase8_mapa_del_mundo.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 8 — El Mapa del Mundo</span><span class="clase-time">60 min</span><span class="clase-status status-ready">✓</span></a>
+        <a href="clase9_galeria_del_mundo.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 9 — Galería del Mundo</span><span class="clase-time">60 min</span><span class="clase-status status-ready">✓</span></a>
       </div>
       <div class="modulo-footer">
         <span class="modulo-tag">4 clases · 2 semanas</span>
@@ -530,10 +540,10 @@
         Escriben el primer episodio de su serie. Guion, diálogos, estructura narrativa. Crean su primer cómic digital completo.
       </div>
       <div class="clases-list">
-        <a href="clase9_el_guion.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 9 — El Guion</span><span class="clase-time">60 min</span><span class="clase-status status-ready">✓</span></a>
-        <a href="clase10_los_dialogos.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 10 — Los Diálogos</span><span class="clase-time">60 min</span><span class="clase-status status-ready">✓</span></a>
-        <a href="clase11_el_comic.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 11 — El Cómic</span><span class="clase-time">60 min</span><span class="clase-status status-ready">✓</span></a>
-        <a href="clase12_episodio_completo.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 12 — Episodio Completo</span><span class="clase-time">60 min</span><span class="clase-status status-ready">✓</span></a>
+        <a href="clase10_el_guion.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 10 — El Guion</span><span class="clase-time">60 min</span><span class="clase-status status-ready">✓</span></a>
+        <a href="clase11_los_dialogos.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 11 — Los Diálogos</span><span class="clase-time">60 min</span><span class="clase-status status-ready">✓</span></a>
+        <a href="clase12_el_comic.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 12 — El Cómic</span><span class="clase-time">60 min</span><span class="clase-status status-ready">✓</span></a>
+        <a href="clase13_episodio_completo.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 13 — Episodio Completo</span><span class="clase-time">60 min</span><span class="clase-status status-ready">✓</span></a>
       </div>
       <div class="modulo-footer">
         <span class="modulo-tag">4 clases · 2 semanas</span>
@@ -555,13 +565,14 @@
         Su personaje cobra vida en movimiento. Animan escenas con IA, aprenden edición básica y producen su primer tráiler oficial.
       </div>
       <div class="clases-list">
-        <a href="clase13_primera_animacion.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 13 — Primera Animación</span><span class="clase-time">60 min</span><span class="clase-status status-ready">✓</span></a>
-        <a href="clase14_las_escenas.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 14 — Las Escenas</span><span class="clase-time">60 min</span><span class="clase-status status-ready">✓</span></a>
-        <a href="clase15_edicion_basica.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 15 — Edición Básica</span><span class="clase-time">60 min</span><span class="clase-status status-ready">✓</span></a>
-        <a href="clase16_el_trailer.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 16 — El Tráiler</span><span class="clase-time">60 min</span><span class="clase-status status-ready">✓</span></a>
+        <a href="clase14_primera_animacion.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 14 — Primera Animación</span><span class="clase-time">60 min</span><span class="clase-status status-ready">✓</span></a>
+        <a href="clase15_planos_y_camara.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 15 — Planos y Cámara</span><span class="clase-time">60 min</span><span class="clase-status status-pending">⏳</span></a>
+        <a href="clase16_las_escenas.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 16 — Las Escenas</span><span class="clase-time">60 min</span><span class="clase-status status-ready">✓</span></a>
+        <a href="clase17_edicion_basica.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 17 — Edición Básica</span><span class="clase-time">60 min</span><span class="clase-status status-ready">✓</span></a>
+        <a href="clase18_el_trailer.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 18 — El Tráiler</span><span class="clase-time">60 min</span><span class="clase-status status-ready">✓</span></a>
       </div>
       <div class="modulo-footer">
-        <span class="modulo-tag">4 clases · 2 semanas</span>
+        <span class="modulo-tag">5 clases · 2 semanas</span>
         <span class="modulo-arrow" style="color:var(--red)">→</span>
       </div>
     </div>
@@ -580,10 +591,10 @@
         Componen el tema musical de su serie, generan voces con IA y producen el audio completo de su episodio sin saber tocar ningún instrumento.
       </div>
       <div class="clases-list">
-        <a href="clase17_el_tema_musical.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 17 — El Tema Musical</span><span class="clase-time">60 min</span><span class="clase-status status-ready">✓</span></a>
-        <a href="clase18_la_voz_del_personaje.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 18 — La Voz del Personaje</span><span class="clase-time">60 min</span><span class="clase-status status-ready">✓</span></a>
-        <a href="clase19_efectos_de_sonido.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 19 — Efectos de Sonido</span><span class="clase-time">60 min</span><span class="clase-status status-ready">✓</span></a>
-        <a href="clase20_audio_completo.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 20 — Audio Completo</span><span class="clase-time">60 min</span><span class="clase-status status-ready">✓</span></a>
+        <a href="clase19_el_tema_musical.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 19 — El Tema Musical</span><span class="clase-time">60 min</span><span class="clase-status status-ready">✓</span></a>
+        <a href="clase20_la_voz_del_personaje.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 20 — La Voz del Personaje</span><span class="clase-time">60 min</span><span class="clase-status status-ready">✓</span></a>
+        <a href="clase21_efectos_de_sonido.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 21 — Efectos de Sonido</span><span class="clase-time">60 min</span><span class="clase-status status-ready">✓</span></a>
+        <a href="clase22_audio_completo.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 22 — Audio Completo</span><span class="clase-time">60 min</span><span class="clase-status status-ready">✓</span></a>
       </div>
       <div class="modulo-footer">
         <span class="modulo-tag">4 clases · 2 semanas</span>
@@ -605,10 +616,10 @@
         Todo se une. Producen su episodio completo con personaje, mundo, historia, animación y música. Presentación ante familia y compañeros.
       </div>
       <div class="clases-list">
-        <a href="clase21_ensamble_final.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 21 — Ensamble Final</span><span class="clase-time">60 min</span><span class="clase-status status-ready">✓</span></a>
-        <a href="clase22_revision_edicion.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 22 — Revisión y Edición</span><span class="clase-time">60 min</span><span class="clase-status status-ready">✓</span></a>
-        <a href="clase23_estreno_privado.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 23 — Estreno Privado</span><span class="clase-time">60 min</span><span class="clase-status status-ready">✓</span></a>
-        <a href="clase24_graduacion_genios.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 24 — Graduación Genios</span><span class="clase-time">60 min</span><span class="clase-status status-ready">✓</span></a>
+        <a href="clase23_ensamble_final.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 23 — Ensamble Final</span><span class="clase-time">60 min</span><span class="clase-status status-ready">✓</span></a>
+        <a href="clase24_revision_edicion.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 24 — Revisión y Edición</span><span class="clase-time">60 min</span><span class="clase-status status-ready">✓</span></a>
+        <a href="clase25_estreno_privado.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 25 — Estreno Privado</span><span class="clase-time">60 min</span><span class="clase-status status-ready">✓</span></a>
+        <a href="clase26_graduacion_genios.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 26 — Graduación Genios</span><span class="clase-time">60 min</span><span class="clase-status status-ready">✓</span></a>
       </div>
       <div class="modulo-footer">
         <span class="modulo-tag">4 clases · 2 semanas</span>
@@ -629,7 +640,7 @@
   <div class="robotsin-grid">
     <div class="robotsin-card">
       <div class="robotsin-img">
-        <img src="../robotsin/robotsin_artista.png" alt="D-IA Vinci Artista"
+        <img src="robotsin/robotsin_artista.png" alt="D-IA Vinci Artista"
              onerror="this.style.display='none'; this.parentElement.querySelector('.fallback').style.display='block'">
         <div class="fallback" style="display:none">🎨</div>
       </div>
@@ -639,7 +650,7 @@
     </div>
     <div class="robotsin-card">
       <div class="robotsin-img">
-        <img src="../robotsin/robotsin_arquitecto.png" alt="D-IA Vinci Arquitecto"
+        <img src="robotsin/robotsin_arquitecto.png" alt="D-IA Vinci Arquitecto"
              onerror="this.style.display='none'; this.parentElement.querySelector('.fallback').style.display='block'">
         <div class="fallback" style="display:none">🌍</div>
       </div>
@@ -649,7 +660,7 @@
     </div>
     <div class="robotsin-card">
       <div class="robotsin-img">
-        <img src="../robotsin/robotsin_escritor.png" alt="D-IA Vinci Escritor"
+        <img src="robotsin/robotsin_escritor.png" alt="D-IA Vinci Escritor"
              onerror="this.style.display='none'; this.parentElement.querySelector('.fallback').style.display='block'">
         <div class="fallback" style="display:none">📖</div>
       </div>
@@ -659,7 +670,7 @@
     </div>
     <div class="robotsin-card">
       <div class="robotsin-img">
-        <img src="../robotsin/robotsin_director.png" alt="D-IA Vinci Director"
+        <img src="robotsin/robotsin_director.png" alt="D-IA Vinci Director"
              onerror="this.style.display='none'; this.parentElement.querySelector('.fallback').style.display='block'">
         <div class="fallback" style="display:none">🎬</div>
       </div>
@@ -669,7 +680,7 @@
     </div>
     <div class="robotsin-card">
       <div class="robotsin-img">
-        <img src="../robotsin/robotsin_musico.png" alt="D-IA Vinci Músico"
+        <img src="robotsin/robotsin_musico.png" alt="D-IA Vinci Músico"
              onerror="this.style.display='none'; this.parentElement.querySelector('.fallback').style.display='block'">
         <div class="fallback" style="display:none">🎵</div>
       </div>
@@ -679,7 +690,7 @@
     </div>
     <div class="robotsin-card">
       <div class="robotsin-img">
-        <img src="../robotsin/robotsin_maestro.png" alt="D-IA Vinci Maestro"
+        <img src="robotsin/robotsin_maestro.png" alt="D-IA Vinci Maestro"
              onerror="this.style.display='none'; this.parentElement.querySelector('.fallback').style.display='block'">
         <div class="fallback" style="display:none">🏆</div>
       </div>
@@ -693,7 +704,7 @@
 
 <!-- ═══ CTA ═══ -->
 <div class="cta-section">
-  <img src="../robotsin/robotsin_completo.png" alt="D-IA Vinci Robotsin"
+  <img src="robotsin/robotsin_completo.png" alt="D-IA Vinci Robotsin"
        style="width:260px; height:260px; object-fit:contain;
               filter:drop-shadow(0 8px 32px rgba(74,144,217,0.4));
               margin-bottom:12px; display:block; margin-left:auto; margin-right:auto;">

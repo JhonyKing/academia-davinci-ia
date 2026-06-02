@@ -1,0 +1,23 @@
+flowchart TD
+    A["🎬 Fin de Escena\n¿Cómo paso a la siguiente?"] --> B{Elige tu\ntransición}
+
+    B --> C["✂️ CORTE DIRECTO\nCambio instantáneo"]
+    B --> D["⬛ FUNDIDO NEGRO\nPantalla se oscurece"]
+    B --> E["⬜ FUNDIDO BLANCO\nPantalla se ilumina"]
+    B --> F["📝 TEXTO EN PANTALLA\n'3 horas después...'"]
+
+    C -.-> C1["Usar para:\nAcción rápida\nCambio de ángulo\nMisma escena"]
+    D -.-> D1["Usar para:\nPaso de tiempo\nFin de capítulo\nMomento dramático"]
+    E -.-> E1["Usar para:\nSueño / recuerdo\nFlashback\nFinal feliz"]
+    F -.-> F1["Usar para:\nSalto en el tiempo\nCambio de lugar\nExplicar contexto"]
+
+    style A fill:#2D1F1A,stroke:#E74C3C,color:#fff
+    style B fill:#E74C3C,stroke:#C0392B,color:#fff
+    style C fill:#1A2540,stroke:#4A90D9,color:#fff
+    style D fill:#1A1A1A,stroke:#888,color:#fff
+    style E fill:#2A2A2A,stroke:#ddd,color:#fff
+    style F fill:#1A3530,stroke:#27AE60,color:#fff
+    style C1 fill:#0F1626,stroke:#4A90D9,color:#aaa
+    style D1 fill:#0F1626,stroke:#888,color:#aaa
+    style E1 fill:#0F1626,stroke:#ddd,color:#aaa
+    style F1 fill:#0F1626,stroke:#27AE60,color:#aaa

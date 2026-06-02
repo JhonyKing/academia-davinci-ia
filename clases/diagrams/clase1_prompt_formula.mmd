@@ -1,0 +1,19 @@
+flowchart LR
+    P["✍️ PROMPT<br/>La instrucción<br/>que le das a la IA"]
+
+    P --> A["❓ ¿QUÉ?<br/>Lo que quieres crear<br/><i>Un dragón bebé</i>"]
+    P --> B["🎨 ¿CÓMO?<br/>El estilo artístico<br/><i>Estilo Pixar 3D</i>"]
+    P --> C["🌍 ¿DÓNDE?<br/>El escenario o fondo<br/><i>Volcán tranquilo</i>"]
+    P --> D["✨ ¿EXTRAS?<br/>Detalles especiales<br/><i>Color morado, 9:16</i>"]
+
+    A --> R["🖼️ RESULTADO<br/>Tu imagen con IA"]
+    B --> R
+    C --> R
+    D --> R
+
+    style P fill:#4A90D9,stroke:#2C5F8A,color:#fff,font-size:14px
+    style A fill:#9B59B6,stroke:#7D3C98,color:#fff
+    style B fill:#E74C3C,stroke:#C0392B,color:#fff
+    style C fill:#27AE60,stroke:#1E8449,color:#fff
+    style D fill:#F39C12,stroke:#D68910,color:#fff
+    style R fill:#2ECC71,stroke:#27AE60,color:#fff,font-size:14px

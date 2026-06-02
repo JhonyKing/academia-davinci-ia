@@ -1,0 +1,50 @@
+# Carpetas con video pesado (no son parte del sitio web)
+public/hooks_videos/
+public/MATERIALES/
+OUTPUT_HABITOS/
+tmp_downloads/
+tmp_frames/
+tmp_retry_videos/
+
+# Carpetas de media local (no del curso)
+AUDIOS CTA/
+FRAGMENTOS AUDIOS HABITOS/
+MI CONTENIDO SORA/
+imagenes_nuevo_laredo/
+ejemplos_carruseles/
+
+# Videos MP4 sueltos en la raíz
+Intro-IA-YT-30s-LOOMINLAB-1080p.mp4
+Intro_LoominLab_9x16_18s.mp4
+Promo_CuartoAmarillo_18s.mp4
+Promo_CuartoAmarillo_Final_Con_Audio.mp4
+Promo_CuartoAmarillo_Final_V4_Narrado.mp4
+Promo_CuartoAmarillo_Final_V5_Musica.mp4
+Promo_CuartoAmarillo_Galeria_20s.mp4
+Promo_CuartoAmarillo_Galeria_V2_22s.mp4
+Promo_CuartoAmarillo_Galeria_V3_37s.mp4
+Promo_CuartoAmarillo_V2_18s.mp4
+
+# Scripts Python
+*.py
+*.bat
+
+# Caches y datos operativos
+media_cache*.json
+drive_malos_habitos.json
+temp_sheet_data.json
+render_log.txt
+short_log.txt
+
+# Build artifacts
+node_modules/
+out/
+__pycache__/
+
+# Otros proyectos/herramientas
+AIOS/
+.agent/
+.cursor/
+.gemini/
+academia_davinci_modulo1.excalidraw
+test_diagram.excalidraw

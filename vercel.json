@@ -1,0 +1,6 @@
+{
+  "outputDirectory": "clases",
+  "rewrites": [
+    { "source": "/", "destination": "/index.html" }
+  ]
+}
