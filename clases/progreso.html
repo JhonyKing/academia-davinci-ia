@@ -483,6 +483,21 @@
 
   </div><!-- /container -->
 
+  <!-- ZONA DE PELIGRO -->
+  <div style="max-width:860px;margin:0 auto 48px;padding:0 24px;">
+    <div style="border:1px solid rgba(231,76,60,0.25);border-radius:16px;padding:28px 32px;background:rgba(231,76,60,0.04);">
+      <h3 style="font-size:15px;font-weight:700;color:#e74c3c;margin-bottom:6px;">⚠️ Zona de administración</h3>
+      <p style="font-size:13px;color:rgba(232,234,240,0.5);margin-bottom:20px;">Esta acción borra el registro de clases completadas. Las entregas y el portafolio del alumno <strong style="color:rgba(232,234,240,0.7)">no se eliminan</strong>.</p>
+      <button id="btn-reset" onclick="confirmarReset()"
+        style="background:transparent;border:1px solid rgba(231,76,60,0.5);color:#e74c3c;
+               padding:10px 24px;border-radius:8px;font-family:'Poppins',sans-serif;
+               font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;">
+        🔄 Resetear avance en clases
+      </button>
+      <span id="reset-msg" style="font-size:13px;margin-left:16px;display:none;"></span>
+    </div>
+  </div>
+
   <!-- FOOTER -->
   <footer>
     <p>Este reporte fue generado desde <a href="https://academia-davinci-ia.vercel.app" target="_blank">Academia Da Vinci IA</a></p>
@@ -644,6 +659,40 @@
       // Mostrar contenido
       document.getElementById('loading-state').style.display = 'none'
       document.getElementById('main-content').style.display  = 'block'
+    }
+
+    // ── RESET PROGRESO ───────────────────────────────────────
+    async function confirmarReset() {
+      const primera = confirm('¿Seguro que quieres borrar el avance en clases?\n\nLas entregas y el portafolio del alumno NO se borran.')
+      if (!primera) return
+      const segunda = confirm('Última confirmación: se borrarán todas las clases marcadas como completadas. ¿Continuar?')
+      if (!segunda) return
+
+      const btn = document.getElementById('btn-reset')
+      const msg = document.getElementById('reset-msg')
+      btn.disabled = true
+      btn.textContent = '⏳ Borrando...'
+      msg.style.display = 'none'
+
+      const sb = window._supabase
+      const { data: { session } } = await sb.auth.getSession()
+      if (!session) { alert('Sesión expirada. Recarga la página.'); return }
+
+      const { error } = await sb
+        .from('progress')
+        .delete()
+        .eq('user_id', session.user.id)
+
+      if (error) {
+        msg.style.cssText = 'color:#e74c3c;display:inline;font-size:13px;'
+        msg.textContent = '❌ Error: ' + error.message
+        btn.disabled = false
+        btn.textContent = '🔄 Resetear avance en clases'
+      } else {
+        msg.style.cssText = 'color:#27AE60;display:inline;font-size:13px;'
+        msg.textContent = '✅ Avance reseteado. Recargando...'
+        setTimeout(() => location.reload(), 1800)
+      }
     }
 
     // ── INIT ─────────────────────────────────────────────────
