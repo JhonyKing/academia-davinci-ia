@@ -552,12 +552,22 @@
         }
       }
 
+      const secNombreEsc = (sec.nombre || 'Sin nombre').replace(/'/g, "\\'")
       html += `
         <div class="secundario-card">
           <div class="sec-avatar ${tipoClass}">${imgHTML}</div>
           <div class="sec-name">${sec.nombre || 'Sin nombre'}</div>
           <div class="sec-tipo ${tipoClass}">${tipoLabel}</div>
           ${sec.arquetipo ? `<div class="sec-arquetipo">${sec.arquetipo}</div>` : ''}
+          <button onclick="window.promoverAProtagonista(${sec.id}, '${secNombreEsc}')"
+            style="margin-top:10px;background:transparent;border:none;
+                   color:rgba(255,255,255,.2);font-family:'Poppins',sans-serif;
+                   font-size:10px;cursor:pointer;padding:2px 0;display:block;
+                   width:100%;letter-spacing:0.5px;transition:color .2s;"
+            onmouseover="this.style.color='rgba(74,144,217,.65)'"
+            onmouseout="this.style.color='rgba(255,255,255,.2)'">
+            ↑ hacer protagonista
+          </button>
         </div>`
     }
     html += `</div>`
@@ -782,6 +792,63 @@
 
       alert('¡Listo! Tu personaje anterior está guardado como secundario.\nAhora puedes crear tu nuevo personaje.')
       window.location.href = 'clase2_nace_el_personaje.html'
+    } catch (err) {
+      alert('Error inesperado: ' + err.message)
+    }
+  }
+
+  // ── Promover secundario a protagonista ───────────────────────────────
+  window.promoverAProtagonista = async function (secId, secNombre) {
+    const ok = confirm(
+      `¿Convertir a "${secNombre}" en tu personaje protagonista?\n\n` +
+      'Tu protagonista actual pasará a ser personaje secundario.'
+    )
+    if (!ok) return
+
+    const sb = window._supabase
+    const { data: { session } } = await sb.auth.getSession()
+    if (!session) return
+    const userId = session.user.id
+
+    try {
+      // Obtener datos del secundario
+      const { data: sec, error: secErr } = await sb
+        .from('personajes_secundarios').select('*').eq('id', secId).single()
+      if (secErr || !sec) { alert('No se encontró el personaje.'); return }
+
+      // Si hay protagonista actual, moverlo a secundarios
+      const { data: actual } = await sb
+        .from('personaje').select('*').eq('user_id', userId).maybeSingle()
+      if (actual) {
+        await sb.from('personajes_secundarios').insert({
+          user_id: userId,
+          nombre: actual.nombre,
+          arquetipo: actual.arquetipo,
+          tipo: 'protagonista_anterior',
+          descripcion: actual.descripcion,
+          imagen_retrato_url: actual.imagen_retrato_url,
+        })
+        await sb.from('personaje').delete().eq('user_id', userId)
+      }
+
+      // Subir el secundario al protagonista
+      await sb.from('personaje').upsert(
+        {
+          user_id: userId,
+          nombre: sec.nombre,
+          arquetipo: sec.arquetipo,
+          descripcion: sec.descripcion,
+          imagen_retrato_url: sec.imagen_retrato_url,
+          imagen_tarjeta_url: sec.imagen_tarjeta_url,
+        },
+        { onConflict: 'user_id' }
+      )
+
+      // Eliminar de secundarios
+      await sb.from('personajes_secundarios').delete().eq('id', secId)
+
+      alert(`¡${secNombre} ahora es tu protagonista! Recargando...`)
+      location.reload()
     } catch (err) {
       alert('Error inesperado: ' + err.message)
     }
