@@ -53,13 +53,14 @@
 
       .dv-confetti-wrap { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
       .dv-c {
-        position: absolute; top: -12px; border-radius: 2px;
-        animation: dv-fall linear both;
+        position: absolute; border-radius: 2px;
+        animation: dv-fall linear infinite;
       }
       @keyframes dv-fall {
-        0%   { transform: translateY(0)    rotate(0deg);   opacity: 1 }
-        80%  { opacity: 1 }
-        100% { transform: translateY(420px) rotate(720deg); opacity: 0 }
+        0%   { transform: translateY(-16px) rotate(0deg);   opacity: 0 }
+        6%   { opacity: 1 }
+        88%  { opacity: 1 }
+        100% { transform: translateY(460px) rotate(740deg); opacity: 0 }
       }
 
       .dv-robotsin-face {
@@ -99,27 +100,50 @@
     document.head.appendChild(s)
   }
 
-  // ── Sonido chime via Web Audio API ────────────────────────────────────────
+  // ── Sonido de victoria via Web Audio API ─────────────────────────────────
   function playChime(notes) {
     try {
-      const ctx = new (window.AudioContext || window.webkitAudioContext)()
-      notes.forEach(([freq, t]) => {
+      const ctx    = new (window.AudioContext || window.webkitAudioContext)()
+      const master = ctx.createGain()
+      master.gain.value = 0.5
+      master.connect(ctx.destination)
+
+      notes.forEach(([freq, t, dur = 0.5, type = 'sine', vol = 0.22]) => {
         const osc  = ctx.createOscillator()
         const gain = ctx.createGain()
-        osc.connect(gain); gain.connect(ctx.destination)
-        osc.type = 'sine'; osc.frequency.value = freq
+        osc.connect(gain); gain.connect(master)
+        osc.type = type; osc.frequency.value = freq
         const st = ctx.currentTime + t
         gain.gain.setValueAtTime(0, st)
-        gain.gain.linearRampToValueAtTime(0.22, st + 0.04)
-        gain.gain.exponentialRampToValueAtTime(0.001, st + 0.7)
-        osc.start(st); osc.stop(st + 0.7)
+        gain.gain.linearRampToValueAtTime(vol, st + 0.03)
+        gain.gain.exponentialRampToValueAtTime(0.001, st + dur)
+        osc.start(st); osc.stop(st + dur + 0.05)
       })
     } catch (e) { /* silencioso si el browser bloquea audio */ }
   }
 
-  const CHIME_CLASS   = [[523, 0], [659, 0.18], [784, 0.36]]   // C5 E5 G5
-  const CHIME_MODULE  = [[523, 0], [659, 0.15], [784, 0.30], [1047, 0.48]] // + C6
-  const CHIME_ENTREGA = [[440, 0], [554, 0.2]]
+  // Fanfarria de victoria: arpegio ascendente con armónico y acorde final
+  const CHIME_CLASS = [
+    [523,  0,    0.35, 'triangle', 0.3],   // C5
+    [659,  0.16, 0.35, 'triangle', 0.3],   // E5
+    [784,  0.32, 0.35, 'triangle', 0.3],   // G5
+    [1047, 0.48, 0.7,  'sine',     0.28],  // C6 — nota larga final
+    [1047, 0.48, 0.7,  'triangle', 0.12],  // C6 armónico
+  ]
+  // Fanfarria épica para módulo: sube más alto y más fuerte
+  const CHIME_MODULE = [
+    [523,  0,    0.3,  'triangle', 0.28],
+    [659,  0.14, 0.3,  'triangle', 0.28],
+    [784,  0.28, 0.3,  'triangle', 0.28],
+    [1047, 0.42, 0.3,  'triangle', 0.28],
+    [1319, 0.56, 0.9,  'sine',     0.32],  // E6 — pico épico largo
+    [1319, 0.56, 0.9,  'triangle', 0.14],
+    [1047, 0.58, 0.85, 'sine',     0.15],  // acorde C6+E6
+  ]
+  const CHIME_ENTREGA = [
+    [440, 0,   0.3, 'sine', 0.2],
+    [554, 0.2, 0.4, 'sine', 0.22],
+  ]
 
   // ── Confetti ──────────────────────────────────────────────────────────────
   const COLORS = ['#4A90D9','#8E44AD','#F39C12','#27AE60','#16A085','#E74C3C','#ffffff','#74B9FF']
@@ -189,7 +213,7 @@
           subtitle: `"${mod.name}" — ¡Insignia desbloqueada, genio!`,
           color: mod.color,
           robotsinSrc: 'robotsin/robotsin_completo.png',
-          ms: 10000,
+          ms: 15000,
         })
       } else {
         playChime(CHIME_CLASS)
@@ -199,7 +223,7 @@
           subtitle: 'Sigue avanzando. Tu proyecto está tomando forma.',
           color: '#4A90D9',
           robotsinSrc: 'robotsin/robotsin_completo.png',
-          ms: 3800,
+          ms: 15000,
         })
       }
     },
@@ -212,7 +236,7 @@
         subtitle: mensaje || 'Tu trabajo quedó guardado. ¡Misión cumplida, genio!',
         color: '#27AE60',
         robotsinSrc: 'robotsin/robotsin_artista.png',
-        ms: 5000,
+        ms: 15000,
       })
     },
   }
