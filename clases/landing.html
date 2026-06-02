@@ -309,21 +309,21 @@
     .arte-card p  { font-size: 13px; color: var(--muted); line-height: 1.5; }
 
     /* ─────────────── METODOLOGÍA ─────────────── */
-    .metodologia-wrap {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start;
-    }
+    .metodologia-wrap { display: flex; flex-direction: column; gap: 72px; }
+    .metodo-img { width: 100%; border-radius: 20px; display: block; }
+    .steam-img  { box-shadow: 0 12px 48px rgba(74,144,217,0.3);  margin: 28px 0; }
+    .gardner-img{ box-shadow: 0 12px 48px rgba(142,68,173,0.3); margin: 28px 0; }
     .steam-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
-      margin-top: 8px;
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px;
     }
     .steam-item {
       background: rgba(26,37,64,0.7);
       border: 1px solid rgba(255,255,255,0.07);
       border-radius: 14px;
-      padding: 20px 18px;
+      padding: 18px 14px;
     }
     .steam-letter {
-      font-size: 28px; font-weight: 900;
+      font-size: 26px; font-weight: 900;
       line-height: 1; margin-bottom: 6px;
     }
     .s-letter { color: var(--blue); }
@@ -331,26 +331,43 @@
     .e-letter { color: var(--gold); }
     .a-letter { color: var(--green); }
     .m-letter { color: var(--teal); }
-    .steam-item p { font-size: 12px; color: var(--muted); }
-    .intel-list {
-      list-style: none;
-      display: flex; flex-direction: column; gap: 12px;
+    .steam-item p { font-size: 11px; color: var(--muted); line-height: 1.5; }
+    /* Tabla Gardner */
+    .intel-table { width: 100%; border-collapse: collapse; margin: 0; }
+    .intel-table thead th {
+      background: rgba(74,144,217,0.12);
+      padding: 13px 18px; text-align: left;
+      font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+      color: #74B9FF;
+      border-bottom: 1px solid rgba(74,144,217,0.25);
     }
-    .intel-list li {
-      display: flex; gap: 14px; align-items: flex-start;
-      background: rgba(26,37,64,0.5);
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 12px;
-      padding: 14px 18px;
+    .intel-table tbody td {
+      padding: 13px 18px; font-size: 13px; color: var(--text);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      vertical-align: middle;
     }
-    .intel-list li .i-num {
-      font-size: 13px; font-weight: 800;
-      color: var(--blue);
-      min-width: 20px;
+    .intel-table tbody tr:hover td { background: rgba(74,144,217,0.05); }
+    .intel-table-wrap {
+      background: rgba(26,37,64,0.6);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 16px; overflow: hidden;
+      margin-top: 28px;
     }
-    .intel-list li .i-text { font-size: 13px; }
-    .intel-list li .i-text strong { color: #fff; display: block; }
-    .intel-list li .i-text span { color: var(--muted); }
+    .intel-destaca td { background: rgba(243,156,18,0.06) !important; }
+    .intel-destaca td:first-child { border-left: 3px solid var(--gold); }
+    .intel-destaca td strong { color: var(--gold); }
+    /* Banner cierre */
+    .despierta-banner {
+      text-align: center;
+      padding: 40px 32px;
+      background: linear-gradient(135deg, rgba(74,144,217,0.08), rgba(142,68,173,0.08));
+      border: 1px solid rgba(74,144,217,0.18);
+      border-radius: 20px;
+      margin-top: 48px;
+    }
+    .despierta-banner p { font-size: clamp(18px,2.5vw,26px); font-weight: 700; color: #fff; line-height: 1.4; }
+    .despierta-banner span { color: var(--blue); }
+    .despierta-banner em { color: var(--gold); font-style: normal; }
 
     /* ─────────────── MÓDULOS ─────────────── */
     .modulos-grid {
@@ -600,7 +617,7 @@
       .hero-tags { display: none; }
       .robotsin-img { width: 280px; }
       .hero-actions { justify-content: center; }
-      .metodologia-wrap { grid-template-columns: 1fr; gap: 40px; }
+      .steam-grid { grid-template-columns: repeat(3, 1fr); }
       .req-grid { grid-template-columns: 1fr; }
       .grid-2 { grid-template-columns: 1fr; }
     }
@@ -613,7 +630,7 @@
       .modulos-grid { grid-template-columns: 1fr; }
       .artes-grid { grid-template-columns: 1fr 1fr; }
       .resultado-grid { grid-template-columns: 1fr 1fr; }
-      .steam-grid { grid-template-columns: 1fr; }
+      .steam-grid { grid-template-columns: repeat(2, 1fr); }
       .hero h1 { font-size: 30px; }
     }
     @media (max-width: 420px) {
@@ -794,78 +811,106 @@
       <p class="section-sub">No inventamos nada: combinamos los marcos educativos más poderosos del mundo y los aplicamos a la IA creativa.</p>
       <div class="metodologia-wrap">
 
-        <!-- STEAM -->
+        <!-- ── BLOQUE 1: STEAM ── -->
         <div>
-          <h3 style="font-size:20px; font-weight:800; color:#fff; margin-bottom:8px;">Metodología STEAM aplicada</h3>
-          <p style="font-size:14px; color:var(--muted); margin-bottom:20px;">Cada clase integra las 5 dimensiones del aprendizaje moderno:</p>
-          <!-- Imagen STEAM con Robotsin -->
-          <div style="text-align:center; margin-bottom:24px;">
-            <img src="robotsin/STEAM/PRINCIPAL.png"
-                 alt="Robotsin explicando STEAM — Science, Technology, Engineering, Arts, Mathematics"
-                 style="max-width:100%; border-radius:16px; box-shadow:0 8px 32px rgba(74,144,217,0.25);">
-          </div>
+          <h3 style="font-size:22px; font-weight:800; color:#fff; margin-bottom:8px;">Metodología STEAM aplicada</h3>
+          <p style="font-size:15px; color:var(--muted); margin-bottom:0;">Cada clase integra las 5 dimensiones del aprendizaje moderno. Tu hijo no estudia tecnología de forma aislada: la usa para crear arte, contar historias y resolver problemas reales.</p>
+          <img src="robotsin/STEAM/PRINCIPAL.png"
+               alt="Robotsin explicando STEAM — Science, Technology, Engineering, Arts, Mathematics"
+               class="metodo-img steam-img">
           <div class="steam-grid">
             <div class="steam-item">
               <div class="steam-letter s-letter">S</div>
-              <p><strong>Science</strong> — Cómo funciona la IA y la tecnología digital</p>
+              <p><strong>Science</strong> — Entiende cómo funciona la IA y la tecnología digital que usa cada día</p>
             </div>
             <div class="steam-item">
               <div class="steam-letter t-letter">T</div>
-              <p><strong>Technology</strong> — Herramientas IA, YouTube y producción digital</p>
+              <p><strong>Technology</strong> — Domina ChatGPT, Suno, Gemini, Google Flow y YouTube como creador</p>
             </div>
             <div class="steam-item">
               <div class="steam-letter e-letter">E</div>
-              <p><strong>Engineering</strong> — Estructura narrativa y construcción de mundos</p>
+              <p><strong>Engineering</strong> — Construye narrativas que funcionan: personaje, conflicto y resolución</p>
             </div>
             <div class="steam-item">
               <div class="steam-letter a-letter">A</div>
-              <p><strong>Arts</strong> — Las 5 disciplinas artísticas integradas</p>
+              <p><strong>Arts</strong> — Cine, música, literatura, ilustración y actuación de voz integradas</p>
             </div>
-            <div class="steam-item" style="grid-column: 1/-1;">
+            <div class="steam-item">
               <div class="steam-letter m-letter">M</div>
-              <p><strong>Mathematics</strong> — Timing, estructura de historia en actos, lógica narrativa</p>
+              <p><strong>Mathematics</strong> — Timing de escenas, estructura en 3 actos, ritmo y lógica narrativa</p>
             </div>
           </div>
         </div>
 
-        <!-- Inteligencias Múltiples -->
+        <!-- ── BLOQUE 2: INTELIGENCIAS MÚLTIPLES ── -->
         <div>
-          <h3 style="font-size:20px; font-weight:800; color:#fff; margin-bottom:8px;">8 Inteligencias de Gardner</h3>
-          <p style="font-size:14px; color:var(--muted); margin-bottom:24px;">El curso activa TODAS las inteligencias múltiples, no solo la académica:</p>
-          <ul class="intel-list">
-            <li>
-              <span class="i-num">1</span>
-              <div class="i-text"><strong>Lingüística-verbal</strong><span>Guion, diálogos y narrativa escrita</span></div>
-            </li>
-            <li>
-              <span class="i-num">2</span>
-              <div class="i-text"><strong>Musical-rítmica</strong><span>Composición, ritmo y diseño de sonido</span></div>
-            </li>
-            <li>
-              <span class="i-num">3</span>
-              <div class="i-text"><strong>Visual-espacial</strong><span>Diseño, mapa del mundo e ilustración</span></div>
-            </li>
-            <li>
-              <span class="i-num">4</span>
-              <div class="i-text"><strong>Lógico-matemática</strong><span>Estructura narrativa y actos de la historia</span></div>
-            </li>
-            <li>
-              <span class="i-num">5</span>
-              <div class="i-text"><strong>Corporal-cinestésica</strong><span>Animación y estudio del movimiento</span></div>
-            </li>
-            <li>
-              <span class="i-num">6</span>
-              <div class="i-text"><strong>Intrapersonal</strong><span>El personaje como expresión del propio niño</span></div>
-            </li>
-            <li>
-              <span class="i-num">7</span>
-              <div class="i-text"><strong>Interpersonal</strong><span>Aliados, villanos y dinámicas de personajes</span></div>
-            </li>
-            <li>
-              <span class="i-num">8</span>
-              <div class="i-text"><strong>Naturalista</strong><span>Construcción del universo y mundo propio</span></div>
-            </li>
-          </ul>
+          <h3 style="font-size:22px; font-weight:800; color:#fff; margin-bottom:8px;">IA creativa que activa las 8 inteligencias</h3>
+          <p style="font-size:15px; color:var(--muted); margin-bottom:0;">Tu hijo no tiene que ser "bueno para todo". Solo necesita descubrir su forma de crear. Basados en la teoría de Howard Gardner (Harvard), diseñamos cada clase para que el niño aprenda desde sus propias fortalezas — mientras construye un proyecto digital real.</p>
+          <img src="robotsin/INTELIGENCIAS_MULTIPLES/PRINCIPAL.png"
+               alt="Academia Da Vinci IA — Las 8 Inteligencias Múltiples de Gardner + IA"
+               class="metodo-img gardner-img">
+
+          <p style="font-size:13px; font-weight:700; color:var(--blue); text-transform:uppercase; letter-spacing:2px; margin-bottom:16px;">Si a tu hijo le gusta... trabaja estas inteligencias:</p>
+
+          <div class="intel-table-wrap">
+            <table class="intel-table">
+              <thead>
+                <tr>
+                  <th>Si a tu hijo le gusta…</th>
+                  <th>Activará la inteligencia…</th>
+                  <th>Y en el curso creará…</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>📖 Inventar y contar historias</td>
+                  <td><strong>Lingüística</strong></td>
+                  <td>Guion completo + diálogos de su personaje</td>
+                </tr>
+                <tr>
+                  <td>🎨 Diseñar, dibujar e imaginar</td>
+                  <td><strong>Visual-Espacial</strong></td>
+                  <td>Personajes, mapas y universo visual</td>
+                </tr>
+                <tr>
+                  <td>🎵 La música y los sonidos</td>
+                  <td><strong>Musical</strong></td>
+                  <td>Tema musical original + efectos de sonido</td>
+                </tr>
+                <tr class="intel-destaca">
+                  <td>🧩 Resolver puzzles y organizar ideas</td>
+                  <td><strong>Lógico-Matemática</strong></td>
+                  <td>Estructura narrativa en 3 actos, timing y ritmo del video</td>
+                </tr>
+                <tr class="intel-destaca">
+                  <td>🎭 Actuar, moverse y expresarse</td>
+                  <td><strong>Corporal-Cinestésica</strong></td>
+                  <td>Animaciones, dirección de escenas y actuación de voz</td>
+                </tr>
+                <tr>
+                  <td>💭 Reflexionar sobre sí mismo</td>
+                  <td><strong>Intrapersonal</strong></td>
+                  <td>Personaje con emociones, valores e historia propia</td>
+                </tr>
+                <tr>
+                  <td>👥 Trabajar en equipo y compartir</td>
+                  <td><strong>Interpersonal</strong></td>
+                  <td>Aliados, villanos y estreno privado para la familia</td>
+                </tr>
+                <tr>
+                  <td>🌿 Imaginar mundos y ecosistemas</td>
+                  <td><strong>Naturalista</strong></td>
+                  <td>Universo propio con escenarios, criaturas y ambientes</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Tagline cierre -->
+          <div class="despierta-banner">
+            <p>De <em>consumidor de pantallas</em> a <span>creador con Inteligencia Artificial.</span></p>
+            <p style="font-size:clamp(14px,1.8vw,18px); font-weight:500; color:var(--muted); margin-top:12px;">La IA no reemplaza la creatividad de tu hijo: <strong style="color:#fff;">la despierta.</strong></p>
+          </div>
         </div>
 
       </div>
