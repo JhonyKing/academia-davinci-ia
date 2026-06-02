@@ -23,6 +23,9 @@
   const TOTAL_CLASES    = 26
   const SCROLL_TRIGGER  = 0.90   // 90 % de scroll para marcar completada
 
+  // Clases que SOLO se completan al entregar — el scroll nunca las marca
+  const REQUIEREN_ENTREGA = new Set([2, 3, 4, 5, 10, 11, 14, 18, 23])
+
   // ── 1b. Carga celebration.js de forma diferida ──────────────────────────
   function loadCelebration() {
     if (window.CelebrationSystem) return Promise.resolve()
@@ -123,7 +126,47 @@
     }
   }
 
-  // ── 5. Scroll listener: trigger al 90 % ─────────────────────────────────
+  // ── 5a. Nudge visual cuando la clase requiere entrega ───────────────────
+  function nudgeEntrega() {
+    // No mostrar si ya hay un nudge visible
+    if (document.getElementById('dv-entrega-nudge')) return
+
+    const nudge = document.createElement('div')
+    nudge.id = 'dv-entrega-nudge'
+    nudge.innerHTML = '📬 <strong>¡Casi!</strong> Entrega tu misión para completar esta clase.'
+    nudge.style.cssText = `
+      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+      background: #1A2540; border: 1px solid rgba(74,144,217,0.5);
+      border-left: 4px solid #4A90D9;
+      color: #E8EAF0; font-family: 'Poppins', sans-serif;
+      font-size: 14px; padding: 14px 24px; border-radius: 12px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+      z-index: 9000; cursor: pointer; white-space: nowrap;
+      animation: dv-nudge-in .3s ease both;
+    `
+    // Inyectar animación si no existe
+    if (!document.getElementById('dv-nudge-style')) {
+      const st = document.createElement('style')
+      st.id = 'dv-nudge-style'
+      st.textContent = `
+        @keyframes dv-nudge-in { from { opacity:0; transform:translateX(-50%) translateY(12px) } to { opacity:1; transform:translateX(-50%) translateY(0) } }
+      `
+      document.head.appendChild(st)
+    }
+    document.body.appendChild(nudge)
+
+    // Al hacer clic, baja al widget de entrega
+    nudge.addEventListener('click', () => {
+      nudge.remove()
+      const widget = document.getElementById('entrega-widget')
+      if (widget) widget.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    })
+
+    // Auto-desaparece en 5 s
+    setTimeout(() => nudge.remove(), 5000)
+  }
+
+  // ── 5b. Scroll listener: trigger al 90 % ────────────────────────────────
   function setupScrollListener(userId) {
     let marked = false
     function onScroll() {
@@ -135,7 +178,13 @@
       if (ratio >= SCROLL_TRIGGER) {
         marked = true
         window.removeEventListener('scroll', onScroll)
-        markClassComplete(userId)
+
+        if (CLASE_NUM && REQUIEREN_ENTREGA.has(CLASE_NUM)) {
+          // Esta clase solo se completa al entregar — mostrar nudge
+          nudgeEntrega()
+        } else {
+          markClassComplete(userId)
+        }
       }
     }
     window.addEventListener('scroll', onScroll, { passive: true })
@@ -145,7 +194,9 @@
       setTimeout(() => {
         if (!marked) {
           marked = true
-          markClassComplete(userId)
+          if (!CLASE_NUM || !REQUIEREN_ENTREGA.has(CLASE_NUM)) {
+            markClassComplete(userId)
+          }
         }
       }, 30_000)
     }

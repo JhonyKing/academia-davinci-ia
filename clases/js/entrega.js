@@ -362,23 +362,34 @@
 
         // Feedback + celebración solo en primera entrega
         if (esPrimeraEntrega) {
-          // Cargar feedback.js si no está listo
-          function runCelebrationWithFeedback() {
-            if (window.DvFeedback && window.CelebrationSystem) {
-              window.DvFeedback.generateFeedback(claseNum, config.tipo, payload)
-                .then(msg => window.CelebrationSystem.showEntregaSuccess(msg))
-            } else if (window.CelebrationSystem) {
-              window.CelebrationSystem.showEntregaSuccess()
+          function runCelebration() {
+            const cs = window.CelebrationSystem
+            const fb = window.DvFeedback
+            if (fb && cs) {
+              fb.generateFeedback(claseNum, config.tipo, payload).then(msg => {
+                cs.showEntregaSuccess(msg)
+                // Si esta entrega completa el último slot del módulo, mostrar
+                // la celebración de módulo cuando cierre el modal de entrega
+                setTimeout(() => cs.showClassComplete(claseNum), 15500)
+              })
+            } else if (cs) {
+              cs.showEntregaSuccess()
+              setTimeout(() => cs.showClassComplete(claseNum), 15500)
             }
           }
-          if (!window.DvFeedback) {
-            const s = document.createElement('script')
-            s.src = 'js/feedback.js'
-            s.onload = () => setTimeout(runCelebrationWithFeedback, 400)
-            document.head.appendChild(s)
-          } else {
-            setTimeout(runCelebrationWithFeedback, 400)
+
+          // Cargar celebration.js y feedback.js si aún no están
+          function loadAndRun() {
+            const pending = []
+            if (!window.CelebrationSystem) {
+              const s = document.createElement('script'); s.src = 'js/celebration.js'; pending.push(new Promise(r => { s.onload = r; document.head.appendChild(s) }))
+            }
+            if (!window.DvFeedback) {
+              const s = document.createElement('script'); s.src = 'js/feedback.js'; pending.push(new Promise(r => { s.onload = r; document.head.appendChild(s) }))
+            }
+            Promise.all(pending).then(() => setTimeout(runCelebration, 400))
           }
+          loadAndRun()
         }
 
         // Scroll suave a la navegación de lección si existe
