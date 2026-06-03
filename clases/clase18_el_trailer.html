@@ -1,557 +1,341 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Clase 26 — El Tráiler | Academia Da Vinci IA</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap');
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --blue:#4A90D9; --purple:#8E44AD; --gold:#F39C12;
-      --green:#27AE60; --red:#E74C3C; --dark:#0F1626;
-    }
-    body { font-family:'Poppins',sans-serif; background:var(--dark); color:#E8EAF0; }
-
-    .nav { position:sticky; top:0; z-index:100; background:rgba(15,22,38,0.92); backdrop-filter:blur(12px); border-bottom:1px solid rgba(255,255,255,0.07); padding:14px 40px; display:flex; align-items:center; gap:16px; }
-    .nav-back { color:rgba(255,255,255,0.4); font-size:13px; text-decoration:none; display:flex; align-items:center; gap:6px; transition:color .2s; }
-    .nav-back:hover { color:#fff; }
-    .nav-title { font-weight:700; font-size:15px; color:#fff; }
-    .nav-title span { color:var(--red); }
-    .nav-spacer { flex:1; }
-    .nav-progress { display:flex; align-items:center; gap:8px; font-size:12px; color:rgba(255,255,255,0.4); }
-    .progress-bar { width:100px; height:4px; background:rgba(255,255,255,0.1); border-radius:4px; overflow:hidden; }
-    .progress-fill { height:100%; width:100%; background:var(--red); border-radius:4px; }
-
-    .hero { position:relative; min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; overflow:hidden; padding:60px 20px; }
-    .hero-video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.2; z-index:0; }
-    .hero-overlay { position:absolute; inset:0; background:linear-gradient(180deg,rgba(15,22,38,.3) 0%,rgba(15,22,38,.65) 60%,var(--dark) 100%); z-index:1; }
-    .hero-content { position:relative; z-index:2; max-width:720px; }
-    .hero-badge { display:inline-block; background:rgba(231,76,60,.2); border:1px solid rgba(231,76,60,.5); color:#F1948A; padding:8px 24px; border-radius:50px; font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; margin-bottom:24px; box-shadow: 0 0 20px rgba(231,76,60,.3); }
-    .hero-modulo { font-size:13px; font-weight:600; letter-spacing:3px; text-transform:uppercase; color:rgba(255,255,255,.4); margin-bottom:10px; }
-    .hero h1 { font-size:clamp(42px,7vw,72px); font-weight:900; color:#fff; line-height:1.05; margin-bottom:12px; }
-    .hero h1 span { color:var(--red); }
-    .hero-sub { font-size:18px; color:rgba(255,255,255,.6); margin-bottom:36px; line-height:1.5; }
-    .robotsin-float { width:160px; height:160px; margin:0 auto 28px; position:relative; }
-    .robotsin-float img { width:100%; height:100%; object-fit:contain; filter:drop-shadow(0 0 35px rgba(231,76,60,.7)); animation:float 3s ease-in-out infinite; }
-    .robotsin-float .fallback { font-size:90px; line-height:160px; }
-    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
-    .robotsin-bubble { background:rgba(231,76,60,.15); border:1px solid rgba(231,76,60,.4); border-radius:16px; padding:16px 22px; position:relative; font-size:15px; color:rgba(255,255,255,.85); font-style:italic; margin-bottom:32px; max-width:480px; margin-left:auto; margin-right:auto; }
-    .robotsin-bubble::before { content:''; position:absolute; top:-8px; left:50%; width:14px; height:14px; background:rgba(231,76,60,.3); border-top:1px solid rgba(231,76,60,.3); border-left:1px solid rgba(231,76,60,.3); transform:translateX(-50%) rotate(45deg); }
-    .hero-chips { display:flex; gap:12px; flex-wrap:wrap; justify-content:center; }
-    .chip { background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); padding:8px 18px; border-radius:50px; font-size:13px; color:rgba(255,255,255,.7); }
-    .divider { height:1px; background:linear-gradient(90deg,transparent,rgba(231,76,60,.3),transparent); }
-
-    /* Banner de final de módulo */
-    .modulo-banner {
-      background:linear-gradient(135deg,rgba(231,76,60,.25),rgba(243,156,18,.15));
-      border:2px solid rgba(231,76,60,.5);
-      border-radius:20px; padding:28px 32px; margin-bottom:32px;
-      text-align:center;
-      box-shadow: 0 0 40px rgba(231,76,60,.2);
-    }
-    .modulo-banner h2 { font-size:20px; font-weight:800; color:#fff; margin-bottom:8px; }
-    .modulo-banner p { font-size:14px; color:rgba(255,255,255,.7); }
-    .modulo-banner .estrella { font-size:32px; margin-bottom:12px; }
-
-    .section { max-width:900px; margin:0 auto; padding:72px 40px; }
-    .section-header { display:flex; align-items:flex-start; gap:20px; margin-bottom:36px; }
-    .section-robotsin { width:72px; height:72px; flex-shrink:0; border-radius:50%; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); display:flex; align-items:center; justify-content:center; overflow:hidden; }
-    .section-robotsin img { width:100%; height:100%; object-fit:cover; }
-    .section-robotsin .fallback { font-size:32px; }
-    .section-label { color:var(--red); font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; margin-bottom:6px; }
-    .section-title { font-size:clamp(24px,4vw,36px); font-weight:800; color:#fff; line-height:1.2; }
-    .section-title span { color:var(--red); }
-
-    .mision-box { background:linear-gradient(135deg,rgba(231,76,60,.2),rgba(243,156,18,.1)); border:2px solid rgba(231,76,60,.4); border-radius:20px; padding:32px; margin-bottom:32px; display:flex; gap:24px; align-items:flex-start; box-shadow: 0 0 30px rgba(231,76,60,.15); }
-    .mision-icon { font-size:48px; flex-shrink:0; }
-    .mision-box h3 { font-size:18px; font-weight:700; color:var(--red); margin-bottom:8px; }
-    .mision-box p { font-size:15px; color:rgba(255,255,255,.75); line-height:1.7; }
-    .mision-box strong { color:#F1948A; }
-
-    .obj-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px; }
-    .obj-card { background:rgba(255,255,255,.03); border:1px solid rgba(231,76,60,.15); border-radius:16px; padding:24px; }
-    .obj-card .ico { font-size:28px; margin-bottom:12px; }
-    .obj-card h4 { font-size:15px; font-weight:700; color:#fff; margin-bottom:6px; }
-    .obj-card p { font-size:13px; color:rgba(255,255,255,.5); }
-
-    .robotsin-inline { display:flex; gap:20px; align-items:flex-start; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.07); border-radius:16px; padding:24px; margin:28px 0; }
-    .ri-avatar { width:64px; height:64px; flex-shrink:0; border-radius:50%; overflow:hidden; background:rgba(255,255,255,.05); display:flex; align-items:center; justify-content:center; }
-    .ri-avatar img { width:100%; height:100%; object-fit:cover; }
-    .ri-avatar .fallback { font-size:30px; }
-    .ri-name { font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--red); margin-bottom:4px; }
-    .ri-text { font-size:15px; color:rgba(255,255,255,.8); line-height:1.7; }
-    .ri-text strong { color:#F1948A; }
-    .ri-text em { color:var(--gold); font-style:normal; font-weight:600; }
-    .ri-blue { border-color:rgba(74,144,217,.2); }
-    .ri-blue .ri-name { color:var(--blue); }
-    .ri-gold { border-color:rgba(243,156,18,.2); }
-    .ri-gold .ri-name { color:var(--gold); }
-    .ri-green { border-color:rgba(39,174,96,.2); }
-    .ri-green .ri-name { color:var(--green); }
-
-    .concepto { background:linear-gradient(135deg,rgba(231,76,60,.1),rgba(74,144,217,.06)); border:1px solid rgba(231,76,60,.2); border-left:4px solid var(--red); border-radius:12px; padding:24px 28px; margin:20px 0; }
-    .concepto p { font-size:16px; color:rgba(255,255,255,.85); line-height:1.75; }
-    .concepto strong { color:#F1948A; }
-
-    .diagram-card { background:rgba(255,255,255,.03); border:1px solid rgba(231,76,60,.2); border-radius:20px; padding:28px; margin:24px 0; }
-    .diagram-title { font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--red); margin-bottom:16px; }
-    .diagram-card img { width:100%; border-radius:10px; background:#fff; }
-
-    .act-list { list-style:none; }
-    .act-item { display:flex; gap:18px; padding:22px; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.07); border-radius:16px; margin-bottom:10px; }
-    .act-num { min-width:46px; height:46px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:800; flex-shrink:0; }
-    .act-body { flex:1; }
-    .act-body h4 { font-size:15px; font-weight:700; color:#fff; margin-bottom:4px; }
-    .act-body p { font-size:13px; color:rgba(255,255,255,.55); }
-    .act-time { background:rgba(255,255,255,.06); border-radius:8px; padding:4px 12px; font-size:11px; color:rgba(255,255,255,.4); align-self:center; white-space:nowrap; flex-shrink:0; }
-    .a1 .act-num { background:rgba(39,174,96,.2); color:#2ECC71; }
-    .a2 .act-num { background:rgba(231,76,60,.2); color:#E74C3C; }
-    .a3 .act-num { background:rgba(243,156,18,.2); color:#F39C12; }
-
-    .tarea-box { background:linear-gradient(135deg,rgba(243,156,18,.12),rgba(230,126,34,.08)); border:1px solid rgba(243,156,18,.25); border-radius:20px; padding:32px; display:flex; gap:24px; align-items:flex-start; }
-    .tarea-icon { font-size:48px; flex-shrink:0; }
-    .tarea-box h3 { font-size:18px; font-weight:700; color:var(--gold); margin-bottom:8px; }
-    .tarea-box p { font-size:15px; color:rgba(255,255,255,.75); line-height:1.7; }
-
-    /* Insignia final de módulo — más grande */
-    .insignia-section {
-      text-align:center; padding:80px 40px;
-      background:linear-gradient(135deg,rgba(231,76,60,.15),rgba(243,156,18,.08),rgba(74,144,217,.06));
-    }
-    .insignia-robotsin {
-      width:120px; height:120px; margin:0 auto 24px;
-      border-radius:50%; overflow:hidden;
-      background:rgba(255,255,255,.06);
-      display:flex; align-items:center; justify-content:center;
-      border:3px solid rgba(231,76,60,.5);
-      box-shadow: 0 0 30px rgba(231,76,60,.3);
-    }
-    .insignia-robotsin img { width:100%; height:100%; object-fit:cover; }
-    .insignia-robotsin .fallback { font-size:60px; }
-    .insignia-badge {
-      width:160px; height:160px; margin:0 auto 24px;
-      background:linear-gradient(135deg,#E74C3C,#C0392B,#E74C3C);
-      border-radius:50%; display:flex; flex-direction:column;
-      align-items:center; justify-content:center;
-      box-shadow:0 0 60px rgba(231,76,60,.6), 0 0 120px rgba(231,76,60,.2);
-      font-size:52px;
-      animation: pulse-badge 2s ease-in-out infinite;
-    }
-    @keyframes pulse-badge {
-      0%,100% { box-shadow:0 0 60px rgba(231,76,60,.6), 0 0 120px rgba(231,76,60,.2); transform:scale(1); }
-      50% { box-shadow:0 0 80px rgba(231,76,60,.8), 0 0 160px rgba(231,76,60,.35); transform:scale(1.04); }
-    }
-    .insignia-title { font-size:28px; font-weight:900; color:#fff; margin-bottom:10px; }
-    .insignia-nivel { font-size:13px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--red); margin-bottom:10px; }
-    .insignia-desc { font-size:14px; color:rgba(255,255,255,.5); }
-
-    /* Cards de cierre con borde rojo (highlight final módulo) */
-    .cierre-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:28px; }
-    .cierre-card { background:rgba(255,255,255,.03); border:1px solid rgba(231,76,60,.2); border-radius:14px; padding:22px; text-align:center; }
-    .cierre-card .ico { font-size:32px; margin-bottom:10px; }
-    .cierre-card h4 { font-size:14px; font-weight:700; color:#fff; margin-bottom:6px; }
-    .cierre-card p { font-size:12px; color:rgba(255,255,255,.45); }
-
-    /* Next box — preview Módulo 5 con tono dorado */
-    .next-box-m5 {
-      background:linear-gradient(135deg,rgba(243,156,18,.15),rgba(230,126,34,.1));
-      border:2px solid rgba(243,156,18,.4);
-      border-radius:16px; padding:28px 32px;
-      display:flex; align-items:center; gap:20px;
-      box-shadow: 0 0 30px rgba(243,156,18,.15);
-    }
-    .next-box-m5 .modulo-preview-icon {
-      width:64px; height:64px; flex-shrink:0;
-      border-radius:50%; overflow:hidden;
-      background:rgba(243,156,18,.1);
-      border:2px solid rgba(243,156,18,.3);
-      display:flex; align-items:center; justify-content:center;
-    }
-    .next-box-m5 .modulo-preview-icon img { width:100%; height:100%; object-fit:cover; }
-    .next-box-m5 .modulo-preview-icon .fallback { font-size:28px; }
-    .next-box-m5 h4 { font-size:11px; text-transform:uppercase; letter-spacing:2px; color:rgba(255,255,255,.35); margin-bottom:4px; }
-    .next-box-m5 p { font-size:17px; font-weight:700; color:#fff; margin-bottom:6px; }
-    .next-box-m5 p span { color:var(--gold); }
-    .next-box-m5 small { font-size:12px; color:rgba(255,255,255,.4); }
-
-    /* ── LESSON NAV ── */
-    .lesson-nav { display:flex; align-items:stretch; gap:12px; max-width:900px; margin:48px auto 0; padding:32px 40px 0; border-top:1px solid rgba(255,255,255,.06); }
-    .lesson-nav-btn { flex:1; display:flex; align-items:center; gap:14px; padding:18px 22px; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); border-radius:16px; text-decoration:none; color:#fff; transition:background .2s, border-color .2s, transform .15s; }
-    .lesson-nav-btn:hover { background:rgba(255,255,255,.07); border-color:rgba(255,255,255,.18); transform:translateY(-2px); }
-    .lesson-nav-btn.next { justify-content:flex-end; text-align:right; }
-    .lesson-nav-btn.next-gold { border-color:rgba(243,156,18,.25); background:rgba(243,156,18,.05); }
-    .lesson-nav-btn.next-gold:hover { background:rgba(243,156,18,.1); border-color:rgba(243,156,18,.4); }
-    .nav-arrow { font-size:26px; color:var(--red); flex-shrink:0; line-height:1; }
-    .nav-arrow-gold { font-size:26px; color:var(--gold); flex-shrink:0; line-height:1; }
-    .nav-label { font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,.3); margin-bottom:3px; }
-    .nav-title-btn { font-size:14px; font-weight:700; color:#fff; }
-    .lesson-nav-home { display:flex; align-items:center; justify-content:center; width:52px; flex-shrink:0; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); border-radius:16px; font-size:20px; text-decoration:none; transition:background .2s, border-color .2s; }
-    .lesson-nav-home:hover { background:rgba(255,255,255,.08); border-color:rgba(255,255,255,.2); }
-
-    footer { text-align:center; padding:40px; border-top:1px solid rgba(255,255,255,.06); color:rgba(255,255,255,.2); font-size:12px; }
-    footer strong { color:rgba(255,255,255,.45); }
-    @media(max-width:600px){ .section{padding:60px 20px;} .mision-box{flex-direction:column;} .cierre-grid{grid-template-columns:1fr;} .nav{padding:14px 20px;} .lesson-nav{padding:24px 20px 0; flex-wrap:wrap;} }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Clase 18 — El Tráiler · Genios Creativos</title>
+<link rel="icon" type="image/svg+xml" href="robotsin/favicon.svg">
+<link rel="stylesheet" href="css/genios.css">
+<link rel="stylesheet" href="css/lesson.css">
+<link rel="stylesheet" href="css/juice.css">
 </head>
-<body>
+<body class="lesson" style="--wc: var(--m4)">
 
-<!-- ═══ NAV ═══ -->
-<nav class="nav">
-  <a href="index.html" class="nav-back">← Inicio</a>
-  <div class="nav-title">Módulo 4 · <span>El Video</span></div>
-  <div class="nav-spacer"></div>
-  <div class="nav-progress">
-    <span>Clase 16/16</span>
-    <div class="progress-bar"><div class="progress-fill"></div></div>
-    <span>100%</span>
+<!-- ═══════════ TOPBAR ═══════════ -->
+<header class="topbar">
+  <div class="wrap">
+    <a class="lback" href="index.html">← Mapa</a>
+    <div class="nav-title">Mundo 4 <span class="sep">·</span> <span>El Genio en Movimiento</span></div>
+    <div class="nav-spacer topbar-spacer"></div>
+    <div class="prog-chip">
+      <span>Clase 18/26</span>
+      <span class="bar"><i style="width:69%"></i></span>
+      <span id="dv-progress-badge">🏆 69%</span>
+    </div>
   </div>
-</nav>
+</header>
 
-<!-- ═══ HERO ═══ -->
-<section class="hero">
-  <video class="hero-video" autoplay loop muted playsinline>
-    <source src="robotsin/videos/Robot_conducting_STEAM_elements_202606010101.mp4" type="video/mp4">
-    <source src="robotsin/videos/Robot_conducting_STEAM_elements_202606010101 (1).mp4" type="video/mp4">
-    <source src="robotsin/videos/Robot_floating_in_cosmic_space_202606010114.mp4" type="video/mp4">
-  </video>
-  <div class="hero-overlay"></div>
-  <div class="hero-content">
-    <div class="hero-badge">🏆 Clase Final · Módulo 4 — El Video</div>
-    <div class="hero-modulo">Academia Da Vinci IA · Clase 16 de 16</div>
+<!-- ═══════════ HERO ═══════════ -->
+<section class="lhero">
+  <span class="spark" data-parallax="0.14" style="top:30px;left:14%;font-size:24px;">✦</span>
+  <span class="spark" data-parallax="-0.12" style="top:80px;right:16%;font-size:18px;animation-delay:1s;">✧</span>
+  <div class="lread" data-reveal>
+    <span class="badge-pill">🎬 Mundo 4 — El Genio en Movimiento</span>
+    <div class="kicker">Misión 18 de 26 · ¡Final del Mundo 4!</div>
 
-    <div class="robotsin-float">
-      <img src="robotsin/robotsin_director.png" alt="D-IA Vinci Director"
-           onerror="this.style.display='none'; this.parentElement.querySelector('.fallback').style.display='block'">
-      <div class="fallback" style="display:none">🎬</div>
+    <div class="mascot-stage">
+      <img src="robotsin/robotsin_director.png" alt="D-IA Vinci Director">
     </div>
 
-    <div class="robotsin-bubble">
-      "Robotsin Director corre el telón. <strong>¡Es la Gran Premiere Da Vinci!</strong> El mundo ve tu tráiler hoy. 🎬"
+    <div class="bubble">
+      "El tráiler es el gancho que hace que TODOS quieran ver tu serie. ¡Luces, cámara, tráiler! 🎬"
     </div>
 
     <h1>El <span>Tráiler</span></h1>
-    <p class="hero-sub">El tráiler oficial de tu serie y la Gran Premiere Da Vinci.<br>El Módulo 4 llega a su clímax — ¡y tú eres el director!</p>
-    <div class="hero-chips">
-      <div class="chip">🎯 Edad: 9–13 años</div>
-      <div class="chip">⏱️ 60 minutos</div>
-      <div class="chip">🛠️ CapCut</div>
-      <div class="chip">🏆 Final de Módulo</div>
+    <p class="lead">Hoy creas el teaser de 15 seg y el tráiler oficial de 60 seg, y presentas tu serie ante el grupo.</p>
+    <div class="chips">
+      <span class="chip">🎬 Tráiler</span>
+      <span class="chip">⏱️ 60 min</span>
+      <span class="chip">🛠️ CapCut</span>
+      <span class="chip">🏆 Final de Mundo 4</span>
     </div>
   </div>
 </section>
 
-<!-- ═══ MISIÓN ═══ -->
-<div class="divider"></div>
-<div class="section">
-  <div class="modulo-banner">
-    <div class="estrella">🎬</div>
-    <h2>¡ÚLTIMA CLASE DEL MÓDULO 4!</h2>
-    <p>Has animado, filmado y editado. Hoy creas el tráiler oficial y presentas tu serie ante el grupo en la Gran Premiere Da Vinci.</p>
-  </div>
+<!-- ═══════════ MISIÓN ═══════════ -->
+<section class="block">
+  <div class="lread">
+    <div class="mission" data-reveal>
+      <span class="em">🎬</span>
+      <div>
+        <h3>⚡ Misión de hoy: La Premiere</h3>
+        <p>Robotsin Director corre los créditos del telón. Es hora de presentar el tráiler oficial de tu serie. Tu misión: <strong>crear el teaser de 15 seg y el tráiler completo de 60 seg</strong>, y presentarlo ante el grupo en la premiere más épica de la Academia Da Vinci IA. Al terminar, ¡completas el Mundo 4!</p>
+      </div>
+    </div>
 
-  <div class="mision-box">
-    <div class="mision-icon">🎥</div>
-    <div>
-      <h3>⚡ Misión de hoy: La Gran Premiere Da Vinci</h3>
-      <p>
-        Robotsin Director corre los créditos del telón. El público está en sus asientos.
-        Tu trabajo de 4 clases culmina hoy con <strong>el tráiler oficial de tu serie animada</strong>.<br><br>
-        Primero crearás un <em>teaser de 15 segundos</em> (puro gancho) y luego el <em>tráiler completo de 60 segundos</em>
-        con la estructura profesional. Al terminar, <strong>presentas tu tráiler ante todo el grupo</strong>
-        en la Premiere más épica de la Academia Da Vinci.
-      </p>
+    <!-- 🎬 VIDEO DE LA CLASE — Robotsin explica la misión (EN ESPAÑOL).
+         ⚠️ El clip de abajo es SOLO un ejemplo/placeholder y va SILENCIADO ("muted").
+         Reemplaza el <source> por el video real de Robotsin (en español) de esta clase
+         y quita el atributo "muted". O cámbialo por un embed de YouTube (<iframe>). -->
+    <div class="class-video" data-reveal>
+      <div class="cv-frame">
+        <div class="cv-inner">
+          <video id="claseVideo" playsinline controls muted preload="none" poster="robotsin/robotsin_director.png">
+            <source src="robotsin/videos/Robot_conducting_STEAM_elements_202606010101.mp4" type="video/mp4">
+          </video>
+          <button class="cv-play" id="cvPlay" aria-label="Reproducir video de la clase">
+            <span class="circle">▶</span>
+          </button>
+          <div class="cv-badge"><span class="dot"></span> Video de la clase</div>
+        </div>
+      </div>
+      <div class="cv-caption">🤖 <b>Robotsin Director</b> te explica, paso a paso, la misión de hoy.</div>
     </div>
-  </div>
 
-  <div class="section-header">
-    <div class="section-robotsin">
-      <img src="robotsin/robotsin_director.png" alt="Robotsin Director"
-           onerror="this.style.display='none'; this.parentElement.querySelector('.fallback').style.display='flex'">
-      <div class="fallback" style="display:none; width:100%; height:100%; align-items:center; justify-content:center; font-size:30px;">🎬</div>
+    <div class="shead">
+      <span class="ava"><img src="robotsin/robotsin_director.png" alt="Robotsin"></span>
+      <div>
+        <div class="lab">Lo que aprenderás hoy</div>
+        <h2>Objetivos de la <em>Clase</em></h2>
+      </div>
     </div>
-    <div>
-      <div class="section-label">Lo que aprenderás hoy</div>
-      <div class="section-title">Objetivos de la <span>Clase</span></div>
-    </div>
-  </div>
 
-  <div class="obj-grid">
-    <div class="obj-card">
-      <div class="ico">🎯</div>
-      <h4>Anatomía de un tráiler ganador</h4>
-      <p>Los 5 elementos que hacen que un tráiler deje al público con ganas de ver la serie completa.</p>
-    </div>
-    <div class="obj-card">
-      <div class="ico">⚡</div>
-      <h4>El teaser de 15 segundos</h4>
-      <p>La forma más poderosa de enganchar: una sola imagen o frase que lo dice todo sin revelar nada.</p>
-    </div>
-    <div class="obj-card">
-      <div class="ico">🏆</div>
-      <h4>La Premiere del grupo</h4>
-      <p>Presentar el tráiler oficial ante compañeros y recibir aplausos por el trabajo de todo el módulo.</p>
+    <div class="objs" data-reveal>
+      <div class="obj"><div class="em">🎓</div><h4>Aprender las reglas del tráiler perfecto</h4><p>Gancho en 3 segundos, ritmo en crescendo, no revelar el final, frase memorable y música. Las reglas de Hollywood.</p></div>
+      <div class="obj"><div class="em">⚡</div><h4>Crear teaser de 15 segundos</h4><p>La versión corta: puro gancho visual y emocional. Si engancha en 15 seg, está listo para redes sociales.</p></div>
+      <div class="obj"><div class="em">🎬</div><h4>Crear tráiler completo de 60 segundos</h4><p>La estructura completa: gancho → mundo → conflicto → clímax → título con música épica.</p></div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- ═══ SECCIÓN TEÓRICA ═══ -->
-<div class="divider"></div>
-<div class="section" style="background:rgba(255,255,255,.02);">
-  <div class="section-header">
-    <div class="section-robotsin">
-      <img src="robotsin/robotsin_director.png" alt="Robotsin Director"
-           onerror="this.style.display='none'; this.parentElement.querySelector('.fallback').style.display='flex'">
-      <div class="fallback" style="display:none; width:100%; height:100%; align-items:center; justify-content:center; font-size:30px;">🎬</div>
+<!-- ═══════════ TEORÍA: LAS REGLAS DEL TRÁILER ═══════════ -->
+<section class="block tint">
+  <div class="lread">
+    <div class="shead">
+      <span class="ava"><img src="robotsin/robotsin_director.png" alt="Robotsin"></span>
+      <div>
+        <div class="lab">Parte teórica · 15 min</div>
+        <h2>Las reglas del <em>tráiler perfecto</em></h2>
+      </div>
     </div>
-    <div>
-      <div class="section-label">Teoría · 15 min</div>
-      <div class="section-title">¿Qué hace un <span>Buen Tráiler</span>?</div>
+
+    <div class="rmsg">
+      <span class="ava"><img src="robotsin/robotsin_director.png" alt="Robotsin"></span>
+      <div>
+        <div class="who">D-IA Vinci Director revela el secreto de Hollywood</div>
+        <div class="say">"Tienes <strong>3 segundos para enganchar al espectador</strong> — ¡o cambia de canal! Si los primeros 3 segundos de tu tráiler no son impactantes, nadie ve el resto. <em>¡Así es el mundo de hoy!</em>"</div>
+      </div>
     </div>
-  </div>
 
-  <div class="concepto">
-    <p>
-      Un tráiler tiene exactamente <strong>60 segundos para convencer al mundo</strong> de que tu serie
-      vale la pena verla. No muestra todo — solo el suficiente para crear curiosidad, emoción y
-      la necesidad urgente de ver más. Los 5 elementos de un tráiler ganador son:
-      <strong>gancho, presentación del mundo, conflicto en crescendo, clímax y frase memorable.</strong>
-    </p>
-  </div>
+    <table class="ptable">
+      <thead><tr><th>Regla del tráiler</th><th>Por qué importa</th></tr></thead>
+      <tbody>
+        <tr><td>⚡ Gancho en 3 segundos</td><td>El espectador decide en 3 seg si sigue viendo</td></tr>
+        <tr><td>📈 Ritmo en crescendo</td><td>Empieza lento, termina épico — siempre de menos a más</td></tr>
+        <tr><td>🤫 No revelar el final</td><td>El misterio es lo que lleva al espectador a ver la serie completa</td></tr>
+        <tr><td>💬 Frase memorable</td><td>Una línea de diálogo que quede grabada en la mente</td></tr>
+        <tr><td>🎵 Música que emociona</td><td>El 50% del impacto emocional de un tráiler viene del audio</td></tr>
+      </tbody>
+    </table>
 
-  <div class="diagram-card">
-    <div class="diagram-title">📊 Estructura del Tráiler Oficial — 60 Segundos</div>
-    <img src="diagrams/clase16_estructura_trailer.png" alt="Estructura del trailer">
-  </div>
-
-  <div class="robotsin-inline ri-blue">
-    <div class="ri-avatar">
-      <img src="robotsin/robotsin_director.png" alt="Robotsin Director"
-           onerror="this.style.display='none'; this.parentElement.querySelector('.fallback').style.display='block'">
-      <div class="fallback" style="display:none">🎬</div>
+    <div class="shead" style="margin-top:32px;">
+      <span class="ava"><img src="robotsin/robotsin_director.png" alt="Robotsin"></span>
+      <div>
+        <div class="lab">La estructura exacta de los mejores tráilers</div>
+        <h2>Estructura del <em>tráiler de 60 seg</em></h2>
+      </div>
     </div>
-    <div>
-      <div class="ri-name">D-IA Vinci Director explica el gancho:</div>
-      <div class="ri-text">
-        "Los primeros <strong>3 segundos del tráiler son los más importantes de todo.</strong>
-        En redes sociales, si no enganchas en 3 segundos, el pulgar ya sigue scrolleando.
-        Tu gancho puede ser la imagen más impactante de tu serie, una pregunta que genere intriga,
-        o el sonido más poderoso. <em>¡Lo que sea — pero que pare el mundo 3 segundos!</em>"
+
+    <table class="ptable">
+      <thead><tr><th>Segmento</th><th>Duración</th><th>Qué poner</th></tr></thead>
+      <tbody>
+        <tr><td>⚡ Gancho</td><td>0-3 seg</td><td>La imagen o acción más impactante de toda tu serie</td></tr>
+        <tr><td>🌍 El mundo</td><td>3-13 seg</td><td>Establece dónde vive el héroe, cuál es su misión</td></tr>
+        <tr><td>⚔️ El conflicto</td><td>13-33 seg</td><td>El problema principal, el antagonista, la apuesta</td></tr>
+        <tr><td>🔥 El clímax</td><td>33-38 seg</td><td>Cortes rápidos del momento más épico — ¡pero sin revelar el final!</td></tr>
+        <tr><td>🎬 Título + música</td><td>38-60 seg</td><td>Nombre de la serie + frase memorable + música crescendo</td></tr>
+      </tbody>
+    </table>
+
+    <div class="rmsg alt">
+      <span class="ava"><img src="robotsin/robotsin_director.png" alt="Robotsin"></span>
+      <div>
+        <div class="who">D-IA Vinci comparte la filosofía del tráiler</div>
+        <div class="say">"El mejor tráiler muestra sin revelar. <strong>Es el arte del misterio.</strong> Das suficiente para que quieran más, pero guardas el secreto que solo se revela en la serie completa. <em>¡Eso es lo que te mantiene volviendo a ver más episodios!</em>"</div>
+      </div>
+    </div>
+
+    <div class="rmsg alt" style="--wc:var(--green)">
+      <span class="ava"><img src="robotsin/robotsin_director.png" alt="Robotsin"></span>
+      <div>
+        <div class="who">💡 Tip Pro de Robotsin</div>
+        <div class="say">"Para el teaser de 15 seg: <strong>usa tu imagen más impactante + la frase más memorable + 2 cortes rápidos de acción</strong>. Sin presentación, sin explicación. Directo al impacto. <em>¡Menos es más cuando se trata de hacer querer más!</em>"</div>
       </div>
     </div>
   </div>
+</section>
 
-  <div class="robotsin-inline ri-gold">
-    <div class="ri-avatar">
-      <img src="robotsin/robotsin_director.png" alt="Robotsin Director"
-           onerror="this.style.display='none'; this.parentElement.querySelector('.fallback').style.display='block'">
-      <div class="fallback" style="display:none">🎬</div>
+<!-- ═══════════ ACTIVIDADES ═══════════ -->
+<section class="block">
+  <div class="lread">
+    <div class="shead">
+      <span class="ava"><img src="robotsin/robotsin_director.png" alt="Robotsin"></span>
+      <div>
+        <div class="lab">Parte práctica · 55 min</div>
+        <h2>¡Luces, cámara, <em>tráiler Genio</em>!</h2>
+      </div>
     </div>
-    <div>
-      <div class="ri-name">D-IA Vinci tiene una analogía:</div>
-      <div class="ri-text">
-        "Los tráilers de Marvel tienen una regla de oro: <strong>mostrar todo, revelar nada.</strong>
-        Ves explosiones, personajes, emociones intensas — pero nunca sabes cómo termina.
-        Eso es lo que crea la anticipación. <em>Tu tráiler debe dejar al espectador con una sola pregunta:
-        ¿qué pasó después?</em>"
+
+    <ul class="acts" data-reveal>
+      <li class="act c1"><div class="num">1</div><div><h4>⚡ "El Teaser" — 15 segundos de puro gancho</h4><p>Crea en CapCut un video de 15 segundos usando los mejores momentos de tus escenas. Sin presentación ni explicación — arranca con la imagen más impactante y termina con el nombre de tu serie. Este va directo a redes sociales.</p></div><span class="t">20 min</span></li>
+      <li class="act c2"><div class="num">2</div><div><h4>🎬 "El Tráiler Completo" — 60 segundos con estructura</h4><p>Sigue la estructura: gancho (3s) → mundo (10s) → conflicto (20s) → clímax (5s) → título + música (22s). Usa la música libre de derechos de CapCut para el crescendo final. Este es el tráiler oficial de tu serie.</p></div><span class="t">25 min</span></li>
+      <li class="act c3"><div class="num">3</div><div><h4>🎤 "La Premiere" — Presentación ante el grupo</h4><p>¡Es la premiere! Cada genio presenta su tráiler en pantalla grande. El grupo da 1 aplauso entusiasta + 1 cosa que les gustó + 1 pregunta sobre la serie. Robotsin es el maestro de ceremonias.</p></div><span class="t">10 min</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══════════ TAREA ═══════════ -->
+<section class="block tint">
+  <div class="lread">
+    <div class="shead">
+      <span class="ava" style="--wc:var(--gold)"><img src="robotsin/robotsin_director.png" alt="Robotsin"></span>
+      <div>
+        <div class="lab" style="color:var(--gold)">Para la próxima clase</div>
+        <h2>Tu <em style="color:var(--gold)">Tarea</em></h2>
+      </div>
+    </div>
+
+    <div class="tarea" data-reveal>
+      <span class="em">🏆</span>
+      <div>
+        <h3>Tráiler oficial publicado con tu familia</h3>
+        <p>Comparte el <strong>tráiler completo de 60 segundos</strong> por WhatsApp con tu familia esta noche. No expliques nada — solo mándalo y espera la reacción. Captura las respuestas que te lleguen y tráelas a la siguiente clase. La reacción de tu familia es tu primera prueba de audiencia real.</p>
+      </div>
+    </div>
+
+    <div class="rmsg" style="--wc:var(--gold); margin-top:22px;">
+      <span class="ava"><img src="robotsin/robotsin_director.png" alt="Robotsin"></span>
+      <div>
+        <div class="who">Robotsin Director te dice</div>
+        <div class="say">"¡Felicidades, Director Creativo! Completaste el Mundo 4 — creaste animaciones, dominaste los planos, filmaste escenas, editaste un episodio y ahora tienes tu tráiler oficial. <strong>¡Eso es hacer cine con IA!</strong> En el Mundo 5, tu serie necesita su tema musical épico. <em>¡La siguiente aventura te espera! 🎵</em>"</div>
       </div>
     </div>
   </div>
+</section>
 
-  <div class="robotsin-inline ri-green">
-    <div class="ri-avatar">
-      <img src="robotsin/robotsin_director.png" alt="Robotsin Director"
-           onerror="this.style.display='none'; this.parentElement.querySelector('.fallback').style.display='block'">
-      <div class="fallback" style="display:none">🎬</div>
+<!-- ═══════════ INSIGNIA DE MÓDULO ═══════════ -->
+<section class="block badge-sec" id="badgeSec">
+  <span class="spark" style="top:24px;left:18%;font-size:22px;">✦</span>
+  <span class="spark" style="bottom:24px;right:20%;font-size:18px;animation-delay:.7s;">✧</span>
+  <div class="lread">
+    <div class="badge-coin locked" id="badgeCoin">🏆</div>
+    <h3 id="badgeTitle">¡Insignia de Módulo por desbloquear!</h3>
+    <div class="bname">"Director Creativo"</div>
+    <div class="bmeta">Clase 18 · ¡Completaste el Mundo 4 — El Genio en Movimiento!</div>
+    <button class="btn gold btn-lg" id="claimBtn">🏆 ¡Reclamar la insignia de Director!</button>
+  </div>
+</section>
+
+<!-- ═══════════ CIERRE ═══════════ -->
+<section class="block tint">
+  <div class="lread">
+    <div class="shead">
+      <span class="ava"><img src="robotsin/robotsin_director.png" alt="Robotsin"></span>
+      <div>
+        <div class="lab">Resumen · 5 min</div>
+        <h2>Lo que <em>lograste en el Mundo 4</em></h2>
+      </div>
     </div>
-    <div>
-      <div class="ri-name">Tip Pro de Robotsin Director:</div>
-      <div class="ri-text">
-        "<strong>El ritmo del tráiler es todo:</strong> empieza con clips de 5 segundos,
-        luego de 3, luego de 2, luego de 1. Cuando los clips se vuelven más cortos el ritmo acelera
-        y el corazón del espectador también.
-        <em>La música debe ir creciendo junto con el ritmo — ese es el crescendo profesional.</em>"
+
+    <div class="cierre" data-reveal>
+      <div class="rec"><div class="em">🎞️</div><h4>Animaciones con IA</h4><p>Creaste videos desde imágenes estáticas con movimiento suave y escenas de acción dramáticas.</p></div>
+      <div class="rec"><div class="em">📽️</div><h4>Maestría de los 3 planos</h4><p>General, medio y primer plano — ahora piensas como director de fotografía profesional.</p></div>
+      <div class="rec"><div class="em">🎦</div><h4>Episodio completo montado</h4><p>Apertura, clímax y cierre editados en CapCut — tu primer episodio de serie existe de verdad.</p></div>
+      <div class="rec"><div class="em">🏆</div><h4>Tráiler oficial publicado</h4><p>El gancho que hace que todos quieran ver tu serie. Ya eres un Director Creativo IA.</p></div>
+    </div>
+
+    <div class="next">
+      <span class="em">▶️</span>
+      <div>
+        <div class="lab">Siguiente mundo</div>
+        <div class="ti">Clase 19 — "El Tema Musical" · Mundo 5</div>
       </div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- ═══ ACTIVIDADES ═══ -->
-<div class="divider"></div>
-<div class="section">
-  <div class="section-header">
-    <div class="section-robotsin">
-      <img src="robotsin/robotsin_director.png" alt="Robotsin Director"
-           onerror="this.style.display='none'; this.parentElement.querySelector('.fallback').style.display='flex'">
-      <div class="fallback" style="display:none; width:100%; height:100%; align-items:center; justify-content:center; font-size:30px;">🎬</div>
-    </div>
+<!-- ═══════════ NAV LECCIÓN ═══════════ -->
+<nav class="lessonnav">
+  <a href="clase17_edicion_basica.html" class="lnav-btn prev-btn">
+    <span class="ar">←</span>
     <div>
-      <div class="section-label">Parte práctica · 35 min</div>
-      <div class="section-title">¡La Gran <span>Premiere</span>!</div>
-    </div>
-  </div>
-
-  <ul class="act-list">
-    <li class="act-item a1">
-      <div class="act-num">1</div>
-      <div class="act-body">
-        <h4>⚡ "El Teaser" — 15 segundos de puro gancho</h4>
-        <p>Elige el momento más impactante de tu episodio. Edita solo ese clip de 10-15 segundos. Agrega música de suspenso y al final muestra el título de tu serie. Este es el anzuelo perfecto para TikTok o Reels.</p>
-      </div>
-      <div class="act-time">⏱️ 12 min</div>
-    </li>
-    <li class="act-item a2">
-      <div class="act-num">2</div>
-      <div class="act-body">
-        <h4>🎬 "El Tráiler Completo" — 60 segundos con estructura profesional</h4>
-        <p>Sigue el diagrama de los 5 actos: gancho (3s) → mundo (10s) → conflicto escalando con clips cada vez más cortos (20s) → clímax (5s) → título + frase memorable (resto). Música en crescendo desde inicio a fin.</p>
-      </div>
-      <div class="act-time">⏱️ 15 min</div>
-    </li>
-    <li class="act-item a3">
-      <div class="act-num">3</div>
-      <div class="act-body">
-        <h4>🏆 "La Premiere" — Presentación ante el grupo</h4>
-        <p>Cada Genio Creativo presenta su tráiler en la pantalla grande. El grupo aplaude al terminar. El instructor destaca el elemento más poderoso de cada uno: gancho, ritmo, música, personaje o historia.</p>
-      </div>
-      <div class="act-time">⏱️ 8 min</div>
-    </li>
-  </ul>
-</div>
-
-<!-- ═══ TAREA ═══ -->
-<div class="divider"></div>
-<div class="section" style="background:rgba(255,255,255,.02);">
-  <div class="section-label">Misión final del Módulo 4</div>
-  <h2 style="font-size:32px;font-weight:800;color:#fff;margin-bottom:28px;">
-    📝 Tu <span style="color:var(--gold)">Tarea Final</span>
-  </h2>
-
-  <div class="tarea-box">
-    <div class="tarea-icon">📱</div>
-    <div>
-      <h3>¡Comparte el tráiler con tu familia!</h3>
-      <p>Envía el tráiler oficial de tu serie por WhatsApp a tu familia.
-      El mensaje puede decir: <em>"¡Hola! Hice esta animación con Inteligencia Artificial en la Academia Da Vinci IA."</em><br><br>
-      Esta es tu <strong>primera obra publicada</strong>. El primer paso de tu carrera creativa con IA.
-      <strong style="color:var(--gold)">¡Guarda ese mensaje de vuelta — es tu primer review como director!</strong></p>
-    </div>
-  </div>
-
-  <div class="robotsin-inline" style="margin-top:24px; border-color:rgba(231,76,60,.3);">
-    <div class="ri-avatar">
-      <img src="robotsin/robotsin_director.png" alt="Robotsin Director"
-           onerror="this.style.display='none'; this.parentElement.querySelector('.fallback').style.display='block'">
-      <div class="fallback" style="display:none">🎬</div>
-    </div>
-    <div>
-      <div class="ri-name" style="color:var(--red)">Robotsin Director, emocionado:</div>
-      <div class="ri-text">
-        "Cuando empezaste el Módulo 4 no sabías qué era la animación por IA.
-        Ahora tienes clips animados, 3 escenas de un episodio, un montaje de 2-3 minutos
-        y un tráiler profesional. <strong>Todo eso en 4 clases.</strong>
-        Los directores de Hollywood tardan años en aprender eso.
-        <em>Tú lo hiciste con IA, con talento y con ganas. ¡Eso se merece aplausos! 👏🎬</em>"
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ═══ INSIGNIA FINAL DE MÓDULO ═══ -->
-<div class="divider"></div>
-<div class="insignia-section">
-  <div class="insignia-robotsin">
-    <img src="robotsin/robotsin_director.png" alt="Robotsin Director"
-         onerror="this.style.display='none'; this.parentElement.querySelector('.fallback').style.display='block'">
-    <div class="fallback" style="display:none">🎬</div>
-  </div>
-  <div class="insignia-badge">🏆</div>
-  <div class="insignia-nivel">Módulo 4 Completado</div>
-  <div class="insignia-title">Director Creativo — Nivel 4</div>
-  <div class="insignia-desc" style="font-size:17px; color:rgba(255,255,255,.8); margin-bottom:12px;">
-    <strong style="color:#F1948A">Insignia de Módulo Desbloqueada</strong>
-  </div>
-  <div class="insignia-desc">Has animado, filmado, editado y creado el tráiler de tu serie.<br>Certificado por D-IA Vinci Director · Academia Da Vinci IA</div>
-</div>
-
-<!-- ═══ CIERRE ═══ -->
-<div class="divider"></div>
-<div class="section">
-  <div class="section-label">Resumen del Módulo 4</div>
-  <h2 style="font-size:32px;font-weight:800;color:#fff;margin-bottom:28px;">
-    Lo que conquistaste en el <span style="color:var(--red)">Módulo 4</span>
-  </h2>
-
-  <div class="cierre-grid">
-    <div class="cierre-card">
-      <div class="ico">🎬</div>
-      <h4>Animación por IA</h4>
-      <p>Convertiste imágenes estáticas en videos con movimiento usando Kling AI / Runway / Pika.</p>
-    </div>
-    <div class="cierre-card">
-      <div class="ico">🎥</div>
-      <h4>Filmación en 3 actos</h4>
-      <p>Creaste las 3 escenas clave: apertura que presenta, clímax que emociona, cierre que engancha.</p>
-    </div>
-    <div class="cierre-card">
-      <div class="ico">✂️</div>
-      <h4>Edición profesional</h4>
-      <p>Dominaste CapCut: importar, cortar, transiciones, música y exportar un episodio completo.</p>
-    </div>
-    <div class="cierre-card">
-      <div class="ico">🏆</div>
-      <h4>Tráiler oficial</h4>
-      <p>Creaste un teaser de 15s y un tráiler de 60s con estructura profesional de 5 actos.</p>
-    </div>
-  </div>
-
-  <!-- Preview Módulo 5 — D-IA Vinci Músico, tono dorado -->
-  <div class="next-box-m5">
-    <div class="modulo-preview-icon">
-      <img src="robotsin/robotsin_musico.png" alt="D-IA Vinci Músico"
-           onerror="this.style.display='none'; this.parentElement.querySelector('.fallback').style.display='block'">
-      <div class="fallback" style="display:none">🎵</div>
-    </div>
-    <div>
-      <h4>Siguiente módulo — El que más se espera</h4>
-      <p>Módulo 5 — <span>La Música</span></p>
-      <small>Clase 17: El Tema Musical · D-IA Vinci Músico llega al taller con una melodía que nadie ha escuchado...</small>
-    </div>
-  </div>
-</div>
-
-<!-- ═══ NAVEGACIÓN ═══ -->
-<div id="entrega-widget"></div>
-
-<nav class="lesson-nav">
-  <a href="clase17_edicion_basica.html" class="lesson-nav-btn">
-    <span class="nav-arrow">←</span>
-    <div>
-      <div class="nav-label">Anterior</div>
-      <div class="nav-title-btn">Clase 25 — Edición Básica</div>
+      <div class="lab">Lección anterior</div>
+      <div class="ti">Clase 17 — Edición Básica</div>
     </div>
   </a>
-  <a href="index.html" class="lesson-nav-home">🏠</a>
-  <a href="clase19_el_tema_musical.html" class="lesson-nav-btn next next-gold">
+  <a href="index.html" class="lnav-home" title="Mapa de aventura">🗺️</a>
+  <a href="clase19_el_tema_musical.html" class="lnav-btn next-btn">
     <div>
-      <div class="nav-label">Siguiente módulo</div>
-      <div class="nav-title-btn">Clase 25 — El Tema Musical</div>
+      <div class="lab">Siguiente lección</div>
+      <div class="ti">Clase 19 — El Tema Musical</div>
     </div>
-    <span class="nav-arrow-gold">🎬</span>
+    <span class="ar">→</span>
   </a>
 </nav>
 
-<footer>
-  <strong>Academia Da Vinci IA</strong> · Pequeños Genios Creativos<br>
-  Módulo 4 — El Video · Clase 16 de 16 · Módulo Completado<br>
-  Por Ing. Jhonnatan Azael Vázquez Espinoza
+<footer class="foot">
+  <div class="ico">🏆✨</div>
+  <b>Academia Da Vinci IA</b> · Pequeños Genios Creativos<br>
+  Mundo 4 — El Genio en Movimiento · Clase 18 de 26 · Por Ing. Jhonnatan Azael Vázquez Espinoza
 </footer>
 
-<!-- ── Supabase Auth + Progreso ─────────────────────────────────── -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
-<script src="js/supabase-client.js"></script>
-<script src="js/auth.js"></script>
-<script src="js/entrega.js"></script>
+<!-- ── Reproductor de video de la clase ── -->
+<script>
+(function(){
+  var v = document.getElementById('claseVideo'), p = document.getElementById('cvPlay');
+  if (!v || !p) return;
+  p.addEventListener('click', function(){ v.play(); });
+  v.addEventListener('play',  function(){ p.classList.add('hidden'); });
+  v.addEventListener('pause', function(){ if (!v.ended) p.classList.remove('hidden'); });
+  v.addEventListener('ended', function(){ p.classList.remove('hidden'); });
+})();
+</script>
+
+<!-- ── Motor de efectos compartido ── -->
+<script src="js/juice.js"></script>
+
+<!-- ── Reclamar insignia: confeti + sonido + subida de nivel ── -->
+<script>
+(function(){
+  const btn = document.getElementById('claimBtn');
+  const coin = document.getElementById('badgeCoin');
+  const sec = document.getElementById('badgeSec');
+  const title = document.getElementById('badgeTitle');
+  let claimed = false;
+
+  btn.addEventListener('click', ()=>{
+    if(claimed) return; claimed=true;
+    coin.classList.remove('locked'); sec.classList.add('won');
+    coin.style.animation='none'; void coin.offsetWidth; coin.style.animation='popIn .5s cubic-bezier(.34,1.7,.5,1) both';
+    title.textContent='🏆 ¡Insignia de Módulo desbloqueada!';
+    btn.textContent='✓ ¡Mundo 4 completado!'; btn.style.opacity='.7'; btn.style.pointerEvents='none';
+
+    // Efectos: sonido de victoria + confeti grande
+    if (window.GCSound) window.GCSound.win();
+    if (window.GCConfetti) window.GCConfetti(70);
+
+    // Marca que el genio avanzó de nivel y muestra el flash
+    if (window.GCLevelUp) setTimeout(()=>window.GCLevelUp(18, 'El Genio en Movimiento'), 600);
+    try { localStorage.setItem('gc_seen_level', '18'); } catch(e){}
+
+    if (window.dvMarkClassComplete) window.dvMarkClassComplete(); // guarda progreso en producción
+  });
+})();
+</script>
+
+<!-- ── Tutor con IA "Pregúntale a Robotsin" ── -->
+<script>window.ROBOTSIN_CONTEXT = "la Clase 18: cómo crear el tráiler de la serie del niño en CapCut — las reglas del tráiler perfecto (gancho en 3 segundos, no revelar el final, frase memorable) y cómo hacer el teaser de 15 segundos y el tráiler completo de 60 segundos";</script>
+<script src="js/robotsin-tutor.js"></script>
+
+<!-- ── Supabase + auth (sólo producción; en preview no redirige al login) ── -->
+<script>
+if (/vercel\.app$|academiadavinci/.test(location.hostname)) {
+  const add=(src,cb)=>{const s=document.createElement('script');s.src=src;s.onload=cb;document.head.appendChild(s);};
+  add('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js',()=>{
+    add('js/supabase-client.js',()=>{ add('js/auth.js'); });
+  });
+}
+</script>
 
 </body>
 </html>
