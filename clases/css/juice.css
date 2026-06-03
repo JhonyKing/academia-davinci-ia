@@ -128,15 +128,23 @@
   z-index:9998; pointer-events:none; text-align:center; opacity:0;
   font-family:var(--font-display); font-weight:700; color:var(--gold);
   text-shadow:0 4px 0 rgba(217,140,0,.35), 0 0 30px rgba(255,176,32,.6);
+  background:rgba(12,8,28,.82);
+  border:2px solid rgba(255,176,32,.35);
+  border-radius:28px;
+  padding:32px 52px 28px;
+  box-shadow:0 8px 48px rgba(0,0,0,.55), 0 0 60px rgba(255,176,32,.15);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
 }
-.lvl-flash.show { animation: lvlFlash 1.8s cubic-bezier(.22,1,.36,1) forwards; }
+.lvl-flash.show { animation: lvlFlash 4.5s cubic-bezier(.22,1,.36,1) forwards; }
 .lvl-flash .big { font-size:84px; line-height:1; }
-.lvl-flash .small { font-size:24px; color:var(--ink); }
+.lvl-flash .small { font-size:24px; color:rgba(255,255,255,.9); }
 @keyframes lvlFlash {
-  0%{ opacity:0; transform:translate(-50%,-50%) scale(.4) }
-  18%{ opacity:1; transform:translate(-50%,-50%) scale(1.08) }
-  30%{ transform:translate(-50%,-50%) scale(1) }
-  78%{ opacity:1 } 100%{ opacity:0; transform:translate(-50%,-58%) scale(1) }
+  0%  { opacity:0; transform:translate(-50%,-50%) scale(.4) }
+  12% { opacity:1; transform:translate(-50%,-50%) scale(1.06) }
+  18% { transform:translate(-50%,-50%) scale(1) }
+  78% { opacity:1; transform:translate(-50%,-50%) scale(1) }
+  100%{ opacity:0; transform:translate(-50%,-58%) scale(1) }
 }
 
 /* ── Nodos: aparición tipo "stamp" + estrella que late en completadas ── */

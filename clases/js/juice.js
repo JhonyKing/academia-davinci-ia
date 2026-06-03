@@ -263,7 +263,7 @@
     document.body.appendChild(f);
     void f.offsetWidth; f.classList.add('show');
     Sound.level(); confetti(60);
-    setTimeout(() => f.remove(), 2000);
+    setTimeout(() => f.remove(), 5000);
   }
   window.GCLevelUp = levelUp;
 
