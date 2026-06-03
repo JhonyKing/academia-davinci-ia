@@ -133,6 +133,115 @@ td.clase-fecha { color: var(--ink-3); font-size: 14px; text-align: right; }
   .hero-nombre { font-size: 24px; }
 }
 
+/* ── Sección de valor para padres ── */
+.padres-valor {
+  background: linear-gradient(135deg, #f0f4ff 0%, #faf5ff 50%, #f0fdf4 100%);
+  border-bottom: 1px solid rgba(0,0,0,.07);
+  padding: 48px 0 40px;
+}
+.pv-wrap {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.pv-header {
+  text-align: center;
+  margin-bottom: 36px;
+}
+.pv-eyebrow {
+  display: inline-block;
+  font-size: .8rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: #6B7280;
+  margin-bottom: 10px;
+}
+.pv-title {
+  font-family: var(--font-display, 'Fredoka', sans-serif);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  color: #1e1b4b;
+  margin: 0 0 12px;
+  line-height: 1.2;
+}
+.pv-accent {
+  color: #4F46E5;
+}
+.pv-sub {
+  font-size: 1rem;
+  color: #4B5563;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+.pv-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+.pv-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 22px 20px;
+  box-shadow: 0 2px 12px rgba(0,0,0,.07);
+  border: 1px solid rgba(0,0,0,.05);
+  transition: transform .2s, box-shadow .2s;
+}
+.pv-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 24px rgba(0,0,0,.1);
+}
+.pv-icon {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+.pv-card h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1e1b4b;
+  margin: 0 0 6px;
+}
+.pv-card p {
+  font-size: .88rem;
+  color: #4B5563;
+  margin: 0;
+  line-height: 1.55;
+}
+.pv-quote {
+  text-align: center;
+  font-style: italic;
+  font-size: 1.05rem;
+  color: #6B7280;
+  border-top: 1px solid rgba(0,0,0,.08);
+  padding-top: 24px;
+  position: relative;
+}
+.pv-q {
+  font-size: 3rem;
+  color: #E0E7FF;
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  line-height: 1;
+  pointer-events: none;
+  font-family: Georgia, serif;
+}
+.pv-author {
+  display: block;
+  margin-top: 8px;
+  font-size: .85rem;
+  font-weight: 600;
+  color: #4F46E5;
+  font-style: normal;
+}
+
+/* Ocultar sección de valor al imprimir */
+@media print {
+  .padres-valor { display: none; }
+}
+
 /* ── PRINT (reporte limpio para papás) ── */
 @media print {
   body.page-padres { background: #fff; }
