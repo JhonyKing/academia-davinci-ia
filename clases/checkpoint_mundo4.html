@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Reto del Mundo 4 — Genios Creativos</title>
+<link rel="icon" type="image/svg+xml" href="robotsin/favicon.svg">
+<link rel="stylesheet" href="css/genios.css">
+<link rel="stylesheet" href="css/juice.css">
+<link rel="stylesheet" href="css/quiz.css">
+</head>
+<body class="lesson" style="--wc: var(--m4)">
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="lback" href="index.html">← Mapa</a>
+    <div class="nav-title">Mundo 4 <span class="sep">·</span> <span>El Genio en Movimiento</span></div>
+    <div class="nav-spacer topbar-spacer"></div>
+    <button class="icon-btn" id="soundBtn" title="Sonido" aria-label="Sonido">🔊</button>
+  </div>
+</header>
+
+<section class="lhero" style="padding-bottom:24px;">
+  <span class="spark" data-parallax="0.14" style="top:30px;left:16%;font-size:24px;">✦</span>
+  <span class="spark" data-parallax="-0.12" style="top:70px;right:18%;font-size:18px;animation-delay:1s;">✧</span>
+  <div class="lread" data-reveal>
+    <span class="badge-pill">🎯 Checkpoint del Mundo 4</span>
+    <div class="mascot-stage" style="width:120px;height:120px;margin:18px auto 14px;">
+      <img src="robotsin/robotsin_director.png" alt="Robotsin">
+    </div>
+    <h1>El <span>Reto</span> del Genio</h1>
+    <p class="lead">Responde para demostrar que dominas el Mundo 4… ¡y gana tu insignia de maestría!</p>
+  </div>
+</section>
+
+<section class="block" style="padding-top:10px;">
+  <div class="lread">
+    <div class="quiz" data-reveal><div id="quiz"></div></div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="ico">🎬✨</div>
+  <b>Academia Da Vinci IA</b> · Checkpoint · Mundo 4 — El Genio en Movimiento
+</footer>
+
+<script src="js/juice.js"></script>
+<script>
+window.QUIZ_DATA = {
+  "insignia": "🎬",
+  "insigniaNombre": "Director de Cine",
+  "avatar": "robotsin/robotsin_director.png",
+  "btnClass": "",
+  "volverHref": "index.html",
+  "siguienteHref": "clase19_el_tema_musical.html",
+  "siguienteLabel": "▶ Siguiente mundo",
+  "preguntas": [
+    {
+      "q": "Un \"plano\" en el cine es…",
+      "opciones": [
+        "Un papel para dibujar",
+        "Cómo se ve la escena por la cámara",
+        "Un avión",
+        "Una línea recta"
+      ],
+      "correcta": 1,
+      "pista": "Es el encuadre: qué muestra y cómo la cámara. 🎥"
+    },
+    {
+      "q": "Para animar a tu personaje necesitas…",
+      "opciones": [
+        "Que se quede quieto",
+        "Hacer que se mueva (con IA o cuadro a cuadro)",
+        "Solo una foto",
+        "Apagar la compu"
+      ],
+      "correcta": 1,
+      "pista": "Animar = darle movimiento. 🏃"
+    },
+    {
+      "q": "El tráiler sirve para…",
+      "opciones": [
+        "Mostrar lo mejor y emocionar al público",
+        "Contar toda la película",
+        "Dormir",
+        "Hacer la tarea"
+      ],
+      "correcta": 0,
+      "pista": "Es el adelanto que da ganas de ver tu peli. 🍿"
+    },
+    {
+      "q": "Editar un video es…",
+      "opciones": [
+        "Borrarlo",
+        "Unir y ordenar las escenas",
+        "Imprimirlo",
+        "Pintarlo"
+      ],
+      "correcta": 1,
+      "pista": "Es montar las escenas en el orden correcto. ✂️"
+    }
+  ]
+};
+</script>
+<script src="js/quiz.js"></script>
+
+</body>
+</html>

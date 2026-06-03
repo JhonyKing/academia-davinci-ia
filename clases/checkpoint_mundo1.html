@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Reto del Mundo 1 — Genios Creativos</title>
+<link rel="icon" type="image/svg+xml" href="robotsin/favicon.svg">
+<link rel="stylesheet" href="css/genios.css">
+<link rel="stylesheet" href="css/juice.css">
+<link rel="stylesheet" href="css/quiz.css">
+</head>
+<body class="lesson" style="--wc: var(--m1)">
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="lback" href="index.html">← Mapa</a>
+    <div class="nav-title">Mundo 1 <span class="sep">·</span> <span>El Genio Creativo</span></div>
+    <div class="nav-spacer topbar-spacer"></div>
+    <button class="icon-btn" id="soundBtn" title="Sonido" aria-label="Sonido">🔊</button>
+  </div>
+</header>
+
+<section class="lhero" style="padding-bottom:24px;">
+  <span class="spark" data-parallax="0.14" style="top:30px;left:16%;font-size:24px;">✦</span>
+  <span class="spark" data-parallax="-0.12" style="top:70px;right:18%;font-size:18px;animation-delay:1s;">✧</span>
+  <div class="lread" data-reveal>
+    <span class="badge-pill">🎯 Checkpoint del Mundo 1</span>
+    <div class="mascot-stage" style="width:120px;height:120px;margin:18px auto 14px;">
+      <img src="robotsin/robotsin_artista.png" alt="Robotsin">
+    </div>
+    <h1>El <span>Reto</span> del Genio</h1>
+    <p class="lead">Responde para demostrar que dominas el Mundo 1… ¡y gana tu insignia de maestría!</p>
+  </div>
+</section>
+
+<section class="block" style="padding-top:10px;">
+  <div class="lread">
+    <div class="quiz" data-reveal><div id="quiz"></div></div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="ico">🎨✨</div>
+  <b>Academia Da Vinci IA</b> · Checkpoint · Mundo 1 — El Genio Creativo
+</footer>
+
+<script src="js/juice.js"></script>
+<script>
+window.QUIZ_DATA = {
+  "insignia": "🎨",
+  "insigniaNombre": "Maestro de Prompts",
+  "avatar": "robotsin/robotsin_artista.png",
+  "btnClass": "",
+  "volverHref": "index.html",
+  "siguienteHref": "clase6_el_universo.html",
+  "siguienteLabel": "▶ Siguiente mundo",
+  "preguntas": [
+    {
+      "q": "¿Qué es un \"prompt\"?",
+      "opciones": [
+        "Un robot que dibuja solo",
+        "Las instrucciones que le das a la IA",
+        "Un tipo de computadora",
+        "Un videojuego"
+      ],
+      "correcta": 1,
+      "pista": "Es lo que tú le escribes para pedirle lo que imaginas. 🪄"
+    },
+    {
+      "q": "¿Cuáles son los 4 ingredientes de un buen prompt?",
+      "opciones": [
+        "Rojo, azul, verde y amarillo",
+        "¿Qué?, ¿Cómo?, ¿Dónde? y ¿Extras?",
+        "Inicio, nudo y final",
+        "Sumar, restar, multiplicar y dividir"
+      ],
+      "correcta": 1,
+      "pista": "Describe QUÉ quieres, CÓMO se ve, DÓNDE está y los EXTRAS. ✨"
+    },
+    {
+      "q": "Si quieres una mejor imagen, tu prompt debe ser…",
+      "opciones": [
+        "Lo más corto posible",
+        "Más detallado y específico",
+        "Solo una palabra",
+        "En mayúsculas"
+      ],
+      "correcta": 1,
+      "pista": "Mientras más le cuentas a la IA, mejor entiende tu idea. 🎯"
+    },
+    {
+      "q": "La Inteligencia Artificial es…",
+      "opciones": [
+        "Una persona de verdad",
+        "Una herramienta que te ayuda a crear",
+        "Magia real",
+        "Un ser vivo que piensa y siente"
+      ],
+      "correcta": 1,
+      "pista": "No piensa ni siente: es una herramienta que TÚ diriges. 🤖"
+    }
+  ]
+};
+</script>
+<script src="js/quiz.js"></script>
+
+</body>
+</html>

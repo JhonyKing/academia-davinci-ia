@@ -1,458 +1,167 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Iniciar sesión — Academia Da Vinci IA</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&display=swap');
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Iniciar sesión — Genios Creativos</title>
+<link rel="icon" type="image/svg+xml" href="robotsin/favicon.svg">
+<link rel="stylesheet" href="css/genios.css">
+<link rel="stylesheet" href="css/juice.css">
+<style>
+  body.page-login { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 28px 18px; }
 
-    :root {
-      --blue:   #4A90D9;
-      --purple: #8E44AD;
-      --gold:   #F39C12;
-      --green:  #27AE60;
-      --red:    #E74C3C;
-      --dark:   #0F1626;
-      --dark2:  #1A2744;
-    }
+  .login-card {
+    position: relative; z-index: 1; width: 100%; max-width: 440px;
+    background: #fff; border: 2px solid var(--line); border-radius: var(--r-lg);
+    padding: 40px 38px 34px; box-shadow: var(--shadow);
+    animation: cardIn .5s cubic-bezier(.22,1,.36,1) both;
+  }
+  @keyframes cardIn { from { opacity: 0; transform: translateY(24px) scale(.97); } to { opacity: 1; transform: none; } }
 
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: var(--dark);
-      color: #E8EAF0;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
+  .login-brand { text-align: center; margin-bottom: 26px; }
+  .login-robot {
+    width: 112px; height: 112px; object-fit: contain; margin: 0 auto 14px; cursor: pointer;
+    filter: drop-shadow(0 12px 18px rgba(0,0,0,.18)); animation: float 4s ease-in-out infinite; display: block;
+  }
+  @keyframes float { 0%,100%{ transform: translateY(0) rotate(-1.5deg) } 50%{ transform: translateY(-12px) rotate(1.5deg) } }
+  .login-brand .name { font-family: var(--font-display); font-weight: 700; font-size: 27px; color: var(--ink); line-height: 1.05; }
+  .login-brand .name span { color: var(--blue); }
+  .login-brand .sub { font-weight: 700; font-size: 13px; color: var(--ink-3); margin-top: 5px; }
 
-    /* ── Fondo animado ── */
-    .bg-particles {
-      position: fixed; inset: 0; z-index: 0;
-      background:
-        radial-gradient(ellipse 80% 60% at 20% 20%, rgba(142,68,173,0.18) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 50% at 80% 80%, rgba(74,144,217,0.15) 0%, transparent 60%),
-        var(--dark);
-    }
-    .bg-particles::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-    }
+  .form-group { margin-bottom: 16px; }
+  .form-label { display: block; font-weight: 800; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-2); margin-bottom: 7px; }
+  .form-input {
+    width: 100%; background: #F7F9FF; border: 2px solid var(--line); border-radius: 14px;
+    padding: 14px 16px; font-family: var(--font-body); font-weight: 600; font-size: 15px; color: var(--ink);
+    outline: none; transition: border-color .18s, background .18s, box-shadow .18s;
+  }
+  .form-input::placeholder { color: var(--ink-3); font-weight: 600; }
+  .form-input:focus { border-color: var(--blue); background: #fff; box-shadow: 0 0 0 4px rgba(47,123,246,.14); }
+  .form-input.error-field { border-color: var(--red); background: color-mix(in srgb,var(--red) 6%,#fff); }
 
-    /* ── Tarjeta login ── */
-    .login-card {
-      position: relative; z-index: 1;
-      background: rgba(26, 39, 68, 0.85);
-      border: 1px solid rgba(255,255,255,0.08);
-      backdrop-filter: blur(20px);
-      border-radius: 24px;
-      padding: 48px 44px;
-      width: 100%;
-      max-width: 440px;
-      box-shadow: 0 32px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(142,68,173,0.08);
-      animation: cardIn .5s ease both;
-    }
-    @keyframes cardIn {
-      from { opacity: 0; transform: translateY(24px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
+  .login-card .btn { width: 100%; justify-content: center; margin-top: 6px; }
+  .login-card .btn .spinner { width: 16px; height: 16px; border: 3px solid rgba(255,255,255,.4); border-top-color: #fff; border-radius: 50%; animation: spin .7s linear infinite; display: inline-block; }
+  @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* ── Branding ── */
-    .brand {
-      text-align: center;
-      margin-bottom: 36px;
-    }
-    .brand-robot {
-      width: 100px;
-      height: 100px;
-      object-fit: contain;
-      border-radius: 50%;
-      background: rgba(142,68,173,0.12);
-      border: 2px solid rgba(142,68,173,0.3);
-      padding: 8px;
-      margin-bottom: 16px;
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-      animation: float 4s ease-in-out infinite;
-    }
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50%       { transform: translateY(-8px); }
-    }
-    .brand-title {
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.35);
-      margin-bottom: 6px;
-    }
-    .brand-name {
-      font-size: 26px;
-      font-weight: 900;
-      color: #fff;
-      line-height: 1.1;
-    }
-    .brand-name span { color: var(--purple); }
-    .brand-sub {
-      font-size: 12px;
-      color: rgba(255,255,255,0.35);
-      margin-top: 6px;
-    }
+  .forgot-link { display: block; width: 100%; text-align: center; margin-top: 16px; background: none; border: none; cursor: pointer; font-family: var(--font-body); font-weight: 700; font-size: 14px; color: var(--ink-3); transition: color .18s; }
+  .forgot-link:hover { color: var(--blue); }
 
-    /* ── Formulario ── */
-    .form-group {
-      margin-bottom: 18px;
-    }
-    .form-label {
-      display: block;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.45);
-      margin-bottom: 8px;
-    }
-    .form-input {
-      width: 100%;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 12px;
-      padding: 14px 18px;
-      font-family: 'Poppins', sans-serif;
-      font-size: 14px;
-      color: #E8EAF0;
-      outline: none;
-      transition: border-color .2s, background .2s;
-    }
-    .form-input::placeholder { color: rgba(255,255,255,0.2); }
-    .form-input:focus {
-      border-color: rgba(142,68,173,0.6);
-      background: rgba(142,68,173,0.06);
-    }
-    .form-input.error-field {
-      border-color: rgba(231,76,60,0.6);
-      background: rgba(231,76,60,0.04);
-    }
+  .alert { border-radius: 14px; padding: 13px 16px; font-weight: 600; font-size: 14px; margin-bottom: 16px; display: none; align-items: flex-start; gap: 10px; line-height: 1.45; }
+  .alert.show { display: flex; }
+  .alert-error { background: color-mix(in srgb,var(--red) 9%,#fff); border: 2px solid color-mix(in srgb,var(--red) 32%,#fff); color: #C0392B; }
+  .alert-success { background: color-mix(in srgb,var(--green) 10%,#fff); border: 2px solid color-mix(in srgb,var(--green) 34%,#fff); color: #1B7A47; }
+  .alert-icon { font-size: 17px; flex-shrink: 0; }
 
-    /* ── Botón principal ── */
-    .btn-primary {
-      width: 100%;
-      padding: 15px;
-      background: linear-gradient(135deg, var(--purple), #6C3483);
-      border: none;
-      border-radius: 12px;
-      font-family: 'Poppins', sans-serif;
-      font-size: 15px;
-      font-weight: 700;
-      color: #fff;
-      cursor: pointer;
-      transition: transform .2s, box-shadow .2s, opacity .2s;
-      box-shadow: 0 8px 24px rgba(142,68,173,0.35);
-      margin-top: 8px;
-      position: relative;
-      overflow: hidden;
-    }
-    .btn-primary:hover:not(:disabled) {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 32px rgba(142,68,173,0.5);
-    }
-    .btn-primary:active:not(:disabled) { transform: translateY(0); }
-    .btn-primary:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
-    .btn-primary .spinner {
-      display: inline-block;
-      width: 16px; height: 16px;
-      border: 2px solid rgba(255,255,255,0.3);
-      border-top-color: #fff;
-      border-radius: 50%;
-      animation: spin .7s linear infinite;
-      vertical-align: middle;
-      margin-right: 8px;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    /* ── Link contraseña ── */
-    .forgot-link {
-      display: block;
-      text-align: center;
-      margin-top: 16px;
-      font-size: 12px;
-      color: rgba(255,255,255,0.3);
-      text-decoration: none;
-      cursor: pointer;
-      transition: color .2s;
-      background: none;
-      border: none;
-      font-family: 'Poppins', sans-serif;
-      width: 100%;
-    }
-    .forgot-link:hover { color: rgba(255,255,255,0.65); }
-
-    /* ── Alerta de error / éxito ── */
-    .alert {
-      border-radius: 10px;
-      padding: 12px 16px;
-      font-size: 13px;
-      margin-bottom: 18px;
-      display: none;
-      align-items: flex-start;
-      gap: 10px;
-      line-height: 1.4;
-    }
-    .alert.show { display: flex; }
-    .alert-error {
-      background: rgba(231,76,60,0.1);
-      border: 1px solid rgba(231,76,60,0.3);
-      color: #F1948A;
-    }
-    .alert-success {
-      background: rgba(39,174,96,0.1);
-      border: 1px solid rgba(39,174,96,0.3);
-      color: #82E0AA;
-    }
-    .alert-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
-
-    /* ── Divisor ── */
-    .divider {
-      border: none;
-      border-top: 1px solid rgba(255,255,255,0.07);
-      margin: 28px 0 22px;
-    }
-
-    /* ── Footer ── */
-    .login-footer {
-      text-align: center;
-      font-size: 11px;
-      color: rgba(255,255,255,0.2);
-      margin-top: 24px;
-    }
-
-    /* ── Estrellas decorativas ── */
-    .star {
-      position: fixed; pointer-events: none;
-      border-radius: 50%; background: #fff;
-      animation: twinkle var(--d, 3s) ease-in-out infinite;
-      opacity: 0;
-    }
-    @keyframes twinkle {
-      0%, 100% { opacity: 0; transform: scale(.5); }
-      50%       { opacity: var(--o, 0.4); transform: scale(1); }
-    }
-  </style>
+  .divider { border: none; border-top: 2px solid var(--line); margin: 24px 0 18px; }
+  .login-footer { text-align: center; font-weight: 700; font-size: 12px; color: var(--ink-3); margin-top: 22px; }
+  .login-foot-link { text-align: center; margin-top: 14px; font-weight: 700; font-size: 13px; }
+  .login-foot-link a { color: var(--blue); }
+  .login-foot-link a:hover { text-decoration: underline; }
+</style>
 </head>
-<body>
+<body class="page-login">
 
-<!-- Fondo -->
-<div class="bg-particles"></div>
-
-<!-- Estrellas decorativas (generadas por JS) -->
-
-<!-- Tarjeta de login -->
 <div class="login-card">
-
-  <!-- Branding -->
-  <div class="brand">
-    <img
-      src="robotsin/robotsin_completo.png"
-      alt="Robotsin — Academia Da Vinci IA"
-      class="brand-robot"
-      onerror="this.style.display='none'"
-    >
-    <div class="brand-title">Academia</div>
-    <div class="brand-name">Da Vinci <span>IA</span></div>
-    <div class="brand-sub">Plataforma de aprendizaje para genios</div>
+  <div class="login-brand">
+    <div class="mascot-stage" style="width:112px;height:112px;margin:0 auto 14px;">
+      <img src="robotsin/robotsin_completo.png" alt="D-IA Vinci Robotsin" class="login-robot" onerror="this.style.display='none'">
+    </div>
+    <div class="name">Genios <span>Creativos</span></div>
+    <div class="sub">¡Bienvenido de vuelta, genio! 🚀</div>
   </div>
 
-  <!-- Alerta de error -->
   <div class="alert alert-error" id="error-alert">
     <span class="alert-icon">⚠️</span>
     <span id="error-msg">Correo o contraseña incorrectos. Inténtalo de nuevo.</span>
   </div>
-
-  <!-- Alerta de éxito (para reset de contraseña) -->
   <div class="alert alert-success" id="success-alert">
     <span class="alert-icon">✉️</span>
-    <span id="success-msg">Te enviamos un enlace para restablecer tu contraseña. Revisa tu correo.</span>
+    <span id="success-msg">Te enviamos un enlace para restablecer tu contraseña.</span>
   </div>
 
-  <!-- Formulario login -->
   <form id="login-form" novalidate>
     <div class="form-group">
       <label class="form-label" for="email">Correo electrónico</label>
-      <input
-        type="email"
-        id="email"
-        class="form-input"
-        placeholder="tu@correo.com"
-        autocomplete="email"
-        required
-      >
+      <input type="email" id="email" class="form-input" placeholder="tu@correo.com" autocomplete="email" required>
     </div>
     <div class="form-group">
       <label class="form-label" for="password">Contraseña</label>
-      <input
-        type="password"
-        id="password"
-        class="form-input"
-        placeholder="••••••••"
-        autocomplete="current-password"
-        required
-      >
+      <input type="password" id="password" class="form-input" placeholder="••••••••" autocomplete="current-password" required>
     </div>
-
-    <button type="submit" class="btn-primary" id="login-btn">
-      Entrar al curso
-    </button>
+    <button type="submit" class="btn btn-lg" id="login-btn">▶ Entrar a la aventura</button>
   </form>
 
   <hr class="divider">
+  <button class="forgot-link" id="forgot-btn">¿Olvidaste tu contraseña?</button>
 
-  <button class="forgot-link" id="forgot-btn">
-    ¿Olvidaste tu contraseña?
-  </button>
-
-  <div class="login-footer">
-    Academia Da Vinci IA · Solo para alumnos inscritos
-  </div>
-
+  <div class="login-foot-link">¿Aún no tienes cuenta? <a href="landing.html">Conoce el curso →</a></div>
+  <div class="login-footer">Academia Da Vinci IA · Solo para alumnos inscritos</div>
 </div>
 
-<!-- CDN Supabase -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
-<script src="js/supabase-client.js"></script>
+<script src="js/juice.js"></script>
 <script>
-  // ── Estrellas de fondo ────────────────────────────────────────────────
-  ;(function () {
-    for (let i = 0; i < 40; i++) {
-      const s = document.createElement('div')
-      s.className = 'star'
-      const size = Math.random() * 2.5 + 0.5
-      s.style.cssText = `
-        width:${size}px; height:${size}px;
-        left:${Math.random()*100}vw; top:${Math.random()*100}vh;
-        --d:${(Math.random()*4+2).toFixed(1)}s;
-        --o:${(Math.random()*0.4+0.1).toFixed(2)};
-        animation-delay:${(Math.random()*5).toFixed(1)}s;
-      `
-      document.body.appendChild(s)
-    }
-  })()
+const ES_PRODUCCION = /vercel\.app$|academiadavinci/.test(location.hostname);
 
-  // ── Helpers UI ────────────────────────────────────────────────────────
-  const sb = window._supabase
+function showError(msg){ document.getElementById('error-msg').textContent=msg; document.getElementById('error-alert').classList.add('show'); document.getElementById('success-alert').classList.remove('show'); }
+function showSuccess(msg){ document.getElementById('success-msg').textContent=msg; document.getElementById('success-alert').classList.add('show'); document.getElementById('error-alert').classList.remove('show'); }
+function hideAlerts(){ document.getElementById('error-alert').classList.remove('show'); document.getElementById('success-alert').classList.remove('show'); }
+function setLoading(l){ const b=document.getElementById('login-btn'); if(l){ b.disabled=true; b.innerHTML='<span class="spinner"></span> Verificando...'; } else { b.disabled=false; b.innerHTML='▶ Entrar a la aventura'; } }
 
-  function showError(msg) {
-    document.getElementById('error-msg').textContent = msg
-    document.getElementById('error-alert').classList.add('show')
-    document.getElementById('success-alert').classList.remove('show')
-  }
-  function showSuccess(msg) {
-    document.getElementById('success-msg').textContent = msg
-    document.getElementById('success-alert').classList.add('show')
-    document.getElementById('error-alert').classList.remove('show')
-  }
-  function hideAlerts() {
-    document.getElementById('error-alert').classList.remove('show')
-    document.getElementById('success-alert').classList.remove('show')
-  }
-  function setLoading(loading) {
-    const btn = document.getElementById('login-btn')
-    if (loading) {
-      btn.disabled = true
-      btn.innerHTML = '<span class="spinner"></span> Verificando...'
-    } else {
-      btn.disabled = false
-      btn.innerHTML = 'Entrar al curso'
-    }
-  }
+['email','password'].forEach(id => document.getElementById(id).addEventListener('input', () => { document.getElementById(id).classList.remove('error-field'); hideAlerts(); }));
 
-  // ── Redirigir si ya hay sesión activa ─────────────────────────────────
-  sb.auth.getSession().then(({ data: { session } }) => {
-    if (session) window.location.href = 'index.html'
-  })
+if (ES_PRODUCCION) {
+  // ── Producción: autenticación real con Supabase ──
+  const add=(s,cb)=>{const e=document.createElement('script');e.src=s;if(cb)e.onload=cb;document.head.appendChild(e);};
+  add('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js', () => {
+    add('js/supabase-client.js', () => {
+      const sb = window._supabase;
+      sb.auth.getSession().then(({ data:{ session } }) => { if (session) location.href = 'index.html'; });
 
-  // ── Formulario de login ───────────────────────────────────────────────
-  document.getElementById('login-form').addEventListener('submit', async (e) => {
-    e.preventDefault()
-    hideAlerts()
+      document.getElementById('login-form').addEventListener('submit', async (e) => {
+        e.preventDefault(); hideAlerts();
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value;
+        if (!email || !password) { showError('Por favor ingresa tu correo y contraseña.'); return; }
+        setLoading(true);
+        const { error } = await sb.auth.signInWithPassword({ email, password });
+        setLoading(false);
+        if (error) {
+          const msgs = { 'Invalid login credentials':'Correo o contraseña incorrectos. Verifica tus datos.', 'Email not confirmed':'Debes confirmar tu correo antes de entrar. Revisa tu bandeja.', 'Too many requests':'Demasiados intentos. Espera unos minutos.' };
+          showError(msgs[error.message] || ('Error al iniciar sesión: ' + error.message));
+          document.getElementById('email').classList.add('error-field');
+          document.getElementById('password').classList.add('error-field');
+          return;
+        }
+        location.href = 'index.html';
+      });
 
-    const email    = document.getElementById('email').value.trim()
-    const password = document.getElementById('password').value
-
-    // Validación básica
-    if (!email || !password) {
-      showError('Por favor ingresa tu correo y contraseña.')
-      return
-    }
-
-    setLoading(true)
-
-    const { data, error } = await sb.auth.signInWithPassword({ email, password })
-
-    setLoading(false)
-
-    if (error) {
-      // Mapear mensajes de Supabase a español
-      const msgs = {
-        'Invalid login credentials': 'Correo o contraseña incorrectos. Verifica tus datos.',
-        'Email not confirmed': 'Debes confirmar tu correo antes de entrar. Revisa tu bandeja de entrada.',
-        'Too many requests': 'Demasiados intentos. Espera unos minutos e inténtalo de nuevo.',
-      }
-      const friendly = msgs[error.message] || `Error al iniciar sesión: ${error.message}`
-      showError(friendly)
-      document.getElementById('email').classList.add('error-field')
-      document.getElementById('password').classList.add('error-field')
-      return
-    }
-
-    // Login exitoso → limpiar error-field y redirigir
-    document.getElementById('email').classList.remove('error-field')
-    document.getElementById('password').classList.remove('error-field')
-    window.location.href = 'index.html'
-  })
-
-  // Quitar error-field al escribir
-  ['email', 'password'].forEach(id => {
-    document.getElementById(id).addEventListener('input', () => {
-      document.getElementById(id).classList.remove('error-field')
-      hideAlerts()
-    })
-  })
-
-  // ── Olvidé contraseña ─────────────────────────────────────────────────
-  document.getElementById('forgot-btn').addEventListener('click', async () => {
-    const email = document.getElementById('email').value.trim()
-    if (!email) {
-      showError('Primero escribe tu correo en el campo de arriba, luego haz clic aquí.')
-      document.getElementById('email').focus()
-      return
-    }
-
-    const btn = document.getElementById('forgot-btn')
-    btn.textContent = 'Enviando...'
-    btn.disabled = true
-
-    const { error } = await sb.auth.resetPasswordForEmail(email, {
-      redirectTo: window.location.origin + '/clases/login.html'
-    })
-
-    btn.disabled = false
-    btn.textContent = '¿Olvidaste tu contraseña?'
-
-    if (error) {
-      showError(`No pudimos enviar el correo: ${error.message}`)
-    } else {
-      showSuccess('Te enviamos un enlace para restablecer tu contraseña. Revisa tu correo (incluyendo spam).')
-    }
-  })
+      document.getElementById('forgot-btn').addEventListener('click', async () => {
+        const email = document.getElementById('email').value.trim();
+        if (!email) { showError('Primero escribe tu correo arriba, luego haz clic aquí.'); document.getElementById('email').focus(); return; }
+        const btn = document.getElementById('forgot-btn'); btn.textContent='Enviando...'; btn.disabled=true;
+        const { error } = await sb.auth.resetPasswordForEmail(email, { redirectTo: location.origin + '/clases/login.html' });
+        btn.disabled=false; btn.textContent='¿Olvidaste tu contraseña?';
+        if (error) showError('No pudimos enviar el correo: ' + error.message);
+        else showSuccess('Te enviamos un enlace para restablecer tu contraseña. Revisa tu correo (y spam).');
+      });
+    });
+  });
+} else {
+  // ── Vista previa: demostración sin backend ──
+  document.getElementById('login-form').addEventListener('submit', (e) => {
+    e.preventDefault(); hideAlerts();
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
+    if (!email || !password) { showError('Por favor ingresa tu correo y contraseña.'); return; }
+    setLoading(true);
+    setTimeout(() => { setLoading(false); showSuccess('Vista previa de diseño ✓ — en producción esto te llevaría a tu aventura.'); if (window.GCConfetti) GCConfetti(30); }, 700);
+  });
+  document.getElementById('forgot-btn').addEventListener('click', () => {
+    const email = document.getElementById('email').value.trim();
+    if (!email) { showError('Primero escribe tu correo arriba, luego haz clic aquí.'); document.getElementById('email').focus(); return; }
+    showSuccess('Vista previa ✓ — en producción enviaríamos el enlace a ' + email + '.');
+  });
+}
 </script>
 
 </body>

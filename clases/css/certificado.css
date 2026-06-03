@@ -1,0 +1,91 @@
+/* ============================================================
+   GENIOS CREATIVOS · Certificado de graduación (certificado.html)
+   Diploma elegante e imprimible (A4 horizontal). Carga DESPUÉS de genios.css.
+   ============================================================ */
+
+body.page-cert { background: #EEF2FF; }
+body.page-cert::after { display: none; }
+
+/* Barra de acciones (no se imprime) */
+.cert-bar { display: flex; align-items: center; gap: 12px; max-width: 1040px; margin: 26px auto 14px; padding: 0 22px; }
+.cert-bar .spacer { flex: 1; }
+.cert-hint { text-align: center; font-weight: 700; color: var(--ink-3); font-size: 14px; margin: 0 auto 22px; max-width: 1040px; padding: 0 22px; }
+
+/* Lienzo del certificado */
+.cert-wrap { max-width: 1040px; margin: 0 auto 60px; padding: 0 22px; }
+.cert {
+  position: relative; aspect-ratio: 1.414 / 1; /* A4 horizontal */
+  background:
+    radial-gradient(120% 120% at 0% 0%, #FFFDF8, #FFFFFF 40%),
+    #fff;
+  border-radius: 12px; overflow: hidden;
+  box-shadow: 0 30px 70px -24px rgba(30,37,71,.5);
+  border: 1px solid var(--line);
+}
+/* Marco doble dorado */
+.cert::before {
+  content: ''; position: absolute; inset: 18px; border-radius: 6px;
+  border: 3px solid var(--gold);
+  box-shadow: inset 0 0 0 7px #fff, inset 0 0 0 9px color-mix(in srgb,var(--gold) 45%,#fff);
+}
+/* Adornos de esquina */
+.cert-corner { position: absolute; width: 54px; height: 54px; z-index: 3; color: var(--gold); font-size: 26px; display: grid; place-items: center; }
+.cert-corner.tl { top: 26px; left: 26px; } .cert-corner.tr { top: 26px; right: 26px; }
+.cert-corner.bl { bottom: 26px; left: 26px; } .cert-corner.br { bottom: 26px; right: 26px; }
+
+.cert-inner { position: absolute; inset: 0; z-index: 2; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 7% 10%; }
+
+.cert-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 2%; }
+.cert-brand img { width: 46px; height: 46px; object-fit: contain; }
+.cert-brand b { font-family: var(--font-display); font-weight: 700; font-size: clamp(15px,1.7vw,19px); color: var(--ink); }
+.cert-brand b span { color: var(--blue); }
+
+.cert-kicker { font-weight: 900; font-size: clamp(11px,1.3vw,14px); letter-spacing: .28em; text-transform: uppercase; color: var(--ink-3); }
+.cert-title { font-family: var(--font-display); font-weight: 700; font-size: clamp(30px,5vw,58px); color: var(--ink); line-height: 1; margin: 1.5% 0; }
+.cert-title span { color: var(--blue); }
+.cert-give { font-weight: 700; font-size: clamp(13px,1.5vw,16px); color: var(--ink-2); }
+.cert-name {
+  font-family: var(--font-display); font-weight: 700; font-size: clamp(34px,6.2vw,72px);
+  color: transparent; background: linear-gradient(135deg, var(--blue), var(--purple)); -webkit-background-clip: text; background-clip: text;
+  line-height: 1.05; margin: 1.5% 0;
+}
+.cert-name-underline { width: min(60%, 520px); height: 3px; background: color-mix(in srgb,var(--gold) 70%,#fff); border-radius: 999px; margin: 0 auto 2.5%; }
+.cert-desc { font-weight: 600; font-size: clamp(13px,1.55vw,17px); color: var(--ink-2); max-width: 80%; line-height: 1.55; }
+.cert-desc b { color: var(--ink); }
+
+/* Insignias de los 6 mundos */
+.cert-badges { display: flex; gap: clamp(6px,1.2vw,14px); margin: 3% 0 1%; }
+.cert-badge { width: clamp(34px,4.4vw,52px); height: clamp(34px,4.4vw,52px); border-radius: 50%; display: grid; place-items: center; font-size: clamp(16px,2.2vw,26px); color: #fff; box-shadow: 0 4px 0 rgba(0,0,0,.12); }
+
+/* Pie: firmas + sello */
+.cert-foot { display: flex; align-items: flex-end; justify-content: space-between; width: 86%; margin-top: 3%; }
+.cert-sign { text-align: center; min-width: 28%; }
+.cert-sign .line { border-top: 2px solid var(--ink-3); margin-bottom: 6px; }
+.cert-sign .who { font-family: var(--font-display); font-weight: 600; font-size: clamp(12px,1.4vw,15px); color: var(--ink); }
+.cert-sign .role { font-weight: 700; font-size: clamp(10px,1.1vw,12px); color: var(--ink-3); }
+.cert-seal {
+  width: clamp(70px,9vw,104px); height: clamp(70px,9vw,104px); border-radius: 50%; flex-shrink: 0;
+  background: radial-gradient(circle at 35% 30%, #FFD86E, var(--gold) 55%, #E08A00);
+  display: grid; place-items: center; text-align: center; color: #7a4d00;
+  box-shadow: 0 8px 18px -6px rgba(217,140,0,.7), inset 0 0 0 3px rgba(255,255,255,.5), inset 0 0 0 6px var(--gold);
+  font-family: var(--font-display); font-weight: 700; line-height: 1;
+  position: relative;
+}
+.cert-seal .star { font-size: clamp(22px,3vw,34px); }
+.cert-seal .txt { font-size: clamp(7px,.9vw,9px); letter-spacing: .08em; margin-top: 3px; font-weight: 800; text-transform: uppercase; }
+.cert-date { margin-top: 2.5%; font-weight: 700; font-size: clamp(11px,1.3vw,14px); color: var(--ink-3); }
+.cert-date b { color: var(--ink-2); }
+
+/* ── IMPRESIÓN ── */
+@page { size: A4 landscape; margin: 0; }
+@media print {
+  body.page-cert { background: #fff; }
+  body.page-cert::before { display: none; }
+  .topbar, .cert-bar, .cert-hint, .foot { display: none !important; }
+  .cert-wrap { max-width: 100%; margin: 0; padding: 0; }
+  .cert { aspect-ratio: auto; width: 100vw; height: 100vh; border-radius: 0; box-shadow: none; border: none; }
+  .cert, .cert-badge, .cert-seal, .cert-name { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  * { animation: none !important; }
+}
+
+@media (max-width: 620px) { .cert-foot { width: 94%; } .cert-corner { display: none; } }

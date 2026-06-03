@@ -2,422 +2,26 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Panel de Papás — Academia Da Vinci IA</title>
   <link rel="icon" type="image/svg+xml" href="robotsin/favicon.svg">
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
-  <script src="js/supabase-client.js"></script>
-  <style>
-    :root {
-      --bg:     #0F1626;
-      --bg2:    #1A2540;
-      --blue:   #4A90D9;
-      --purple: #8E44AD;
-      --gold:   #F39C12;
-      --green:  #27AE60;
-      --red:    #E74C3C;
-      --teal:   #16A085;
-      --text:   #E8EAF0;
-      --muted:  rgba(232,234,240,0.55);
-      --radius: 12px;
-      --shadow: 0 4px 24px rgba(0,0,0,0.4);
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      line-height: 1.6;
-    }
-
-    /* ── NAV ─────────────────────────────────────────────── */
-    nav {
-      background: var(--bg2);
-      border-bottom: 1px solid rgba(74,144,217,0.2);
-      padding: 0 24px;
-      height: 60px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    .nav-logo {
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--blue);
-      text-decoration: none;
-      letter-spacing: -0.3px;
-    }
-    .nav-logo:hover { color: var(--text); }
-    .nav-title {
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--muted);
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-    .btn-print {
-      background: transparent;
-      border: 1px solid rgba(74,144,217,0.4);
-      color: var(--blue);
-      padding: 6px 16px;
-      border-radius: 8px;
-      font-family: 'Poppins', sans-serif;
-      font-size: 0.82rem;
-      font-weight: 500;
-      cursor: pointer;
-      transition: background 0.2s, color 0.2s;
-    }
-    .btn-print:hover {
-      background: var(--blue);
-      color: #fff;
-    }
-
-    /* ── CONTENEDOR ──────────────────────────────────────── */
-    .container {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 32px 24px 64px;
-    }
-
-    /* ── LOADING ─────────────────────────────────────────── */
-    #loading-state {
-      text-align: center;
-      padding: 80px 24px;
-      color: var(--muted);
-      font-size: 1rem;
-    }
-    #main-content { display: none; }
-
-    /* ── HERO ────────────────────────────────────────────── */
-    .hero {
-      background: var(--bg2);
-      border-radius: var(--radius);
-      padding: 32px;
-      margin-bottom: 28px;
-      border: 1px solid rgba(74,144,217,0.15);
-    }
-    .hero-nombre {
-      font-size: 1.9rem;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 4px;
-    }
-    .hero-nombre span {
-      background: linear-gradient(135deg, var(--blue), var(--purple));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .hero-subtitle {
-      font-size: 0.9rem;
-      color: var(--muted);
-      margin-bottom: 6px;
-    }
-    .hero-fecha {
-      font-size: 0.82rem;
-      color: var(--muted);
-      margin-bottom: 28px;
-    }
-    .hero-fecha strong { color: var(--text); }
-
-    /* Stat cards */
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-    }
-    .stat-card {
-      background: var(--bg);
-      border-radius: 10px;
-      padding: 18px 16px;
-      text-align: center;
-      border: 1px solid rgba(255,255,255,0.06);
-    }
-    .stat-value {
-      font-size: 1.8rem;
-      font-weight: 700;
-      line-height: 1;
-      margin-bottom: 6px;
-    }
-    .stat-label {
-      font-size: 0.75rem;
-      color: var(--muted);
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.4px;
-    }
-    .stat-card:nth-child(1) .stat-value { color: var(--blue); }
-    .stat-card:nth-child(2) .stat-value { color: var(--purple); }
-    .stat-card:nth-child(3) .stat-value { color: var(--gold); }
-    .stat-card:nth-child(4) .stat-value { color: var(--teal); }
-
-    /* ── BARRA GENERAL ───────────────────────────────────── */
-    .progress-section {
-      background: var(--bg2);
-      border-radius: var(--radius);
-      padding: 24px 28px;
-      margin-bottom: 28px;
-      border: 1px solid rgba(255,255,255,0.06);
-    }
-    .section-title {
-      font-size: 0.78rem;
-      font-weight: 600;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-      margin-bottom: 14px;
-    }
-    .progress-bar-wrap {
-      background: rgba(255,255,255,0.08);
-      border-radius: 99px;
-      height: 12px;
-      overflow: hidden;
-      margin-bottom: 10px;
-    }
-    .progress-bar-fill {
-      height: 100%;
-      border-radius: 99px;
-      background: linear-gradient(90deg, var(--blue), var(--purple));
-      transition: width 0.8s ease;
-    }
-    .progress-label {
-      font-size: 0.85rem;
-      color: var(--muted);
-    }
-    .progress-label strong { color: var(--text); }
-
-    /* ── MÓDULOS GRID ────────────────────────────────────── */
-    .modulos-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-      margin-bottom: 28px;
-    }
-    .modulo-card {
-      background: var(--bg2);
-      border-radius: var(--radius);
-      padding: 20px 20px 20px 24px;
-      border: 1px solid rgba(255,255,255,0.06);
-      border-left-width: 4px;
-      position: relative;
-    }
-    .modulo-header {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      margin-bottom: 14px;
-      gap: 8px;
-    }
-    .modulo-info {}
-    .modulo-num {
-      font-size: 0.72rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.6px;
-      color: var(--muted);
-      margin-bottom: 2px;
-    }
-    .modulo-nombre {
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--text);
-    }
-    .modulo-conteo {
-      font-size: 0.8rem;
-      color: var(--muted);
-      white-space: nowrap;
-    }
-    .badge-completado {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      background: rgba(39,174,96,0.18);
-      color: var(--green);
-      border: 1px solid rgba(39,174,96,0.35);
-      border-radius: 99px;
-      padding: 3px 10px;
-      font-size: 0.72rem;
-      font-weight: 600;
-    }
-    .clases-dots {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-    .dot {
-      width: 28px;
-      height: 28px;
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.65rem;
-      font-weight: 600;
-      transition: opacity 0.2s;
-    }
-    .dot-done {
-      background: rgba(39,174,96,0.25);
-      color: var(--green);
-      border: 1px solid rgba(39,174,96,0.5);
-    }
-    .dot-pending {
-      background: rgba(255,255,255,0.05);
-      color: var(--muted);
-      border: 1px solid rgba(255,255,255,0.1);
-    }
-
-    /* ── ACTIVIDAD RECIENTE ──────────────────────────────── */
-    .actividad-section {
-      background: var(--bg2);
-      border-radius: var(--radius);
-      padding: 24px 28px;
-      margin-bottom: 28px;
-      border: 1px solid rgba(255,255,255,0.06);
-    }
-    .actividad-empty {
-      color: var(--muted);
-      font-size: 0.88rem;
-      padding: 12px 0;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-    thead th {
-      font-size: 0.72rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: var(--muted);
-      padding: 0 0 12px 0;
-      text-align: left;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-    }
-    tbody tr {
-      border-bottom: 1px solid rgba(255,255,255,0.04);
-    }
-    tbody tr:last-child { border-bottom: none; }
-    tbody td {
-      padding: 11px 0;
-      font-size: 0.85rem;
-      color: var(--text);
-    }
-    td.clase-num {
-      font-weight: 700;
-      color: var(--blue);
-      width: 60px;
-    }
-    td.clase-fecha {
-      color: var(--muted);
-      font-size: 0.8rem;
-      text-align: right;
-    }
-
-    /* ── FOOTER ──────────────────────────────────────────── */
-    footer {
-      text-align: center;
-      padding: 32px 24px;
-      color: var(--muted);
-      font-size: 0.8rem;
-      border-top: 1px solid rgba(255,255,255,0.06);
-    }
-    footer a {
-      color: var(--blue);
-      text-decoration: none;
-    }
-    footer a:hover { text-decoration: underline; }
-    footer p + p { margin-top: 4px; }
-
-    /* ── RESPONSIVE ──────────────────────────────────────── */
-    @media (max-width: 680px) {
-      .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      .modulos-grid {
-        grid-template-columns: 1fr;
-      }
-      .nav-title { display: none; }
-      .hero-nombre { font-size: 1.5rem; }
-    }
-
-    @media (max-width: 420px) {
-      .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    /* ── PRINT ───────────────────────────────────────────── */
-    @media print {
-      :root {
-        --bg:   #ffffff;
-        --bg2:  #f5f5f5;
-        --text: #111111;
-        --muted: #666666;
-      }
-
-      body { background: #fff; color: #111; }
-
-      nav { display: none; }
-
-      .btn-print { display: none; }
-
-      .container { padding: 0; max-width: 100%; }
-
-      .hero,
-      .progress-section,
-      .modulo-card,
-      .actividad-section {
-        background: #f5f5f5 !important;
-        border: 1px solid #ddd !important;
-        box-shadow: none !important;
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
-      }
-
-      .progress-bar-fill {
-        background: #333 !important;
-      }
-
-      .dot-done {
-        background: #d4edda !important;
-        color: #155724 !important;
-        border-color: #c3e6cb !important;
-      }
-
-      .dot-pending {
-        background: #f0f0f0 !important;
-        color: #999 !important;
-        border-color: #ddd !important;
-      }
-
-      .hero-nombre span {
-        -webkit-text-fill-color: #111 !important;
-      }
-
-      a { color: #111 !important; text-decoration: none !important; }
-
-      * { animation: none !important; transition: none !important; }
-    }
-  </style>
+  <link rel="stylesheet" href="css/genios.css">
+  <link rel="stylesheet" href="css/progreso.css">
+  
 </head>
-<body>
+<body class="page-padres">
 
-  <!-- NAV -->
-  <nav>
-    <a class="nav-logo" href="index.html">🤖 Academia Da Vinci IA</a>
-    <span class="nav-title">📊 Panel de Papás — Reporte de Progreso</span>
-    <button class="btn-print" onclick="window.print()">🖨️ Imprimir</button>
-  </nav>
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div class="wrap">
+      <a class="brand" href="index.html">
+        <span class="brand-badge"><img src="robotsin/robotsin_completo.png" alt="Robotsin"></span>
+        <span><span class="brand-name">Genios <span>Creativos</span></span><br><span class="brand-sub">Panel de Papás</span></span>
+      </a>
+      <div class="topbar-spacer"></div>
+      <button class="btn-print" onclick="window.print()">🖨️ Imprimir reporte</button>
+    </div>
+  </header>
 
   <div class="container">
 
@@ -430,10 +34,8 @@
     <div id="main-content">
 
       <!-- HERO -->
-      <div class="hero">
-        <div style="display:inline-block;background:rgba(74,144,217,.12);border:1px solid rgba(74,144,217,.3);color:#74B9FF;padding:5px 16px;border-radius:50px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:14px;">
-          👨‍👩‍👧 Panel para Papás y Mamás
-        </div>
+      <div class="report-hero">
+        <div class="report-eyebrow">👨‍👩‍👧 Panel para Papás y Mamás</div>
         <div class="hero-nombre">Progreso de <span id="alumno-nombre">—</span></div>
         <div class="hero-subtitle">Academia Da Vinci IA · Cine Digital con IA</div>
         <div class="hero-fecha">Inscrito desde: <strong id="fecha-inicio">—</strong></div>
@@ -487,18 +89,13 @@
 
   </div><!-- /container -->
 
-  <!-- ZONA DE PELIGRO -->
-  <div style="max-width:860px;margin:0 auto 48px;padding:0 24px;">
-    <div style="border:1px solid rgba(231,76,60,0.25);border-radius:16px;padding:28px 32px;background:rgba(231,76,60,0.04);">
-      <h3 style="font-size:15px;font-weight:700;color:#e74c3c;margin-bottom:6px;">⚠️ Zona de administración</h3>
-      <p style="font-size:13px;color:rgba(232,234,240,0.5);margin-bottom:20px;">Esta acción borra el registro de clases completadas. Las entregas y el portafolio del alumno <strong style="color:rgba(232,234,240,0.7)">no se eliminan</strong>.</p>
-      <button id="btn-reset" onclick="confirmarReset()"
-        style="background:transparent;border:1px solid rgba(231,76,60,0.5);color:#e74c3c;
-               padding:10px 24px;border-radius:8px;font-family:'Poppins',sans-serif;
-               font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;">
-        🔄 Resetear avance en clases
-      </button>
-      <span id="reset-msg" style="font-size:13px;margin-left:16px;display:none;"></span>
+  <!-- ZONA DE ADMINISTRACIÓN -->
+  <div class="danger-zone">
+    <div class="inner">
+      <h3>⚠️ Zona de administración</h3>
+      <p>Esta acción borra el registro de clases completadas. Las entregas y el portafolio del alumno <strong>no se eliminan</strong>.</p>
+      <button id="btn-reset" class="btn-danger" onclick="confirmarReset()">🔄 Resetear avance en clases</button>
+      <span id="reset-msg" style="font-size:13px;margin-left:14px;display:none;font-weight:700;"></span>
     </div>
   </div>
 
@@ -700,7 +297,41 @@
     }
 
     // ── INIT ─────────────────────────────────────────────────
-    document.addEventListener('DOMContentLoaded', loadData)
+    window.__progresoInit = loadData;
   </script>
+<!-- ── Producción: Supabase + reporte real · Preview: datos demo ── -->
+<script>
+const ES_PRODUCCION = /vercel\.app$|academiadavinci/.test(location.hostname);
+
+if (ES_PRODUCCION) {
+  const add = (s, cb) => { const e = document.createElement('script'); e.src = s; if (cb) e.onload = cb; document.head.appendChild(e); };
+  add('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js', () => {
+    add('js/supabase-client.js', () => { if (window.__progresoInit) window.__progresoInit(); });
+  });
+} else {
+  document.addEventListener('DOMContentLoaded', () => {
+    const completadas = new Set([1, 2, 3, 4, 5, 6, 7]);
+    document.getElementById('alumno-nombre').textContent = 'Sofía';
+    document.getElementById('fecha-inicio').textContent = '12 mar 2026';
+    document.getElementById('stat-clases').textContent = '7 / 26';
+    document.getElementById('stat-pct').textContent = '27%';
+    document.getElementById('stat-modulos').textContent = '1 / 6';
+    document.getElementById('stat-entregas').textContent = '9';
+    document.getElementById('barra-fill').style.width = '27%';
+    document.getElementById('barra-label').innerHTML = '<strong>7</strong> de <strong>26</strong> clases completadas';
+    renderModulos(completadas);
+    renderActividad([
+      { clase_num: 7, completada_at: '2026-05-28' },
+      { clase_num: 6, completada_at: '2026-05-21' },
+      { clase_num: 5, completada_at: '2026-05-14' },
+      { clase_num: 4, completada_at: '2026-05-07' },
+      { clase_num: 3, completada_at: '2026-04-30' }
+    ]);
+    document.getElementById('loading-state').style.display = 'none';
+    document.getElementById('main-content').style.display = 'block';
+  });
+}
+</script>
+
 </body>
 </html>

@@ -1,837 +1,408 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Academia Da Vinci IA — Panel Principal</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&display=swap');
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --blue:   #4A90D9;
-      --purple: #8E44AD;
-      --gold:   #F39C12;
-      --green:  #27AE60;
-      --red:    #E74C3C;
-      --teal:   #16A085;
-      --dark:   #0F1626;
-      --dark2:  #1A2744;
-    }
-
-    body { font-family: 'Poppins', sans-serif; background: var(--dark); color: #E8EAF0; }
-
-    /* ── HERO ── */
-    .hero {
-      position: relative;
-      min-height: 100vh;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      text-align: center;
-      overflow: hidden;
-      padding: 40px 20px;
-    }
-    .hero-video {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-      opacity: 0.25;
-      z-index: 0;
-    }
-    .hero-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(180deg, rgba(15,22,38,0.4) 0%, rgba(15,22,38,0.7) 60%, var(--dark) 100%);
-      z-index: 1;
-    }
-    .hero-content { position: relative; z-index: 2; max-width: 800px; }
-
-    .hero-badge {
-      display: inline-block;
-      background: rgba(74,144,217,0.15);
-      border: 1px solid rgba(74,144,217,0.4);
-      color: #74B9FF;
-      padding: 8px 24px; border-radius: 50px;
-      font-size: 12px; font-weight: 700;
-      letter-spacing: 3px; text-transform: uppercase;
-      margin-bottom: 24px;
-    }
-    .hero h1 {
-      font-size: clamp(40px, 7vw, 80px);
-      font-weight: 900; color: #fff;
-      line-height: 1.05; margin-bottom: 8px;
-    }
-    .hero h1 span { color: var(--blue); }
-    .hero-sub {
-      font-size: clamp(16px, 2.5vw, 22px);
-      color: rgba(255,255,255,0.65);
-      margin-bottom: 40px;
-    }
-
-    /* Robotsin hero flotante */
-    .robotsin-hero {
-      width: 260px; height: 260px;
-      margin: 0 auto 32px;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .robotsin-hero img {
-      width: 100%; height: 100%;
-      object-fit: contain;
-      filter: drop-shadow(0 0 40px rgba(74,144,217,0.5));
-      animation: heroFloat 4s ease-in-out infinite;
-    }
-    @keyframes heroFloat {
-      0%,100% { transform: translateY(0) rotate(-1deg); }
-      25%      { transform: translateY(-14px) rotate(1deg); }
-      75%      { transform: translateY(-6px) rotate(0deg); }
-    }
-
-    .hero-stats {
-      display: flex; gap: 32px; flex-wrap: wrap; justify-content: center;
-    }
-    .stat {
-      text-align: center;
-    }
-    .stat .num {
-      font-size: 32px; font-weight: 800; color: var(--blue);
-      display: block;
-    }
-    .stat .label {
-      font-size: 12px; color: rgba(255,255,255,0.45);
-      text-transform: uppercase; letter-spacing: 1px;
-    }
-
-    /* ── NAV ── */
-    .nav {
-      position: sticky; top: 0; z-index: 100;
-      background: rgba(15,22,38,0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255,255,255,0.07);
-      padding: 16px 40px;
-      display: flex; align-items: center; gap: 20px;
-    }
-    .nav-logo { font-weight: 800; font-size: 16px; color: #fff; }
-    .nav-logo span { color: var(--blue); }
-    .nav-spacer { flex: 1; }
-    .nav-tag {
-      background: rgba(74,144,217,0.12);
-      border: 1px solid rgba(74,144,217,0.25);
-      color: #74B9FF;
-      padding: 6px 16px; border-radius: 50px;
-      font-size: 12px; font-weight: 600;
-    }
-
-    /* ── SECCIÓN GENERAL ── */
-    .section { max-width: 1100px; margin: 0 auto; padding: 80px 40px; }
-    .section-label {
-      color: var(--blue); font-size: 11px; font-weight: 700;
-      letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px;
-    }
-    .section-title {
-      font-size: clamp(28px, 4vw, 42px); font-weight: 800;
-      color: #fff; margin-bottom: 12px;
-    }
-    .section-title span { color: var(--blue); }
-    .section-desc {
-      font-size: 16px; color: rgba(255,255,255,0.55);
-      max-width: 560px; margin-bottom: 48px;
-    }
-    .divider {
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(74,144,217,0.3), transparent);
-    }
-
-    /* ── MÓDULOS GRID ── */
-    .modulos-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 24px;
-    }
-
-    .modulo-card {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.07);
-      border-radius: 20px;
-      overflow: hidden;
-      transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
-      cursor: pointer;
-      text-decoration: none;
-      display: block;
-      color: inherit;
-    }
-    .modulo-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-    }
-
-    .modulo-header {
-      padding: 28px 28px 20px;
-      display: flex; align-items: flex-start; gap: 16px;
-    }
-    .modulo-icon {
-      width: 56px; height: 56px; border-radius: 14px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 26px; flex-shrink: 0;
-    }
-    .modulo-num {
-      font-size: 11px; font-weight: 700; letter-spacing: 2px;
-      text-transform: uppercase; opacity: 0.5; margin-bottom: 4px;
-    }
-    .modulo-name { font-size: 20px; font-weight: 800; color: #fff; }
-    .modulo-robotsin-name {
-      font-size: 12px; font-weight: 600;
-      opacity: 0.5; margin-top: 2px;
-    }
-
-    .modulo-desc {
-      padding: 0 28px 20px;
-      font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.6;
-    }
-
-    /* Clases dentro del módulo */
-    .clases-list {
-      border-top: 1px solid rgba(255,255,255,0.06);
-      padding: 16px 20px;
-    }
-    .clase-item {
-      display: flex; align-items: center; gap: 12px;
-      padding: 10px 8px; border-radius: 10px;
-      transition: background 0.2s;
-      text-decoration: none; color: inherit;
-    }
-    .clase-item:hover { background: rgba(255,255,255,0.05); }
-    .clase-dot {
-      width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
-    }
-    .clase-title { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.8); flex: 1; }
-    .clase-time {
-      font-size: 11px; color: rgba(255,255,255,0.3);
-    }
-    .clase-status {
-      width: 20px; height: 20px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 10px;
-    }
-    .status-ready   { background: rgba(39,174,96,0.2); color: #2ECC71; }
-    .status-pending { background: rgba(243,156,18,0.15); color: #F39C12; }
-    .status-soon    { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.3); }
-    .status-lock    { background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.2); }
-
-    .modulo-footer {
-      padding: 16px 28px;
-      border-top: 1px solid rgba(255,255,255,0.05);
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .modulo-tag {
-      font-size: 11px; font-weight: 700; letter-spacing: 1px;
-      text-transform: uppercase; opacity: 0.45;
-    }
-    .modulo-arrow { opacity: 0.3; font-size: 18px; }
-
-    /* Colores por módulo */
-    .m1 { border-color: rgba(142,68,173,0.3); }
-    .m1:hover { border-color: rgba(142,68,173,0.7); box-shadow: 0 20px 60px rgba(142,68,173,0.15); }
-    .m1 .modulo-icon { background: rgba(142,68,173,0.2); }
-    .m1 .modulo-arrow { color: var(--purple); opacity: 0.7; }
-    .m1 .clase-dot { background: var(--purple); }
-
-    .m2 { border-color: rgba(74,144,217,0.3); }
-    .m2:hover { border-color: rgba(74,144,217,0.7); box-shadow: 0 20px 60px rgba(74,144,217,0.15); }
-    .m2 .modulo-icon { background: rgba(74,144,217,0.2); }
-    .m2 .modulo-arrow { color: var(--blue); opacity: 0.7; }
-    .m2 .clase-dot { background: var(--blue); }
-
-    .m3 { border-color: rgba(39,174,96,0.3); }
-    .m3:hover { border-color: rgba(39,174,96,0.7); box-shadow: 0 20px 60px rgba(39,174,96,0.15); }
-    .m3 .modulo-icon { background: rgba(39,174,96,0.2); }
-    .m3 .modulo-arrow { color: var(--green); opacity: 0.7; }
-    .m3 .clase-dot { background: var(--green); }
-
-    .m4 { border-color: rgba(231,76,60,0.3); }
-    .m4:hover { border-color: rgba(231,76,60,0.7); box-shadow: 0 20px 60px rgba(231,76,60,0.15); }
-    .m4 .modulo-icon { background: rgba(231,76,60,0.2); }
-    .m4 .modulo-arrow { color: var(--red); opacity: 0.7; }
-    .m4 .clase-dot { background: var(--red); }
-
-    .m5 { border-color: rgba(243,156,18,0.3); }
-    .m5:hover { border-color: rgba(243,156,18,0.7); box-shadow: 0 20px 60px rgba(243,156,18,0.15); }
-    .m5 .modulo-icon { background: rgba(243,156,18,0.2); }
-    .m5 .modulo-arrow { color: var(--gold); opacity: 0.7; }
-    .m5 .clase-dot { background: var(--gold); }
-
-    .m6 { border-color: rgba(22,160,133,0.3); }
-    .m6:hover { border-color: rgba(22,160,133,0.7); box-shadow: 0 20px 60px rgba(22,160,133,0.15); }
-    .m6 .modulo-icon { background: rgba(22,160,133,0.2); }
-    .m6 .modulo-arrow { color: var(--teal); opacity: 0.7; }
-    .m6 .clase-dot { background: var(--teal); }
-
-    /* ── STEAM SECTION ── */
-    .steam-grid {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 16px;
-    }
-    .steam-card {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.07);
-      border-radius: 16px;
-      padding: 24px 16px;
-      text-align: center;
-    }
-    .steam-card .icon { font-size: 32px; margin-bottom: 12px; }
-    .steam-card h4 { font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 6px; }
-    .steam-card p { font-size: 12px; color: rgba(255,255,255,0.45); }
-
-    /* ── ROBOTSIN SECTION ── */
-    .robotsin-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-    .robotsin-card {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 20px;
-      padding: 28px 20px 28px;
-      display: flex; flex-direction: column; align-items: center;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-      transition: transform .2s, border-color .2s;
-    }
-    .robotsin-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(255,255,255,0.18);
-    }
-    .robotsin-img {
-      width: 180px; height: 180px; flex-shrink: 0;
-      margin-bottom: 16px;
-    }
-    .robotsin-img img {
-      width: 100%; height: 100%;
-      object-fit: contain;
-      filter: drop-shadow(0 8px 24px rgba(0,0,0,0.5));
-    }
-    .robotsin-img .fallback { font-size: 80px; line-height: 180px; }
-    .robotsin-card h4 { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 4px; }
-    .robotsin-card p { font-size: 12px; color: rgba(255,255,255,0.45); line-height: 1.5; }
-    .robotsin-card .r-mod {
-      font-size: 10px; font-weight: 700; letter-spacing: 2px;
-      text-transform: uppercase; opacity: 0.4; margin-bottom: 6px;
-    }
-
-    /* ── CTA ── */
-    .cta-section {
-      background: linear-gradient(135deg, rgba(74,144,217,0.12), rgba(142,68,173,0.08));
-      border: 1px solid rgba(74,144,217,0.2);
-      border-radius: 24px;
-      padding: 60px;
-      text-align: center;
-      margin: 80px 40px;
-      max-width: 1100px;
-      margin-left: auto; margin-right: auto;
-    }
-    .cta-section h2 { font-size: 36px; font-weight: 800; color: #fff; margin-bottom: 12px; }
-    .cta-section p { font-size: 16px; color: rgba(255,255,255,0.55); margin-bottom: 32px; }
-    .btn-primary {
-      display: inline-block;
-      background: var(--blue);
-      color: #fff;
-      padding: 16px 40px;
-      border-radius: 50px;
-      font-size: 16px; font-weight: 700;
-      text-decoration: none;
-      transition: background 0.2s, transform 0.2s;
-    }
-    .btn-primary:hover { background: #357ABD; transform: translateY(-2px); }
-
-    /* ── FOOTER ── */
-    footer {
-      text-align: center;
-      padding: 40px;
-      border-top: 1px solid rgba(255,255,255,0.06);
-      color: rgba(255,255,255,0.25);
-      font-size: 13px;
-    }
-    footer strong { color: rgba(255,255,255,0.5); }
-
-    @media (max-width: 768px) {
-      .steam-grid { grid-template-columns: repeat(3,1fr); }
-      .robotsin-grid { grid-template-columns: 1fr; }
-      .nav { padding: 16px 20px; }
-      .section { padding: 60px 20px; }
-      .cta-section { padding: 40px 24px; margin: 40px 20px; }
-    }
-    @media (max-width: 500px) {
-      .steam-grid { grid-template-columns: repeat(2,1fr); }
-    }
-  </style>
-  <link rel="icon" type="image/svg+xml" href="robotsin/favicon.svg">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Genios Creativos — Tu Mapa de Aventura</title>
+<link rel="icon" type="image/svg+xml" href="robotsin/favicon.svg">
+<link rel="stylesheet" href="css/genios.css">
+<link rel="stylesheet" href="css/juice.css">
 </head>
 <body>
 
-<!-- ═══ NAV ═══ -->
-<nav class="nav">
-  <div class="nav-logo">Academia <span>Da Vinci IA</span></div>
-  <div class="nav-spacer"></div>
-  <a href="progreso.html" style="color:#4A90D9;font-weight:700;font-size:14px;text-decoration:none;margin-right:16px;display:flex;align-items:center;gap:6px;">
-    📊 Panel de Papás
-  </a>
-  <a href="mi-personaje.html" style="color:#F39C12;font-weight:700;font-size:14px;text-decoration:none;margin-right:20px;display:flex;align-items:center;gap:6px;">
-    ⭐ Mi Personaje
-  </a>
-  <div class="nav-tag">🎓 Pequeños Genios Creativos</div>
-</nav>
+<!-- ═══════════ TOPBAR ═══════════ -->
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <span class="brand-badge"><img src="robotsin/robotsin_completo.png" alt="Robotsin"></span>
+      <span>
+        <span class="brand-name">Genios <span>Creativos</span></span><br>
+        <span class="brand-sub">Academia Da Vinci IA</span>
+      </span>
+    </a>
+    <div class="topbar-spacer"></div>
+    <a class="tlink" href="galeria.html"><span class="ic">🎬</span><span>Galería</span></a>
+    <a class="tlink" href="mi-personaje.html"><span class="ic">🦸</span><span>Mi Personaje</span></a>
+    <a class="tlink" href="progreso.html"><span class="ic">📊</span><span>Panel de Papás</span></a>
+    <button class="icon-btn" id="soundBtn" title="Sonido" aria-label="Activar/silenciar sonido">🔊</button>
+  </div>
+</header>
 
-<!-- ═══ HERO ═══ -->
+<!-- ═══════════ HERO ═══════════ -->
 <section class="hero">
-  <video class="hero-video" autoplay loop muted playsinline>
-    <source src="robotsin/videos/Robot_floating_in_cosmic_space_202606010114.mp4" type="video/mp4">
-    <source src="robotsin/videos/Robot_conducting_STEAM_elements_202606010101.mp4" type="video/mp4">
-    <source src="robotsin/videos/Robot_floats_in_cosmic_space_202606010118.mp4" type="video/mp4">
-    <source src="robotsin/videos/Robot_conducting_STEAM_elements_202606010101 (2).mp4" type="video/mp4">
-  </video>
-  <div class="hero-overlay"></div>
-  <div class="hero-content">
-    <div class="hero-badge">⚗️ Metodología STEAM + IA</div>
+  <span class="spark" data-parallax="0.12" style="top:40px;left:6%;font-size:30px;opacity:.5;">✦</span>
+  <span class="spark" data-parallax="-0.1" style="top:120px;right:8%;font-size:22px;opacity:.5;animation-delay:1.2s;">✧</span>
+  <div class="wrap hero-grid">
+    <div class="hero-copy" data-reveal="left">
+      <span class="eyebrow">🚀 Tu aventura creativa</span>
+      <h1>Crea tu propia <span class="pop">película con IA</span></h1>
+      <p class="hero-sub">26 misiones. Tú y Robotsin van a inventar un personaje, su mundo, su historia, su voz y su música… ¡y lo van a convertir en un video de verdad!</p>
 
-    <div class="robotsin-hero">
-      <img src="robotsin/robotsin_completo.png" alt="D-IA Vinci Robotsin"
-           onerror="this.style.display='none'">
+      <!-- XP / PROGRESO (se llena con Supabase en producción) -->
+      <div class="xp" id="xpCard">
+        <div class="xp-top">
+          <div class="xp-lvl"><small>NIVEL</small><b id="xpLevel">1</b></div>
+          <div class="xp-meta">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
+              <span class="xp-label" id="xpLabel">¡Empieza tu primera misión!</span>
+              <span class="xp-pct" id="xpPct">0%</span>
+            </div>
+            <div class="xp-track"><div class="xp-fill" id="xpFill"></div></div>
+          </div>
+        </div>
+        <div class="xp-next" id="xpNext">▶ Siguiente: <b>Clase 1 — ¡Bienvenido, Genio!</b></div>
+        <div class="streak-days" data-streak-days></div>
+      </div>
+
+      <div class="hero-cta" style="margin-top:20px;">
+        <a class="btn btn-lg" id="continueBtn" href="clase1_bienvenido_genio.html">▶ Continuar aventura</a>
+        <a class="btn btn-ghost" href="#mapa">🗺️ Ver el mapa</a>
+        <span class="streak" title="¡Vuelve cada día para subir tu racha!">
+          <span class="flame">🔥</span>
+          <span><span class="s-num" data-streak-num>1</span><span class="s-lab"> días de racha</span></span>
+        </span>
+      </div>
     </div>
 
-    <h1>Academia <span>Da Vinci</span> IA</h1>
-    <p class="hero-sub">Donde la imaginación y la inteligencia artificial se encuentran</p>
-    <div class="hero-stats">
-      <div class="stat"><span class="num">6</span><span class="label">Módulos</span></div>
-      <div class="stat"><span class="num">26</span><span class="label">Clases</span></div>
-      <div class="stat"><span class="num">9–13</span><span class="label">Años</span></div>
-      <div class="stat"><span class="num">STEAM</span><span class="label">Metodología</span></div>
-    </div>
-
-    <!-- Contador de progreso del alumno (se muestra al cargar sesión) -->
-    <div id="dv-progress-bar-wrap" style="display:none; margin-top:28px; max-width:480px;">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-        <span id="dv-progress-label" style="font-size:13px; font-weight:700; color:#E8EAF0;"></span>
-        <span id="dv-progress-pct" style="font-size:13px; font-weight:800; color:#4A90D9;"></span>
+    <div class="hero-art" data-reveal="right" data-rd="2">
+      <div class="hero-mascot-wrap">
+        <img class="hero-mascot" src="robotsin/robotsin_completo.png" alt="D-IA Vinci Robotsin">
       </div>
-      <div style="height:8px; background:rgba(255,255,255,0.08); border-radius:8px; overflow:hidden;">
-        <div id="dv-progress-fill"
-             style="height:100%; background:linear-gradient(90deg,#4A90D9,#8E44AD);
-                    border-radius:8px; transition:width 1s ease; width:0%;"></div>
+      <div class="hero-screen">
+        <span class="spark" style="top:-14px;left:8%;font-size:22px;">✦</span>
+        <span class="spark" style="bottom:-10px;right:14%;font-size:16px;animation-delay:1s;">✧</span>
+        <div class="hero-screen-inner">
+          <video autoplay loop muted playsinline poster="">
+            <source src="robotsin/videos/Robot_floating_in_cosmic_space_202606010114.mp4" type="video/mp4">
+          </video>
+          <div class="glow"></div>
+        </div>
+        <div class="hero-pill tl"><span class="em">🎨</span> 5 superpoderes</div>
+        <div class="hero-pill br"><span class="em">🏆</span> 6 insignias</div>
       </div>
-      <div id="dv-next-clase" style="margin-top:10px; font-size:12px; color:rgba(232,234,240,0.45);"></div>
     </div>
   </div>
 </section>
 
+<!-- ═══════════ STEAM ═══════════ -->
+<section class="section" style="padding-top:28px;">
+  <div class="wrap">
+    <div class="steam" data-reveal>
+      <div class="steam-card tilt" data-rd="1"><div class="steam-emoji tilt-pop">🔬</div><h4>Ciencia</h4><p>Cómo piensa la IA</p></div>
+      <div class="steam-card tilt" data-rd="2"><div class="steam-emoji tilt-pop">💻</div><h4>Tecnología</h4><p>Herramientas reales</p></div>
+      <div class="steam-card tilt" data-rd="3"><div class="steam-emoji tilt-pop">⚙️</div><h4>Ingeniería</h4><p>El arte del prompt</p></div>
+      <div class="steam-card tilt" data-rd="4"><div class="steam-emoji tilt-pop">🎨</div><h4>Arte</h4><p>Imagen, video y música</p></div>
+      <div class="steam-card tilt" data-rd="5"><div class="steam-emoji tilt-pop">🧮</div><h4>Matemáticas</h4><p>Ritmo y estructura</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ MISIÓN DIARIA ═══════════ -->
+<section class="section" style="padding-top:8px;padding-bottom:0;">
+  <div class="wrap">
+    <div class="daily" id="daily" data-reveal>
+      <div class="daily-icon" id="dailyIcon">🎯</div>
+      <div class="daily-main">
+        <div class="daily-top">
+          <span class="daily-label">Misión diaria</span>
+          <span class="daily-date" id="dailyDate"></span>
+        </div>
+        <div class="daily-text" id="dailyText">Cargando tu reto de hoy…</div>
+      </div>
+      <div class="daily-action">
+        <button class="btn green" id="dailyBtn">✓ ¡Lo hice!</button>
+        <div class="daily-streak"><span>🔥</span> <b data-streak-num>1</b> de racha</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ MAPA DE AVENTURA ═══════════ -->
+<section class="section" id="mapa" style="padding-top:18px;">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <span class="eyebrow">🗺️ El recorrido completo</span>
+      <h2>El <em>Mapa</em> de la Aventura</h2>
+      <p>Seis mundos, 26 misiones. Completa una para desbloquear la siguiente — igual que en tu videojuego favorito.</p>
+    </div>
+    <div class="worlds" id="worlds"><!-- mundos generados por JS --></div>
+  </div>
+</section>
+
+<!-- ═══════════ GUÍAS ═══════════ -->
+<section class="section" style="padding-top:18px;">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <span class="eyebrow">🤖 Tu maestro robot</span>
+      <h2>Las 6 caras de <em>Robotsin</em></h2>
+      <p>En cada mundo te acompaña un Robotsin distinto, experto en lo que vas a crear.</p>
+    </div>
+    <div class="guides" data-reveal>
+      <div class="guide"><div class="guide-img"><img src="robotsin/robotsin_artista.png" alt="Artista"></div><div class="g-mod">Mundo 1</div><h4>Artista</h4><p>Pincel mágico</p></div>
+      <div class="guide"><div class="guide-img"><img src="robotsin/robotsin_arquitecto.png" alt="Arquitecto"></div><div class="g-mod">Mundo 2</div><h4>Arquitecto</h4><p>Construye mundos</p></div>
+      <div class="guide"><div class="guide-img"><img src="robotsin/robotsin_escritor.png" alt="Escritor"></div><div class="g-mod">Mundo 3</div><h4>Escritor</h4><p>Pluma dorada</p></div>
+      <div class="guide"><div class="guide-img"><img src="robotsin/robotsin_director.png" alt="Director"></div><div class="g-mod">Mundo 4</div><h4>Director</h4><p>¡Acción!</p></div>
+      <div class="guide"><div class="guide-img"><img src="robotsin/robotsin_musico.png" alt="Músico"></div><div class="g-mod">Mundo 5</div><h4>Músico</h4><p>Compone sin saber</p></div>
+      <div class="guide"><div class="guide-img"><img src="robotsin/robotsin_maestro.png" alt="Maestro"></div><div class="g-mod">Mundo 6</div><h4>Maestro</h4><p>¡Eres un genio!</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ EXTRAS ═══════════ -->
+<section class="section" style="padding-top:18px;">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">🎁 Bonus desbloqueado</span>
+      <h2>Misiones <em>Extra</em></h2>
+      <p>Retos sueltos que puedes abrir cuando quieras — sin candado.</p>
+    </div>
+    <div class="extras" data-reveal>
+      <a class="extra" href="extra_matematico_del_cine.html" style="border-color:color-mix(in srgb,var(--teal) 40%,#fff)">
+        <div class="em">🧮</div>
+        <div class="tag" style="color:var(--teal)">Matemáticas en acción</div>
+        <h3>El Matemático del Cine</h3>
+        <p>La regla de los tercios, el cronograma de producción y los BPM: los secretos numéricos de los directores.</p>
+        <div class="go" style="color:var(--teal)">Abrir misión →</div>
+      </a>
+      <a class="extra" href="extra_tu_cuerpo_crea.html" style="border-color:color-mix(in srgb,var(--purple) 40%,#fff)">
+        <div class="em">🎭</div>
+        <div class="tag" style="color:var(--purple)">Inteligencia del cuerpo</div>
+        <h3>Tu Cuerpo Crea</h3>
+        <p>Actúa antes de animar, el Mirror Challenge y el calentamiento de voz que usan los animadores de Pixar.</p>
+        <div class="go" style="color:var(--purple)">Abrir misión →</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ CTA ═══════════ -->
+<section class="section" style="padding-top:10px;">
+  <div class="wrap">
+    <div class="cta" data-reveal>
+      <span class="spark" style="top:18px;left:10%;font-size:24px;color:#fff;">✦</span>
+      <span class="spark" style="bottom:24px;right:12%;font-size:18px;color:#fff;animation-delay:.8s;">✧</span>
+      <img src="robotsin/robotsin_completo.png" alt="Robotsin">
+      <h2>¿Listo para crear, genio?</h2>
+      <p>Robotsin no puede hacer la magia solo. Te necesita a ti. ¡Juntos son el genio más poderoso del universo!</p>
+      <a class="btn btn-lg gold" id="ctaBtn" href="clase1_bienvenido_genio.html">▶ Empezar la Clase 1</a>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="ico">🎓✨</div>
+  <b>Academia Da Vinci IA</b> · Pequeños Genios Creativos<br>
+  Metodología STEAM + Inteligencia Artificial · Por Ing. Jhonnatan Azael Vázquez Espinoza
+</footer>
+
+<!-- ── Datos del curso + render del mapa + progreso ── -->
 <script>
-;(function loadProgress() {
-  const CLASE_NOMBRES = {
-    1:'Bienvenido, Genio', 2:'Nace el Personaje', 3:'Retrato Oficial',
-    4:'Tarjeta Oficial', 5:'Los 12 Arquetipos', 6:'El Universo',
-    7:'Aliados y Villanos', 8:'Mapa del Mundo', 9:'Galería del Mundo',
-    10:'El Guion', 11:'Los Diálogos', 12:'El Cómic', 13:'Episodio Completo',
-    14:'Primera Animación', 15:'Planos y Cámara', 16:'Las Escenas',
-    17:'Edición Básica', 18:'El Tráiler', 19:'El Tema Musical',
-    20:'La Voz del Personaje', 21:'Efectos de Sonido', 22:'Audio Completo',
-    23:'Ensamble Final', 24:'Revisión y Edición', 25:'Estreno Privado',
-    26:'Graduación de Genios'
-  }
-  const TOTAL = 26
+const CLASES = [
+  { n:1,  t:'¡Bienvenido, Genio!',    h:'clase1_bienvenido_genio.html' },
+  { n:2,  t:'Nace el Personaje',      h:'clase2_nace_el_personaje.html' },
+  { n:3,  t:'El Retrato Oficial',     h:'clase3_retrato_oficial.html' },
+  { n:4,  t:'La Tarjeta Oficial',     h:'clase4_tarjeta_oficial.html' },
+  { n:5,  t:'Los 12 Arquetipos',      h:'clase5_los_arquetipos.html' },
+  { n:6,  t:'El Universo',            h:'clase6_el_universo.html' },
+  { n:7,  t:'Aliados y Villanos',     h:'clase7_aliados_villanos.html' },
+  { n:8,  t:'El Mapa del Mundo',      h:'clase8_mapa_del_mundo.html' },
+  { n:9,  t:'Galería del Mundo',      h:'clase9_galeria_del_mundo.html' },
+  { n:10, t:'El Guion',               h:'clase10_el_guion.html' },
+  { n:11, t:'Los Diálogos',           h:'clase11_los_dialogos.html' },
+  { n:12, t:'El Cómic',               h:'clase12_el_comic.html' },
+  { n:13, t:'Episodio Completo',      h:'clase13_episodio_completo.html' },
+  { n:14, t:'Primera Animación',      h:'clase14_primera_animacion.html' },
+  { n:15, t:'Planos y Cámara',        h:'clase15_planos_y_camara.html' },
+  { n:16, t:'Las Escenas',            h:'clase16_las_escenas.html' },
+  { n:17, t:'Edición Básica',         h:'clase17_edicion_basica.html' },
+  { n:18, t:'El Tráiler',             h:'clase18_el_trailer.html' },
+  { n:19, t:'El Tema Musical',        h:'clase19_el_tema_musical.html' },
+  { n:20, t:'La Voz del Personaje',   h:'clase20_la_voz_del_personaje.html' },
+  { n:21, t:'Efectos de Sonido',      h:'clase21_efectos_de_sonido.html' },
+  { n:22, t:'Audio Completo',         h:'clase22_audio_completo.html' },
+  { n:23, t:'Ensamble Final',         h:'clase23_ensamble_final.html' },
+  { n:24, t:'Revisión y Edición',     h:'clase24_revision_edicion.html' },
+  { n:25, t:'Estreno Privado',        h:'clase25_estreno_privado.html' },
+  { n:26, t:'Graduación de Genios',   h:'clase26_graduacion_genios.html' },
+];
+const MUNDOS = [
+  { id:1, v:'m1', mascota:'artista',    nombre:'El Genio Creativo',     guia:'Robotsin Artista',    clases:[1,2,3,4,5] },
+  { id:2, v:'m2', mascota:'arquitecto', nombre:'El Mundo del Genio',    guia:'Robotsin Arquitecto', clases:[6,7,8,9] },
+  { id:3, v:'m3', mascota:'escritor',   nombre:'La Historia del Genio', guia:'Robotsin Escritor',   clases:[10,11,12,13] },
+  { id:4, v:'m4', mascota:'director',   nombre:'El Genio en Movimiento',guia:'Robotsin Director',   clases:[14,15,16,17,18] },
+  { id:5, v:'m5', mascota:'musico',     nombre:'La Voz del Genio',      guia:'Robotsin Músico',     clases:[19,20,21,22] },
+  { id:6, v:'m6', mascota:'maestro',    nombre:'El Genio al Mundo',     guia:'Robotsin Maestro',    clases:[23,24,25,26] },
+];
+const TOTAL = CLASES.length;
+const claseById = n => CLASES.find(c => c.n === n);
 
-  function tryInit() {
-    const sb = window._supabase
-    if (!sb) { setTimeout(tryInit, 200); return }
-    sb.auth.getSession().then(({ data: { session } }) => {
-      if (!session) return
-      sb.from('progress')
-        .select('clase_num')
-        .eq('user_id', session.user.id)
-        .eq('completada', true)
-        .then(({ data }) => {
-          const completadas = new Set((data || []).map(r => r.clase_num))
-          const done = completadas.size
-          const pct  = Math.round((done / TOTAL) * 100)
+function render(completadas) {
+  const done = new Set(completadas);
+  let current = null;
+  for (let i = 1; i <= TOTAL; i++) { if (!done.has(i)) { current = i; break; } }
 
-          // Primera clase no completada (no necesariamente done+1)
-          let nextNum = null
-          for (let i = 1; i <= TOTAL; i++) {
-            if (!completadas.has(i)) { nextNum = i; break }
-          }
+  // ── Mundos + nodos ──
+  const cont = document.getElementById('worlds');
+  cont.innerHTML = MUNDOS.map(m => {
+    const hechos = m.clases.filter(n => done.has(n)).length;
+    const nodos = m.clases.map(n => {
+      const c = claseById(n);
+      const st = done.has(n) ? 'done' : (n === current ? 'current' : 'locked');
+      const icon = st === 'done' ? '⭐' : (st === 'current' ? '👉' : '🔒');
+      const meta = st === 'done' ? 'Completada' : (st === 'current' ? 'Tu misión' : 'Bloqueada');
+      const lockCls = st === 'locked' ? ' is-locked' : '';
+      const glow = st === 'current' ? ' glow-live' : '';
+      return `
+        <a class="node-link${lockCls}" href="${st==='locked' ? 'javascript:void(0)' : c.h}" data-n="${n}">
+          <div class="node ${st}${glow}">
+            <div class="node-top">
+              <span class="node-dot">${n}</span>
+              <span class="node-state">${icon}</span>
+            </div>
+            <div class="node-title">${c.t}</div>
+            <div class="node-meta">${meta}</div>
+            <span class="play-tag">▶ Jugar</span>
+          </div>
+        </a>`;
+    }).join('');
+    const allDoneW = hechos === m.clases.length;
+    const retoNodo = `
+        <a class="node-link${allDoneW ? '' : ' is-locked'}" href="${allDoneW ? 'checkpoint_mundo' + m.id + '.html' : 'javascript:void(0)'}">
+          <div class="node reto ${allDoneW ? 'open' : 'locked'}">
+            <div class="node-top"><span class="node-dot">🎯</span><span class="node-state">${allDoneW ? '🎯' : '🔒'}</span></div>
+            <div class="node-title">Reto del Mundo</div>
+            <div class="node-meta">${allDoneW ? '¡Disponible!' : 'Completa el mundo'}</div>
+            <span class="play-tag">▶ Jugar</span>
+          </div>
+        </a>`;
+    return `
+      <div class="world" style="--wc:var(--${m.v})">
+        <div class="world-head">
+          <img class="world-mascot" src="robotsin/robotsin_${m.mascota}.png" alt="${m.guia}">
+          <div>
+            <div class="world-id">Mundo ${m.id}</div>
+            <div class="world-name">${m.nombre}</div>
+            <div class="world-guide">🤖 ${m.guia}</div>
+          </div>
+          <div class="spacer"></div>
+          <div class="world-prog">${hechos}/${m.clases.length} ⭐</div>
+        </div>
+        <div class="path">${nodos}${retoNodo}</div>
+      </div>`;
+  }).join('');
 
-          const wrap = document.getElementById('dv-progress-bar-wrap')
-          if (!wrap) return
-
-          document.getElementById('dv-progress-label').textContent =
-            done === 0    ? '¡Empieza tu primera clase hoy!' :
-            done === TOTAL ? '🎓 ¡Curso completado! Eres un Genio Creativo.' :
-            `${done} de ${TOTAL} clases completadas`
-          document.getElementById('dv-progress-pct').textContent = pct + '%'
-
-          if (nextNum && done > 0 && done < TOTAL) {
-            document.getElementById('dv-next-clase').textContent =
-              `▶ Siguiente: Clase ${nextNum} — ${CLASE_NOMBRES[nextNum] || ''}`
-          }
-
-          // Mostrar el contenedor primero, luego animar la barra en el siguiente frame
-          wrap.style.display = 'block'
-          requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
-              document.getElementById('dv-progress-fill').style.width = pct + '%'
-            })
-          })
-        })
-    })
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => setTimeout(tryInit, 300))
+  // ── XP / nivel ──
+  const total = done.size;
+  const pct = Math.round((total / TOTAL) * 100);
+  const mundoActual = MUNDOS.find(m => m.clases.includes(current || TOTAL)) || MUNDOS[5];
+  document.getElementById('xpLevel').textContent = total >= TOTAL ? '🏆' : mundoActual.id;
+  document.getElementById('xpPct').textContent = pct + '%';
+  document.getElementById('xpLabel').textContent =
+    total === 0     ? '¡Empieza tu primera misión!' :
+    total >= TOTAL  ? '🎓 ¡Aventura completada! Eres un Genio Creativo.' :
+    `${total} de ${TOTAL} misiones completadas`;
+  const nextBox = document.getElementById('xpNext');
+  const contBtn = document.getElementById('continueBtn');
+  if (current && total < TOTAL) {
+    const c = claseById(current);
+    nextBox.innerHTML = `▶ Siguiente: <b>Clase ${current} — ${c.t}</b>`;
+    contBtn.href = c.h;
+    contBtn.textContent = total === 0 ? '▶ Empezar aventura' : '▶ Continuar aventura';
   } else {
-    setTimeout(tryInit, 300)
+    nextBox.innerHTML = `🎉 <b>¡Terminaste las 26 misiones!</b>`;
+    contBtn.href = 'clase26_graduacion_genios.html';
+    contBtn.textContent = '🏆 Ver mi graduación';
   }
-})()
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    document.getElementById('xpFill').style.width = pct + '%';
+  }));
+
+  // Re-vincular efectos (ripple/sonido/reveal) a los nodos recién creados
+  if (window.GCBind) window.GCBind();
+
+  // Detectar subida de nivel (mundo) desde la última visita
+  try {
+    const nivelActual = total >= TOTAL ? 7 : mundoActual.id;
+    const prev = parseInt(localStorage.getItem('gc_seen_level') || '0', 10);
+    if (total > 0 && nivelActual > prev && prev > 0 && window.GCLevelUp) {
+      const m = MUNDOS.find(x => x.id === nivelActual);
+      setTimeout(() => window.GCLevelUp(nivelActual, m ? m.nombre : ''), 700);
+    }
+    localStorage.setItem('gc_seen_level', String(nivelActual));
+  } catch (e) {}
+}
+
+// ── Cargar progreso real (Supabase, sólo producción) o demo (preview) ──
+const ES_PRODUCCION = /vercel\.app$|academiadavinci/.test(location.hostname);
+function cargarProgreso() {
+  if (ES_PRODUCCION && window._supabase) {
+    const sb = window._supabase;
+    sb.auth.getSession().then(({ data:{ session } }) => {
+      if (!session) { render([1]); return; }
+      sb.from('progress').select('clase_num')
+        .eq('user_id', session.user.id).eq('completada', true)
+        .then(({ data }) => render((data||[]).map(r => r.clase_num)));
+    }).catch(() => render([1]));
+  } else {
+    // Modo demo para la vista previa (muestra el diseño "con avance")
+    render([1,2,3,4,5,6,7]);
+  }
+}
+document.addEventListener('DOMContentLoaded', cargarProgreso);
 </script>
 
-<!-- ═══ STEAM ═══ -->
-<div class="divider"></div>
-<div class="section">
-  <div class="section-label">Metodología</div>
-  <h2 class="section-title">Aprendizaje <span>STEAM + IA</span></h2>
-  <p class="section-desc">Cada lección integra las 5 disciplinas en un solo proyecto creativo.</p>
-  <div class="steam-grid">
-    <div class="steam-card">
-      <div class="icon">🔬</div>
-      <h4>Ciencia</h4>
-      <p>Cómo funciona la IA y sus algoritmos</p>
-    </div>
-    <div class="steam-card">
-      <div class="icon">💻</div>
-      <h4>Tecnología</h4>
-      <p>ChatGPT, Suno, ElevenLabs, Kling</p>
-    </div>
-    <div class="steam-card">
-      <div class="icon">⚙️</div>
-      <h4>Ingeniería</h4>
-      <p>Estructura lógica de los prompts</p>
-    </div>
-    <div class="steam-card">
-      <div class="icon">🎨</div>
-      <h4>Arte</h4>
-      <p>Imagen, video, música, narrativa</p>
-    </div>
-    <div class="steam-card">
-      <div class="icon">➕</div>
-      <h4>Matemáticas</h4>
-      <p>Patrones, estructuras y lógica creativa</p>
-    </div>
-  </div>
-</div>
+<!-- ── Motor de efectos (partículas, parallax, reveal, tilt, sonido, racha) ── -->
+<script src="js/juice.js"></script>
 
-<!-- ═══ MÓDULOS ═══ -->
-<div class="divider"></div>
-<div class="section">
-  <div class="section-label">El Recorrido Completo</div>
-  <h2 class="section-title">Los 6 <span>Módulos</span></h2>
-  <p class="section-desc">Cada módulo construye sobre el anterior. Al final del curso, tu hijo habrá creado su propia serie animada completa.</p>
+<!-- ── Misión diaria (reto creativo que rota cada día) ── -->
+<script>
+(function () {
+  var RETOS = [
+    'Inventa un nombre épico para una mascota robot 🤖',
+    'Dibuja en tu cuaderno un personaje con 3 ojos 👁️',
+    'Escribe un prompt para crear tu comida favorita en 3D 🍕',
+    'Piensa un superpoder que nadie haya visto jamás ⚡',
+    'Inventa un planeta nuevo y cómo es la vida ahí 🪐',
+    'Describe a tu personaje en solo 5 palabras ✍️',
+    'Imagina qué canción sonaría en tu película 🎵',
+    'Dale a tu personaje un miedo secreto 😱',
+    'Inventa un invento loco que arregle algo aburrido 🛠️',
+  ];
+  function init() {
+    var today = new Date();
+    var key = 'gc_daily_' + today.toISOString().slice(0, 10);
+    var dayIdx = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 864e5);
+    var reto = RETOS[dayIdx % RETOS.length];
+    var elText = document.getElementById('dailyText');
+    var elDate = document.getElementById('dailyDate');
+    var elBtn = document.getElementById('dailyBtn');
+    var elCard = document.getElementById('daily');
+    var elIcon = document.getElementById('dailyIcon');
+    if (!elText) return;
+    elText.textContent = reto;
+    elDate.textContent = today.toLocaleDateString('es-MX', { weekday: 'long', day: 'numeric', month: 'long' });
 
-  <div class="modulos-grid">
+    function markDone(celebrate) {
+      elCard.classList.add('done'); elIcon.textContent = '✅';
+      elBtn.textContent = '✓ ¡Hecho hoy!'; elBtn.style.opacity = '.7'; elBtn.style.pointerEvents = 'none';
+      if (celebrate) { if (window.GCConfetti) window.GCConfetti(26); if (window.GCSound) try { window.GCSound.win(); } catch (e) {} }
+    }
+    if (localStorage.getItem(key)) { markDone(false); }
+    elBtn.addEventListener('click', function () { localStorage.setItem(key, '1'); markDone(true); });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+})();
+</script>
 
-    <!-- MÓDULO 1 -->
-    <div class="modulo-card m1">
-      <div class="modulo-header">
-        <div class="modulo-icon">🎨</div>
-        <div>
-          <div class="modulo-num">Módulo 1</div>
-          <div class="modulo-name">El Personaje</div>
-          <div class="modulo-robotsin-name">D-IA Vinci Artista</div>
-        </div>
-      </div>
-      <div class="modulo-desc">
-        Crean su personaje desde un dibujo a mano. Aprenden qué es la IA, cómo escribir prompts y lo convierten en imagen digital con estilo propio.
-      </div>
-      <div class="clases-list">
-        <a href="clase1_bienvenido_genio.html" class="clase-item">
-          <span class="clase-dot"></span>
-          <span class="clase-title">Clase 1 — ¡Bienvenido, Genio!</span>
-          <span class="clase-time">60 min</span>
-                  </a>
-        <a href="clase2_nace_el_personaje.html" class="clase-item">
-          <span class="clase-dot"></span>
-          <span class="clase-title">Clase 2 — Nace el Personaje</span>
-          <span class="clase-time">60 min</span>
-                  </a>
-        <a href="clase3_retrato_oficial.html" class="clase-item">
-          <span class="clase-dot"></span>
-          <span class="clase-title">Clase 3 — El Retrato Oficial</span>
-          <span class="clase-time">60 min</span>
-                  </a>
-        <a href="clase4_tarjeta_oficial.html" class="clase-item">
-          <span class="clase-dot"></span>
-          <span class="clase-title">Clase 4 — La Tarjeta Oficial</span>
-          <span class="clase-time">60 min</span>
-                  </a>
-        <a href="clase5_los_arquetipos.html" class="clase-item">
-          <span class="clase-dot"></span>
-          <span class="clase-title">Clase 5 — Los 12 Arquetipos</span>
-          <span class="clase-time">60 min</span>
-                  </a>
-      </div>
-      <div class="modulo-footer">
-        <span class="modulo-tag">5 clases · 2 semanas</span>
-        <span class="modulo-arrow" style="color:var(--purple)">→</span>
-      </div>
-    </div>
-
-    <!-- MÓDULO 2 -->
-    <div class="modulo-card m2">
-      <div class="modulo-header">
-        <div class="modulo-icon">🌍</div>
-        <div>
-          <div class="modulo-num">Módulo 2</div>
-          <div class="modulo-name">El Mundo</div>
-          <div class="modulo-robotsin-name">D-IA Vinci Arquitecto</div>
-        </div>
-      </div>
-      <div class="modulo-desc">
-        Construyen el universo donde vive su personaje. Escenarios, aliados, villanos. Aprenden composición visual y world-building con IA.
-      </div>
-      <div class="clases-list">
-        <a href="clase6_el_universo.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 6 — El Universo</span><span class="clase-time">60 min</span><span class="clase-status status-ready">✓</span></a>
-        <a href="clase7_aliados_villanos.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 7 — Aliados y Villanos</span><span class="clase-time">60 min</span><span class="clase-status status-ready">✓</span></a>
-        <a href="clase8_mapa_del_mundo.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 8 — El Mapa del Mundo</span><span class="clase-time">60 min</span><span class="clase-status status-ready">✓</span></a>
-        <a href="clase9_galeria_del_mundo.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 9 — Galería del Mundo</span><span class="clase-time">60 min</span><span class="clase-status status-ready">✓</span></a>
-      </div>
-      <div class="modulo-footer">
-        <span class="modulo-tag">4 clases · 2 semanas</span>
-        <span class="modulo-arrow" style="color:var(--blue)">→</span>
-      </div>
-    </div>
-
-    <!-- MÓDULO 3 -->
-    <div class="modulo-card m3">
-      <div class="modulo-header">
-        <div class="modulo-icon">📖</div>
-        <div>
-          <div class="modulo-num">Módulo 3</div>
-          <div class="modulo-name">La Historia</div>
-          <div class="modulo-robotsin-name">D-IA Vinci Escritor</div>
-        </div>
-      </div>
-      <div class="modulo-desc">
-        Escriben el primer episodio de su serie. Guion, diálogos, estructura narrativa. Crean su primer cómic digital completo.
-      </div>
-      <div class="clases-list">
-        <a href="clase10_el_guion.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 10 — El Guion</span><span class="clase-time">60 min</span><span class="clase-status status-ready">✓</span></a>
-        <a href="clase11_los_dialogos.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 11 — Los Diálogos</span><span class="clase-time">60 min</span><span class="clase-status status-ready">✓</span></a>
-        <a href="clase12_el_comic.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 12 — El Cómic</span><span class="clase-time">60 min</span><span class="clase-status status-ready">✓</span></a>
-        <a href="clase13_episodio_completo.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 13 — Episodio Completo</span><span class="clase-time">60 min</span><span class="clase-status status-ready">✓</span></a>
-      </div>
-      <div class="modulo-footer">
-        <span class="modulo-tag">4 clases · 2 semanas</span>
-        <span class="modulo-arrow" style="color:var(--green)">→</span>
-      </div>
-    </div>
-
-    <!-- MÓDULO 4 -->
-    <div class="modulo-card m4">
-      <div class="modulo-header">
-        <div class="modulo-icon">🎬</div>
-        <div>
-          <div class="modulo-num">Módulo 4</div>
-          <div class="modulo-name">El Video</div>
-          <div class="modulo-robotsin-name">D-IA Vinci Director</div>
-        </div>
-      </div>
-      <div class="modulo-desc">
-        Su personaje cobra vida en movimiento. Animan escenas con IA, aprenden edición básica y producen su primer tráiler oficial.
-      </div>
-      <div class="clases-list">
-        <a href="clase14_primera_animacion.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 14 — Primera Animación</span><span class="clase-time">60 min</span><span class="clase-status status-ready">✓</span></a>
-        <a href="clase15_planos_y_camara.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 15 — Planos y Cámara</span><span class="clase-time">60 min</span><span class="clase-status status-pending">⏳</span></a>
-        <a href="clase16_las_escenas.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 16 — Las Escenas</span><span class="clase-time">60 min</span><span class="clase-status status-ready">✓</span></a>
-        <a href="clase17_edicion_basica.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 17 — Edición Básica</span><span class="clase-time">60 min</span><span class="clase-status status-ready">✓</span></a>
-        <a href="clase18_el_trailer.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 18 — El Tráiler</span><span class="clase-time">60 min</span><span class="clase-status status-ready">✓</span></a>
-      </div>
-      <div class="modulo-footer">
-        <span class="modulo-tag">5 clases · 2 semanas</span>
-        <span class="modulo-arrow" style="color:var(--red)">→</span>
-      </div>
-    </div>
-
-    <!-- MÓDULO 5 -->
-    <div class="modulo-card m5">
-      <div class="modulo-header">
-        <div class="modulo-icon">🎵</div>
-        <div>
-          <div class="modulo-num">Módulo 5</div>
-          <div class="modulo-name">La Música</div>
-          <div class="modulo-robotsin-name">D-IA Vinci Músico</div>
-        </div>
-      </div>
-      <div class="modulo-desc">
-        Componen el tema musical de su serie, generan voces con IA y producen el audio completo de su episodio sin saber tocar ningún instrumento.
-      </div>
-      <div class="clases-list">
-        <a href="clase19_el_tema_musical.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 19 — El Tema Musical</span><span class="clase-time">60 min</span><span class="clase-status status-ready">✓</span></a>
-        <a href="clase20_la_voz_del_personaje.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 20 — La Voz del Personaje</span><span class="clase-time">60 min</span><span class="clase-status status-ready">✓</span></a>
-        <a href="clase21_efectos_de_sonido.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 21 — Efectos de Sonido</span><span class="clase-time">60 min</span><span class="clase-status status-ready">✓</span></a>
-        <a href="clase22_audio_completo.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 22 — Audio Completo</span><span class="clase-time">60 min</span><span class="clase-status status-ready">✓</span></a>
-      </div>
-      <div class="modulo-footer">
-        <span class="modulo-tag">4 clases · 2 semanas</span>
-        <span class="modulo-arrow" style="color:var(--gold)">→</span>
-      </div>
-    </div>
-
-    <!-- MÓDULO 6 -->
-    <div class="modulo-card m6">
-      <div class="modulo-header">
-        <div class="modulo-icon">🏆</div>
-        <div>
-          <div class="modulo-num">Módulo 6</div>
-          <div class="modulo-name">El Proyecto Final</div>
-          <div class="modulo-robotsin-name">D-IA Vinci Maestro</div>
-        </div>
-      </div>
-      <div class="modulo-desc">
-        Todo se une. Producen su episodio completo con personaje, mundo, historia, animación y música. Presentación ante familia y compañeros.
-      </div>
-      <div class="clases-list">
-        <a href="clase23_ensamble_final.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 23 — Ensamble Final</span><span class="clase-time">60 min</span><span class="clase-status status-ready">✓</span></a>
-        <a href="clase24_revision_edicion.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 24 — Revisión y Edición</span><span class="clase-time">60 min</span><span class="clase-status status-ready">✓</span></a>
-        <a href="clase25_estreno_privado.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 25 — Estreno Privado</span><span class="clase-time">60 min</span><span class="clase-status status-ready">✓</span></a>
-        <a href="clase26_graduacion_genios.html" class="clase-item"><span class="clase-dot"></span><span class="clase-title">Clase 26 — Graduación Genios</span><span class="clase-time">60 min</span><span class="clase-status status-ready">✓</span></a>
-      </div>
-      <div class="modulo-footer">
-        <span class="modulo-tag">4 clases · 2 semanas</span>
-        <span class="modulo-arrow" style="color:var(--teal)">→</span>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<!-- ═══ ROBOTSIN VARIANTS ═══ -->
-<div class="divider"></div>
-<div class="section" style="background: rgba(255,255,255,0.01);">
-  <div class="section-label">Tu guía en cada módulo</div>
-  <h2 class="section-title">Las variantes de <span>D-IA Vinci Robotsin</span></h2>
-  <p class="section-desc">Un Robotsin diferente te acompaña en cada módulo, especializado en lo que aprenderás.</p>
-
-  <div class="robotsin-grid">
-    <div class="robotsin-card">
-      <div class="robotsin-img">
-        <img src="robotsin/robotsin_artista.png" alt="D-IA Vinci Artista"
-             onerror="this.style.display='none'; this.parentElement.querySelector('.fallback').style.display='block'">
-        <div class="fallback" style="display:none">🎨</div>
-      </div>
-      <div class="r-mod">Módulo 1</div>
-      <h4>D-IA Vinci Artista</h4>
-      <p>Pincel luminoso, crea personajes con magia digital</p>
-    </div>
-    <div class="robotsin-card">
-      <div class="robotsin-img">
-        <img src="robotsin/robotsin_arquitecto.png" alt="D-IA Vinci Arquitecto"
-             onerror="this.style.display='none'; this.parentElement.querySelector('.fallback').style.display='block'">
-        <div class="fallback" style="display:none">🌍</div>
-      </div>
-      <div class="r-mod">Módulo 2</div>
-      <h4>D-IA Vinci Arquitecto</h4>
-      <p>Planos holográficos, construye mundos enteros</p>
-    </div>
-    <div class="robotsin-card">
-      <div class="robotsin-img">
-        <img src="robotsin/robotsin_escritor.png" alt="D-IA Vinci Escritor"
-             onerror="this.style.display='none'; this.parentElement.querySelector('.fallback').style.display='block'">
-        <div class="fallback" style="display:none">📖</div>
-      </div>
-      <div class="r-mod">Módulo 3</div>
-      <h4>D-IA Vinci Escritor</h4>
-      <p>Pluma dorada, las historias cobran vida</p>
-    </div>
-    <div class="robotsin-card">
-      <div class="robotsin-img">
-        <img src="robotsin/robotsin_director.png" alt="D-IA Vinci Director"
-             onerror="this.style.display='none'; this.parentElement.querySelector('.fallback').style.display='block'">
-        <div class="fallback" style="display:none">🎬</div>
-      </div>
-      <div class="r-mod">Módulo 4</div>
-      <h4>D-IA Vinci Director</h4>
-      <p>Claqueta en mano, ¡acción con IA!</p>
-    </div>
-    <div class="robotsin-card">
-      <div class="robotsin-img">
-        <img src="robotsin/robotsin_musico.png" alt="D-IA Vinci Músico"
-             onerror="this.style.display='none'; this.parentElement.querySelector('.fallback').style.display='block'">
-        <div class="fallback" style="display:none">🎵</div>
-      </div>
-      <div class="r-mod">Módulo 5</div>
-      <h4>D-IA Vinci Músico</h4>
-      <p>Laúd digital, compone sin saber música</p>
-    </div>
-    <div class="robotsin-card">
-      <div class="robotsin-img">
-        <img src="robotsin/robotsin_maestro.png" alt="D-IA Vinci Maestro"
-             onerror="this.style.display='none'; this.parentElement.querySelector('.fallback').style.display='block'">
-        <div class="fallback" style="display:none">🏆</div>
-      </div>
-      <div class="r-mod">Módulo 6</div>
-      <h4>D-IA Vinci Maestro</h4>
-      <p>Diploma dorado, ¡eres un Genio Creativo!</p>
-    </div
-    </div>
-  </div>
-</div>
-
-<!-- ═══ RECURSOS EXTRA ═══ -->
-<div class="divider"></div>
-<div class="section" style="background: rgba(255,255,255,0.01);">
-  <div class="section-label">Bonus desbloqueado</div>
-  <h2 class="section-title">Recursos <span>Extra</span></h2>
-  <p class="section-desc">Materiales complementarios que refuerzan habilidades específicas. Accesibles en cualquier momento del curso — sin prerequisitos.</p>
-
-  <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; max-width:700px; margin:0 auto;">
-
-    <a href="extra_matematico_del_cine.html" style="text-decoration:none;">
-      <div style="background:rgba(22,160,133,0.08); border:1px solid rgba(22,160,133,0.25); border-radius:20px; padding:28px; transition:all .25s; cursor:pointer;" onmouseover="this.style.transform='translateY(-4px)';this.style.borderColor='rgba(22,160,133,0.5)'" onmouseout="this.style.transform='';this.style.borderColor='rgba(22,160,133,0.25)'">
-        <div style="font-size:36px; margin-bottom:14px;">🧮</div>
-        <div style="font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:#16A085; margin-bottom:8px;">Matemáticas en Acción</div>
-        <h3 style="font-size:16px; font-weight:800; color:#fff; margin-bottom:8px;">El Matemático del Cine</h3>
-        <p style="font-size:13px; color:rgba(232,234,240,0.55); line-height:1.5;">Regla de los tercios, cronograma de producción y BPM — los secretos numéricos que usan todos los directores.</p>
-        <div style="margin-top:16px; font-size:12px; font-weight:700; color:#16A085;">Abrir recurso →</div>
-      </div>
-    </a>
-
-    <a href="extra_tu_cuerpo_crea.html" style="text-decoration:none;">
-      <div style="background:rgba(142,68,173,0.08); border:1px solid rgba(142,68,173,0.25); border-radius:20px; padding:28px; transition:all .25s; cursor:pointer;" onmouseover="this.style.transform='translateY(-4px)';this.style.borderColor='rgba(142,68,173,0.5)'" onmouseout="this.style.transform='';this.style.borderColor='rgba(142,68,173,0.25)'">
-        <div style="font-size:36px; margin-bottom:14px;">🎭</div>
-        <div style="font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:#c39bd3; margin-bottom:8px;">Inteligencia Kinestésica</div>
-        <h3 style="font-size:16px; font-weight:800; color:#fff; margin-bottom:8px;">Tu Cuerpo Crea</h3>
-        <p style="font-size:13px; color:rgba(232,234,240,0.55); line-height:1.5;">Actúa antes de animar, Mirror Challenge y calentamiento vocal — las técnicas que usan los animadores de Pixar.</p>
-        <div style="margin-top:16px; font-size:12px; font-weight:700; color:#c39bd3;">Abrir recurso →</div>
-      </div>
-    </a>
-
-  </div>
-</div>
-
-<!-- ═══ CTA ═══ -->
-<div class="cta-section">
-  <img src="robotsin/robotsin_completo.png" alt="D-IA Vinci Robotsin"
-       style="width:260px; height:260px; object-fit:contain;
-              filter:drop-shadow(0 8px 32px rgba(74,144,217,0.4));
-              margin-bottom:12px; display:block; margin-left:auto; margin-right:auto;">
-  <h2>¿Listo para crear con D-IA Vinci?</h2>
-  <p>Tu hijo va a crear su propio personaje animado, con historia, música y voz propia. Con inteligencia artificial.</p>
-  <a href="clase1_bienvenido_genio.html" class="btn-primary">Empezar Clase 1 →</a>
-</div>
-
-<!-- ═══ FOOTER ═══ -->
-<footer>
-  <strong>Academia Da Vinci IA</strong> · Pequeños Genios Creativos<br>
-  Metodología STEAM + Inteligencia Artificial Generativa<br>
-  Por Ing. Jhonnatan Azael Vázquez Espinoza
-</footer>
+<!-- ── Supabase (sólo se activa en producción; en preview se ignora) ── -->
+<script>
+if (ES_PRODUCCION) {
+  const add = (src, cb) => { const s=document.createElement('script'); s.src=src; s.onload=cb; document.head.appendChild(s); };
+  add('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js', () => {
+    add('js/supabase-client.js', cargarProgreso);
+  });
+}
+</script>
 
 </body>
 </html>

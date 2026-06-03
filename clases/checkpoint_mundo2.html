@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Reto del Mundo 2 — Genios Creativos</title>
+<link rel="icon" type="image/svg+xml" href="robotsin/favicon.svg">
+<link rel="stylesheet" href="css/genios.css">
+<link rel="stylesheet" href="css/juice.css">
+<link rel="stylesheet" href="css/quiz.css">
+</head>
+<body class="lesson" style="--wc: var(--m2)">
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="lback" href="index.html">← Mapa</a>
+    <div class="nav-title">Mundo 2 <span class="sep">·</span> <span>El Mundo del Genio</span></div>
+    <div class="nav-spacer topbar-spacer"></div>
+    <button class="icon-btn" id="soundBtn" title="Sonido" aria-label="Sonido">🔊</button>
+  </div>
+</header>
+
+<section class="lhero" style="padding-bottom:24px;">
+  <span class="spark" data-parallax="0.14" style="top:30px;left:16%;font-size:24px;">✦</span>
+  <span class="spark" data-parallax="-0.12" style="top:70px;right:18%;font-size:18px;animation-delay:1s;">✧</span>
+  <div class="lread" data-reveal>
+    <span class="badge-pill">🎯 Checkpoint del Mundo 2</span>
+    <div class="mascot-stage" style="width:120px;height:120px;margin:18px auto 14px;">
+      <img src="robotsin/robotsin_arquitecto.png" alt="Robotsin">
+    </div>
+    <h1>El <span>Reto</span> del Genio</h1>
+    <p class="lead">Responde para demostrar que dominas el Mundo 2… ¡y gana tu insignia de maestría!</p>
+  </div>
+</section>
+
+<section class="block" style="padding-top:10px;">
+  <div class="lread">
+    <div class="quiz" data-reveal><div id="quiz"></div></div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="ico">🌍✨</div>
+  <b>Academia Da Vinci IA</b> · Checkpoint · Mundo 2 — El Mundo del Genio
+</footer>
+
+<script src="js/juice.js"></script>
+<script>
+window.QUIZ_DATA = {
+  "insignia": "🌍",
+  "insigniaNombre": "Constructor de Mundos",
+  "avatar": "robotsin/robotsin_arquitecto.png",
+  "btnClass": "",
+  "volverHref": "index.html",
+  "siguienteHref": "clase10_el_guion.html",
+  "siguienteLabel": "▶ Siguiente mundo",
+  "preguntas": [
+    {
+      "q": "¿Qué es \"construir un mundo\" (worldbuilding)?",
+      "opciones": [
+        "Jugar con bloques",
+        "Inventar el lugar donde vive tu personaje",
+        "Dibujar un mapa de tu casa",
+        "Hacer la tarea"
+      ],
+      "correcta": 1,
+      "pista": "Es crear el universo: ciudades, criaturas y reglas. 🌍"
+    },
+    {
+      "q": "¿Para qué sirve un villano en tu historia?",
+      "opciones": [
+        "Para ponerle retos al héroe",
+        "Para no hacer nada",
+        "Para ganar siempre",
+        "Para aburrir"
+      ],
+      "correcta": 0,
+      "pista": "Sin un buen reto, la aventura no emociona. 😈"
+    },
+    {
+      "q": "El mapa de tu mundo sirve para…",
+      "opciones": [
+        "Decorar nada más",
+        "Saber dónde pasan las aventuras",
+        "Perderte",
+        "Comer"
+      ],
+      "correcta": 1,
+      "pista": "Ayuda a ubicar los lugares de tu historia. 🗺️"
+    },
+    {
+      "q": "Los personajes secundarios son…",
+      "opciones": [
+        "Los aliados y villanos que acompañan al héroe",
+        "Solo el protagonista",
+        "Personas reales",
+        "Robots de verdad"
+      ],
+      "correcta": 0,
+      "pista": "Amigos y enemigos hacen más rica la historia. 👥"
+    }
+  ]
+};
+</script>
+<script src="js/quiz.js"></script>
+
+</body>
+</html>

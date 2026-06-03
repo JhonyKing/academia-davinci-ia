@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Reto del Mundo 6 — Genios Creativos</title>
+<link rel="icon" type="image/svg+xml" href="robotsin/favicon.svg">
+<link rel="stylesheet" href="css/genios.css">
+<link rel="stylesheet" href="css/juice.css">
+<link rel="stylesheet" href="css/quiz.css">
+</head>
+<body class="lesson" style="--wc: var(--m6)">
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="lback" href="index.html">← Mapa</a>
+    <div class="nav-title">Mundo 6 <span class="sep">·</span> <span>El Genio al Mundo</span></div>
+    <div class="nav-spacer topbar-spacer"></div>
+    <button class="icon-btn" id="soundBtn" title="Sonido" aria-label="Sonido">🔊</button>
+  </div>
+</header>
+
+<section class="lhero" style="padding-bottom:24px;">
+  <span class="spark" data-parallax="0.14" style="top:30px;left:16%;font-size:24px;">✦</span>
+  <span class="spark" data-parallax="-0.12" style="top:70px;right:18%;font-size:18px;animation-delay:1s;">✧</span>
+  <div class="lread" data-reveal>
+    <span class="badge-pill">🎯 Checkpoint del Mundo 6</span>
+    <div class="mascot-stage" style="width:120px;height:120px;margin:18px auto 14px;">
+      <img src="robotsin/robotsin_maestro.png" alt="Robotsin">
+    </div>
+    <h1>El <span>Reto</span> del Genio</h1>
+    <p class="lead">Responde para demostrar que dominas el Mundo 6… ¡y gana tu insignia de maestría!</p>
+  </div>
+</section>
+
+<section class="block" style="padding-top:10px;">
+  <div class="lread">
+    <div class="quiz" data-reveal><div id="quiz"></div></div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="ico">🏆✨</div>
+  <b>Academia Da Vinci IA</b> · Checkpoint · Mundo 6 — El Genio al Mundo
+</footer>
+
+<script src="js/juice.js"></script>
+<script>
+window.QUIZ_DATA = {
+  "insignia": "🏆",
+  "insigniaNombre": "Genio Graduado",
+  "avatar": "robotsin/robotsin_maestro.png",
+  "btnClass": "",
+  "volverHref": "index.html",
+  "siguienteHref": "certificado.html",
+  "siguienteLabel": "🏆 Ver mi certificado",
+  "preguntas": [
+    {
+      "q": "\"Ensamblar\" tu proyecto significa…",
+      "opciones": [
+        "Romperlo",
+        "Unir todas las piezas (video, audio y música)",
+        "Empezar de cero",
+        "Esconderlo"
+      ],
+      "correcta": 1,
+      "pista": "Es juntar todo en una sola película. 🧩"
+    },
+    {
+      "q": "Antes de publicar en YouTube, lo mejor es subirlo como…",
+      "opciones": [
+        "Público para todos",
+        "Oculto, hasta que papá/mamá aprueben",
+        "En vivo",
+        "Borrado"
+      ],
+      "correcta": 1,
+      "pista": "Primero oculto y con permiso de un adulto. 🔒"
+    },
+    {
+      "q": "El estreno privado es…",
+      "opciones": [
+        "Mostrar tu peli a tu familia",
+        "Venderla",
+        "Borrarla",
+        "Esconderla para siempre"
+      ],
+      "correcta": 0,
+      "pista": "¡Es tu première para la familia! 🎉"
+    },
+    {
+      "q": "Un buen creador siempre…",
+      "opciones": [
+        "Usa la IA con seguridad y supervisión de un adulto",
+        "Trabaja solo y a escondidas",
+        "Copia todo",
+        "No revisa nada"
+      ],
+      "correcta": 0,
+      "pista": "Seguridad y acompañamiento adulto, siempre. 🛡️"
+    }
+  ]
+};
+</script>
+<script src="js/quiz.js"></script>
+
+</body>
+</html>

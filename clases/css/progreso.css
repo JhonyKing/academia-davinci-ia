@@ -1,0 +1,148 @@
+/* ============================================================
+   GENIOS CREATIVOS · Panel de Papás (progreso.html)
+   Tema claro, profesional y CONFIABLE — pensado para adultos.
+   Menos "juego", más claridad y legibilidad. Imprimible.
+   Carga DESPUÉS de css/genios.css. (No usa la capa juice.)
+   ============================================================ */
+
+body.page-padres { background: #F4F6FD; }
+/* fondo más sobrio que el del niño */
+body.page-padres::before { opacity: .5; }
+body.page-padres::after { display: none; }
+
+/* ── Topbar con botón imprimir ── */
+.btn-print {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: #fff; border: 2px solid var(--line); color: var(--ink-2);
+  font-family: var(--font-display); font-weight: 600; font-size: 14px;
+  padding: 9px 18px; border-radius: 999px; cursor: pointer; transition: .18s;
+}
+.btn-print:hover { border-color: var(--blue); color: var(--blue); transform: translateY(-2px); }
+
+.container { max-width: 940px; margin: 0 auto; padding: 32px 22px 56px; }
+
+#loading-state { text-align: center; padding: 90px 22px; color: var(--ink-3); font-weight: 700; font-size: 16px; }
+
+/* ── HERO / cabecera del reporte ── */
+.report-hero {
+  background: #fff; border: 2px solid var(--line); border-radius: var(--r-lg);
+  padding: 30px 32px; margin-bottom: 22px; box-shadow: var(--shadow-sm);
+}
+.report-eyebrow {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-weight: 900; font-size: 12px; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--purple); background: color-mix(in srgb,var(--purple) 12%,#fff);
+  padding: 7px 15px; border-radius: 999px; margin-bottom: 16px;
+}
+.hero-nombre { font-family: var(--font-display); font-weight: 700; font-size: clamp(26px,4vw,38px); color: var(--ink); line-height: 1.1; }
+.hero-nombre span { color: var(--blue); }
+.hero-subtitle { font-size: 15px; font-weight: 600; color: var(--ink-2); margin-top: 4px; }
+.hero-fecha { font-size: 14px; font-weight: 600; color: var(--ink-3); margin-top: 4px; margin-bottom: 26px; }
+.hero-fecha strong { color: var(--ink); }
+
+/* ── Tarjetas de estadística ── */
+.stats-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; }
+.stat-card {
+  background: #F7F9FF; border: 2px solid var(--line); border-radius: var(--r);
+  padding: 20px 16px; text-align: center;
+}
+.stat-value { font-family: var(--font-display); font-weight: 700; font-size: 30px; line-height: 1; margin-bottom: 8px; }
+.stat-label { font-size: 12px; font-weight: 800; color: var(--ink-3); text-transform: uppercase; letter-spacing: .04em; }
+.stat-card:nth-child(1) .stat-value { color: var(--blue); }
+.stat-card:nth-child(2) .stat-value { color: var(--purple); }
+.stat-card:nth-child(3) .stat-value { color: var(--gold); }
+.stat-card:nth-child(4) .stat-value { color: var(--teal); }
+
+/* ── Barra general ── */
+.progress-section, .actividad-section {
+  background: #fff; border: 2px solid var(--line); border-radius: var(--r-lg);
+  padding: 24px 28px; margin-bottom: 22px; box-shadow: var(--shadow-sm);
+}
+.section-title { font-family: var(--font-display); font-weight: 600; font-size: 15px; color: var(--ink); margin-bottom: 14px; }
+.progress-bar-wrap { background: #EAEDFA; border-radius: 999px; height: 14px; overflow: hidden; margin-bottom: 10px; box-shadow: inset 0 2px 4px rgba(30,37,71,.1); }
+.progress-bar-fill { height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--blue), var(--purple)); transition: width .8s ease; }
+.progress-label { font-size: 15px; font-weight: 700; color: var(--ink-2); }
+.progress-label strong { color: var(--ink); }
+
+/* ── Módulos ── */
+.modulos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 22px; }
+.modulo-card {
+  background: #fff; border: 2px solid var(--line); border-left-width: 6px; border-radius: var(--r);
+  padding: 20px 22px; box-shadow: var(--shadow-sm);
+}
+.modulo-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 14px; gap: 8px; }
+.modulo-num { font-weight: 900; font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-3); margin-bottom: 2px; }
+.modulo-nombre { font-family: var(--font-display); font-weight: 600; font-size: 16px; color: var(--ink); }
+.modulo-conteo { font-size: 13px; font-weight: 700; color: var(--ink-3); white-space: nowrap; }
+.badge-completado {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: color-mix(in srgb,var(--green) 16%,#fff); color: var(--green);
+  border: 2px solid color-mix(in srgb,var(--green) 36%,#fff);
+  border-radius: 999px; padding: 4px 12px; font-weight: 800; font-size: 12px; white-space: nowrap;
+}
+.clases-dots { display: flex; flex-wrap: wrap; gap: 7px; }
+.dot {
+  width: 32px; height: 32px; border-radius: 9px; display: grid; place-items: center;
+  font-weight: 800; font-size: 12px; transition: transform .15s;
+}
+.dot:hover { transform: translateY(-2px); }
+.dot-done { background: color-mix(in srgb,var(--green) 18%,#fff); color: var(--green); border: 2px solid color-mix(in srgb,var(--green) 42%,#fff); }
+.dot-pending { background: #F1F3FB; color: var(--ink-3); border: 2px solid var(--line); }
+
+/* ── Actividad reciente (tabla) ── */
+.actividad-empty { color: var(--ink-3); font-weight: 600; font-size: 15px; padding: 10px 0; }
+table { width: 100%; border-collapse: collapse; }
+thead th {
+  font-weight: 900; font-size: 11px; text-transform: uppercase; letter-spacing: .06em;
+  color: var(--ink-3); padding: 0 0 12px; text-align: left; border-bottom: 2px solid var(--line);
+}
+tbody tr { border-bottom: 1px solid var(--line); }
+tbody tr:last-child { border-bottom: none; }
+tbody td { padding: 13px 0; font-size: 15px; font-weight: 600; color: var(--ink); }
+td.clase-num { font-family: var(--font-display); font-weight: 700; color: var(--blue); width: 60px; }
+td.clase-fecha { color: var(--ink-3); font-size: 14px; text-align: right; }
+
+/* ── Zona de administración ── */
+.danger-zone {
+  max-width: 940px; margin: 0 auto 46px; padding: 0 22px;
+}
+.danger-zone .inner {
+  border: 2px solid color-mix(in srgb,var(--red) 30%,#fff); border-radius: var(--r-lg);
+  padding: 26px 30px; background: color-mix(in srgb,var(--red) 6%,#fff);
+}
+.danger-zone h3 { font-family: var(--font-display); font-weight: 600; font-size: 17px; color: var(--red); margin-bottom: 6px; }
+.danger-zone p { font-size: 14px; font-weight: 600; color: var(--ink-2); margin-bottom: 18px; }
+.danger-zone p strong { color: var(--ink); }
+.btn-danger {
+  background: #fff; border: 2px solid color-mix(in srgb,var(--red) 45%,#fff); color: var(--red);
+  padding: 11px 22px; border-radius: 999px; font-family: var(--font-display); font-weight: 600;
+  font-size: 14px; cursor: pointer; transition: .18s; box-shadow: 0 5px 0 color-mix(in srgb,var(--red) 30%,#fff);
+}
+.btn-danger:hover { transform: translateY(-1px); }
+.btn-danger:active { transform: translateY(4px); box-shadow: 0 1px 0 color-mix(in srgb,var(--red) 30%,#fff); }
+
+/* ── Footer ── */
+.page-padres footer { text-align: center; padding: 36px 22px; color: var(--ink-3); font-weight: 700; font-size: 14px; border-top: 2px solid var(--line); }
+.page-padres footer a { color: var(--blue); font-weight: 800; }
+.page-padres footer p + p { margin-top: 4px; }
+
+/* ── Responsive ── */
+@media (max-width: 680px) {
+  .stats-grid { grid-template-columns: repeat(2,1fr); }
+  .modulos-grid { grid-template-columns: 1fr; }
+  .hero-nombre { font-size: 24px; }
+}
+
+/* ── PRINT (reporte limpio para papás) ── */
+@media print {
+  body.page-padres { background: #fff; }
+  body.page-padres::before, body.page-padres::after { display: none; }
+  .topbar, .btn-print, .danger-zone { display: none !important; }
+  .container { padding: 0; max-width: 100%; }
+  .report-hero, .progress-section, .actividad-section, .modulo-card, .stat-card {
+    box-shadow: none !important; border: 1px solid #ccc !important;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .progress-bar-fill { background: #444 !important; }
+  * { animation: none !important; transition: none !important; }
+}

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Galería de Genios — El Estreno · Academia Da Vinci IA</title>
+<link rel="icon" type="image/svg+xml" href="robotsin/favicon.svg">
+<link rel="stylesheet" href="css/genios.css">
+<link rel="stylesheet" href="css/juice.css">
+<link rel="stylesheet" href="css/galeria.css">
+</head>
+<body class="page-galeria">
+
+<!-- ═══════════ TOPBAR ═══════════ -->
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <span class="brand-badge"><img src="robotsin/robotsin_completo.png" alt="Robotsin"></span>
+      <span>
+        <span class="brand-name">Genios <span>Creativos</span></span><br>
+        <span class="brand-sub">La Galería</span>
+      </span>
+    </a>
+    <div class="topbar-spacer"></div>
+    <a class="tlink" href="index.html"><span class="ic">🗺️</span><span>Mapa</span></a>
+    <a class="tlink" href="mi-personaje.html"><span class="ic">🦸</span><span>Mi Estudio</span></a>
+    <button class="icon-btn" id="soundBtn" title="Sonido" aria-label="Sonido">🔊</button>
+  </div>
+</header>
+
+<section class="section" style="padding-top:38px;padding-bottom:0;">
+  <div class="wrap">
+    <div class="section-head" data-reveal style="margin-bottom:0;">
+      <span class="eyebrow">🎬 El Estreno</span>
+      <h2>Galería de <em>Genios</em></h2>
+      <p>Las creaciones de otros genios de la academia. ¡Mira lo que se puede crear y toma ideas para tu propio universo!</p>
+    </div>
+    <div class="safe-note">
+      <span class="ic">🛡️</span>
+      <span>Espacio seguro y <b>moderado</b>. Todo se publica como <b>privado</b> y solo aparece aquí cuando un adulto lo aprueba. Sin apellidos, sin datos personales.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ ESTRENO DESTACADO ═══════════ -->
+<section class="section" style="padding-top:24px;padding-bottom:0;">
+  <div class="wrap">
+    <div class="featured" data-reveal>
+      <div class="feat-media">
+        <video id="featVideo" playsinline muted loop poster="robotsin/robotsin_director.png">
+          <source src="robotsin/videos/Robot_conducting_STEAM_elements_202606010101.mp4" type="video/mp4">
+        </video>
+        <div class="feat-flag"><span class="dot"></span> Estreno de la semana</div>
+        <button class="feat-play" id="featPlay" aria-label="Reproducir"><span class="circle">▶</span></button>
+      </div>
+      <div class="feat-info">
+        <span class="eyebrow">🎬 Película · Mundo 4</span>
+        <h2>"Nébula y el Robot Perdido"</h2>
+        <div class="by">por <b>Mateo, 11 años</b></div>
+        <p>Un cortometraje sobre una astronauta que encuentra a un robot olvidado en un planeta de cristal. Hecho 100% con IA: personaje, mundo, guion, animación y música original. 🌌</p>
+        <button class="btn red" id="featCta">▶ Ver el estreno</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FILTROS + GRILLA ═══════════ -->
+<section class="section" style="padding-top:30px;">
+  <div class="wrap">
+    <div class="gal-filters" id="filters" data-reveal>
+      <button class="gfilter active" data-f="todo">✨ Todo</button>
+      <button class="gfilter" data-f="personaje">🦸 Personajes</button>
+      <button class="gfilter" data-f="mundo">🌍 Mundos</button>
+      <button class="gfilter" data-f="historia">📖 Historias</button>
+      <button class="gfilter" data-f="pelicula">🎬 Películas</button>
+      <button class="gfilter" data-f="musica">🎵 Música</button>
+    </div>
+    <div class="gal-grid" id="grid" data-reveal></div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="ico">🎬✨</div>
+  <b>Academia Da Vinci IA</b> · La Galería de Genios<br>
+  Todas las creaciones se muestran con permiso de los papás · Espacio moderado
+</footer>
+
+<script src="js/juice.js"></script>
+<script>
+// ── Datos de la galería (en producción: tabla de creaciones públicas + aprobadas) ──
+const CREACIONES = [
+  { tipo:'personaje', titulo:'Chispa, la Zorra Inventora', autor:'Sofía', edad:11, mundo:'Mundo 1', img:'robotsin/robotsin_artista.png',    aplausos:48, video:false },
+  { tipo:'mundo',     titulo:'Ciudad Engranaje',           autor:'Diego', edad:10, mundo:'Mundo 2', img:'robotsin/robotsin_arquitecto.png', aplausos:33, video:false },
+  { tipo:'historia',  titulo:'El Diario de Byte',          autor:'Valentina', edad:12, mundo:'Mundo 3', img:'robotsin/robotsin_escritor.png', aplausos:27, video:false },
+  { tipo:'pelicula',  titulo:'Nébula y el Robot Perdido',  autor:'Mateo', edad:11, mundo:'Mundo 4', img:'robotsin/robotsin_director.png',   aplausos:81, video:true },
+  { tipo:'musica',    titulo:'La Canción de Tornillo',     autor:'Lucas', edad:9,  mundo:'Mundo 5', img:'robotsin/robotsin_musico.png',     aplausos:39, video:true },
+  { tipo:'personaje', titulo:'Capitán Cometa',             autor:'Camila', edad:13, mundo:'Mundo 1', img:'robotsin/robotsin_maestro.png',   aplausos:52, video:false },
+  { tipo:'pelicula',  titulo:'El Reino de Cristal',        autor:'Emma', edad:10,  mundo:'Mundo 4', img:'robotsin/robotsin_completo.png',   aplausos:64, video:true },
+  { tipo:'mundo',     titulo:'Bosque de Neón',             autor:'Santiago', edad:12, mundo:'Mundo 2', img:'robotsin/robotsin_artista.png', aplausos:29, video:false },
+];
+const TIPO_LABEL = { personaje:'🦸 Personaje', mundo:'🌍 Mundo', historia:'📖 Historia', pelicula:'🎬 Película', musica:'🎵 Música' };
+
+const grid = document.getElementById('grid');
+let filtro = 'todo';
+
+function render() {
+  const items = CREACIONES.filter(c => filtro === 'todo' || c.tipo === filtro);
+  if (!items.length) { grid.innerHTML = '<div class="gal-empty">Aún no hay creaciones aquí. ¡Sé el primero! 🎨</div>'; return; }
+  grid.innerHTML = items.map(c => `
+    <div class="gcard">
+      <div class="gcard-media">
+        <img src="${c.img}" alt="${c.titulo}">
+        <span class="gcard-type t-${c.tipo}">${TIPO_LABEL[c.tipo]}</span>
+        ${c.video ? '<span class="gcard-play">▶</span>' : ''}
+      </div>
+      <div class="gcard-body">
+        <div class="gcard-title">${c.titulo}</div>
+        <div class="gcard-creator"><span class="ava">${c.autor.charAt(0)}</span> ${c.autor}, ${c.edad} años</div>
+        <div class="gcard-foot">
+          <span class="gcard-world">${c.mundo}</span>
+          <button class="applause" data-n="${c.aplausos}">👏 <span>${c.aplausos}</span></button>
+        </div>
+      </div>
+    </div>`).join('');
+  // aplausos
+  grid.querySelectorAll('.applause').forEach(b => {
+    b.addEventListener('click', () => {
+      if (b.classList.contains('clapped')) return;
+      b.classList.add('clapped');
+      const s = b.querySelector('span'); s.textContent = (parseInt(b.dataset.n,10) + 1);
+      if (window.GCSound) try { window.GCSound.click(); } catch(e){}
+      if (window.GCConfetti) window.GCConfetti(10);
+    });
+  });
+  if (window.GCBind) window.GCBind();
+}
+render();
+
+document.getElementById('filters').addEventListener('click', (e) => {
+  const btn = e.target.closest('.gfilter'); if (!btn) return;
+  document.querySelectorAll('.gfilter').forEach(f => f.classList.remove('active'));
+  btn.classList.add('active'); filtro = btn.dataset.f; render();
+});
+
+// Estreno: play
+(function(){
+  const v = document.getElementById('featVideo'), p = document.getElementById('featPlay'), cta = document.getElementById('featCta');
+  function play(){ v.muted = false; v.play(); p.style.display = 'none'; }
+  if (p) p.addEventListener('click', play);
+  if (cta) cta.addEventListener('click', play);
+})();
+</script>
+
+</body>
+</html>

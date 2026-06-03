@@ -1,0 +1,164 @@
+/* ============================================================
+   GENIOS CREATIVOS · Capa de EFECTOS (juice)
+   Animaciones, glow, parallax, reveal, tilt, racha, level-up.
+   Carga DESPUÉS de genios.css / lesson.css.
+   ============================================================ */
+
+/* ── Canvas de partículas de fondo ── */
+#fx-particles {
+  position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  width: 100%; height: 100%;
+}
+
+/* ── Scroll reveal ── */
+[data-reveal] {
+  opacity: 0; transform: translateY(26px) scale(.985);
+  transition: opacity .6s ease, transform .6s cubic-bezier(.22,1,.36,1);
+  will-change: opacity, transform;
+}
+[data-reveal].in { opacity: 1; transform: none; }
+[data-reveal][data-reveal="left"]  { transform: translateX(-30px); }
+[data-reveal][data-reveal="right"] { transform: translateX(30px); }
+[data-reveal].in[data-reveal] { transform: none; }
+/* retrasos escalonados */
+[data-rd="1"]{ transition-delay:.06s } [data-rd="2"]{ transition-delay:.12s }
+[data-rd="3"]{ transition-delay:.18s } [data-rd="4"]{ transition-delay:.24s }
+[data-rd="5"]{ transition-delay:.30s } [data-rd="6"]{ transition-delay:.36s }
+
+/* ── Tilt 3D (tarjetas que reaccionan al mouse) ── */
+.tilt { transform-style: preserve-3d; transition: transform .25s cubic-bezier(.22,1,.36,1); will-change: transform; }
+.tilt > * { transform: translateZ(0); }
+.tilt .tilt-pop { transform: translateZ(34px); }
+
+/* ── Glow pulsante (para la misión actual / CTA) ── */
+@keyframes glowPulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(47,123,246,.0), var(--shadow); }
+  50%     { box-shadow: 0 0 34px 2px rgba(47,123,246,.45), var(--shadow); }
+}
+.glow-live { animation: glowPulse 2.4s ease-in-out infinite; }
+
+/* ── Brillo que recorre los botones grandes ── */
+.btn-lg { position: relative; overflow: hidden; }
+.btn-lg::before {
+  content:''; position:absolute; top:0; left:-120%; width:60%; height:100%;
+  background: linear-gradient(100deg, transparent, rgba(255,255,255,.55), transparent);
+  transform: skewX(-18deg); animation: sheen 3.4s ease-in-out infinite;
+}
+@keyframes sheen { 0%,72%{ left:-120% } 86%,100%{ left:140% } }
+
+/* ── Ripple al hacer click ── */
+.ripple-host { position: relative; overflow: hidden; }
+.ripple {
+  position:absolute; border-radius:50%; transform:scale(0); pointer-events:none;
+  background: rgba(255,255,255,.55); animation: ripple .6s ease-out forwards;
+}
+@keyframes ripple { to { transform: scale(2.6); opacity: 0; } }
+
+/* ── Mascota reactiva (hero) ── */
+.hero-mascot { cursor: pointer; }
+.hero-mascot.react { animation: mascotJump .6s cubic-bezier(.3,1.6,.5,1); }
+@keyframes mascotJump {
+  0%{ transform: translateY(0) rotate(0) }
+  35%{ transform: translateY(-34px) rotate(-8deg) scale(1.06) }
+  60%{ transform: translateY(-10px) rotate(6deg) }
+  100%{ transform: translateY(0) rotate(0) }
+}
+/* burbujita de la mascota al tocarla */
+.mascot-say {
+  position:absolute; left:50%; top:-6px; transform:translate(-50%,-100%) scale(.6);
+  background:#fff; border:2px solid var(--line); border-radius:16px; padding:10px 16px;
+  font-family:var(--font-display); font-weight:600; font-size:15px; color:var(--ink);
+  white-space:nowrap; box-shadow:var(--shadow); opacity:0; pointer-events:none;
+  transition: opacity .3s, transform .3s cubic-bezier(.34,1.56,.5,1); z-index:5;
+}
+.mascot-say.show { opacity:1; transform:translate(-50%,-100%) scale(1); }
+@media (max-width:480px){
+  .mascot-say { white-space:normal; max-width:78vw; text-align:center; font-size:14px; }
+}
+.mascot-say::after {
+  content:''; position:absolute; bottom:-9px; left:50%; transform:translateX(-50%) rotate(45deg);
+  width:16px; height:16px; background:#fff; border-right:2px solid var(--line); border-bottom:2px solid var(--line);
+}
+
+/* ── Mascota de lección reactiva (clase) ── */
+.mascot-stage img { cursor: pointer; }
+.mascot-stage.react img { animation: mascotJump2 .6s cubic-bezier(.3,1.6,.5,1); }
+@keyframes mascotJump2 {
+  0%,100%{ transform: translateY(0) rotate(0) }
+  35%{ transform: translateY(-30px) rotate(-7deg) scale(1.07) }
+  65%{ transform: translateY(-8px) rotate(5deg) }
+}
+
+/* ── RACHA diaria (streak) ── */
+.streak {
+  display:inline-flex; align-items:center; gap:12px; cursor:default;
+  background:linear-gradient(135deg, color-mix(in srgb,var(--gold) 18%,#fff), #fff);
+  border:2px solid color-mix(in srgb,var(--gold) 40%,#fff);
+  border-radius:999px; padding:8px 18px 8px 10px; box-shadow:var(--shadow-sm);
+}
+.streak .flame {
+  width:42px; height:42px; border-radius:50%; flex-shrink:0; display:grid; place-items:center;
+  font-size:24px; background:linear-gradient(135deg,#FF8A00,var(--gold));
+  box-shadow:0 4px 0 #D98C00; animation: flame 1.6s ease-in-out infinite;
+}
+@keyframes flame { 0%,100%{ transform:scale(1) rotate(-3deg) } 50%{ transform:scale(1.12) rotate(3deg) } }
+.streak .s-num { font-family:var(--font-display); font-weight:700; font-size:22px; color:var(--ink); line-height:1; }
+.streak .s-lab { font-weight:800; font-size:11px; color:var(--ink-3); text-transform:uppercase; letter-spacing:.06em; }
+
+/* ── Tira de días de la semana (racha) ── */
+.streak-days { display:flex; gap:6px; margin-top:14px; flex-wrap:wrap; }
+.sd {
+  width:38px; text-align:center; font-weight:800; font-size:11px; color:var(--ink-3);
+}
+.sd .dot {
+  width:34px; height:34px; margin:0 auto 4px; border-radius:12px; display:grid; place-items:center;
+  background:#fff; border:2px solid var(--line); font-size:15px; transition: transform .2s;
+}
+.sd.on .dot { background:linear-gradient(135deg,#FF8A00,var(--gold)); border-color:transparent; color:#fff; box-shadow:0 3px 0 #D98C00; }
+.sd.today .dot { border-color:var(--blue); border-width:3px; animation: pulse 1.8s ease-in-out infinite; }
+
+/* ── XP: subida de nivel ── */
+.xp-lvl.levelup { animation: lvlPop .7s cubic-bezier(.34,1.7,.5,1); }
+@keyframes lvlPop {
+  0%{ transform:scale(1) } 30%{ transform:scale(1.4) rotate(-10deg) }
+  55%{ transform:scale(.9) rotate(6deg) } 100%{ transform:scale(1) }
+}
+.lvl-flash {
+  position:fixed; left:50%; top:38%; transform:translate(-50%,-50%) scale(.4);
+  z-index:9998; pointer-events:none; text-align:center; opacity:0;
+  font-family:var(--font-display); font-weight:700; color:var(--gold);
+  text-shadow:0 4px 0 rgba(217,140,0,.35), 0 0 30px rgba(255,176,32,.6);
+}
+.lvl-flash.show { animation: lvlFlash 1.8s cubic-bezier(.22,1,.36,1) forwards; }
+.lvl-flash .big { font-size:84px; line-height:1; }
+.lvl-flash .small { font-size:24px; color:var(--ink); }
+@keyframes lvlFlash {
+  0%{ opacity:0; transform:translate(-50%,-50%) scale(.4) }
+  18%{ opacity:1; transform:translate(-50%,-50%) scale(1.08) }
+  30%{ transform:translate(-50%,-50%) scale(1) }
+  78%{ opacity:1 } 100%{ opacity:0; transform:translate(-50%,-58%) scale(1) }
+}
+
+/* ── Nodos: aparición tipo "stamp" + estrella que late en completadas ── */
+.node .node-state { transition: transform .2s; }
+.node.done:hover .node-state { animation: starSpin .6s ease; }
+@keyframes starSpin { 50%{ transform: scale(1.4) rotate(20deg) } }
+.node-link { outline: none; }
+
+/* hover global lift para elementos marcados */
+.lift { transition: transform .18s cubic-bezier(.34,1.4,.5,1), box-shadow .18s; }
+.lift:hover { transform: translateY(-5px); }
+
+/* ── Cursor de chispa (rastro suave) ── */
+.spark-trail {
+  position: fixed; z-index: 9997; pointer-events:none; font-size:14px;
+  transform: translate(-50%,-50%); opacity:.9;
+  animation: trailFade .8s ease-out forwards;
+}
+@keyframes trailFade { to { opacity:0; transform:translate(-50%,-90%) scale(.4) rotate(40deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+  #fx-particles { display:none; }
+  [data-reveal] { opacity:1 !important; transform:none !important; }
+  .btn-lg::before, .glow-live, .flame, .streak .flame { animation: none !important; }
+}

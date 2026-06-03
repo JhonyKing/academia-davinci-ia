@@ -2,328 +2,35 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Mi Personaje — Academia Da Vinci IA</title>
   <link rel="icon" type="image/svg+xml" href="robotsin/favicon.svg">
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap');
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --blue:#4A90D9; --purple:#8E44AD; --gold:#F39C12;
-      --green:#27AE60; --red:#E74C3C; --teal:#16A085;
-      --bg:#0F1626; --bg2:#1A2540;
-    }
-    body { font-family:'Poppins',sans-serif; background:var(--bg); color:#E8EAF0; }
-
-    /* ── NAV ── */
-    .nav {
-      position:sticky; top:0; z-index:100;
-      background:rgba(15,22,38,0.92); backdrop-filter:blur(12px);
-      border-bottom:1px solid rgba(255,255,255,0.07);
-      padding:14px 40px; display:flex; align-items:center; gap:16px;
-    }
-    .nav-back {
-      color:rgba(255,255,255,0.4); font-size:13px; text-decoration:none;
-      display:flex; align-items:center; gap:6px; transition:color .2s;
-    }
-    .nav-back:hover { color:#fff; }
-    .nav-title { font-weight:700; font-size:15px; color:#fff; }
-    .nav-title span { color:var(--blue); }
-    .nav-spacer { flex:1; }
-
-    /* ── HERO ── */
-    .hero {
-      position:relative; padding:80px 40px 60px;
-      text-align:center; overflow:hidden;
-    }
-    .hero::before {
-      content:''; position:absolute; inset:0;
-      background:radial-gradient(ellipse at 50% 0%, rgba(74,144,217,.12) 0%, transparent 65%);
-    }
-    .hero-content { position:relative; z-index:1; }
-    .hero-badge {
-      display:inline-block;
-      background:rgba(74,144,217,.12); border:1px solid rgba(74,144,217,.3);
-      color:#74B9FF; padding:7px 22px; border-radius:50px;
-      font-size:11px; font-weight:700; letter-spacing:3px;
-      text-transform:uppercase; margin-bottom:20px;
-    }
-    .hero h1 {
-      font-size:clamp(38px,6vw,64px); font-weight:900; color:#fff;
-      line-height:1.05; margin-bottom:10px;
-    }
-    .hero h1 span { color:var(--blue); }
-    .hero-sub { font-size:17px; color:rgba(255,255,255,.5); }
-
-    /* ── CONTENEDOR PRINCIPAL ── */
-    .container { max-width:960px; margin:0 auto; padding:0 40px 80px; }
-
-    /* ── SECTION TITLE ── */
-    .section-head {
-      display:flex; align-items:center; gap:14px; margin:56px 0 24px;
-    }
-    .section-head .icon {
-      width:46px; height:46px; border-radius:12px;
-      display:flex; align-items:center; justify-content:center;
-      font-size:22px; flex-shrink:0;
-    }
-    .icon-blue   { background:rgba(74,144,217,.15);  border:1px solid rgba(74,144,217,.25); }
-    .icon-purple { background:rgba(142,68,173,.15);  border:1px solid rgba(142,68,173,.25); }
-    .icon-gold   { background:rgba(243,156,18,.15);  border:1px solid rgba(243,156,18,.25); }
-    .icon-green  { background:rgba(39,174,96,.15);   border:1px solid rgba(39,174,96,.25);  }
-    .section-head h2 { font-size:22px; font-weight:800; color:#fff; }
-    .section-head h2 span { color:var(--blue); }
-
-    /* ── CARD BASE ── */
-    .card {
-      background:var(--bg2); border-radius:16px;
-      border:1px solid rgba(255,255,255,.07); padding:28px;
-    }
-    .card + .card { margin-top:16px; }
-
-    /* ── PROTAGONISTA ── */
-    .protagonist-card {
-      background:linear-gradient(135deg,rgba(74,144,217,.08),rgba(142,68,173,.05));
-      border:1px solid rgba(74,144,217,.2);
-      border-radius:20px; padding:32px;
-      display:flex; gap:28px; align-items:flex-start;
-    }
-    .avatar-circle {
-      width:120px; height:120px; border-radius:50%; flex-shrink:0;
-      background:linear-gradient(135deg,rgba(74,144,217,.3),rgba(142,68,173,.3));
-      border:3px solid rgba(74,144,217,.4);
-      display:flex; align-items:center; justify-content:center;
-      font-size:48px; font-weight:900; color:#fff; overflow:hidden;
-    }
-    .avatar-circle img { width:100%; height:100%; object-fit:cover; border-radius:50%; }
-    .protagonist-info { flex:1; min-width:0; }
-    .protagonist-name {
-      font-size:28px; font-weight:900; color:#fff; margin-bottom:6px;
-      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
-    }
-    .arquetipo-badge {
-      display:inline-flex; align-items:center; gap:6px;
-      background:rgba(74,144,217,.15); border:1px solid rgba(74,144,217,.3);
-      color:#74B9FF; padding:5px 14px; border-radius:20px;
-      font-size:12px; font-weight:700; margin-bottom:14px;
-    }
-    .protagonist-desc {
-      font-size:14px; color:rgba(255,255,255,.65); line-height:1.7;
-    }
-
-    /* Galería de retratos */
-    .retratos-grid {
-      display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:14px;
-      margin-top:20px;
-    }
-    .retrato-card {
-      border-radius:12px; overflow:hidden;
-      border:1px solid rgba(255,255,255,.08); background:#0F1626;
-      aspect-ratio:3/4; position:relative;
-    }
-    .retrato-card img { width:100%; height:100%; object-fit:cover; }
-    .retrato-label {
-      position:absolute; bottom:0; left:0; right:0;
-      background:linear-gradient(transparent,rgba(0,0,0,.7));
-      padding:10px 10px 8px;
-      font-size:11px; font-weight:700; letter-spacing:1px;
-      text-transform:uppercase; color:rgba(255,255,255,.7);
-    }
-
-    /* Expandible */
-    .expand-btn {
-      background:transparent; border:1px solid rgba(74,144,217,.3);
-      color:#4A90D9; padding:8px 18px; border-radius:8px;
-      font-family:'Poppins',sans-serif; font-size:13px; font-weight:600;
-      cursor:pointer; margin-top:16px; transition:all .2s;
-    }
-    .expand-btn:hover { background:rgba(74,144,217,.1); }
-
-    /* ── PERSONAJES SECUNDARIOS ── */
-    .secundarios-grid {
-      display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:16px;
-    }
-    .secundario-card {
-      background:var(--bg2); border-radius:14px;
-      border:1px solid rgba(255,255,255,.07); padding:20px;
-      text-align:center; transition:border-color .2s, transform .15s;
-    }
-    .secundario-card:hover { border-color:rgba(74,144,217,.3); transform:translateY(-2px); }
-    .sec-avatar {
-      width:72px; height:72px; border-radius:50%; margin:0 auto 12px;
-      display:flex; align-items:center; justify-content:center;
-      font-size:28px; overflow:hidden;
-    }
-    .sec-avatar img { width:100%; height:100%; object-fit:cover; }
-    .sec-avatar.aliado  { background:rgba(39,174,96,.15);  border:2px solid rgba(39,174,96,.4);  }
-    .sec-avatar.villano { background:rgba(231,76,60,.15);   border:2px solid rgba(231,76,60,.4);  }
-    .sec-avatar.neutro  { background:rgba(74,144,217,.15);  border:2px solid rgba(74,144,217,.4); }
-    .sec-name { font-size:14px; font-weight:700; color:#fff; margin-bottom:4px; }
-    .sec-tipo {
-      font-size:11px; font-weight:700; letter-spacing:2px;
-      text-transform:uppercase;
-    }
-    .sec-tipo.aliado  { color:#27AE60; }
-    .sec-tipo.villano { color:#E74C3C; }
-    .sec-tipo.neutro  { color:#4A90D9; }
-    .sec-arquetipo { font-size:12px; color:rgba(255,255,255,.4); margin-top:4px; }
-
-    /* ── PORTAFOLIO — MÓDULOS ── */
-    .modulos-grid {
-      display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:16px;
-    }
-    .modulo-card {
-      background:var(--bg2); border-radius:16px;
-      border:1px solid rgba(255,255,255,.07); padding:22px;
-      transition:border-color .2s;
-    }
-    .modulo-card:hover { border-color:rgba(74,144,217,.25); }
-    .modulo-header {
-      display:flex; align-items:center; gap:10px; margin-bottom:16px;
-    }
-    .modulo-num {
-      width:32px; height:32px; border-radius:8px; flex-shrink:0;
-      display:flex; align-items:center; justify-content:center;
-      font-size:13px; font-weight:800; color:#fff;
-    }
-    .m1 .modulo-num { background:rgba(74,144,217,.4); }
-    .m2 .modulo-num { background:rgba(142,68,173,.4); }
-    .m3 .modulo-num { background:rgba(230,126,34,.4); }
-    .m4 .modulo-num { background:rgba(39,174,96,.4);  }
-    .m5 .modulo-num { background:rgba(22,160,133,.4); }
-    .m6 .modulo-num { background:rgba(243,156,18,.4); }
-    .modulo-title { font-size:14px; font-weight:700; color:#fff; }
-    .modulo-sub   { font-size:12px; color:rgba(255,255,255,.35); }
-
-    .entrega-item {
-      display:flex; align-items:flex-start; gap:10px;
-      padding:10px 0; border-top:1px solid rgba(255,255,255,.05);
-    }
-    .entrega-item:first-child { border-top:none; padding-top:0; }
-    .entrega-dot {
-      width:8px; height:8px; border-radius:50%; flex-shrink:0; margin-top:5px;
-    }
-    .dot-done    { background:var(--green); }
-    .dot-pending { background:rgba(255,255,255,.15); }
-    .entrega-label { font-size:13px; color:rgba(255,255,255,.5); flex:1; line-height:1.4; }
-    .entrega-label.done { color:rgba(255,255,255,.8); }
-
-    /* Texto y video embeds */
-    .entrega-texto-preview {
-      background:#0F1626; border-radius:8px; padding:12px;
-      font-size:13px; color:rgba(255,255,255,.65); line-height:1.6;
-      max-height:80px; overflow:hidden; position:relative; margin-top:6px;
-    }
-    .entrega-texto-preview::after {
-      content:''; position:absolute; bottom:0; left:0; right:0; height:24px;
-      background:linear-gradient(transparent,#0F1626);
-    }
-    .yt-embed-wrapper {
-      margin-top:10px; border-radius:10px; overflow:hidden;
-      aspect-ratio:16/9; background:#000;
-    }
-    .yt-embed-wrapper iframe {
-      width:100%; height:100%; border:none; display:block;
-    }
-
-    /* ── PROGRESO ── */
-    .progress-bar-wrap {
-      background:#2A3550; border-radius:20px; height:10px;
-      overflow:hidden; margin-bottom:8px;
-    }
-    .progress-bar-fill {
-      height:100%; border-radius:20px;
-      background:linear-gradient(90deg, var(--blue), var(--purple));
-      transition:width .8s ease;
-    }
-    .progress-label {
-      font-size:13px; color:rgba(255,255,255,.5); margin-bottom:24px;
-    }
-    .progress-label strong { color:#fff; }
-
-    .clases-grid {
-      display:grid;
-      grid-template-columns:repeat(auto-fill,minmax(52px,1fr));
-      gap:8px;
-    }
-    .clase-circle {
-      width:52px; height:52px; border-radius:50%;
-      display:flex; flex-direction:column; align-items:center; justify-content:center;
-      font-size:14px; font-weight:700; cursor:default;
-      position:relative; transition:transform .15s;
-    }
-    .clase-circle:hover { transform:scale(1.08); }
-    .clase-circle.completada {
-      background:rgba(39,174,96,.2); border:2px solid rgba(39,174,96,.5); color:#2ECC71;
-    }
-    .clase-circle.disponible {
-      background:rgba(74,144,217,.1); border:2px solid rgba(74,144,217,.3); color:#74B9FF;
-    }
-    .clase-circle.bloqueada {
-      background:rgba(255,255,255,.03); border:2px solid rgba(255,255,255,.06);
-      color:rgba(255,255,255,.2);
-    }
-    .clase-num-label { font-size:9px; opacity:.7; margin-top:2px; }
-
-    /* ── EMPTY STATES ── */
-    .empty-state {
-      background:rgba(255,255,255,.02); border:1px dashed rgba(255,255,255,.1);
-      border-radius:12px; padding:32px 24px; text-align:center;
-    }
-    .empty-state .ico { font-size:36px; margin-bottom:10px; }
-    .empty-state p { color:rgba(255,255,255,.4); font-size:14px; line-height:1.6; }
-    .empty-state a { color:var(--blue); text-decoration:none; font-weight:600; }
-    .empty-state a:hover { text-decoration:underline; }
-
-    /* ── LOADING ── */
-    .loading-spinner {
-      display:flex; align-items:center; justify-content:center; gap:12px;
-      padding:60px 0; color:rgba(255,255,255,.4); font-size:15px;
-    }
-    @keyframes spin { to { transform:rotate(360deg); } }
-    .spinner {
-      width:28px; height:28px; border-radius:50%;
-      border:3px solid rgba(74,144,217,.2);
-      border-top-color:#4A90D9;
-      animation:spin .7s linear infinite;
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      text-align:center; padding:40px;
-      border-top:1px solid rgba(255,255,255,.06);
-      color:rgba(255,255,255,.2); font-size:12px;
-    }
-    footer strong { color:rgba(255,255,255,.4); }
-
-    /* ── RESPONSIVE ── */
-    @media(max-width:700px) {
-      .nav { padding:14px 20px; }
-      .hero { padding:60px 20px 40px; }
-      .container { padding:0 20px 60px; }
-      .protagonist-card { flex-direction:column; align-items:center; text-align:center; }
-      .modulos-grid { grid-template-columns:1fr; }
-      .clases-grid { grid-template-columns:repeat(auto-fill,minmax(44px,1fr)); gap:6px; }
-      .clase-circle { width:44px; height:44px; font-size:12px; }
-    }
-  </style>
+  <link rel="stylesheet" href="css/genios.css">
+  <link rel="stylesheet" href="css/mi-personaje.css">
+  <link rel="stylesheet" href="css/juice.css">
+  
 </head>
-<body>
+<body class="page-personaje">
 
-<!-- ═══ NAV ═══ -->
-<nav class="nav">
-  <a href="index.html" class="nav-back">← Volver al curso</a>
-  <div class="nav-title">Mi <span>Portafolio</span></div>
-  <div class="nav-spacer"></div>
-</nav>
+<!-- ═══ TOPBAR ═══ -->
+<header class="topbar">
+  <div class="wrap">
+    <a class="lback" href="index.html">← Mapa</a>
+    <div class="topbar-spacer"></div>
+    <a class="tlink" href="index.html"><span class="ic">🗺️</span><span>Aventura</span></a>
+    <a class="tlink" href="progreso.html"><span class="ic">📊</span><span>Panel de Papás</span></a>
+    <button class="icon-btn" id="soundBtn" title="Sonido" aria-label="Sonido">🔊</button>
+  </div>
+</header>
 
 <!-- ═══ HERO ═══ -->
-<section class="hero">
-  <div class="hero-content">
-    <div class="hero-badge">✨ Academia Da Vinci IA</div>
-    <h1>Mi <span>Personaje</span></h1>
-    <p class="hero-sub">Tu portafolio creativo — todo lo que has creado en el curso</p>
-  </div>
+<section class="studio-hero">
+  <span class="spark" style="top:24px;left:18%;font-size:22px;">✦</span>
+  <span class="spark" style="top:60px;right:20%;font-size:16px;animation-delay:1s;">✧</span>
+  <span class="eyebrow">🎨 Tu portafolio creativo</span>
+  <div class="mascot-stage studio-mascot"><img src="robotsin/robotsin_maestro.png" alt="Robotsin Maestro"></div>
+  <h1>Mi <span>Estudio</span></h1>
+  <p class="sub">Todo lo que has creado en la aventura, en un solo lugar.</p>
 </section>
 
 <!-- ═══ MAIN CONTENT ═══ -->
@@ -384,9 +91,7 @@
 </footer>
 
 <!-- ─── Scripts ─────────────────────────────────────────────────── -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
-<script src="js/supabase-client.js"></script>
-<script src="js/auth.js"></script>
+
 
 <script>
 ;(function () {
@@ -902,13 +607,89 @@
   }
 
   // Arrancar cuando el DOM esté listo
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', cargarPortafolio)
-  } else {
-    cargarPortafolio()
-  }
+  window.__miPersonajeInit = cargarPortafolio;
 
 })()
+</script>
+
+<!-- ── Motor de efectos (partículas, sonido, reveal, mascota reactiva) ── -->
+<script src="js/juice.js"></script>
+
+<!-- ── Producción: Supabase + auth + portafolio real · Preview: datos demo ── -->
+<script>
+const ES_PRODUCCION = /vercel\.app$|academiadavinci/.test(location.hostname);
+
+if (ES_PRODUCCION) {
+  const add = (s, cb) => { const e = document.createElement('script'); e.src = s; if (cb) e.onload = cb; document.head.appendChild(e); };
+  add('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js', () => {
+    add('js/supabase-client.js', () => {
+      add('js/auth.js', () => { if (window.__miPersonajeInit) window.__miPersonajeInit(); });
+    });
+  });
+} else {
+  document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('protagonista-section').innerHTML = `
+      <div class="protagonist-card">
+        <div class="avatar-circle"><img src="robotsin/robotsin_artista.png" alt="Chispa"></div>
+        <div class="protagonist-info">
+          <div class="protagonist-name">Chispa, la Zorra Inventora</div>
+          <div class="arquetipo-badge">⚡ La Creadora</div>
+          <div class="protagonist-desc" id="desc-protagonista" style="max-height:72px;overflow:hidden;">Una zorrita de pelaje naranja que vive en un taller lleno de inventos voladores. Es curiosa, valiente y siempre lleva sus gafas de soldadora en la frente. Su sueño más grande es construir una máquina capaz de pintar las estrellas de colores nuevos.</div>
+          <button class="expand-btn" id="expandDemo">Ver descripción completa ▼</button>
+        </div>
+      </div>
+      <div class="retratos-grid">
+        <div class="retrato-card"><img src="robotsin/robotsin_artista.png" alt="Retrato"><div class="retrato-label">Retrato Oficial</div></div>
+        <div class="retrato-card"><img src="robotsin/robotsin_director.png" alt="Tarjeta"><div class="retrato-label">Tarjeta Oficial</div></div>
+      </div>`;
+
+    document.getElementById('secundarios-section').innerHTML = `
+      <div class="secundarios-grid">
+        <div class="secundario-card"><div class="sec-avatar aliado"><img src="robotsin/robotsin_musico.png" alt=""></div><div class="sec-name">Tornillo</div><div class="sec-tipo aliado">✅ Aliado</div><div class="sec-arquetipo">El Ayudante</div></div>
+        <div class="secundario-card"><div class="sec-avatar villano"><img src="robotsin/robotsin_arquitecto.png" alt=""></div><div class="sec-name">Doña Óxido</div><div class="sec-tipo villano">⚠️ Villano</div><div class="sec-arquetipo">La Sombra</div></div>
+        <div class="secundario-card"><div class="sec-avatar neutro">B</div><div class="sec-name">Byte</div><div class="sec-tipo neutro">◎ Neutro</div><div class="sec-arquetipo">El Sabio</div></div>
+      </div>`;
+
+    document.getElementById('portafolio-section').innerHTML = `
+      <div class="modulos-grid">
+        <div class="modulo-card m1" style="border-color:color-mix(in srgb,var(--green) 32%,#fff)">
+          <div class="modulo-header"><div class="modulo-num">1</div><div><div class="modulo-title">El Genio Creativo</div><div class="modulo-sub">4/4 entregas</div></div><span style="margin-left:auto;font-size:18px;">✅</span></div>
+          <div class="entrega-item"><div class="entrega-dot dot-done"></div><div class="entrega-label done">Descripción del personaje<div class="entrega-texto-preview">Chispa es una zorra inventora, curiosa y valiente, que vive en un taller mágico lleno de inventos voladores...</div></div></div>
+          <div class="entrega-item"><div class="entrega-dot dot-done"></div><div class="entrega-label done">Retrato del personaje<div style="margin-top:4px;font-size:12px;color:var(--green);font-weight:700;">✅ Imagen subida</div></div></div>
+          <div class="entrega-item"><div class="entrega-dot dot-done"></div><div class="entrega-label done">Arquetipo elegido<div style="margin-top:4px;font-size:12px;color:var(--blue);font-weight:700;">⚡ La Creadora</div></div></div>
+        </div>
+        <div class="modulo-card m2">
+          <div class="modulo-header"><div class="modulo-num">2</div><div><div class="modulo-title">El Mundo del Genio</div><div class="modulo-sub">1/1 entregas</div></div><span style="margin-left:auto;font-size:18px;">✅</span></div>
+          <div class="entrega-item"><div class="entrega-dot dot-done"></div><div class="entrega-label done">Retratos de personajes secundarios</div></div>
+        </div>
+        <div class="modulo-card m4">
+          <div class="modulo-header"><div class="modulo-num">4</div><div><div class="modulo-title">En Movimiento</div><div class="modulo-sub">0/2 entregas</div></div></div>
+          <div class="entrega-item"><div class="entrega-dot dot-pending"></div><div class="entrega-label">Primera animación en YouTube</div></div>
+          <div class="entrega-item"><div class="entrega-dot dot-pending"></div><div class="entrega-label">Tráiler en YouTube</div></div>
+        </div>
+      </div>`;
+
+    const circles = Array.from({ length: 26 }, (_, i) => {
+      const n = i + 1; const st = n <= 7 ? 'completada' : (n <= 9 ? 'disponible' : 'bloqueada');
+      return `<div class="clase-circle ${st}" title="Clase ${n}">${st === 'completada' ? '✓' : n}<div class="clase-num-label">${st === 'completada' ? '' : 'C' + n}</div></div>`;
+    }).join('');
+    document.getElementById('progreso-section').innerHTML = `
+      <div class="card">
+        <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:0%"></div></div>
+        <div class="progress-label"><strong>7</strong> de <strong>26</strong> clases completadas — <strong>27%</strong></div>
+        <div class="clases-grid">${circles}</div>
+      </div>`;
+
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('portafolio-content').style.display = 'block';
+    setTimeout(() => { const f = document.querySelector('.progress-bar-fill'); if (f) f.style.width = '27%'; }, 250);
+
+    const exp = document.getElementById('expandDemo');
+    if (exp) exp.addEventListener('click', () => { const d = document.getElementById('desc-protagonista'); if (d) d.style.maxHeight = 'none'; exp.style.display = 'none'; });
+
+    if (window.GCBind) window.GCBind();
+  });
+}
 </script>
 
 </body>

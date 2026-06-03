@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Certificado de Genio Creativo — Academia Da Vinci IA</title>
+<link rel="icon" type="image/svg+xml" href="robotsin/favicon.svg">
+<link rel="stylesheet" href="css/genios.css">
+<link rel="stylesheet" href="css/certificado.css">
+</head>
+<body class="page-cert">
+
+<!-- ═══════════ TOPBAR ═══════════ -->
+<header class="topbar">
+  <div class="wrap">
+    <a class="lback" href="index.html">← Mapa</a>
+    <div class="topbar-spacer"></div>
+    <a class="tlink" href="mi-personaje.html"><span class="ic">🦸</span><span>Mi Estudio</span></a>
+  </div>
+</header>
+
+<!-- Acciones -->
+<div class="cert-bar">
+  <h1 style="font-family:var(--font-display);font-weight:700;font-size:clamp(22px,3vw,30px);color:var(--ink);">🏆 ¡Felicidades, genio!</h1>
+  <div class="spacer"></div>
+  <button class="btn gold" onclick="window.print()">🖨️ Imprimir / Guardar PDF</button>
+</div>
+<p class="cert-hint">Consejo: al imprimir, elige <b>Horizontal</b> y activa <b>"Gráficos de fondo"</b> para que salga a todo color. 🎨</p>
+
+<!-- ═══════════ CERTIFICADO ═══════════ -->
+<div class="cert-wrap">
+  <div class="cert" id="cert">
+    <span class="cert-corner tl">✦</span><span class="cert-corner tr">✦</span>
+    <span class="cert-corner bl">✦</span><span class="cert-corner br">✦</span>
+
+    <div class="cert-inner">
+      <div class="cert-brand">
+        <img src="robotsin/robotsin_completo.png" alt="Robotsin">
+        <b>Academia <span>Da Vinci IA</span></b>
+      </div>
+
+      <div class="cert-kicker">Certificado de</div>
+      <div class="cert-title">Genio <span>Creativo</span></div>
+
+      <div class="cert-give">Este certificado se otorga con orgullo a</div>
+      <div class="cert-name" id="certName">Sofía Ramírez</div>
+      <div class="cert-name-underline"></div>
+
+      <div class="cert-desc">Por completar las <b>26 misiones</b> del curso de IA Creativa, dominar las <b>5 artes</b> (cine, literatura, música, arte y voz) y crear su propio universo: personaje, mundo, historia y <b>película</b>. ✨</div>
+
+      <div class="cert-badges">
+        <span class="cert-badge" style="background:var(--m1)">🎨</span>
+        <span class="cert-badge" style="background:var(--m2)">🌍</span>
+        <span class="cert-badge" style="background:var(--m3)">📖</span>
+        <span class="cert-badge" style="background:var(--m4)">🎬</span>
+        <span class="cert-badge" style="background:var(--m5)">🎵</span>
+        <span class="cert-badge" style="background:var(--m6)">🏆</span>
+      </div>
+
+      <div class="cert-foot">
+        <div class="cert-sign">
+          <div class="line"></div>
+          <div class="who">Ing. Jhonnatan A. Vázquez E.</div>
+          <div class="role">Director · Academia Da Vinci IA</div>
+        </div>
+        <div class="cert-seal">
+          <span class="star">⭐</span>
+          <span class="txt">Genio<br>Certificado</span>
+        </div>
+        <div class="cert-sign">
+          <div class="line"></div>
+          <div class="who">D-IA Vinci Robotsin 🤖</div>
+          <div class="role">Maestro Genio</div>
+        </div>
+      </div>
+
+      <div class="cert-date">Otorgado el <b id="certDate">—</b></div>
+    </div>
+  </div>
+</div>
+
+<footer class="foot">
+  <div class="ico">🎓✨</div>
+  <b>Academia Da Vinci IA</b> · Pequeños Genios Creativos
+</footer>
+
+<script src="js/juice.js"></script>
+<script>
+const ES_PRODUCCION = /vercel\.app$|academiadavinci/.test(location.hostname);
+
+// Fecha de hoy en español
+document.getElementById('certDate').textContent =
+  new Date().toLocaleDateString('es-MX', { day: 'numeric', month: 'long', year: 'numeric' });
+
+if (ES_PRODUCCION) {
+  // Producción: nombre real del alumno desde Supabase
+  const add=(s,cb)=>{const e=document.createElement('script');e.src=s;if(cb)e.onload=cb;document.head.appendChild(e);};
+  add('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js', () => {
+    add('js/supabase-client.js', async () => {
+      try {
+        const sb = window._supabase;
+        const { data:{ session } } = await sb.auth.getSession();
+        if (!session) { location.href = 'login.html'; return; }
+        const { data } = await sb.from('profiles').select('nombre').eq('id', session.user.id).single();
+        if (data && data.nombre) document.getElementById('certName').textContent = data.nombre;
+      } catch (e) {}
+    });
+  });
+} else {
+  // Vista previa: celebración al cargar
+  window.addEventListener('load', () => { setTimeout(() => { if (window.GCConfetti) window.GCConfetti(70); }, 500); });
+}
+</script>
+
+</body>
+</html>

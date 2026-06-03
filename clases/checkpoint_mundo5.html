@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Reto del Mundo 5 — Genios Creativos</title>
+<link rel="icon" type="image/svg+xml" href="robotsin/favicon.svg">
+<link rel="stylesheet" href="css/genios.css">
+<link rel="stylesheet" href="css/juice.css">
+<link rel="stylesheet" href="css/quiz.css">
+</head>
+<body class="lesson" style="--wc: var(--m5)">
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="lback" href="index.html">← Mapa</a>
+    <div class="nav-title">Mundo 5 <span class="sep">·</span> <span>La Voz del Genio</span></div>
+    <div class="nav-spacer topbar-spacer"></div>
+    <button class="icon-btn" id="soundBtn" title="Sonido" aria-label="Sonido">🔊</button>
+  </div>
+</header>
+
+<section class="lhero" style="padding-bottom:24px;">
+  <span class="spark" data-parallax="0.14" style="top:30px;left:16%;font-size:24px;">✦</span>
+  <span class="spark" data-parallax="-0.12" style="top:70px;right:18%;font-size:18px;animation-delay:1s;">✧</span>
+  <div class="lread" data-reveal>
+    <span class="badge-pill">🎯 Checkpoint del Mundo 5</span>
+    <div class="mascot-stage" style="width:120px;height:120px;margin:18px auto 14px;">
+      <img src="robotsin/robotsin_musico.png" alt="Robotsin">
+    </div>
+    <h1>El <span>Reto</span> del Genio</h1>
+    <p class="lead">Responde para demostrar que dominas el Mundo 5… ¡y gana tu insignia de maestría!</p>
+  </div>
+</section>
+
+<section class="block" style="padding-top:10px;">
+  <div class="lread">
+    <div class="quiz" data-reveal><div id="quiz"></div></div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="ico">🎵✨</div>
+  <b>Academia Da Vinci IA</b> · Checkpoint · Mundo 5 — La Voz del Genio
+</footer>
+
+<script src="js/juice.js"></script>
+<script>
+window.QUIZ_DATA = {
+  "insignia": "🎵",
+  "insigniaNombre": "Maestro del Sonido",
+  "avatar": "robotsin/robotsin_musico.png",
+  "btnClass": "",
+  "volverHref": "index.html",
+  "siguienteHref": "clase23_ensamble_final.html",
+  "siguienteLabel": "▶ Siguiente mundo",
+  "preguntas": [
+    {
+      "q": "Con una IA como Suno puedes crear…",
+      "opciones": [
+        "Música original",
+        "Pizzas",
+        "Dibujos",
+        "Mapas"
+      ],
+      "correcta": 0,
+      "pista": "¡Compones canciones aunque no sepas tocar! 🎵"
+    },
+    {
+      "q": "La \"voz del personaje\" es…",
+      "opciones": [
+        "Cómo suena cuando habla",
+        "Su color",
+        "Su tamaño",
+        "Su nombre"
+      ],
+      "correcta": 0,
+      "pista": "Es el sonido y la forma de hablar de tu personaje. 🎙️"
+    },
+    {
+      "q": "Los efectos de sonido sirven para…",
+      "opciones": [
+        "Hacer la escena más real (pasos, viento…)",
+        "Borrar el audio",
+        "Subir el brillo",
+        "Cambiar el idioma"
+      ],
+      "correcta": 0,
+      "pista": "Pasos, lluvia, explosiones… dan vida a la escena. 🔊"
+    },
+    {
+      "q": "La banda sonora es…",
+      "opciones": [
+        "La música que acompaña tu película",
+        "El nombre del director",
+        "Una banda de amigos",
+        "El final"
+      ],
+      "correcta": 0,
+      "pista": "Es la música de fondo de tu historia. 🎶"
+    }
+  ]
+};
+</script>
+<script src="js/quiz.js"></script>
+
+</body>
+</html>
