@@ -1,0 +1,308 @@
+/* ============================================================
+   archetype-quiz.css — Actividad Identifica el Arquetipo
+   Academia Da Vinci IA — Clase 5 · 60 personajes / 12 arquetipos
+   ============================================================ */
+
+#archetype-activity-container {
+  margin: 40px auto 16px;
+  max-width: 720px;
+  padding: 0 16px;
+}
+
+/* ── Card base ── */
+.aq-card {
+  background: #12172b;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 16px 56px rgba(0,0,0,.32), 0 0 0 1px rgba(255,255,255,.06);
+  position: relative;
+}
+
+/* ── Pantalla de inicio ── */
+.aq-start-card {
+  padding: 48px 32px;
+  text-align: center;
+}
+.aq-start-icon {
+  font-size: 72px;
+  line-height: 1;
+  margin-bottom: 14px;
+}
+.aq-start-title {
+  font-family: var(--font-display, 'Nunito', sans-serif);
+  font-weight: 900;
+  font-size: 26px;
+  color: #fff;
+  margin: 0 0 18px;
+}
+.aq-start-desc {
+  font-size: 16px;
+  color: rgba(255,255,255,.7);
+  line-height: 1.75;
+  margin: 0 0 24px;
+}
+.aq-start-desc em {
+  color: #F39C12;
+  font-style: normal;
+  font-weight: 700;
+}
+.aq-start-stats {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+.aq-start-stats span {
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 100px;
+  padding: 8px 18px;
+  font-size: 14px;
+  font-weight: 700;
+  color: rgba(255,255,255,.85);
+}
+
+/* ── Barra de progreso ── */
+.aq-progress-bar-wrap {
+  position: relative;
+  height: 6px;
+  background: rgba(255,255,255,.06);
+}
+.aq-progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #E74C3C, #F39C12);
+  transition: width .4s ease;
+}
+.aq-progress-label {
+  position: absolute;
+  right: 14px;
+  top: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  color: rgba(255,255,255,.4);
+}
+
+/* ── Área del personaje ── */
+.aq-char-area {
+  padding: 22px 24px 14px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.aq-char-img-wrap {
+  width: 110px;
+  height: 110px;
+  flex-shrink: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  background: rgba(255,255,255,.06);
+  border: 2px solid rgba(255,255,255,.1);
+}
+.aq-char-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+.aq-char-img-fallback {
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  font-size: 52px;
+}
+.aq-char-info { flex: 1; }
+.aq-char-name {
+  font-family: var(--font-display, 'Nunito', sans-serif);
+  font-weight: 900;
+  font-size: 22px;
+  color: #fff;
+  line-height: 1.2;
+  margin-bottom: 5px;
+}
+.aq-char-obra {
+  font-size: 13px;
+  color: rgba(255,255,255,.45);
+  font-weight: 600;
+}
+.aq-multi-tip {
+  margin-top: 8px;
+  font-size: 12px;
+  color: #F39C12;
+  font-weight: 700;
+}
+
+/* ── Prompt ── */
+.aq-prompt {
+  font-family: var(--font-display, 'Nunito', sans-serif);
+  font-weight: 800;
+  font-size: 16px;
+  color: rgba(255,255,255,.7);
+  padding: 6px 24px 14px;
+  letter-spacing: .01em;
+}
+
+/* ── Grid de arquetipos (4 columnas) ── */
+.aq-archetypes-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  padding: 0 18px;
+}
+.aq-arch-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 6px;
+  border-radius: 12px;
+  border: 2px solid rgba(255,255,255,.08);
+  background: rgba(255,255,255,.04);
+  color: rgba(255,255,255,.75);
+  cursor: pointer;
+  transition: all .17s ease;
+  font-family: var(--font-display, 'Nunito', sans-serif);
+}
+.aq-arch-btn:hover:not(:disabled) {
+  background: rgba(255,255,255,.12);
+  border-color: rgba(255,255,255,.28);
+  transform: translateY(-2px);
+  color: #fff;
+}
+.aq-arch-btn:disabled { cursor: default; }
+.aq-arch-emoji { font-size: 20px; line-height: 1; }
+.aq-arch-name  { font-size: 11px; font-weight: 700; text-align: center; line-height: 1.2; }
+
+/* Estados después de responder */
+.aq-arch-btn.aq-arch-correct {
+  background: rgba(34,194,104,.22);
+  border-color: #22C268;
+  color: #fff;
+}
+.aq-arch-btn.aq-arch-wrong {
+  background: rgba(231,76,60,.15);
+  border-color: #E74C3C;
+  color: rgba(255,255,255,.5);
+}
+
+/* ── Feedback ── */
+.aq-feedback {
+  margin: 14px 18px 0;
+}
+.aq-fb-correct, .aq-fb-wrong {
+  border-radius: 12px;
+  padding: 13px 16px;
+  font-size: 15px;
+  line-height: 1.5;
+}
+.aq-fb-correct {
+  background: rgba(34,194,104,.12);
+  border: 1.5px solid rgba(34,194,104,.28);
+  color: rgba(255,255,255,.85);
+}
+.aq-fb-wrong {
+  background: rgba(231,76,60,.1);
+  border: 1.5px solid rgba(231,76,60,.22);
+  color: rgba(255,255,255,.75);
+}
+
+/* ── Footer ── */
+.aq-card-footer {
+  padding: 16px 18px 22px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* ── Botones ── */
+.aq-btn {
+  padding: 12px 26px;
+  border-radius: 12px;
+  border: none;
+  font-family: var(--font-display, 'Nunito', sans-serif);
+  font-weight: 800;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all .2s ease;
+}
+.aq-btn-start {
+  background: linear-gradient(135deg, #E74C3C, #C0392B);
+  color: #fff;
+  font-size: 17px;
+  padding: 16px 40px;
+  border-radius: 16px;
+  box-shadow: 0 8px 28px rgba(231,76,60,.35);
+}
+.aq-btn-start:hover { transform: translateY(-3px); filter: brightness(1.08); }
+.aq-btn-next {
+  background: #E74C3C;
+  color: #fff;
+}
+.aq-btn-next:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,.3);
+  filter: brightness(1.1);
+}
+.aq-btn-retry {
+  background: transparent;
+  border: 2px solid rgba(255,255,255,.2);
+  color: #fff;
+  margin: 0 auto 32px;
+  display: block;
+}
+.aq-btn-retry:hover { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.4); }
+
+/* ── Pantalla de resultados / trofeo ── */
+.aq-result-card { text-align: center; }
+.aq-result-glow {
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, var(--tc, #F39C12), transparent 68%);
+  opacity: .22;
+  pointer-events: none;
+}
+.aq-result-trophy  { font-size: 88px; line-height: 1; padding: 40px 0 10px; }
+.aq-result-level {
+  font-family: var(--font-display, 'Nunito', sans-serif);
+  font-weight: 900;
+  font-size: 30px;
+  color: var(--tc, #F39C12);
+  letter-spacing: .02em;
+}
+.aq-result-titulo  { font-size: 18px; color: rgba(255,255,255,.45); margin-bottom: 12px; }
+.aq-result-stars   { font-size: 22px; letter-spacing: 4px; margin-bottom: 14px; }
+.aq-result-score {
+  font-family: var(--font-display, 'Nunito', sans-serif);
+  font-weight: 900;
+  font-size: 52px;
+  color: #fff;
+  line-height: 1;
+}
+.aq-result-of  { font-size: 28px; color: rgba(255,255,255,.4); font-weight: 700; }
+.aq-result-pct { font-size: 20px; color: rgba(255,255,255,.45); margin: 4px 0 16px; }
+.aq-result-msg {
+  font-size: 16px;
+  color: rgba(255,255,255,.72);
+  line-height: 1.65;
+  padding: 0 32px 28px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 560px) {
+  .aq-archetypes-grid { grid-template-columns: repeat(3, 1fr); }
+  .aq-char-area { flex-direction: column; text-align: center; }
+  .aq-char-img-wrap { width: 130px; height: 130px; }
+  .aq-char-name  { font-size: 20px; }
+  .aq-start-card { padding: 36px 20px; }
+  .aq-result-trophy { font-size: 72px; }
+  .aq-result-level  { font-size: 24px; }
+}
+@media (max-width: 380px) {
+  .aq-archetypes-grid { grid-template-columns: repeat(2, 1fr); }
+  .aq-arch-emoji { font-size: 18px; }
+  .aq-arch-name  { font-size: 10px; }
+}
