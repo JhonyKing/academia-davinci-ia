@@ -31,7 +31,7 @@ create table if not exists public.progress (
   user_id         uuid        not null
                               references public.profiles(id) on delete cascade,
   clase_num       integer     not null
-                              check (clase_num between 1 and 24),
+                              check (clase_num between 1 and 26),
   completada      boolean     not null default true,
   tiempo_segundos integer     not null default 0,
   completada_at   timestamptz not null default now(),
@@ -176,7 +176,7 @@ select
   p.fecha_inicio,
   p.ultimo_acceso,
   count(pr.clase_num)                           as clases_completadas,
-  round(count(pr.clase_num)::numeric / 24 * 100, 1) as porcentaje,
+  round(count(pr.clase_num)::numeric / 26 * 100, 1) as porcentaje,
   max(pr.clase_num)                             as ultima_clase,
   max(pr.completada_at)                         as ultima_actividad
 from public.profiles p
