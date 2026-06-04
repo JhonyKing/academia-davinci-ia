@@ -35,7 +35,20 @@
       click() { tone(660, 0.07, 'triangle', 0.12); tone(880, 0.06, 'triangle', 0.1, 0.05); },
       unlock() { tone(523, .14, 'triangle', .14); tone(659, .14, 'triangle', .13, .1); tone(784, .2, 'triangle', .13, .2); },
       win() { [[523,0,.3],[659,.12,.3],[784,.24,.3],[1047,.38,.7]].forEach(([f,t,d]) => tone(f, d, 'triangle', 0.18, t)); },
-      level() { [[392,0,.2],[523,.1,.2],[659,.2,.2],[784,.3,.2],[1047,.42,.6]].forEach(([f,t,d]) => tone(f, d, 'triangle', 0.16, t)); }
+      level() { [[392,0,.2],[523,.1,.2],[659,.2,.2],[784,.3,.2],[1047,.42,.6]].forEach(([f,t,d]) => tone(f, d, 'triangle', 0.16, t)); },
+      select() { tone(740, 0.06, 'sine', 0.07); },
+      correct() { tone(659, .09, 'triangle', .13); tone(880, .12, 'triangle', .11, .08); tone(1047, .18, 'triangle', .13, .16); },
+      wrong() { tone(330, .1, 'sawtooth', .1); tone(277, .18, 'sawtooth', .08, .09); },
+      fanfare() {
+        // Fanfarria victoriosa — melodía de 8 notas tipo "misión completada"
+        const notes = [
+          [523,.00,.12],[659,.10,.12],[784,.20,.12],[1047,.30,.18],
+          [784,.50,.08],[880,.58,.08],[1047,.66,.08],[1319,.74,.55]
+        ];
+        notes.forEach(([f,t,d]) => tone(f, d, 'triangle', 0.17, t));
+        // Acorde final de refuerzo
+        [[1047,.74,.55],[1319,.74,.55],[1568,.80,.45]].forEach(([f,t,d]) => tone(f, d, 'sine', 0.06, t));
+      }
     };
   })();
   window.GCSound = Sound;
