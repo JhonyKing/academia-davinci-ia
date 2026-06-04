@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Academia Da Vinci IA — Guía del Instructor</title>
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1.5;
+      color: #1a1a2e;
+      background: #f7f8fa;
+    }
+
+    /* ===== VARIABLES DE COLOR ===== */
+    :root {
+      --m1: #E74C3C;
+      --m2: #4A90D9;
+      --m3: #27AE60;
+      --m4: #E74C3C;
+      --m5: #F39C12;
+      --m6: #16A085;
+      --text-dark: #1a1a2e;
+      --text-mid: #4a4a6a;
+      --text-light: #7a7a9a;
+      --bg-card: #ffffff;
+      --border: #e2e4ea;
+      --shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+
+    /* ===== HEADER PRINCIPAL ===== */
+    .site-header {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 60%, #0f3460 100%);
+      color: white;
+      padding: 32px 40px 28px;
+      print-color-adjust: exact;
+      -webkit-print-color-adjust: exact;
+    }
+    .site-header .badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.25);
+      color: rgba(255,255,255,0.8);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+    }
+    .site-header h1 {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      margin-bottom: 4px;
+    }
+    .site-header .subtitle {
+      color: rgba(255,255,255,0.6);
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+
+    /* ===== LEYENDA DE MÓDULOS ===== */
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.9);
+    }
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ===== LAYOUT PRINCIPAL ===== */
+    .main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 32px 24px 60px;
+    }
+
+    /* ===== MÓDULO ===== */
+    .module {
+      margin-bottom: 40px;
+    }
+    .module-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--border);
+    }
+    .module-badge {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 800;
+      color: white;
+      flex-shrink: 0;
+      print-color-adjust: exact;
+      -webkit-print-color-adjust: exact;
+    }
+    .module-title {
+      flex: 1;
+    }
+    .module-title h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+    .module-title .module-meta {
+      font-size: 12px;
+      color: var(--text-light);
+    }
+
+    /* ===== GRID DE CLASES ===== */
+    .classes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 12px;
+    }
+
+    /* ===== CARD DE CLASE ===== */
+    .class-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: box-shadow 0.15s;
+    }
+    .class-card:hover {
+      box-shadow: 0 3px 12px rgba(0,0,0,0.12);
+    }
+    .class-card-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-left: 4px solid var(--accent);
+    }
+    .class-number {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent);
+      background: color-mix(in srgb, var(--accent) 12%, transparent);
+      padding: 2px 8px;
+      border-radius: 20px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .class-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-dark);
+      flex: 1;
+    }
+    .class-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+    .class-duration {
+      font-size: 11px;
+      color: var(--text-light);
+      display: flex;
+      align-items: center;
+      gap: 3px;
+    }
+    .tool-chip {
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 7px;
+      border-radius: 20px;
+      background: #f0f2f7;
+      color: var(--text-mid);
+      white-space: nowrap;
+    }
+    .class-card-body {
+      padding: 10px 14px 12px;
+    }
+    .manzanita {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 6px;
+      line-height: 1.4;
+    }
+    .manzanita::before {
+      content: '🍎 ';
+    }
+    .descripcion {
+      font-size: 12px;
+      color: var(--text-mid);
+      line-height: 1.55;
+    }
+
+    /* ===== CHECKPOINT ===== */
+    .checkpoint {
+      margin-top: 14px;
+      background: var(--bg-card);
+      border: 2px dashed var(--border);
+      border-radius: 10px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .checkpoint-icon {
+      font-size: 22px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .checkpoint-content {}
+    .checkpoint-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-light);
+      margin-bottom: 2px;
+    }
+    .checkpoint-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 3px;
+    }
+    .checkpoint-desc {
+      font-size: 12px;
+      color: var(--text-mid);
+    }
+    .insignia-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 9px;
+      border-radius: 20px;
+      color: white;
+      margin-top: 5px;
+      print-color-adjust: exact;
+      -webkit-print-color-adjust: exact;
+    }
+
+    /* ===== COLORES POR MÓDULO ===== */
+    .m1 { --accent: var(--m1); }
+    .m2 { --accent: var(--m2); }
+    .m3 { --accent: var(--m3); }
+    .m4 { --accent: var(--m4); }
+    .m5 { --accent: var(--m5); }
+    .m6 { --accent: var(--m6); }
+
+    /* ===== PRINT ===== */
+    @media print {
+      body { background: white; font-size: 12px; }
+      .site-header { padding: 20px 24px; }
+      .main { padding: 20px 0; }
+      .class-card { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+      .module { break-inside: avoid; page-break-inside: avoid; }
+      .checkpoint { break-inside: avoid; }
+      .classes-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 600px) {
+      .classes-grid { grid-template-columns: 1fr; }
+      .site-header { padding: 20px; }
+      .main { padding: 20px 12px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="site-header">
+  <div class="badge">Guía del Instructor · Referencia Rápida</div>
+  <h1>Academia Da Vinci IA</h1>
+  <p class="subtitle">26 clases · 6 módulos · 6 checkpoints · Curso de IA Creativa para niños de 9–13 años</p>
+  <nav class="legend" aria-label="Módulos del curso">
+    <div class="legend-item"><span class="legend-dot" style="background:#E74C3C"></span>M1 — El Genio Creativo (C1–C5)</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#4A90D9"></span>M2 — El Mundo del Genio (C6–C9)</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#27AE60"></span>M3 — La Historia del Genio (C10–C13)</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#E74C3C"></span>M4 — El Genio en Movimiento (C14–C18)</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#F39C12"></span>M5 — La Voz del Genio (C19–C22)</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#16A085"></span>M6 — El Genio al Mundo (C23–C26)</div>
+  </nav>
+</header>
+
+<!-- ===== CONTENIDO PRINCIPAL ===== -->
+<main class="main">
+
+  <!-- ========================== MÓDULO 1 ========================== -->
+  <section class="module m1">
+    <div class="module-header">
+      <div class="module-badge" style="background:#E74C3C;">M1</div>
+      <div class="module-title">
+        <h2>El Genio Creativo</h2>
+        <span class="module-meta">Clases 1–5 · ~5 hrs · ChatGPT · Canva</span>
+      </div>
+    </div>
+
+    <div class="classes-grid">
+
+      <div class="class-card m1">
+        <div class="class-card-header">
+          <span class="class-number">Clase 1</span>
+          <span class="class-title">¡Bienvenido, Genio!</span>
+          <div class="class-meta">
+            <span class="class-duration">⏱ 60 min</span>
+            <span class="tool-chip">ChatGPT</span>
+          </div>
+        </div>
+        <div class="class-card-body">
+          <p class="manzanita">Los alumnos descubren qué es la IA y crean su primera imagen con un "prompt" (instrucción). Es como aprender a hablarle a una máquina que dibuja.</p>
+          <p class="descripcion">Los estudiantes conocen la IA como herramienta creativa y aprenden la fórmula de 4 ingredientes para escribir prompts: ¿Qué?, ¿Cómo?, ¿Dónde? y ¿Extras? Practican generando su primera imagen con ChatGPT. El objetivo es perderle el miedo a la tecnología y entender que ellos son los directores creativos.</p>
+        </div>
+      </div>
+
+      <div class="class-card m1">
+        <div class="class-card-header">
+          <span class="class-number">Clase 2</span>
+          <span class="class-title">Nace el Personaje</span>
+          <div class="class-meta">
+            <span class="class-duration">⏱ 60 min</span>
+            <span class="tool-chip">ChatGPT</span>
+          </div>
+        </div>
+        <div class="class-card-body">
+          <p class="manzanita">Cada alumno inventa a su héroe o heroína con 5 datos básicos (nombre, origen, misión, poder, debilidad). Es como llenar la ficha de un personaje de videojuego.</p>
+          <p class="descripcion">Los alumnos crean un personaje original usando los 5 elementos esenciales de la narrativa. Con ChatGPT redactan la historia de origen de su personaje. Luego fotografían un dibujo hecho a mano y usan IA para convertirlo en ilustración digital. Al final cada quien tiene el primer boceto de su protagonista.</p>
+        </div>
+      </div>
+
+      <div class="class-card m1">
+        <div class="class-card-header">
+          <span class="class-number">Clase 3</span>
+          <span class="class-title">El Retrato Oficial</span>
+          <div class="class-meta">
+            <span class="class-duration">⏱ 50 min</span>
+            <span class="tool-chip">ChatGPT</span>
+          </div>
+        </div>
+        <div class="class-card-body">
+          <p class="manzanita">Los alumnos aprenden a pedirle a la IA que dibuje a su personaje en 5 estilos diferentes (Pixar, Anime, Disney, Cartoon Network, Cómic) y eligen el que más les gusta.</p>
+          <p class="descripcion">Se presenta el "Prompt Maestro" de 7 componentes para describir imágenes con precisión. Los estudiantes generan 4 versiones de su personaje en distintos estilos visuales y, en votación grupal, eligen el retrato definitivo que usarán durante todo el curso. Es la clase donde el personaje cobra su identidad visual final.</p>
+        </div>
+      </div>
+
+      <div class="class-card m1">
+        <div class="class-card-header">
+          <span class="class-number">Clase 4</span>
+          <span class="class-title">La Tarjeta Oficial</span>
+          <div class="class-meta">
+            <span class="class-duration">⏱ 60 min</span>
+            <span class="tool-chip">Canva</span>
+          </div>
+        </div>
+        <div class="class-card-body">
+          <p class="manzanita">Con Canva los alumnos diseñan la "credencial" de su personaje, como la tarjeta de un superhéroe. Luego la presentan ante el grupo en 60 segundos.</p>
+          <p class="descripcion">Primera sesión con Canva: los alumnos aprenden a usar plantillas, elegir tipografía y armar una paleta de colores coherente. Diseñan una tarjeta de identidad que incluye el nombre, poderes y retrato oficial del personaje. Finalizan con una presentación exprés de 60 segundos ante el grupo, practicando su primer pitch creativo.</p>
+        </div>
+      </div>
+
+      <div class="class-card m1">
+        <div class="class-card-header">
+          <span class="class-number">Clase 5</span>
+          <span class="class-title">Los 12 Arquetipos</span>
+          <div class="class-meta">
+            <span class="class-duration">⏱ 55 min</span>
+            <span class="tool-chip">Sin IA</span>
+          </div>
+        </div>
+        <div class="class-card-body">
+          <p class="manzanita">Los alumnos descubren que todos los personajes del cine y los cuentos son uno de 12 "tipos" básicos (Héroe, Mago, Rebelde…). Identifican cuál es el suyo.</p>
+          <p class="descripcion">Clase teórico-práctica sobre los 12 arquetipos de Carl Jung aplicados a personajes icónicos del cine y la literatura. Cada alumno analiza qué arquetipo representa a su personaje y por qué. No hay herramienta de IA en esta sesión; el énfasis está en el pensamiento crítico narrativo. Se producen reflexiones escritas en el cuaderno de trabajo.</p>
+        </div>
+      </div>
+
+    </div><!-- /classes-grid -->
+
+    <!-- Checkpoint M1 -->
+    <div class="checkpoint">
+      <div class="checkpoint-icon">🎯</div>
+      <div class="checkpoint-content">
+        <div class="checkpoint-label">Checkpoint · Fin del Módulo 1</div>
+        <div class="checkpoint-title">El Reto del Genio</div>
+        <div class="checkpoint-desc">Los alumnos demuestran que dominan los prompts básicos creando una escena nueva con su personaje usando la fórmula de 4 ingredientes aprendida en clase.</div>
+        <span class="insignia-badge" style="background:#E74C3C;">🎨 Insignia: Maestro de Prompts</span>
+      </div>
+    </div>
+
+  </section><!-- /m1 -->
+
+
+  <!-- ========================== MÓDULO 2 ========================== -->
+  <section class="module m2">
+    <div class="module-header">
+      <div class="module-badge" style="background:#4A90D9;">M2</div>
+      <div class="module-title">
+        <h2>El Mundo del Genio</h2>
+        <span class="module-meta">Clases 6–9 · ~4 hrs · ChatGPT · Midjourney · Canva</span>
+      </div>
+    </div>
+
+    <div class="classes-grid">
+
+      <div class="class-card m2">
+        <div class="class-card-header">
+          <span class="class-number">Clase 6</span>
+          <span class="class-title">El Universo</span>
+          <div class="class-meta">
+            <span class="class-duration">⏱ 60 min</span>
+            <span class="tool-chip">ChatGPT</span>
+            <span class="tool-chip">Midjourney</span>
+          </div>
+        </div>
+        <div class="class-card-body">
+          <p class="manzanita">Cada alumno construye el mundo donde vive su personaje: dónde queda, cómo es el clima, en qué época transcurre y cuáles son las reglas del lugar.</p>
+          <p class="descripcion">Introducción al world-building narrativo. Los alumnos aprenden los 4 tipos de mundos (magia, tecnología, misterio, cotidiano mágico) y los 4 ingredientes del escenario: lugar, clima, época y reglas. Usan ChatGPT para redactar la descripción del mundo y Midjourney (o alternativa) para generar imágenes de sus escenarios.</p>
+        </div>
+      </div>
+
+      <div class="class-card m2">
+        <div class="class-card-header">
+          <span class="class-number">Clase 7</span>
+          <span class="class-title">Aliados y Villanos</span>
+          <div class="class-meta">
+            <span class="class-duration">⏱ 60 min</span>
+            <span class="tool-chip">ChatGPT</span>
+            <span class="tool-chip">Midjourney</span>
+          </div>
+        </div>
+        <div class="class-card-body">
+          <p class="manzanita">Los alumnos diseñan al mejor amigo y al peor enemigo de su héroe. Aprenden por qué un buen villano hace más interesante a cualquier historia.</p>
+          <p class="descripcion">Se estudian los 4 arquetipos de personajes secundarios y se profundiza en cómo diseñar un antagonista memorable (motivaciones, contraste con el héroe, punto débil). Los estudiantes crean fichas completas de su aliado y su villano, con imagen generada por IA. Al finalizar, cada alumno tiene un trío de personajes listo para su historia.</p>
+        </div>
+      </div>
+
+      <div class="class-card m2">
+        <div class="class-card-header">
+          <span class="class-number">Clase 8</span>
+          <span class="class-title">El Mapa del Mundo</span>
+          <div class="class-meta">
+            <span class="class-duration">⏱ 60 min</span>
+            <span class="tool-chip">ChatGPT</span>
+            <span class="tool-chip">Canva</span>
+          </div>
+        </div>
+        <div class="class-card-body">
+          <p class="manzanita">Los alumnos crean el mapa de su mundo con 5 lugares importantes, como el mapa de "El Señor de los Anillos" o "Harry Potter", pero el suyo propio.</p>
+          <p class="descripcion">Clase de narrativa visual: se estudian los planos cinematográficos y cómo los mapas comunican geografía y poder. Los alumnos eligen 5 ubicaciones clave de su mundo, las describen con ChatGPT y las montan visualmente en Canva con nombres, íconos y jerarquía visual. El mapa se convierte en un artefacto central del universo de cada alumno.</p>
+        </div>
+      </div>
+
+      <div class="class-card m2">
+        <div class="class-card-header">
+          <span class="class-number">Clase 9</span>
+          <span class="class-title">Galería del Mundo</span>
+          <div class="class-meta">
+            <span class="class-duration">⏱ 60 min</span>
+            <span class="tool-chip">Canva</span>
+          </div>
+        </div>
+        <div class="class-card-body">
+          <p class="manzanita">Es la clase "gran presentación" del Módulo 2. Cada alumno presenta su mundo completo (personajes, mapa, escenarios) ante el grupo en 60 segundos.</p>
+          <p class="descripcion">Clase final del módulo: los alumnos aprenden la técnica del elevator pitch narrativo y preparan una presentación de 60 segundos que integra todos los elementos construidos en M2. El instructor da retroalimentación estructurada. Se produce una galería visual compartida donde todos pueden ver los universos de sus compañeros.</p>
+        </div>
+      </div>
+
+    </div><!-- /classes-grid -->
+
+    <!-- Checkpoint M2 -->
+    <div class="checkpoint">
+      <div class="checkpoint-icon">🎯</div>
+      <div class="checkpoint-content">
+        <div class="checkpoint-label">Checkpoint · Fin del Módulo 2</div>
+        <div class="checkpoint-title">Constructor de Mundos</div>
+        <div class="checkpoint-desc">Los alumnos entregan el dossier completo de su universo: mapa, ficha de aliado, ficha de villano y descripción del mundo en 100 palabras.</div>
+        <span class="insignia-badge" style="background:#4A90D9;">🌍 Insignia: Constructor de Mundos</span>
+      </div>
+    </div>
+
+  </section><!-- /m2 -->
+
+
+  <!-- ========================== MÓDULO 3 ========================== -->
+  <section class="module m3">
+    <div class="module-header">
+      <div class="module-badge" style="background:#27AE60;">M3</div>
+      <div class="module-title">
+        <h2>La Historia del Genio</h2>
+        <span class="module-meta">Clases 10–13 · ~4 hrs · ChatGPT · Canva</span>
+      </div>
+    </div>
+
+    <div class="classes-grid">
+
+      <div class="class-card m3">
+        <div class="class-card-header">
+          <span class="class-number">Clase 10</span>
+          <span class="class-title">El Guion</span>
+          <div class="class-meta">
+            <span class="class-duration">⏱ 60 min</span>
+            <span class="tool-chip">ChatGPT</span>
+          </div>
+        </div>
+        <div class="class-card-body">
+          <p class="manzanita">Los alumnos aprenden que toda historia tiene 3 partes (inicio, nudo, desenlace) y usan ChatGPT para escribir el guion de su episodio en una sola página.</p>
+          <p class="descripcion">Se introduce la estructura de 3 actos y el viaje del héroe simplificado (mundo ordinario → llamada → prueba → transformación → regreso). Con este esquema como andamio, los alumnos usan ChatGPT como co-escritor para redactar un guion de una página que ya tiene su personaje, su mundo y su conflicto central definidos.</p>
+        </div>
+      </div>
+
+      <div class="class-card m3">
+        <div class="class-card-header">
+          <span class="class-number">Clase 11</span>
+          <span class="class-title">Los Diálogos</span>
+          <div class="class-meta">
+            <span class="class-duration">⏱ 60 min</span>
+            <span class="tool-chip">ChatGPT</span>
+          </div>
+        </div>
+        <div class="class-card-body">
+          <p class="manzanita">Los alumnos aprenden a escribir conversaciones entre personajes que suenen naturales. Es como aprender a "darle voz" a su héroe y su villano.</p>
+          <p class="descripcion">Se estudia la anatomía del diálogo efectivo en 4 partes: apertura → conflicto → revelación → cierre. Se trabaja la "voz del personaje": cómo habla diferente el héroe al villano, al aliado, a los secundarios. Los alumnos escriben un diálogo de 10 líneas entre sus personajes usando ChatGPT como asistente de escritura.</p>
+        </div>
+      </div>
+
+      <div class="class-card m3">
+        <div class="class-card-header">
+          <span class="class-number">Clase 12</span>
+          <span class="class-title">El Cómic</span>
+          <div class="class-meta">
+            <span class="class-duration">⏱ 60 min</span>
+            <span class="tool-chip">ChatGPT</span>
+            <span class="tool-chip">Canva</span>
+          </div>
+        </div>
+        <div class="class-card-body">
+          <p class="manzanita">Los alumnos convierten su historia en tira cómica: generan 4 imágenes con IA y las montan con bocadillos y onomatopeyas en Canva.</p>
+          <p class="descripcion">Introducción a la anatomía del cómic: viñetas, bocadillos, onomatopeyas y ritmo visual. Los alumnos eligen 4 momentos clave de su guion, generan las imágenes con IA (ChatGPT/Midjourney) y las ensamblan en Canva añadiendo texto, globos de diálogo y efectos gráficos. Es la primera vez que ven su historia en formato visual secuencial.</p>
+        </div>
+      </div>
+
+      <div class="class-card m3">
+        <div class="class-card-header">
+          <span class="class-number">Clase 13</span>
+          <span class="class-title">Episodio Completo</span>
+          <div class="class-meta">
+            <span class="class-duration">⏱ 60 min</span>
+            <span class="tool-chip">Canva</span>
+          </div>
+        </div>
+        <div class="class-card-body">
+          <p class="manzanita">Los alumnos terminan y "publican" su primer episodio de cómic completo. Aprenden a hacer una portada y pasan por un proceso editorial de 4 pasos.</p>
+          <p class="descripcion">Clase final del módulo: se presenta el proceso editorial de 4 pasos (borrador → revisión → diseño → publicación). Los alumnos diseñan la portada oficial de su episodio en Canva, integran todo el contenido y exportan su primer "número" publicado. Es un hito emocional importante: ver su historia completa en formato de cómic real.</p>
+        </div>
+      </div>
+
+    </div><!-- /classes-grid -->
+
+    <!-- Checkpoint M3 -->
+    <div class="checkpoint">
+      <div class="checkpoint-icon">🎯</div>
+      <div class="checkpoint-content">
+        <div class="checkpoint-label">Checkpoint · Fin del Módulo 3</div>
+        <div class="checkpoint-title">Maestro de Historias</div>
+        <div class="checkpoint-desc">Los alumnos entregan el episodio completo en PDF: portada, 4 viñetas con diálogos y cierre narrativo. Se evalúa coherencia de personaje, conflicto y resolución.</div>
+        <span class="insignia-badge" style="background:#27AE60;">📖 Insignia: Maestro de Historias</span>
+      </div>
+    </div>
+
+  </section><!-- /m3 -->
+
+
+  <!-- ========================== MÓDULO 4 ========================== -->
+  <section class="module m4">
+    <div class="module-header">
+      <div class="module-badge" style="background:#E74C3C;">M4</div>
+      <div class="module-title">
+        <h2>El Genio en Movimiento</h2>
+        <span class="module-meta">Clases 14–18 · ~5 hrs · Kling / Runway / Pika · CapCut</span>
+      </div>
+    </div>
+
+    <div class="classes-grid">
+
+      <div class="class-card m4">
+        <div class="class-card-header">
+          <span class="class-number">Clase 14</span>
+          <span class="class-title">Primera Animación</span>
+          <div class="class-meta">
+            <span class="class-duration">⏱ 60 min</span>
+            <span class="tool-chip">Kling / Runway</span>
+          </div>
+        </div>
+        <div class="class-card-body">
+          <p class="manzanita">Los alumnos hacen que su personaje se mueva por primera vez con IA de video. Generan 2 clips: uno suave y uno de acción.</p>
+          <p class="descripcion">Introducción a la animación con IA: se explican los 3 tipos de movimiento (de cámara, de personaje, de ambiente) y cómo describirlos en un prompt de video. Los alumnos usan Kling, Runway o Pika para generar sus primeros 2 clips animados. Se comparan los resultados y se discute qué prompts funcionaron mejor.</p>
+        </div>
+      </div>
+
+      <div class="class-card m4">
+        <div class="class-card-header">
+          <span class="class-number">Clase 15</span>
+          <span class="class-title">Planos y Cámara</span>
+          <div class="class-meta">
+            <span class="class-duration">⏱ 60 min</span>
+            <span class="tool-chip">Kling / Runway</span>
+          </div>
+        </div>
+        <div class="class-card-body">
+          <p class="manzanita">Los alumnos aprenden los 3 planos del cine (general, medio, primer plano) y los aplican en sus videos de IA para que la historia se vea más profesional.</p>
+          <p class="descripcion">Clase de lenguaje cinematográfico aplicado a la IA: plano general (establece el lugar), plano medio (muestra la acción) y primer plano (transmite emoción). Los alumnos generan al menos un clip con cada tipo de plano usando a su propio personaje. Al terminar, tienen vocabulario de director de cine y saben pedírselo a la IA.</p>
+        </div>
+      </div>
+
+      <div class="class-card m4">
+        <div class="class-card-header">
+          <span class="class-number">Clase 16</span>
+          <span class="class-title">Las Escenas</span>
+          <div class="class-meta">
+            <span class="class-duration">⏱ 60 min</span>
+            <span class="tool-chip">Kling / Runway</span>
+          </div>
+        </div>
+        <div class="class-card-body">
+          <p class="manzanita">Los alumnos graban las 3 escenas más importantes de su historia: el inicio, el momento más emocionante y el final. Aprenden a mantener coherencia visual entre clips.</p>
+          <p class="descripcion">Se trabajan las 3 escenas clave narrativas: apertura (presenta el mundo), clímax (el conflicto máximo) y cierre (la resolución). Se introduce el concepto de raccord (continuidad visual entre planos) y las transiciones básicas. Los alumnos generan los clips correspondientes y aprenden a revisar que el personaje se vea consistente entre escenas.</p>
+        </div>
+      </div>
+
+      <div class="class-card m4">
+        <div class="class-card-header">
+          <span class="class-number">Clase 17</span>
+          <span class="class-title">Edición Básica</span>
+          <div class="class-meta">
+            <span class="class-duration">⏱ 60 min</span>
+            <span class="tool-chip">CapCut</span>
+          </div>
+        </div>
+        <div class="class-card-body">
+          <p class="manzanita">Los alumnos aprenden a usar CapCut para juntar todos sus clips en un solo video de 2-3 minutos con música y transiciones.</p>
+          <p class="descripcion">Primera sesión con CapCut: importar clips, ordenarlos en timeline, recortar, añadir transiciones y agregar música de fondo. Los alumnos montan un video de 2–3 minutos usando los clips generados en las clases 14–16. El objetivo es que cada alumno termine la sesión con un corto animado funcional listo para mostrar.</p>
+        </div>
+      </div>
+
+      <div class="class-card m4">
+        <div class="class-card-header">
+          <span class="class-number">Clase 18</span>
+          <span class="class-title">El Tráiler</span>
+          <div class="class-meta">
+            <span class="class-duration">⏱ 60 min</span>
+            <span class="tool-chip">CapCut</span>
+          </div>
+        </div>
+        <div class="class-card-body">
+          <p class="manzanita">Los alumnos crean el tráiler oficial de su historia: un teaser de 15 segundos y un tráiler de 60 segundos que no revela el final.</p>
+          <p class="descripcion">Clase final del módulo: se presentan las 3 reglas del tráiler perfecto (gancho en los primeros 3 segundos, crescendo emocional y no revelar el final). Los alumnos editan en CapCut un teaser de 15 segundos y un tráiler completo de 60 segundos. Se hace proyección grupal y votación de los mejores trailers.</p>
+        </div>
+      </div>
+
+    </div><!-- /classes-grid -->
+
+    <!-- Checkpoint M4 -->
+    <div class="checkpoint">
+      <div class="checkpoint-icon">🎯</div>
+      <div class="checkpoint-content">
+        <div class="checkpoint-label">Checkpoint · Fin del Módulo 4</div>
+        <div class="checkpoint-title">Director de Cine</div>
+        <div class="checkpoint-desc">Los alumnos entregan el tráiler de 60 segundos de su historia. Se evalúa el uso de los 3 planos, la continuidad visual y que contenga las 3 escenas clave.</div>
+        <span class="insignia-badge" style="background:#E74C3C;">🎬 Insignia: Director de Cine</span>
+      </div>
+    </div>
+
+  </section><!-- /m4 -->
+
+
+  <!-- ========================== MÓDULO 5 ========================== -->
+  <section class="module m5">
+    <div class="module-header">
+      <div class="module-badge" style="background:#F39C12;">M5</div>
+      <div class="module-title">
+        <h2>La Voz del Genio</h2>
+        <span class="module-meta">Clases 19–22 · ~4 hrs · Suno.ai · ElevenLabs · Freesound · CapCut</span>
+      </div>
+    </div>
+
+    <div class="classes-grid">
+
+      <div class="class-card m5">
+        <div class="class-card-header">
+          <span class="class-number">Clase 19</span>
+          <span class="class-title">El Tema Musical</span>
+          <div class="class-meta">
+            <span class="class-duration">⏱ 60 min</span>
+            <span class="tool-chip">Suno.ai</span>
+          </div>
+        </div>
+        <div class="class-card-body">
+          <p class="manzanita">Los alumnos crean la canción oficial de su historia con IA. Aprenden qué elementos hacen que una música sea pegajosa: ritmo, melodía, armonía y letra.</p>
+          <p class="descripcion">Se introducen los 4 elementos de la música: ritmo, melodía, armonía y letra. Los alumnos aprenden a escribir un prompt musical para Suno.ai que incluya género, mood, instrumentos y letra básica. Cada alumno genera su propio tema musical que refleja la personalidad de su personaje. El resultado es el "tema" del episodio.</p>
+        </div>
+      </div>
+
+      <div class="class-card m5">
+        <div class="class-card-header">
+          <span class="class-number">Clase 20</span>
+          <span class="class-title">La Voz del Personaje</span>
+          <div class="class-meta">
+            <span class="class-duration">⏱ 60 min</span>
+            <span class="tool-chip">ElevenLabs</span>
+          </div>
+        </div>
+        <div class="class-card-body">
+          <p class="manzanita">Los alumnos le dan voz a su personaje con IA. Es como ser el director de doblaje de su propia película.</p>
+          <p class="descripcion">Introducción al text-to-speech con ElevenLabs: cómo elegir la voz adecuada (género, acento, emoción) y cómo escribir el texto para que suene bien narrado (puntuación, pausas, énfasis). Los alumnos escriben el monólogo principal de su personaje y lo generan con la voz de IA. Al final, cada personaje tiene su propia voz oficial.</p>
+        </div>
+      </div>
+
+      <div class="class-card m5">
+        <div class="class-card-header">
+          <span class="class-number">Clase 21</span>
+          <span class="class-title">Efectos de Sonido</span>
+          <div class="class-meta">
+            <span class="class-duration">⏱ 60 min</span>
+            <span class="tool-chip">Freesound</span>
+            <span class="tool-chip">ElevenLabs</span>
+          </div>
+        </div>
+        <div class="class-card-body">
+          <p class="manzanita">Los alumnos aprenden que el sonido tiene 3 capas (ambiente, acción, música) y agregan efectos de sonido a la escena más emocionante de su historia.</p>
+          <p class="descripcion">Introducción al sound design cinematográfico: las 3 capas de audio (ambiente de fondo, efectos de acción y música), su importancia emocional y cómo combinarlas. Se muestran fuentes de efectos gratuitos (Freesound, Pixabay). Los alumnos buscan y aplican efectos sonoros a la escena de clímax de su episodio. La clase cambia radicalmente la percepción del video con solo añadir sonido.</p>
+        </div>
+      </div>
+
+      <div class="class-card m5">
+        <div class="class-card-header">
+          <span class="class-number">Clase 22</span>
+          <span class="class-title">Audio Completo</span>
+          <div class="class-meta">
+            <span class="class-duration">⏱ 60 min</span>
+            <span class="tool-chip">CapCut</span>
+          </div>
+        </div>
+        <div class="class-card-body">
+          <p class="manzanita">Los alumnos mezclan todos sus sonidos (voz, música, efectos) y los sincronizan con el video. Al terminar, tienen su episodio con audio completo.</p>
+          <p class="descripcion">Clase final del módulo: se presenta la fórmula de mezcla de audio (voz al 100%, música al 25%, efectos al 60%) y cómo aplicarla en CapCut. Los alumnos importan la narración de ElevenLabs, el tema de Suno y los efectos de Freesound, los sincronizan con el video y exportan el episodio completamente sonorizado. Es la transformación más notable del curso.</p>
+        </div>
+      </div>
+
+    </div><!-- /classes-grid -->
+
+    <!-- Checkpoint M5 -->
+    <div class="checkpoint">
+      <div class="checkpoint-icon">🎯</div>
+      <div class="checkpoint-content">
+        <div class="checkpoint-label">Checkpoint · Fin del Módulo 5</div>
+        <div class="checkpoint-title">Maestro del Sonido</div>
+        <div class="checkpoint-desc">Los alumnos entregan la escena de clímax del episodio con las 3 capas de audio (voz, música, efectos) correctamente mezcladas y sincronizadas.</div>
+        <span class="insignia-badge" style="background:#F39C12;">🎵 Insignia: Maestro del Sonido</span>
+      </div>
+    </div>
+
+  </section><!-- /m5 -->
+
+
+  <!-- ========================== MÓDULO 6 ========================== -->
+  <section class="module m6">
+    <div class="module-header">
+      <div class="module-badge" style="background:#16A085;">M6</div>
+      <div class="module-title">
+        <h2>El Genio al Mundo</h2>
+        <span class="module-meta">Clases 23–26 · ~4 hrs · CapCut · Presentación grupal con familias</span>
+      </div>
+    </div>
+
+    <div class="classes-grid">
+
+      <div class="class-card m6">
+        <div class="class-card-header">
+          <span class="class-number">Clase 23</span>
+          <span class="class-title">Ensamble Final</span>
+          <div class="class-meta">
+            <span class="class-duration">⏱ 60 min</span>
+            <span class="tool-chip">CapCut</span>
+          </div>
+        </div>
+        <div class="class-card-body">
+          <p class="manzanita">Los alumnos juntan en un solo video todo lo que han creado: video, audio, subtítulos y créditos. Es como armar las piezas finales del rompecabezas.</p>
+          <p class="descripcion">Sesión de post-producción completa: los alumnos ensamblan en CapCut el video final con todas sus capas (clips animados, narración, música, efectos, subtítulos automáticos y créditos finales). Se enseña la estructura estándar de créditos y cómo exportar en la resolución y formato correctos. Al terminar tienen el corte inicial del episodio.</p>
+        </div>
+      </div>
+
+      <div class="class-card m6">
+        <div class="class-card-header">
+          <span class="class-number">Clase 24</span>
+          <span class="class-title">Revisión y Edición</span>
+          <div class="class-meta">
+            <span class="class-duration">⏱ 60 min</span>
+            <span class="tool-chip">CapCut</span>
+          </div>
+        </div>
+        <div class="class-card-body">
+          <p class="manzanita">Los alumnos revisan su episodio con un checklist de 5 puntos y corrigen los errores más comunes antes del estreno. Aprenden que todo buen producto pasa por revisión.</p>
+          <p class="descripcion">Clase de control de calidad: se presenta un checklist de 5 puntos (audio sincronizado, continuidad visual, texto legible, créditos presentes, duración adecuada) y se repasan los errores más comunes con ejemplos. Los alumnos aplican al menos una corrección a su episodio. Esta clase refuerza el pensamiento crítico y la mentalidad editorial.</p>
+        </div>
+      </div>
+
+      <div class="class-card m6">
+        <div class="class-card-header">
+          <span class="class-number">Clase 25</span>
+          <span class="class-title">Estreno Privado</span>
+          <div class="class-meta">
+            <span class="class-duration">⏱ 60 min</span>
+            <span class="tool-chip">Grupo</span>
+          </div>
+        </div>
+        <div class="class-card-body">
+          <p class="manzanita">Los alumnos se proyectan los episodios entre ellos y se dan retroalimentación constructiva usando la fórmula "1 cosa buena + 1 pregunta + 1 sugerencia".</p>
+          <p class="descripcion">Sesión de retroalimentación entre pares con protocolo de feedback constructivo. Cada alumno recibe un turno de proyección y el grupo comenta siguiendo la fórmula de 3 partes. Con ese input, cada alumno implementa al menos una mejora concreta a su episodio antes del estreno final. Es la única clase donde el feedback viene de los compañeros, no del instructor.</p>
+        </div>
+      </div>
+
+      <div class="class-card m6">
+        <div class="class-card-header">
+          <span class="class-number">Clase 26</span>
+          <span class="class-title">Graduación Genios</span>
+          <div class="class-meta">
+            <span class="class-duration">⏱ 60 min</span>
+            <span class="tool-chip">Grupo + Familias</span>
+          </div>
+        </div>
+        <div class="class-card-body">
+          <p class="manzanita">La clase final. Los alumnos estrenan sus episodios ante sus familias, reciben su diploma y celebran haberse convertido en creadores de IA. ¡La gran función!</p>
+          <p class="descripcion">Gran Estreno Da Vinci con presencia de familias: proyección de todos los episodios, entrega de diplomas con el nombre del personaje de cada alumno y reconocimiento de las 6 habilidades para la vida que desarrollaron durante el curso (creatividad, comunicación, pensamiento crítico, colaboración, alfabetización digital y perseverancia). Ceremonia de cierre memorable.</p>
+        </div>
+      </div>
+
+    </div><!-- /classes-grid -->
+
+    <!-- Checkpoint M6 -->
+    <div class="checkpoint">
+      <div class="checkpoint-icon">🎯</div>
+      <div class="checkpoint-content">
+        <div class="checkpoint-label">Checkpoint · Fin del Módulo 6 · FINAL</div>
+        <div class="checkpoint-title">Genio Graduado</div>
+        <div class="checkpoint-desc">Los alumnos entregan el episodio completo y final: video editado, audio mezclado, subtítulos, créditos. Se proyecta ante las familias en el Gran Estreno Da Vinci. Cada alumno recibe su diploma y la insignia máxima del curso.</div>
+        <span class="insignia-badge" style="background:#16A085;">🏆 Insignia: Genio Graduado</span>
+      </div>
+    </div>
+
+  </section><!-- /m6 -->
+
+</main><!-- /main -->
+
+<!-- ===== FOOTER ===== -->
+<footer style="background:#1a1a2e; color:rgba(255,255,255,0.45); text-align:center; padding:18px; font-size:11px; letter-spacing:0.03em;">
+  Academia Da Vinci IA &nbsp;·&nbsp; Guía de Referencia del Instructor &nbsp;·&nbsp; Uso interno — no distribuir a alumnos
+</footer>
+
+</body>
+</html>
