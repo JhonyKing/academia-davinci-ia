@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="css/genios.css">
 <link rel="stylesheet" href="css/lesson.css">
 <link rel="stylesheet" href="css/juice.css">
+<link rel="stylesheet" href="css/lesson-quiz.css">
 </head>
 <body class="lesson" style="--wc: var(--m2)">
 
@@ -285,6 +286,9 @@
 </section>
 
 <!-- ═══════════ NAV LECCIÓN ═══════════ -->
+
+<!-- ══ MINI QUIZ ══ -->
+<div id="lesson-quiz-container"></div>
 <nav class="lessonnav">
   <a href="clase5_los_arquetipos.html" class="lnav-btn prev-btn">
     <span class="ar">←</span>
@@ -365,5 +369,9 @@ if (/vercel\.app$|academiadavinci/.test(location.hostname)) {
 }
 </script>
 
+
+<!-- ── Lesson quiz ── -->
+<script>window.LESSON_QUIZ_DATA = {"claseNum": 6, "preguntas": [{"q": "¿Qué es el 'world-building'?", "opciones": ["Un videojuego de construcción de mundos virtuales", "La habilidad de construir el mundo donde vive tu personaje", "Una técnica de dibujo para mapas de fantasía", "El proceso de crear un nombre para el mundo de tu historia"], "correcta": 1, "pista": "Tu personaje necesita un hogar — y ese hogar tiene reglas, clima y época."}, {"q": "¿Cuáles son los 4 ingredientes de un escenario?", "opciones": ["Color, forma, tamaño y textura", "Héroe, villano, aliado y sidekick", "Lugar, clima, época y reglas especiales", "Música, luz, sombra y movimiento"], "correcta": 2, "pista": "Empieza por el clima y la época — eso define todo lo demás automáticamente."}, {"q": "¿Cuál de estos es un tipo de mundo posible para tu personaje?", "opciones": ["Solo existen los mundos realistas y los de ciencia ficción", "Fantástico (magia), futurista (tecnología), misterioso (secretos) o cotidiano-mágico", "Solo cuentan los mundos que ya existen en películas famosas", "Un mundo siempre debe tener ciudades, porque sin ciudades no es un mundo"], "correcta": 1, "pista": "Piensa en Minecraft — tú decides si hay dragones o si llueve fuego."}, {"q": "¿Por qué un mundo sin reglas no funciona bien en una historia?", "opciones": ["Porque las reglas hacen que el mundo sea aburrido y predecible", "Porque los lectores necesitan saber cuántos personajes hay", "Porque sin reglas no hay consecuencias, conflicto ni lógica interna", "Porque la IA no puede dibujar mundos sin reglas"], "correcta": 2, "pista": "Hasta el universo de Harry Potter tiene reglas. Las reglas crean el drama."}]};</script>
+<script src="js/lesson-quiz.js"></script>
 </body>
 </html>

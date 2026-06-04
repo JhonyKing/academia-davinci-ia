@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="css/genios.css">
 <link rel="stylesheet" href="css/lesson.css">
 <link rel="stylesheet" href="css/juice.css">
+<link rel="stylesheet" href="css/lesson-quiz.css">
 </head>
 <body class="lesson" style="--wc: var(--m5)">
 
@@ -238,6 +239,9 @@
 </section>
 
 <!-- ═══════════ NAV LECCIÓN ═══════════ -->
+
+<!-- ══ MINI QUIZ ══ -->
+<div id="lesson-quiz-container"></div>
 <nav class="lessonnav">
   <a href="clase21_efectos_de_sonido.html" class="lnav-btn prev-btn">
     <span class="ar">←</span>
@@ -318,5 +322,9 @@ if (/vercel\.app$|academiadavinci/.test(location.hostname)) {
 }
 </script>
 
+
+<!-- ── Lesson quiz ── -->
+<script>window.LESSON_QUIZ_DATA = {"claseNum": 22, "preguntas": [{"q": "¿A qué volumen debe estar la VOZ del personaje en la mezcla final?", "opciones": ["Al 50% para equilibrarse con la música", "Al 75% para que no tape los efectos", "Al 100% — la voz siempre es lo más importante", "Al 60% para que la música tenga protagonismo"], "correcta": 2, "pista": "La voz ES la historia. Todo lo demás la apoya."}, {"q": "¿Qué es el 'fade in' en el audio?", "opciones": ["Cuando el audio se corta de repente al terminar una escena", "Cuando la música sube gradualmente al inicio de una escena", "Cuando se silencia la voz del personaje para escuchar el ambiente", "Cuando se duplica el volumen de los efectos de sonido"], "correcta": 1, "pista": "Fade in = entrar suave; fade out = salir suave. Respira naturalmente."}, {"q": "¿Qué significa 'duck' en la mezcla de audio?", "opciones": ["Eliminar completamente la música de una escena", "Bajar la música automáticamente cuando alguien habla y subirla cuando termina", "Duplicar el volumen de los efectos de sonido", "Añadir eco y reverberación a la voz del personaje"], "correcta": 1, "pista": "El 'duck' es lo que hace que todo suene profesional sin que el espectador lo note."}, {"q": "¿Cuál es la señal de que lograste una buena mezcla de audio?", "opciones": ["Que la música sea lo más fuerte de todo", "Que todos los elementos estén al mismo volumen exacto", "Que el espectador NO note el sonido porque está perfectamente equilibrado", "Que los efectos de sonido sean más fuertes que la voz"], "correcta": 2, "pista": "El mejor sonido es el que no se nota — simplemente te sumerge en la historia."}]};</script>
+<script src="js/lesson-quiz.js"></script>
 </body>
 </html>

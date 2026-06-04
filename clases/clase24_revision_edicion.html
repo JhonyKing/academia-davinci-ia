@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="css/genios.css">
 <link rel="stylesheet" href="css/lesson.css">
 <link rel="stylesheet" href="css/juice.css">
+<link rel="stylesheet" href="css/lesson-quiz.css">
 </head>
 <body class="lesson" style="--wc: var(--m6)">
 
@@ -247,6 +248,9 @@
 </section>
 
 <!-- ═══════════ NAV LECCIÓN ═══════════ -->
+
+<!-- ══ MINI QUIZ ══ -->
+<div id="lesson-quiz-container"></div>
 <nav class="lessonnav">
   <a href="clase23_ensamble_final.html" class="lnav-btn prev-btn">
     <span class="ar">←</span>
@@ -327,5 +331,9 @@ if (/vercel\.app$|academiadavinci/.test(location.hostname)) {
 }
 </script>
 
+
+<!-- ── Lesson quiz ── -->
+<script>window.LESSON_QUIZ_DATA = {"claseNum": 24, "preguntas": [{"q": "¿Cuántos puntos tiene el 'checklist de calidad' que aplicas en esta clase?", "opciones": ["3 puntos básicos", "5 puntos (imagen nítida, audio sincronizado, subtítulos correctos, créditos completos, duración adecuada)", "10 puntos detallados", "Solo 1 punto — el más importante"], "correcta": 1, "pista": "Los 5 puntos cubren todos los aspectos técnicos y narrativos del episodio."}, {"q": "¿Cuántas cosas debes mejorar en los 'Retoques'?", "opciones": ["Todas las que puedas — más mejoras es siempre mejor", "Solo 1 — la más urgente", "Las 3 más importantes que identificaste en la revisión", "Exactamente 7 cosas, ni más ni menos"], "correcta": 2, "pista": "La perfección es enemiga de lo publicado — 3 mejoras bien hechas son suficientes."}, {"q": "¿Cómo detectar si la transición entre escenas es 'brusca'?", "opciones": ["Si la transición dura menos de 1 segundo", "Si el espectador nota el corte porque rompe el ritmo o la continuidad", "Si no hay música de fondo durante la transición", "Si los colores de ambas escenas son muy diferentes"], "correcta": 1, "pista": "Una buena transición se siente natural — una mala se nota y saca al espectador de la historia."}, {"q": "¿Cuál es el mejor método para detectar problemas en tu episodio?", "opciones": ["Verlo tú solo en un cuarto a oscuras con auriculares", "Leer el guion original y compararlo con el video", "Mostrárselo a alguien que no lo haya visto y observar su reacción", "Contar cuántos segundos dura cada escena y comparar con el plan original"], "correcta": 2, "pista": "Sus cejas dicen más que sus palabras — la primera reacción no miente."}]};</script>
+<script src="js/lesson-quiz.js"></script>
 </body>
 </html>

@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="css/genios.css">
 <link rel="stylesheet" href="css/lesson.css">
 <link rel="stylesheet" href="css/juice.css">
+<link rel="stylesheet" href="css/lesson-quiz.css">
 </head>
 <body class="lesson" style="--wc: var(--m4)">
 
@@ -250,6 +251,9 @@
 </section>
 
 <!-- ═══════════ NAV LECCIÓN ═══════════ -->
+
+<!-- ══ MINI QUIZ ══ -->
+<div id="lesson-quiz-container"></div>
 <nav class="lessonnav">
   <a href="clase15_planos_y_camara.html" class="lnav-btn prev-btn">
     <span class="ar">←</span>
@@ -332,5 +336,9 @@ if (/vercel\.app$|academiadavinci/.test(location.hostname)) {
 }
 </script>
 
+
+<!-- ── Lesson quiz ── -->
+<script>window.LESSON_QUIZ_DATA = {"claseNum": 16, "preguntas": [{"q": "¿Cuáles son las 3 escenas clave de cualquier episodio?", "opciones": ["Introducción, desarrollo y créditos", "Apertura (héroe en acción), clímax (momento más emocionante) y cierre (consecuencia+gancho)", "Escena de acción, escena de romance y escena de humor", "Escena larga, escena media y escena corta"], "correcta": 1, "pista": "Todo episodio de serie sigue esta estructura de 3 escenas."}, {"q": "¿Qué debe responder la escena de apertura en sus primeros 10 segundos?", "opciones": ["Cuál es la debilidad del villano", "Cómo termina la historia", "¿Quién es? ¿Dónde está? ¿Qué quiere?", "Por qué el héroe y el villano son enemigos"], "correcta": 2, "pista": "Si no estableces esto en 10 segundos, pierdes al espectador."}, {"q": "¿Qué es el 'raccord' (continuidad visual)?", "opciones": ["Un tipo especial de transición entre escenas con efecto de color", "La música que conecta dos escenas diferentes", "Que el personaje se vea igual entre escenas — misma ropa, mismo peinado", "El número de frames por segundo del video"], "correcta": 2, "pista": "Los errores de raccord son cuando algo cambia entre tomas sin explicación."}, {"q": "¿Cuál es la diferencia entre 'fundido negro' y 'corte directo' como transición?", "opciones": ["El fundido negro es más moderno y el corte directo es anticuado", "El fundido negro indica pausa/tiempo que pasa; el corte directo es acción continua", "Son exactamente lo mismo con diferente nombre", "El corte directo solo funciona en videos largos de más de 5 minutos"], "correcta": 1, "pista": "Cada tipo de transición comunica algo diferente al espectador."}]};</script>
+<script src="js/lesson-quiz.js"></script>
 </body>
 </html>

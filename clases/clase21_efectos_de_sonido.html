@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="css/genios.css">
 <link rel="stylesheet" href="css/lesson.css">
 <link rel="stylesheet" href="css/juice.css">
+<link rel="stylesheet" href="css/lesson-quiz.css">
 </head>
 <body class="lesson" style="--wc: var(--m5)">
 
@@ -246,6 +247,9 @@
 </section>
 
 <!-- ═══════════ NAV LECCIÓN ═══════════ -->
+
+<!-- ══ MINI QUIZ ══ -->
+<div id="lesson-quiz-container"></div>
 <nav class="lessonnav">
   <a href="clase20_la_voz_del_personaje.html" class="lnav-btn prev-btn">
     <span class="ar">←</span>
@@ -326,5 +330,9 @@ if (/vercel\.app$|academiadavinci/.test(location.hostname)) {
 }
 </script>
 
+
+<!-- ── Lesson quiz ── -->
+<script>window.LESSON_QUIZ_DATA = {"claseNum": 21, "preguntas": [{"q": "¿Cuáles son las 3 capas de audio en el sound design?", "opciones": ["Música, silencio y ruido", "Voz principal, voz secundaria y coro", "Ambiente/atmósfera, efectos de acción y música", "Agudo, medio y bajo"], "correcta": 2, "pista": "Cada capa cumple un rol — la suma de las tres crea el mundo sonoro completo."}, {"q": "¿A qué volumen debe estar la música de fondo cuando alguien está hablando?", "opciones": ["Al 100% — que todo suene con la misma fuerza", "Al 30% aproximadamente — la voz siempre debe ganar", "Al 80% para que el ambiente sea inmersivo", "La música debe apagarse completamente cuando hay diálogo"], "correcta": 1, "pista": "Si escuchas música y pierdes la voz, el espectador se distrae de la historia."}, {"q": "¿Cómo crearon el sonido del T-Rex en Jurassic Park antes de verlo?", "opciones": ["Grabaron el rugido de un elefante a máxima velocidad", "Usaron efectos de sonido digitales de computadora", "El agua en un vaso tiembla — ese sonido lo crearon con una guitarra", "Filmaron a un actor gruñendo y modificaron la frecuencia"], "correcta": 2, "pista": "Los efectos crean el miedo antes que la imagen — el sonido llega primero al cerebro."}, {"q": "¿Dónde puedes conseguir efectos de sonido GRATUITOS según esta clase?", "opciones": ["Solo en Spotify y Apple Music", "Freesound.org, Pixabay Audio o ElevenLabs Sound Effects", "Solo comprándolos en tiendas especializadas", "Grabándolos siempre tú mismo con el micrófono del teléfono"], "correcta": 1, "pista": "Hay miles de efectos gratuitos disponibles online — no necesitas crearlos todos tú."}]};</script>
+<script src="js/lesson-quiz.js"></script>
 </body>
 </html>

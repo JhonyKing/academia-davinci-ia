@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="css/genios.css">
 <link rel="stylesheet" href="css/lesson.css">
 <link rel="stylesheet" href="css/juice.css">
+<link rel="stylesheet" href="css/lesson-quiz.css">
 </head>
 <body class="lesson" style="--wc: var(--m2)">
 
@@ -284,6 +285,9 @@
 </section>
 
 <!-- ═══════════ NAV LECCIÓN ═══════════ -->
+
+<!-- ══ MINI QUIZ ══ -->
+<div id="lesson-quiz-container"></div>
 <nav class="lessonnav">
   <a href="clase7_aliados_villanos.html" class="lnav-btn prev-btn">
     <span class="ar">←</span>
@@ -364,5 +368,9 @@ if (/vercel\.app$|academiadavinci/.test(location.hostname)) {
 }
 </script>
 
+
+<!-- ── Lesson quiz ── -->
+<script>window.LESSON_QUIZ_DATA = {"claseNum": 8, "preguntas": [{"q": "¿Cuáles son los 3 tipos de plano cinematográfico que aprendiste?", "opciones": ["Plano corto, plano largo y plano diagonal", "Plano general, plano medio y primer plano", "Plano aéreo, plano submarino y plano terrestre", "Plano rojo, plano azul y plano verde"], "correcta": 1, "pista": "Cada plano muestra algo diferente: el mundo, la acción o la emoción."}, {"q": "¿Cuántas ubicaciones clave debe tener el mapa de tu mundo?", "opciones": ["Solo 1 — el lugar donde vive el héroe", "Exactamente 10 lugares para que sea completo", "Al menos 5 (base del héroe, territorio del villano, zona neutral, lugar secreto, frontera)", "Entre 50 y 100 para que se vea detallado"], "correcta": 2, "pista": "Los mejores mundos tienen mapa — Hogwarts, Middle-Earth, Teyvat."}, {"q": "¿Qué herramienta usas para crear el Mapa Oficial de tu mundo?", "opciones": ["Solo papel y lápiz, sin tecnología", "ChatGPT con prompts de texto", "Canva", "Una app especial de cartografía"], "correcta": 2, "pista": "Puedes generarlo con IA y luego montarlo como diseño visual en Canva."}, {"q": "¿Por qué Robotsin recomienda poner 'al menos un lugar misterioso sin nombre' en el mapa?", "opciones": ["Porque los nombres son difíciles de inventar", "Porque genera curiosidad y ganas de explorar en los lectores", "Porque es un error dejar lugares sin nombre en los mapas reales", "Porque la IA no puede generar nombres de lugares"], "correcta": 1, "pista": "El misterio es lo que lleva al espectador a querer saber más."}]};</script>
+<script src="js/lesson-quiz.js"></script>
 </body>
 </html>

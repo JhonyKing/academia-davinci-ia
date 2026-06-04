@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="css/genios.css">
 <link rel="stylesheet" href="css/lesson.css">
 <link rel="stylesheet" href="css/juice.css">
+<link rel="stylesheet" href="css/lesson-quiz.css">
 </head>
 <body class="lesson" style="--wc: var(--m1)">
 
@@ -44,7 +45,7 @@
     <h1>La Tarjeta <span>Oficial</span></h1>
     <p class="lead">Diseña la identidad completa de tu personaje y preséntalo al mundo en la Gran Exposición Da Vinci.</p>
     <div class="chips">
-      <span class="chip">🎯 9–13 años</span>
+      <span class="chip">🎯 8–13 años</span>
       <span class="chip">⏱️ 60 minutos</span>
       <span class="chip">🎨 Canva</span>
       <span class="chip">🃏 Tarjeta de Identidad</span>
@@ -234,6 +235,9 @@
 </section>
 
 <!-- ═══════════ NAV LECCIÓN ═══════════ -->
+
+<!-- ══ MINI QUIZ ══ -->
+<div id="lesson-quiz-container"></div>
 <nav class="lessonnav">
   <a href="clase3_retrato_oficial.html" class="lnav-btn prev-btn">
     <span class="ar">←</span>
@@ -314,5 +318,9 @@ if (/vercel\.app$|academiadavinci/.test(location.hostname)) {
 }
 </script>
 
+
+<!-- ── Lesson quiz ── -->
+<script>window.LESSON_QUIZ_DATA = {"claseNum": 4, "preguntas": [{"q": "¿Qué herramienta usas en esta clase para diseñar la Tarjeta Oficial?", "opciones": ["ChatGPT con modo imagen", "Photoshop profesional", "Canva", "PowerPoint"], "correcta": 2, "pista": "Es gratuita, fácil y en 20 minutos puedes tener algo que parece de diseñador."}, {"q": "¿Cuál es el secreto de Canva según Robotsin?", "opciones": ["Diseñar siempre desde cero sin usar plantillas", "Pagar la versión premium para tener más opciones", "Elegir una plantilla y personalizarla con los datos de tu personaje", "Copiar el diseño de otro alumno y cambiar el nombre"], "correcta": 2, "pista": "Los mejores diseñadores del mundo empiezan con una base."}, {"q": "¿Qué información debe aparecer en la Tarjeta Oficial de tu personaje?", "opciones": ["Solo el nombre y una imagen grande", "Nombre, alias, origen, poder, debilidad, historia corta y frase característica", "Solo el poder y la debilidad", "El nombre, la edad y el signo zodiacal"], "correcta": 1, "pista": "Es como la ficha de un superhéroe — todo lo esencial en un vistazo."}, {"q": "¿Cuánto tiempo tienes para presentar tu personaje ante el grupo en 'El Gran Estreno'?", "opciones": ["30 segundos", "2 minutos", "60 segundos", "5 minutos"], "correcta": 2, "pista": "Nombre+poder (15s) → historia de origen (30s) → por qué elegiste ese estilo (15s)."}]};</script>
+<script src="js/lesson-quiz.js"></script>
 </body>
 </html>

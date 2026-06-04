@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="css/genios.css">
 <link rel="stylesheet" href="css/lesson.css">
 <link rel="stylesheet" href="css/juice.css">
+<link rel="stylesheet" href="css/lesson-quiz.css">
 </head>
 <body class="lesson" style="--wc: var(--m3)">
 
@@ -276,6 +277,9 @@
 </section>
 
 <!-- ═══════════ NAV LECCIÓN ═══════════ -->
+
+<!-- ══ MINI QUIZ ══ -->
+<div id="lesson-quiz-container"></div>
 <nav class="lessonnav">
   <a href="clase10_el_guion.html" class="lnav-btn prev-btn">
     <span class="ar">←</span>
@@ -358,5 +362,9 @@ if (/vercel\.app$|academiadavinci/.test(location.hostname)) {
 }
 </script>
 
+
+<!-- ── Lesson quiz ── -->
+<script>window.LESSON_QUIZ_DATA = {"claseNum": 11, "preguntas": [{"q": "¿Cuáles son las 4 características de un buen diálogo?", "opciones": ["Largo, poético, dramático y filosófico", "Revela carácter, avanza la trama, suena natural y tiene conflicto", "Corto, gracioso, sorpresivo y con mucha acción", "Con muchas preguntas, respuestas largas, pausas y silencios"], "correcta": 1, "pista": "Si al leerlo en voz alta suena raro, está mal escrito."}, {"q": "¿Qué es la 'voz de personaje'?", "opciones": ["El tono de voz que usa el actor al doblar al personaje", "La forma única en que cada personaje habla según su personalidad", "El volumen al que habla el personaje en las escenas", "La música que suena cuando el personaje aparece en pantalla"], "correcta": 1, "pista": "El listo habla con preguntas, el valiente con exclamaciones, el misterioso con silencios."}, {"q": "¿Cómo habla Yoda diferente a los demás personajes?", "opciones": ["Habla más rápido que los otros personajes de Star Wars", "Habla siempre en inglés mientras los otros hablan en otros idiomas", "Invierte el orden de las palabras — 'El miedo, siempre presente está'", "Habla solo en preguntas, nunca en afirmaciones"], "correcta": 2, "pista": "La 'voz' hace al personaje — Yoda sería otro si hablara como todos."}, {"q": "¿Cuál es el tip pro de Robotsin para mejorar tus diálogos?", "opciones": ["Hacerlos más cortos — cuanto menos palabras, mejor", "Copiar diálogos de películas famosas y cambiar los nombres", "Leerlos en voz alta — si suena raro al hablar, está mal escrito", "Usar solo palabras de máximo 2 sílabas"], "correcta": 2, "pista": "Tu oído detecta lo que tus ojos a veces no ven."}]};</script>
+<script src="js/lesson-quiz.js"></script>
 </body>
 </html>

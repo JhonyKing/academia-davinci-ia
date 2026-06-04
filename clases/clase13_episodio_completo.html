@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="css/genios.css">
 <link rel="stylesheet" href="css/lesson.css">
 <link rel="stylesheet" href="css/juice.css">
+<link rel="stylesheet" href="css/lesson-quiz.css">
 </head>
 <body class="lesson" style="--wc: var(--m3)">
 
@@ -256,6 +257,9 @@
 </section>
 
 <!-- ═══════════ NAV LECCIÓN ═══════════ -->
+
+<!-- ══ MINI QUIZ ══ -->
+<div id="lesson-quiz-container"></div>
 <nav class="lessonnav">
   <a href="clase12_el_comic.html" class="lnav-btn prev-btn">
     <span class="ar">←</span>
@@ -338,5 +342,9 @@ if (/vercel\.app$|academiadavinci/.test(location.hostname)) {
 }
 </script>
 
+
+<!-- ── Lesson quiz ── -->
+<script>window.LESSON_QUIZ_DATA = {"claseNum": 13, "preguntas": [{"q": "¿Cuáles son los 4 pasos del proceso editorial?", "opciones": ["Escribir, ilustrar, colorear y publicar", "Revisión, corrección, mejora y publicación", "Borrador, copia, impresión y distribución", "Idea, guion, cómic y presentación"], "correcta": 1, "pista": "Los escritores profesionales nunca publican el primer borrador."}, {"q": "¿Cuántas cosas debes mejorar en la revisión según Robotsin?", "opciones": ["Todo lo que puedas hasta que sea perfecto", "Nada — si lo terminaste ya está listo", "Solo 1 cosa — la más importante", "3 cosas — porque la perfección es enemiga de lo publicado"], "correcta": 3, "pista": "Identifica las 3, mejóralas y publica con orgullo."}, {"q": "¿Qué incluye la 'Portada' de tu cómic?", "opciones": ["Solo una imagen grande sin texto", "El precio y el código de barras del cómic", "Título de la serie, número de episodio, imagen impactante y créditos", "Un resumen de todo lo que pasa en el episodio"], "correcta": 2, "pista": "La portada es la primera impresión — debe enganchar a quien la vea."}, {"q": "¿Por qué compartir el episodio con tu familia es parte de la tarea?", "opciones": ["Para que ellos lo corrijan antes de entregarlo al instructor", "Porque la obra cobra vida cuando alguien más la ve", "Para que te digan si necesitas cambiar el título", "Solo es opcional — no es realmente parte de la tarea"], "correcta": 1, "pista": "El arte sin público es solo un dibujo en un cajón."}]};</script>
+<script src="js/lesson-quiz.js"></script>
 </body>
 </html>

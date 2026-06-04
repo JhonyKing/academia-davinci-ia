@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="css/genios.css">
 <link rel="stylesheet" href="css/lesson.css">
 <link rel="stylesheet" href="css/juice.css">
+<link rel="stylesheet" href="css/lesson-quiz.css">
 </head>
 <body class="lesson" style="--wc: var(--m4)">
 
@@ -252,6 +253,9 @@
 </section>
 
 <!-- ═══════════ NAV LECCIÓN ═══════════ -->
+
+<!-- ══ MINI QUIZ ══ -->
+<div id="lesson-quiz-container"></div>
 <nav class="lessonnav">
   <a href="clase14_primera_animacion.html" class="lnav-btn prev-btn">
     <span class="ar">←</span>
@@ -334,5 +338,9 @@ if (/vercel\.app$|academiadavinci/.test(location.hostname)) {
 }
 </script>
 
+
+<!-- ── Lesson quiz ── -->
+<script>window.LESSON_QUIZ_DATA = {"claseNum": 15, "preguntas": [{"q": "¿Qué muestra el 'plano general' en una escena?", "opciones": ["El detalle de la cara del personaje y su expresión", "La acción del cuerpo del personaje", "El mundo completo: dónde está el personaje, el escenario", "Un objeto pequeño e importante de la escena"], "correcta": 2, "pista": "Es el más alejado — establece el contexto antes de acercarse."}, {"q": "¿Para qué sirve el 'primer plano'?", "opciones": ["Para mostrar el universo completo donde vive el personaje", "Para mostrar la secuencia de acciones del cuerpo del personaje", "Para mostrar la emoción: la cara, los ojos, el detalle importante", "Para hacer que el personaje se vea más pequeño dentro del mundo"], "correcta": 2, "pista": "'Primer plano' = acercamiento = emoción o detalle crucial."}, {"q": "¿Cómo especificas el tipo de plano en un prompt de animación con IA?", "opciones": ["No se puede — la IA decide el plano sola", "Describes el tipo de plano directamente en el prompt ('plano general de...', 'primer plano de...')", "Necesitas un código especial que solo funciona en Kling", "Debes dibujar un esquema antes de escribir el prompt"], "correcta": 1, "pista": "La IA entiende el lenguaje cinematográfico si se lo describes claramente."}, {"q": "¿Cuál es el orden correcto de planos para presentar una escena nueva?", "opciones": ["Primero primer plano, luego plano medio, luego plano general", "Siempre plano medio — nunca se mezclan los tipos en una misma escena", "Primero plano general (establece el mundo), luego acercar según la acción", "El orden no importa — cualquier plano funciona para cualquier momento"], "correcta": 2, "pista": "General → medio → primer plano: de lo global a lo íntimo."}]};</script>
+<script src="js/lesson-quiz.js"></script>
 </body>
 </html>

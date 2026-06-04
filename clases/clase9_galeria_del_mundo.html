@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="css/genios.css">
 <link rel="stylesheet" href="css/lesson.css">
 <link rel="stylesheet" href="css/juice.css">
+<link rel="stylesheet" href="css/lesson-quiz.css">
 </head>
 <body class="lesson" style="--wc: var(--m2)">
 
@@ -250,6 +251,9 @@
 </section>
 
 <!-- ═══════════ NAV LECCIÓN ═══════════ -->
+
+<!-- ══ MINI QUIZ ══ -->
+<div id="lesson-quiz-container"></div>
 <nav class="lessonnav">
   <a href="clase8_mapa_del_mundo.html" class="lnav-btn prev-btn">
     <span class="ar">←</span>
@@ -332,5 +336,9 @@ if (/vercel\.app$|academiadavinci/.test(location.hostname)) {
 }
 </script>
 
+
+<!-- ── Lesson quiz ── -->
+<script>window.LESSON_QUIZ_DATA = {"claseNum": 9, "preguntas": [{"q": "¿Qué es un 'elevator pitch' de creador?", "opciones": ["Una presentación técnica muy larga y detallada para inversores", "Un resumen de tu mundo en 60 segundos: nombre, tipo, personaje, conflicto y gancho", "Un elevator de ascensor que se mueve mientras presentas", "Un pitch musical para una canción del mundo"], "correcta": 1, "pista": "Tienes 60 segundos para convencer a alguien de que quiere conocer tu mundo."}, {"q": "¿Cuál es el objetivo principal de la Galería del Mundo (Clase 9)?", "opciones": ["Crear más personajes para el mundo", "Diseñar el mapa final en Canva por primera vez", "Presentar el universo completo ante el grupo en la Gran Exposición Da Vinci", "Corregir los errores de las clases anteriores del módulo"], "correcta": 2, "pista": "Es el cierre del Módulo 2 — tu universo ve la luz por primera vez."}, {"q": "¿Qué elementos debes incluir en tu presentación de 60 segundos?", "opciones": ["Solo el nombre del mundo y una descripción de los colores", "Nombre del mundo, tipo de mundo, personaje principal, conflicto principal y gancho", "Leer todo el guion del episodio completo en voz alta", "Mostrar todas las imágenes generadas durante el módulo"], "correcta": 1, "pista": "Es el tráiler de tu serie — en 60 segundos deben querer saber más."}, {"q": "¿Cuál es la insignia que se gana al completar el Módulo 2?", "opciones": ["Explorador de Mundos", "Cartógrafo Digital", "Arquitecto del Universo — Nivel 2", "Constructor de Historias"], "correcta": 2, "pista": "Es la insignia grande de módulo — la más especial del Mundo 2."}]};</script>
+<script src="js/lesson-quiz.js"></script>
 </body>
 </html>

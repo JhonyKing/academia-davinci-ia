@@ -1,0 +1,289 @@
+/* ============================================================
+   lesson-quiz.css — Mini-quiz al final de cada lección
+   Academia Da Vinci IA
+   ============================================================ */
+
+/* ── Contenedor principal ── */
+#lesson-quiz-container {
+  margin: 40px auto 0;
+  max-width: 720px;
+  padding: 0 16px;
+}
+
+.lq-wrap {
+  background: rgba(255,255,255,.04);
+  border: 1.5px solid rgba(255,255,255,.12);
+  border-radius: 24px;
+  padding: 32px 28px 28px;
+  backdrop-filter: blur(12px);
+}
+
+/* ── Header del quiz ── */
+.lq-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+.lq-icon {
+  font-size: 36px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.lq-title {
+  font-family: var(--font-display, 'Nunito', sans-serif);
+  font-weight: 800;
+  font-size: 20px;
+  color: #fff;
+  line-height: 1.2;
+  margin-bottom: 4px;
+}
+.lq-sub {
+  font-size: 13px;
+  color: rgba(255,255,255,.55);
+  line-height: 1.5;
+}
+
+/* ── Preguntas ── */
+.lq-questions {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+
+.lq-question {
+  background: rgba(255,255,255,.05);
+  border-radius: 16px;
+  padding: 20px;
+  border: 1px solid rgba(255,255,255,.08);
+}
+
+.lq-q-text {
+  font-weight: 700;
+  font-size: 15px;
+  color: rgba(255,255,255,.9);
+  margin-bottom: 14px;
+  display: flex;
+  gap: 10px;
+  line-height: 1.5;
+}
+.lq-q-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.15);
+  font-size: 12px;
+  font-weight: 800;
+  color: #fff;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* ── Opciones ── */
+.lq-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.lq-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1.5px solid rgba(255,255,255,.1);
+  cursor: pointer;
+  transition: all .18s ease;
+  font-size: 14px;
+  color: rgba(255,255,255,.8);
+  line-height: 1.4;
+}
+.lq-option:hover {
+  background: rgba(255,255,255,.08);
+  border-color: rgba(255,255,255,.25);
+}
+.lq-option input[type="radio"] {
+  accent-color: var(--wc, #2F7BF6);
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* Estados después de calificar */
+.lq-option.lq-correct {
+  background: rgba(34,194,104,.15);
+  border-color: #22C268;
+  color: #fff;
+}
+.lq-option.lq-correct::after {
+  content: '✓';
+  margin-left: auto;
+  color: #22C268;
+  font-weight: 800;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.lq-option.lq-wrong {
+  background: rgba(231,76,60,.12);
+  border-color: #E74C3C;
+  color: rgba(255,255,255,.6);
+}
+.lq-option.lq-wrong::after {
+  content: '✗';
+  margin-left: auto;
+  color: #E74C3C;
+  font-weight: 800;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+/* ── Pista ── */
+.lq-pista {
+  margin-top: 10px;
+  font-size: 13px;
+  color: rgba(243,156,18,.85);
+  background: rgba(243,156,18,.08);
+  border-left: 3px solid rgba(243,156,18,.5);
+  border-radius: 0 8px 8px 0;
+  padding: 8px 12px;
+  line-height: 1.5;
+}
+
+/* ── Footer / Botones ── */
+.lq-footer {
+  margin-top: 4px;
+}
+
+.lq-btn-submit {
+  width: 100%;
+  padding: 14px 24px;
+  border-radius: 14px;
+  border: none;
+  background: var(--wc, #2F7BF6);
+  color: #fff;
+  font-family: var(--font-display, 'Nunito', sans-serif);
+  font-weight: 800;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all .2s ease;
+  letter-spacing: .02em;
+}
+.lq-btn-submit:disabled {
+  opacity: .35;
+  cursor: not-allowed;
+}
+.lq-btn-submit:not(:disabled):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,.3);
+}
+
+/* ── Resultado ── */
+.lq-result {
+  border-radius: 16px;
+  padding: 24px;
+  text-align: center;
+}
+.lq-result.lq-pass {
+  background: rgba(34,194,104,.12);
+  border: 1.5px solid rgba(34,194,104,.35);
+}
+.lq-result.lq-fail {
+  background: rgba(231,76,60,.08);
+  border: 1.5px solid rgba(231,76,60,.25);
+}
+.lq-result-score {
+  font-family: var(--font-display, 'Nunito', sans-serif);
+  font-weight: 800;
+  font-size: 28px;
+  color: #fff;
+  margin-bottom: 8px;
+}
+.lq-result.lq-pass .lq-result-score { color: #22C268; }
+.lq-result.lq-fail .lq-result-score { color: #E74C3C; }
+.lq-result-msg {
+  font-size: 15px;
+  color: rgba(255,255,255,.8);
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+.lq-btn-retry {
+  padding: 12px 28px;
+  border-radius: 12px;
+  border: 1.5px solid rgba(255,255,255,.25);
+  background: transparent;
+  color: #fff;
+  font-family: var(--font-display, 'Nunito', sans-serif);
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all .18s ease;
+}
+.lq-btn-retry:hover {
+  background: rgba(255,255,255,.1);
+  border-color: rgba(255,255,255,.45);
+}
+
+/* ── Estado ya completado ── */
+.lq-already-passed {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+}
+.lq-already-passed .lq-icon { font-size: 28px; }
+.lq-already-passed .lq-title { font-size: 16px; color: #22C268; margin-bottom: 2px; }
+.lq-already-passed .lq-sub { font-size: 13px; }
+
+/* ── Aviso de entrega pendiente ── */
+.lq-entrega-notice {
+  background: rgba(243,156,18,.1);
+  border: 1.5px solid rgba(243,156,18,.3);
+  border-radius: 14px;
+  padding: 16px 20px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  color: rgba(255,255,255,.85);
+  line-height: 1.5;
+}
+.lq-entrega-notice strong { color: #F39C12; }
+
+/* ── Botón siguiente bloqueado ── */
+.lnav-btn.next-btn.lq-locked {
+  opacity: .35;
+  pointer-events: none;
+  cursor: not-allowed;
+  filter: grayscale(0.6);
+}
+.lnav-btn.next-btn.lq-unlocked {
+  animation: lqUnlockPop .4s cubic-bezier(.34,1.56,.5,1);
+}
+@keyframes lqUnlockPop {
+  0% { transform: scale(1) }
+  50% { transform: scale(1.05) }
+  100% { transform: scale(1) }
+}
+
+#lq-lock-msg {
+  text-align: center;
+  font-size: 13px;
+  color: rgba(255,255,255,.45);
+  margin-top: 8px;
+  font-style: italic;
+}
+#lq-lock-msg.lq-done-msg {
+  color: #22C268;
+  font-style: normal;
+  font-weight: 600;
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+  .lq-wrap { padding: 22px 16px 20px; }
+  .lq-title { font-size: 17px; }
+  .lq-result-score { font-size: 22px; }
+}

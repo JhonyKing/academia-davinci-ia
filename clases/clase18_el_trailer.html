@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="css/genios.css">
 <link rel="stylesheet" href="css/lesson.css">
 <link rel="stylesheet" href="css/juice.css">
+<link rel="stylesheet" href="css/lesson-quiz.css">
 </head>
 <body class="lesson" style="--wc: var(--m4)">
 
@@ -255,6 +256,9 @@
 </section>
 
 <!-- ═══════════ NAV LECCIÓN ═══════════ -->
+
+<!-- ══ MINI QUIZ ══ -->
+<div id="lesson-quiz-container"></div>
 <nav class="lessonnav">
   <a href="clase17_edicion_basica.html" class="lnav-btn prev-btn">
     <span class="ar">←</span>
@@ -337,5 +341,9 @@ if (/vercel\.app$|academiadavinci/.test(location.hostname)) {
 }
 </script>
 
+
+<!-- ── Lesson quiz ── -->
+<script>window.LESSON_QUIZ_DATA = {"claseNum": 18, "preguntas": [{"q": "¿Cuántos segundos tienes para enganchar al espectador en un tráiler?", "opciones": ["30 segundos", "10 segundos", "3 segundos", "1 minuto completo"], "correcta": 2, "pista": "Si los primeros 3 segundos no impactan, el espectador cambia de canal."}, {"q": "¿Qué significa 'ritmo en crescendo' en un tráiler?", "opciones": ["Que la música sea cada vez más suave hasta el final", "Que el tráiler empiece épico y termine tranquilo", "Que el tráiler empiece lento y termine épico — siempre de menos a más", "Que haya exactamente 5 cortes por segundo al final"], "correcta": 2, "pista": "El crescendo es la clave emocional de todo buen tráiler."}, {"q": "¿Qué va en los primeros 3 segundos del tráiler de 60 segundos?", "opciones": ["El título de la serie con música épica", "La presentación completa del héroe y su historia de origen", "La imagen o acción más impactante de toda tu serie", "Los créditos del creador y las herramientas usadas"], "correcta": 2, "pista": "El gancho va primero — luego construyes el contexto."}, {"q": "¿Por qué NO debes revelar el final de tu historia en el tráiler?", "opciones": ["Porque el final está protegido por derechos de autor", "Porque el misterio es lo que lleva al espectador a querer ver la serie completa", "Porque el final todavía no está terminado cuando se hace el tráiler", "Porque revelar el final hace que el tráiler sea demasiado largo"], "correcta": 1, "pista": "Muestra sin revelar — esa es la magia del tráiler."}]};</script>
+<script src="js/lesson-quiz.js"></script>
 </body>
 </html>

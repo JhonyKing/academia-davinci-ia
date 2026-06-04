@@ -168,6 +168,8 @@
 
   // ── 5b. Scroll listener: trigger al 90 % ────────────────────────────────
   function setupScrollListener(userId) {
+    // Si la lección tiene quiz propio, el quiz controla cuándo se marca completa
+    if (window.LESSON_HAS_QUIZ) return;
     let marked = false
     function onScroll() {
       if (marked) return

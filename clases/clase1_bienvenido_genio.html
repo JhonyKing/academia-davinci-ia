@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="css/genios.css">
 <link rel="stylesheet" href="css/lesson.css">
 <link rel="stylesheet" href="css/juice.css">
+<link rel="stylesheet" href="css/lesson-quiz.css">
 </head>
 <body class="lesson" style="--wc: var(--m1)">
 
@@ -44,7 +45,7 @@
     <h1>¡Bienvenido, <span>Genio</span>!</h1>
     <p class="lead">Hoy descubres qué es la inteligencia artificial y creas tu primera imagen con ella.</p>
     <div class="chips">
-      <span class="chip">🎯 9–13 años</span>
+      <span class="chip">🎯 8–13 años</span>
       <span class="chip">⏱️ 60 minutos</span>
       <span class="chip">🛠️ ChatGPT</span>
       <span class="chip">📊 STEAM</span>
@@ -290,6 +291,9 @@
 </section>
 
 <!-- ═══════════ NAV LECCIÓN ═══════════ -->
+
+<!-- ══ MINI QUIZ ══ -->
+<div id="lesson-quiz-container"></div>
 <nav class="lessonnav">
   <div class="lnav-spacer"></div>
   <a href="index.html" class="lnav-home" title="Mapa de aventura">🗺️</a>
@@ -366,5 +370,9 @@ if (/vercel\.app$|academiadavinci/.test(location.hostname)) {
 }
 </script>
 
+
+<!-- ── Lesson quiz ── -->
+<script>window.LESSON_QUIZ_DATA = {"claseNum": 1, "preguntas": [{"q": "¿Qué es la Inteligencia Artificial?", "opciones": ["Una persona muy inteligente", "Una herramienta que aprende de datos para ayudarte a crear", "Un robot físico que camina", "Un videojuego avanzado"], "correcta": 1, "pista": "No piensa ni siente — es una herramienta que TÚ diriges."}, {"q": "¿Qué es un 'prompt'?", "opciones": ["El nombre de un robot famoso", "Un tipo de computadora especial", "La instrucción que le das a la IA para crear algo", "Una app de teléfono"], "correcta": 2, "pista": "Es como pedir un deseo a un genio — más específico, mejor resultado."}, {"q": "¿Cuáles son los 4 ingredientes de un buen prompt?", "opciones": ["Título, autor, fecha y lugar", "¿Qué?, ¿Cómo?, ¿Dónde? y ¿Extras?", "Color, forma, tamaño y textura", "Inicio, nudo, clímax y final"], "correcta": 1, "pista": "Describe QUÉ quieres, CÓMO se ve, DÓNDE está y los detalles EXTRA."}, {"q": "Si quieres una mejor imagen, tu prompt debe ser…", "opciones": ["Lo más corto posible (una sola palabra)", "Solo en inglés", "Más detallado y específico", "Sin descripciones de colores"], "correcta": 2, "pista": "Mientras más le cuentes a la IA, mejor entiende tu idea."}]};</script>
+<script src="js/lesson-quiz.js"></script>
 </body>
 </html>

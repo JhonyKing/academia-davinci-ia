@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="css/genios.css">
 <link rel="stylesheet" href="css/lesson.css">
 <link rel="stylesheet" href="css/juice.css">
+<link rel="stylesheet" href="css/lesson-quiz.css">
 </head>
 <body class="lesson" style="--wc: var(--m2)">
 
@@ -288,6 +289,9 @@
 </section>
 
 <!-- ═══════════ NAV LECCIÓN ═══════════ -->
+
+<!-- ══ MINI QUIZ ══ -->
+<div id="lesson-quiz-container"></div>
 <nav class="lessonnav">
   <a href="clase6_el_universo.html" class="lnav-btn prev-btn">
     <span class="ar">←</span>
@@ -368,5 +372,9 @@ if (/vercel\.app$|academiadavinci/.test(location.hostname)) {
 }
 </script>
 
+
+<!-- ── Lesson quiz ── -->
+<script>window.LESSON_QUIZ_DATA = {"claseNum": 7, "preguntas": [{"q": "¿Cuáles son los 4 tipos de personajes secundarios?", "opciones": ["Héroe, anti-héroe, villain y sidekick", "Aliado/compañero, mentor/sabio, villano/antagonista, cómico/sidekick", "Padre, madre, hermano y amigo", "Mago, guerrero, ladrón y sacerdote"], "correcta": 1, "pista": "Cada tipo cumple un rol diferente en la historia del héroe."}, {"q": "¿Qué hace a un buen villano memorable?", "opciones": ["Que sea el más fuerte físicamente y nunca pierda", "Que sea completamente misterioso y no tenga ninguna motivación", "Motivación clara, debilidad relacionada con el héroe, no 'malo por ser malo'", "Que sea aterrador solo en apariencia"], "correcta": 2, "pista": "Thanos quería 'salvar' el universo a su manera. Eso lo hace aterrador."}, {"q": "¿Cuál es la diferencia entre un antagonista y un villano?", "opciones": ["No hay diferencia — son exactamente lo mismo", "El antagonista es siempre el más fuerte; el villano es el más débil", "Un antagonista se opone al héroe sin ser necesariamente malvado; el villano tiene intenciones malignas", "El villano siempre tiene poderes mágicos; el antagonista no"], "correcta": 2, "pista": "Un rival deportivo puede ser antagonista sin ser villano."}, {"q": "Según Robotsin, ¿qué tienen en común el héroe y el villano ideal?", "opciones": ["Los dos deben ser del mismo país de origen", "Los dos deben tener el mismo poder especial", "El mejor villano tiene algo en común con el héroe — es como un espejo oscuro", "Los dos deben haber sido amigos en el pasado"], "correcta": 2, "pista": "Es su conexión lo que hace el conflicto más profundo e interesante."}]};</script>
+<script src="js/lesson-quiz.js"></script>
 </body>
 </html>

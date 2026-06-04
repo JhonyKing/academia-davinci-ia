@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="css/genios.css">
 <link rel="stylesheet" href="css/lesson.css">
 <link rel="stylesheet" href="css/juice.css">
+<link rel="stylesheet" href="css/lesson-quiz.css">
 </head>
 <body class="lesson" style="--wc: var(--m5)">
 
@@ -250,6 +251,9 @@
 </section>
 
 <!-- ═══════════ NAV LECCIÓN ═══════════ -->
+
+<!-- ══ MINI QUIZ ══ -->
+<div id="lesson-quiz-container"></div>
 <nav class="lessonnav">
   <a href="clase18_el_trailer.html" class="lnav-btn prev-btn">
     <span class="ar">←</span>
@@ -332,5 +336,9 @@ if (/vercel\.app$|academiadavinci/.test(location.hostname)) {
 }
 </script>
 
+
+<!-- ── Lesson quiz ── -->
+<script>window.LESSON_QUIZ_DATA = {"claseNum": 19, "preguntas": [{"q": "¿Cómo se llama la herramienta que usas para crear música con IA en esta clase?", "opciones": ["Spotify Studio", "GarageBand", "Suno.ai", "SoundCloud Creator"], "correcta": 2, "pista": "Le escribes el género, el mood, el instrumento y una letra de ejemplo — y genera la música."}, {"q": "¿Cuáles son los 4 elementos básicos de la música?", "opciones": ["Piano, guitarra, batería y voz", "Ritmo, melodía, armonía y letra", "Intro, verso, coro y outro", "Alegre, triste, épico y tranquilo"], "correcta": 1, "pista": "Ritmo=latido, melodía=la parte que cantamos, armonía=varias notas juntas, letra=historia cantada."}, {"q": "¿Cuántas versiones del tema musical debes crear en esta clase?", "opciones": ["Solo 1 versión — la definitiva desde el primer intento", "Al menos 2 versiones (tema principal + versión tranquila para escenas de drama)", "Mínimo 10 versiones para elegir", "3 versiones exactas: rock, balada y electrónica"], "correcta": 1, "pista": "El tema principal y la variante tranquila sirven para escenas diferentes."}, {"q": "¿Qué diferencia a un 'jingle' de un 'tema musical'?", "opciones": ["El jingle es para películas; el tema musical es para publicidad", "Un jingle es corto y pegajoso; un tema musical es más largo y establece la emoción de la serie", "El jingle siempre tiene letra; el tema musical nunca tiene letra", "No hay diferencia — son exactamente lo mismo con diferente nombre"], "correcta": 1, "pista": "El tema de Star Wars en 3 notas ya te dice cómo sentirte — eso es un tema musical."}]};</script>
+<script src="js/lesson-quiz.js"></script>
 </body>
 </html>

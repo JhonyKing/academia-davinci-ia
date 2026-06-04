@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="css/genios.css">
 <link rel="stylesheet" href="css/lesson.css">
 <link rel="stylesheet" href="css/juice.css">
+<link rel="stylesheet" href="css/lesson-quiz.css">
 </head>
 <body class="lesson" style="--wc: var(--m3)">
 
@@ -278,6 +279,9 @@
 </section>
 
 <!-- ═══════════ NAV LECCIÓN ═══════════ -->
+
+<!-- ══ MINI QUIZ ══ -->
+<div id="lesson-quiz-container"></div>
 <nav class="lessonnav">
   <a href="clase11_los_dialogos.html" class="lnav-btn prev-btn">
     <span class="ar">←</span>
@@ -360,5 +364,9 @@ if (/vercel\.app$|academiadavinci/.test(location.hostname)) {
 }
 </script>
 
+
+<!-- ── Lesson quiz ── -->
+<script>window.LESSON_QUIZ_DATA = {"claseNum": 12, "preguntas": [{"q": "¿Qué es una 'viñeta' en el lenguaje del cómic?", "opciones": ["Un personaje pequeño que aparece en segundo plano", "Un cuadro o panel individual que muestra una escena del cómic", "El tipo de letra especial que se usa en los cómics", "La portada del cómic"], "correcta": 1, "pista": "Las páginas de cómic se dividen en viñetas — cada una es un momento de la historia."}, {"q": "¿Cuántas viñetas necesitas para contar una historia completa básica?", "opciones": ["Al menos 20 viñetas por página", "Entre 50 y 100 viñetas para un episodio completo", "4 viñetas: situación → problema → acción → resultado", "Solo 1 viñeta si es muy expresiva"], "correcta": 2, "pista": "4 viñetas son suficientes para contar algo completo — ¡la economía narrativa!"}, {"q": "¿Qué proceso sigues para crear el cómic con IA?", "opciones": ["Escribes el texto primero y luego buscas imágenes en Google", "Generas imágenes de las escenas con IA → las montas con diálogos en Canva", "Dibujas a mano todas las viñetas y las escaneas", "Descargas un cómic existente y cambias los diálogos"], "correcta": 1, "pista": "Guion → escena → prompt → imagen → viñeta → página."}, {"q": "¿Cómo se llama la nube que muestra los PENSAMIENTOS de un personaje (no sus palabras)?", "opciones": ["Bocadillo de diálogo", "Splash page", "Onomatopeya", "Bocadillo de pensamiento"], "correcta": 3, "pista": "Las palabras habladas van en bocadillo de diálogo; los pensamientos, en uno de pensamiento."}]};</script>
+<script src="js/lesson-quiz.js"></script>
 </body>
 </html>

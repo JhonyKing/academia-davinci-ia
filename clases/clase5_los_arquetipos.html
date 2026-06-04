@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="css/genios.css">
 <link rel="stylesheet" href="css/lesson.css">
 <link rel="stylesheet" href="css/juice.css">
+<link rel="stylesheet" href="css/lesson-quiz.css">
 </head>
 <body class="lesson" style="--wc: var(--m1)">
 
@@ -44,7 +45,7 @@
     <h1>Los 12 <span>Arquetipos</span></h1>
     <p class="lead">Descubre el alma de tu personaje con la misma técnica que usan los grandes estudios de cine del mundo.</p>
     <div class="chips">
-      <span class="chip">🎯 9–13 años</span>
+      <span class="chip">🎯 8–13 años</span>
       <span class="chip">⏱️ 55 minutos</span>
       <span class="chip">🔮 Psicología del Cine</span>
       <span class="chip">✨ El Espejo del Alma</span>
@@ -277,6 +278,9 @@
 </section>
 
 <!-- ═══════════ NAV LECCIÓN ═══════════ -->
+
+<!-- ══ MINI QUIZ ══ -->
+<div id="lesson-quiz-container"></div>
 <nav class="lessonnav">
   <a href="clase4_tarjeta_oficial.html" class="lnav-btn prev-btn">
     <span class="ar">←</span>
@@ -357,5 +361,9 @@ if (/vercel\.app$|academiadavinci/.test(location.hostname)) {
 }
 </script>
 
+
+<!-- ── Lesson quiz ── -->
+<script>window.LESSON_QUIZ_DATA = {"claseNum": 5, "preguntas": [{"q": "¿Qué es un 'arquetipo' de personaje?", "opciones": ["El nombre del disfraz del superhéroe", "El 'alma' o tipo universal de personaje que aparece en todas las historias", "El villano principal de una historia", "La habilidad especial que tiene un personaje"], "correcta": 1, "pista": "Carl Jung descubrió que los mismos 12 tipos aparecen en TODAS las historias del mundo."}, {"q": "¿Cuál es el arquetipo de Yoda, Dumbledore y Mufasa?", "opciones": ["El Héroe", "El Gobernante", "El Mago", "El Sabio"], "correcta": 3, "pista": "Guía a otros con su sabiduría y experiencia."}, {"q": "¿Qué tienen en común Tony Stark y Elsa según lo que aprendiste?", "opciones": ["Los dos son el arquetipo del Héroe puro", "Los dos mezclan 2 arquetipos (Tony = Creador+Rebelde; Elsa = Gobernante+Cuidador)", "Los dos son el arquetipo del Sabio", "No tienen nada en común — son opuestos"], "correcta": 1, "pista": "Los mejores personajes mezclan 2 arquetipos. Eso los hace únicos y fascinantes."}, {"q": "¿Cómo se relaciona el arquetipo del villano con el del héroe?", "opciones": ["El villano siempre es el mismo arquetipo que el héroe", "No tienen ninguna relación entre sí", "El villano es la 'sombra' del héroe — lo opuesto de lo que el héroe representa", "El villano siempre es El Gobernante, sin importar quién sea el héroe"], "correcta": 2, "pista": "Si tu héroe es El Inocente, su villano querría controlar o destruir esa libertad."}]};</script>
+<script src="js/lesson-quiz.js"></script>
 </body>
 </html>

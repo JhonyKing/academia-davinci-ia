@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="css/genios.css">
 <link rel="stylesheet" href="css/lesson.css">
 <link rel="stylesheet" href="css/juice.css">
+<link rel="stylesheet" href="css/lesson-quiz.css">
 </head>
 <body class="lesson" style="--wc: var(--m1)">
 
@@ -44,7 +45,7 @@
     <h1>Nace el <span>Personaje</span></h1>
     <p class="lead">Hoy le das vida a tu personaje: nombre, origen, misión, poderes y debilidad. Y lo conviertes en imagen con IA.</p>
     <div class="chips">
-      <span class="chip">🎯 9–13 años</span>
+      <span class="chip">🎯 8–13 años</span>
       <span class="chip">⏱️ 60 minutos</span>
       <span class="chip">🛠️ ChatGPT</span>
       <span class="chip">📋 Ficha de Personaje</span>
@@ -265,6 +266,9 @@
 </section>
 
 <!-- ═══════════ NAV LECCIÓN ═══════════ -->
+
+<!-- ══ MINI QUIZ ══ -->
+<div id="lesson-quiz-container"></div>
 <nav class="lessonnav">
   <a href="clase1_bienvenido_genio.html" class="lnav-btn prev-btn">
     <span class="ar">←</span>
@@ -345,5 +349,9 @@ if (/vercel\.app$|academiadavinci/.test(location.hostname)) {
 }
 </script>
 
+
+<!-- ── Lesson quiz ── -->
+<script>window.LESSON_QUIZ_DATA = {"claseNum": 2, "preguntas": [{"q": "¿Cuáles son los 5 elementos que todo gran personaje necesita?", "opciones": ["Color, forma, tamaño, peso y material", "Nombre, Origen, Misión, Poder y Debilidad", "Pelo, ojos, ropa, zapatos y accesorio", "Villano, aliado, mentor, sidekick y héroe"], "correcta": 1, "pista": "Spider-Man sin historia de origen sería solo 'un chico con traje'."}, {"q": "¿Por qué la DEBILIDAD es el elemento más importante del personaje?", "opciones": ["Porque hace al personaje más fácil de dibujar", "Porque sin debilidad no puede tener superpoder", "Porque hace al personaje humano y relatable — puede perder", "Porque es lo que los fans recuerdan primero"], "correcta": 2, "pista": "Hasta Superman tiene Kryptonita. Sin debilidad, un personaje es aburrido."}, {"q": "¿Para qué sirve usar ChatGPT al crear tu personaje?", "opciones": ["Para que ChatGPT invente el personaje solo sin tu ayuda", "Para copiar un personaje famoso y cambiarlo de nombre", "Como copiloto que desarrolla tu idea en palabras — tú mandas, él escribe", "Para buscar imágenes del personaje en internet"], "correcta": 2, "pista": "Tú tienes la idea. ChatGPT te ayuda a expresarla mejor."}, {"q": "¿Qué hace el prompt 'Del Papel a la Pantalla'?", "opciones": ["Convierte texto en un video de animación automática", "Sube tu dibujo a mano a internet", "Convierte una foto de tu dibujo a mano en una imagen digital con estilo IA", "Imprime tu dibujo en papel fotográfico"], "correcta": 2, "pista": "Fotografía tu dibujo y ChatGPT lo transforma manteniendo la esencia del diseño."}]};</script>
+<script src="js/lesson-quiz.js"></script>
 </body>
 </html>

@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="css/genios.css">
 <link rel="stylesheet" href="css/lesson.css">
 <link rel="stylesheet" href="css/juice.css">
+<link rel="stylesheet" href="css/lesson-quiz.css">
 </head>
 <body class="lesson" style="--wc: var(--m6)">
 
@@ -224,6 +225,9 @@
 </section>
 
 <!-- ═══════════ NAV LECCIÓN ═══════════ -->
+
+<!-- ══ MINI QUIZ ══ -->
+<div id="lesson-quiz-container"></div>
 <nav class="lessonnav">
   <a href="clase25_estreno_privado.html" class="lnav-btn prev-btn">
     <span class="ar">←</span>
@@ -304,5 +308,9 @@ if (/vercel\.app$|academiadavinci/.test(location.hostname)) {
 }
 </script>
 
+
+<!-- ── Lesson quiz ── -->
+<script>window.LESSON_QUIZ_DATA = {"claseNum": 26, "preguntas": [{"q": "¿Cuántas habilidades para la vida te llevas al terminar el curso?", "opciones": ["3 habilidades (prompts, edición y presentación)", "6 habilidades — una por cada Mundo del curso", "Solo 1 habilidad — la más importante de todas", "10 habilidades detalladas"], "correcta": 1, "pista": "Cada Mundo desarrolló una habilidad diferente: prompts, world-building, guion, animación, música y post-producción."}, {"q": "¿Qué habilidad desarrollaste en el Mundo 4 (El Genio en Movimiento)?", "opciones": ["Componer música con IA", "Escribir guiones y diálogos", "Animación con IA — dar vida a personajes en pantalla", "Diseño gráfico en Canva"], "correcta": 2, "pista": "En el Mundo 4 aprendiste a convertir imágenes estáticas en videos animados."}, {"q": "¿Qué hashtag debes usar al compartir tu episodio en redes sociales?", "opciones": ["#DaVinciAnimation", "#IACreativa", "#GenioCreativoDA", "#AcademiaDaVinci"], "correcta": 2, "pista": "El hashtag conecta todos los proyectos de los Genios Creativos en redes sociales."}, {"q": "¿Qué dice Robotsin Maestro sobre la importancia de lo que lograste?", "opciones": ["Que es un buen inicio pero aún falta mucho para ser creador profesional", "Que el logro más importante es haber aprendido a usar la IA", "Que un episodio de Pixar lo crean 350 personas en 4 años — tú lo hiciste en semanas con IA", "Que el certificado es lo más valioso que te llevas del curso"], "correcta": 2, "pista": "Lo que lograste es el futuro del entretenimiento — y tú ya sabes cómo funciona."}]};</script>
+<script src="js/lesson-quiz.js"></script>
 </body>
 </html>

@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="css/genios.css">
 <link rel="stylesheet" href="css/lesson.css">
 <link rel="stylesheet" href="css/juice.css">
+<link rel="stylesheet" href="css/lesson-quiz.css">
 </head>
 <body class="lesson" style="--wc: var(--m6)">
 
@@ -226,6 +227,9 @@
 </section>
 
 <!-- ═══════════ NAV LECCIÓN ═══════════ -->
+
+<!-- ══ MINI QUIZ ══ -->
+<div id="lesson-quiz-container"></div>
 <nav class="lessonnav">
   <a href="clase24_revision_edicion.html" class="lnav-btn prev-btn">
     <span class="ar">←</span>
@@ -306,5 +310,9 @@ if (/vercel\.app$|academiadavinci/.test(location.hostname)) {
 }
 </script>
 
+
+<!-- ── Lesson quiz ── -->
+<script>window.LESSON_QUIZ_DATA = {"claseNum": 25, "preguntas": [{"q": "¿Cuál es la 'fórmula de retroalimentación constructiva' que aprendiste?", "opciones": ["Decir lo que estuvo mal, lo regular y lo que estuvo bien", "1 cosa que funcionó MUY bien + 1 pregunta genuina + 1 sugerencia amable", "Solo hablar de los puntos negativos para que el creador mejore", "Calificar con un número del 1 al 10 y explicar la nota"], "correcta": 1, "pista": "El feedback útil incluye lo positivo, lo curioso y lo sugerido — nunca solo crítica."}, {"q": "¿Cómo debe comenzar el mejor feedback según Robotsin?", "opciones": ["'Esto estuvo mal porque...'", "'Yo lo hubiera hecho diferente...'", "'Sentí que...'", "'En mi opinión, deberías...'"], "correcta": 2, "pista": "Hablar de cómo te hizo sentir es más útil y menos hiriente que hablar de errores."}, {"q": "¿Qué hace el 'Braintrust' de Pixar antes de lanzar una película?", "opciones": ["Vota para eliminar escenas que no les gustan", "Da feedback brutal en privado para mejorar la película antes de que nadie la vea", "Decide el precio de entrada para la premiere", "Crea el tráiler oficial de la película"], "correcta": 1, "pista": "Es su arma secreta — feedback honesto entre profesionales antes del estreno."}, {"q": "¿Qué debes hacer cuando recibes retroalimentación que no te gusta?", "opciones": ["Defender inmediatamente tu decisión creativa", "Ignorar completamente el feedback si no estás de acuerdo", "Escuchar sin defenderte, anotar todo, agradecer y decidir qué incorporar", "Cambiar todo lo que te sugieran sin filtrar nada"], "correcta": 2, "pista": "Anotar no significa implementar todo — tú decides qué feedback tiene sentido para tu visión."}]};</script>
+<script src="js/lesson-quiz.js"></script>
 </body>
 </html>

@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="css/genios.css">
 <link rel="stylesheet" href="css/lesson.css">
 <link rel="stylesheet" href="css/juice.css">
+<link rel="stylesheet" href="css/lesson-quiz.css">
 </head>
 <body class="lesson" style="--wc: var(--m4)">
 
@@ -244,6 +245,9 @@
 </section>
 
 <!-- ═══════════ NAV LECCIÓN ═══════════ -->
+
+<!-- ══ MINI QUIZ ══ -->
+<div id="lesson-quiz-container"></div>
 <nav class="lessonnav">
   <a href="clase16_las_escenas.html" class="lnav-btn prev-btn">
     <span class="ar">←</span>
@@ -326,5 +330,9 @@ if (/vercel\.app$|academiadavinci/.test(location.hostname)) {
 }
 </script>
 
+
+<!-- ── Lesson quiz ── -->
+<script>window.LESSON_QUIZ_DATA = {"claseNum": 17, "preguntas": [{"q": "¿Qué herramienta usas para editar tu video en esta clase?", "opciones": ["Adobe Premiere Pro", "Final Cut Pro", "CapCut", "iMovie de Apple"], "correcta": 2, "pista": "Es gratuita, está disponible en celular y PC, y es perfecta para empezar."}, {"q": "¿Cuál es el proceso completo de edición en orden?", "opciones": ["Exportar → editar → importar → guardar", "Importar → ordenar → cortar → transiciones → música → exportar", "Grabar → cortar → subir → compartir", "Diseñar → animar → editar → publicar"], "correcta": 1, "pista": "Sigue este orden y el proceso fluye de manera natural."}, {"q": "Según Robotsin, ¿cuál es el error más común al editar?", "opciones": ["Poner demasiada música de fondo", "Usar transiciones muy elaboradas", "Dejar los clips demasiado largos — si aburre al editor, aburre al público", "Exportar en baja resolución"], "correcta": 2, "pista": "'Corta sin miedo' — cada segundo de más debilita el ritmo."}, {"q": "¿Cómo se diferencia la edición 'lineal' de la 'no lineal'?", "opciones": ["Lineal es más antigua y no lineal es más moderna — pero hacen lo mismo", "Lineal se edita en orden de inicio a fin; no lineal permite editar cualquier parte en cualquier momento", "Lineal es para videos cortos; no lineal solo funciona para videos de más de 10 minutos", "No existe diferencia real — son términos intercambiables"], "correcta": 1, "pista": "CapCut es no lineal — puedes saltar a cualquier parte y editar sin seguir un orden."}]};</script>
+<script src="js/lesson-quiz.js"></script>
 </body>
 </html>

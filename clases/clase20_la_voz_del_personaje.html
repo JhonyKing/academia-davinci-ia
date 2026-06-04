@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="css/genios.css">
 <link rel="stylesheet" href="css/lesson.css">
 <link rel="stylesheet" href="css/juice.css">
+<link rel="stylesheet" href="css/lesson-quiz.css">
 </head>
 <body class="lesson" style="--wc: var(--m5)">
 
@@ -237,6 +238,9 @@
 </section>
 
 <!-- ═══════════ NAV LECCIÓN ═══════════ -->
+
+<!-- ══ MINI QUIZ ══ -->
+<div id="lesson-quiz-container"></div>
 <nav class="lessonnav">
   <a href="clase19_el_tema_musical.html" class="lnav-btn prev-btn">
     <span class="ar">←</span>
@@ -317,5 +321,9 @@ if (/vercel\.app$|academiadavinci/.test(location.hostname)) {
 }
 </script>
 
+
+<!-- ── Lesson quiz ── -->
+<script>window.LESSON_QUIZ_DATA = {"claseNum": 20, "preguntas": [{"q": "¿Qué es el 'text-to-speech' con IA?", "opciones": ["Una tecnología que convierte audio en texto escrito", "Un sistema que lee en voz alta los textos que tú escribes, usando voces generadas por IA", "Una función que traduce texto de un idioma a otro automáticamente", "Una IA que escribe textos por ti sin que tú escribas nada"], "correcta": 1, "pista": "Tú escribes el texto, la IA lo convierte en voz con el tono y emoción que elijas."}, {"q": "¿Qué significa poner una palabra en MAYÚSCULAS en el texto para ElevenLabs?", "opciones": ["Que esa palabra no debe pronunciarse", "Que esa palabra debe pronunciarse más despacio", "Que esa palabra lleva énfasis — se pronuncia con más fuerza", "Que esa palabra debe eliminarse de la narración"], "correcta": 2, "pista": "La puntuación controla las pausas; las MAYÚSCULAS controlan el énfasis."}, {"q": "¿Cómo debe sonar la voz de un VILLANO según Robotsin?", "opciones": ["Aguda y rápida para que parezca nervioso", "Exactamente igual que la del héroe para confundir al espectador", "Grave y lenta para transmitir amenaza", "Con mucho eco y reverberación electrónica"], "correcta": 2, "pista": "Cada arquetipo tiene una voz característica. El villano intimida con calma."}, {"q": "¿Qué debes guardar como tarea al terminar la clase 20?", "opciones": ["Una imagen del personaje hablando", "El monólogo del personaje grabado como archivo de audio MP3", "Un video de 30 segundos con la voz sincronizada", "El texto escrito del monólogo en un documento"], "correcta": 1, "pista": "El audio es el entregable — 30 segundos de la voz oficial de tu personaje."}]};</script>
+<script src="js/lesson-quiz.js"></script>
 </body>
 </html>
