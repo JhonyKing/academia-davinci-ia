@@ -158,7 +158,7 @@
     { id: 'chilindrina',   nombre: 'La Chilindrina',    obra: 'El Chavo del Ocho',            img: 'img/arquetipos/chilindrina.jpg',   correcto: ['rebelde','creador'] },
 
     // ── Goat Simulator ────────────────────────────────────────────────────────
-    { id: 'goat',          nombre: 'Will Harris',       obra: 'Goat: La Cabra (2026)',        img: 'img/arquetipos/goat.jpg',          correcto: ['heroe','explorador'] },
+    { id: 'goat',          nombre: 'Will Harris',       obra: 'Goat: La Cabra (2026)',        img: 'img/arquetipos/goat.jpg',          correcto: ['heroe','explorador','rebelde'] },
 
     // ── Los 5 finales para llegar a 100 ──────────────────────────────────────
     { id: 'tom',           nombre: 'Tom',               obra: 'Tom y Jerry',                  img: 'img/arquetipos/tom.jpg',           correcto: ['rebelde','bufon'] },
