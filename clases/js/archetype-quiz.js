@@ -47,7 +47,7 @@
     { id: 'sonic',         nombre: 'Sonic',             obra: 'Sonic the Hedgehog',           img: 'img/arquetipos/sonic.jpg',         correcto: ['rebelde','heroe'] },
     // 🦉 El Sabio
     { id: 'yoda',          nombre: 'Yoda',              obra: 'Star Wars',                    img: 'img/arquetipos/yoda.jpg',          correcto: ['sabio'] },
-    { id: 'mufasa',        nombre: 'Mufasa',            obra: 'El Rey León',                  img: 'img/arquetipos/mufasa.jpg',        correcto: ['gobernante','heroe'] },
+    { id: 'mufasa',        nombre: 'Mufasa',            obra: 'El Rey León',                  img: 'img/arquetipos/mufasa.jpg',        correcto: ['gobernante','heroe','sabio'] },
     { id: 'rafiki',        nombre: 'Rafiki',            obra: 'El Rey León',                  img: 'img/arquetipos/rafiki.jpg',        correcto: ['sabio','bufon'] },
     { id: 'oogway',        nombre: 'Maestro Oogway',    obra: 'Kung Fu Panda',                img: 'img/arquetipos/oogway.jpg',        correcto: ['sabio'] },
     { id: 'dumbledore',    nombre: 'Dumbledore',        obra: 'Harry Potter',                 img: 'img/arquetipos/dumbledore.jpg',    correcto: ['sabio','mago'] },
