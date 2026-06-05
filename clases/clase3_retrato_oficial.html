@@ -30,8 +30,8 @@
   0%   { background-position: 0% center; }
   100% { background-position: 250% center; }
 }
-.next .lab { font-size: 11px; font-weight: 700; opacity: .7; letter-spacing: .08em; text-transform: uppercase; }
-.next .ti  { font-size: 20px; font-weight: 900; color: #FFD700 !important; margin-top: 4px; line-height: 1.2; }
+.next .lab { font-size: 20px; font-weight: 900; opacity: 1; letter-spacing: .04em; text-transform: uppercase; }
+.next .ti  { font-size: 24px; font-weight: 900; color: #fff !important; margin-top: 4px; line-height: 1.2; }
 nav.lessonnav .lnav-btn.next-btn .lab { font-size: 11px; opacity: .7; letter-spacing: .06em; }
 nav.lessonnav .lnav-btn.next-btn .ti  { font-size: 16px; font-weight: 900; color: #FFD700 !important; }
 #claimBtn:disabled { opacity: .35; cursor: not-allowed; }
@@ -304,7 +304,21 @@ nav.lessonnav .lnav-btn.next-btn .ti  { font-size: 16px; font-weight: 900; color
       alta resolución, 9:16"
     </div>
 
-    <div class="rmsg alt" style="--wc:var(--green)">
+    <!-- Resultado real: imagen generada con el prompt de ejemplo -->
+    <div style="margin:28px auto 0;max-width:380px;">
+      <div style="background:#1a1f35;border-radius:20px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.08);">
+        <img src="img/sara_guerrera.png" alt="Zara la Guerrera Eléctrica — resultado generado con ChatGPT" style="width:100%;display:block;object-fit:cover;max-height:380px;">
+        <div style="padding:14px 18px 16px;display:flex;align-items:center;gap:10px;">
+          <div style="background:#10a37f;border-radius:8px;padding:5px 9px;font-size:11px;font-weight:800;color:#fff;letter-spacing:.04em;flex-shrink:0;">ChatGPT</div>
+          <div>
+            <div style="color:#fff;font-weight:800;font-size:14px;line-height:1.2;">Resultado real del prompt</div>
+            <div style="color:rgba(255,255,255,.5);font-size:11px;margin-top:2px;">"Zara · Guerrera Eléctrica · Pixar 3D · neón"</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rmsg alt" style="--wc:var(--green); margin-top:28px;">
       <span class="ava"><img src="robotsin/robotsin_artista.png" alt="Robotsin"></span>
       <div>
         <div class="who">💡 Tip Pro de Robotsin</div>
@@ -372,7 +386,7 @@ nav.lessonnav .lnav-btn.next-btn .ti  { font-size: 16px; font-weight: 900; color
       </div>
     </div>
 
-    <div id="dz-c3-imagen"></div>
+    <div id="dz-c3-imagen" style="margin-top:32px;"></div>
 
     <div class="rmsg" style="--wc:var(--gold); margin-top:22px;">
       <span class="ava"><img src="robotsin/robotsin_artista.png" alt="Robotsin"></span>
