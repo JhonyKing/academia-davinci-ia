@@ -1,7 +1,7 @@
 /* ============================================================
    archetype-quiz.js — Actividad: Identifica el Arquetipo
    Academia Da Vinci IA — Clase 5: Los Arquetipos
-   60 personajes · 12 arquetipos · sistema de trofeos
+   102 personajes · 12 arquetipos · sistema de trofeos
    ============================================================ */
 
 ;(function () {
@@ -29,7 +29,7 @@
   const PERSONAJES = [
     // 🦸 El Héroe
     { id: 'spiderman',     nombre: 'Spider-Man',       obra: 'Marvel',                       img: 'img/arquetipos/spiderman.jpg',     correcto: ['heroe'] },
-    { id: 'moana',         nombre: 'Moana',             obra: 'Disney',                       img: 'img/arquetipos/moana.jpg',         correcto: ['heroe','explorador'] },
+    { id: 'moana',         nombre: 'Moana',             obra: 'Disney',                       img: 'img/arquetipos/moana.jpg',         correcto: ['heroe','explorador','rebelde'] },
     { id: 'mulan',         nombre: 'Mulan',             obra: 'Disney',                       img: 'img/arquetipos/mulan.jpg',         correcto: ['heroe','rebelde'] },
     { id: 'hercules',      nombre: 'Hércules',          obra: 'Disney',                       img: 'img/arquetipos/hercules.jpg',      correcto: ['heroe'] },
     { id: 'harry_potter',  nombre: 'Harry Potter',      obra: 'Harry Potter',                 img: 'img/arquetipos/harry_potter.jpg',  correcto: ['heroe','huerfano'] },
@@ -43,11 +43,12 @@
     { id: 'shrek',         nombre: 'Shrek',             obra: 'DreamWorks',                   img: 'img/arquetipos/shrek.jpg',         correcto: ['rebelde','huerfano'] },
     { id: 'katniss',       nombre: 'Katniss Everdeen',  obra: 'Los Juegos del Hambre',        img: 'img/arquetipos/katniss.jpg',       correcto: ['rebelde','heroe'] },
     { id: 'remy',          nombre: 'Remy',              obra: 'Ratatouille',                  img: 'img/arquetipos/remy.jpg',          correcto: ['rebelde','creador'] },
-    { id: 'jack_sparrow',  nombre: 'Jack Sparrow',      obra: 'Piratas del Caribe',           img: 'img/arquetipos/jack_sparrow.jpg',  correcto: ['rebelde','bufon'] },
+    { id: 'jack_sparrow',  nombre: 'Jack Sparrow',      obra: 'Piratas del Caribe',           img: 'img/arquetipos/jack_sparrow.jpg',  correcto: ['rebelde','bufon','explorador'] },
     { id: 'sonic',         nombre: 'Sonic',             obra: 'Sonic the Hedgehog',           img: 'img/arquetipos/sonic.jpg',         correcto: ['rebelde','heroe'] },
     // 🦉 El Sabio
     { id: 'yoda',          nombre: 'Yoda',              obra: 'Star Wars',                    img: 'img/arquetipos/yoda.jpg',          correcto: ['sabio'] },
-    { id: 'mufasa',        nombre: 'Mufasa',            obra: 'El Rey León',                  img: 'img/arquetipos/mufasa.jpg',        correcto: ['sabio','gobernante'] },
+    { id: 'mufasa',        nombre: 'Mufasa',            obra: 'El Rey León',                  img: 'img/arquetipos/mufasa.jpg',        correcto: ['gobernante','heroe'] },
+    { id: 'rafiki',        nombre: 'Rafiki',            obra: 'El Rey León',                  img: 'img/arquetipos/rafiki.jpg',        correcto: ['sabio','bufon'] },
     { id: 'oogway',        nombre: 'Maestro Oogway',    obra: 'Kung Fu Panda',                img: 'img/arquetipos/oogway.jpg',        correcto: ['sabio'] },
     { id: 'dumbledore',    nombre: 'Dumbledore',        obra: 'Harry Potter',                 img: 'img/arquetipos/dumbledore.jpg',    correcto: ['sabio','mago'] },
     { id: 'iroh',          nombre: 'Tío Iroh',          obra: 'Avatar: La Leyenda de Aang',   img: 'img/arquetipos/iroh.jpg',          correcto: ['sabio','cuidador'] },
@@ -78,7 +79,7 @@
     // 👑 El Gobernante
     { id: 'simba',         nombre: 'Simba',             obra: 'El Rey León',                  img: 'img/arquetipos/simba.jpg',         correcto: ['gobernante','heroe'] },
     { id: 'black_panther', nombre: 'Black Panther',     obra: 'Marvel',                       img: 'img/arquetipos/black_panther.jpg', correcto: ['gobernante','heroe'] },
-    { id: 'elsa',          nombre: 'Elsa (Reina)',      obra: 'Frozen',                       img: 'img/arquetipos/elsa.jpg',          correcto: ['gobernante','mago'] },
+    { id: 'elsa',          nombre: 'Elsa (Reina)',      obra: 'Frozen',                       img: 'img/arquetipos/elsa.jpg',          correcto: ['gobernante','mago','rebelde'] },
     { id: 'triton',        nombre: 'Rey Tritón',        obra: 'La Sirenita',                  img: 'img/arquetipos/triton.jpg',        correcto: ['gobernante'] },
     { id: 'elinor',        nombre: 'Reina Elinor',      obra: 'Brave',                        img: 'img/arquetipos/elinor.jpg',        correcto: ['gobernante','cuidador'] },
     // ❤️ El Amante
@@ -96,7 +97,7 @@
     // 🌟 El Huérfano
     { id: 'frodo',         nombre: 'Frodo Bolsón',      obra: 'El Señor de los Anillos',      img: 'img/arquetipos/frodo.jpg',         correcto: ['huerfano','heroe'] },
     { id: 'cenicienta',    nombre: 'Cenicienta',        obra: 'Disney',                       img: 'img/arquetipos/cenicienta.jpg',    correcto: ['huerfano','inocente'] },
-    { id: 'tarzan',        nombre: 'Tarzán',            obra: 'Disney',                       img: 'img/arquetipos/tarzan.jpg',        correcto: ['huerfano','explorador'] },
+    { id: 'tarzan',        nombre: 'Tarzán',            obra: 'Disney',                       img: 'img/arquetipos/tarzan.jpg',        correcto: ['huerfano','explorador','heroe'] },
     { id: 'pinocho',       nombre: 'Pinocho',           obra: 'Disney',                       img: 'img/arquetipos/pinocho.jpg',       correcto: ['huerfano','inocente'] },
     { id: 'oliver',        nombre: 'Oliver',            obra: 'Oliver & Company',             img: 'img/arquetipos/oliver.jpg',        correcto: ['huerfano','inocente'] },
 
@@ -214,12 +215,12 @@
         <div class="aq-start-icon">🎮</div>
         <h2 class="aq-start-title">Reto: Identifica el Arquetipo</h2>
         <p class="aq-start-desc">
-          Verás <strong>60 personajes famosos</strong> del cine y la TV.<br>
+          Verás <strong>102 personajes famosos</strong> del cine, la TV y los videojuegos.<br>
           Tu misión: ¿a cuál arquetipo pertenece cada uno?<br>
-          <em>¡Algunos personajes tienen más de un arquetipo correcto!</em>
+          <em>¡Muchos personajes tienen más de un arquetipo correcto!</em>
         </p>
         <div class="aq-start-stats">
-          <span>🎭 60 personajes</span>
+          <span>🎭 102 personajes</span>
           <span>🏛️ 12 arquetipos</span>
           <span>🏆 Gana un trofeo</span>
         </div>
