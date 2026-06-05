@@ -1,311 +1,78 @@
 {
   "success": [
+    "spiderman",
+    "moana",
+    "mulan",
+    "hercules",
     "harry_potter",
+    "gandalf",
+    "genie",
+    "hada_madrina",
+    "merlin",
+    "dr_strange",
     "katniss",
+    "remy",
+    "jack_sparrow",
+    "sonic",
+    "yoda",
+    "mufasa",
+    "oogway",
+    "dumbledore",
+    "iroh",
+    "nemo",
+    "olaf",
     "winnie_pooh",
     "bambi",
+    "lilo",
     "dora",
     "indiana",
+    "miguel",
+    "carl",
+    "baymax",
+    "elastigirl",
     "paddington",
+    "sam",
+    "eve",
+    "tony_stark",
     "wonka",
+    "edna",
+    "emmet",
+    "hiro",
+    "simba",
+    "black_panther",
+    "elsa",
+    "triton",
+    "elinor",
+    "walle",
+    "ariel",
+    "rapunzel",
+    "belle",
     "romeo",
+    "donkey",
+    "timon",
+    "mushu",
     "patrick",
+    "phil",
+    "frodo",
+    "cenicienta",
+    "tarzan",
     "pinocho"
   ],
   "failed": [
     [
-      "spiderman",
-      "Spider-Man",
-      "Spider-Man_(character)",
-      "no_wiki_image"
-    ],
-    [
-      "moana",
-      "Moana",
-      "Moana_(Disney_character)",
-      "no_wiki_image"
-    ],
-    [
-      "mulan",
-      "Mulan",
-      "Fa_Mulan",
-      "no_wiki_image"
-    ],
-    [
-      "hercules",
-      "Hércules",
-      "Hercules_(Disney_character)",
-      "no_wiki_image"
-    ],
-    [
-      "gandalf",
-      "Gandalf",
-      "Gandalf",
-      "no_wiki_image"
-    ],
-    [
-      "genie",
-      "Genio de Aladdin",
-      "Genie_(Disney)",
-      "no_wiki_image"
-    ],
-    [
-      "hada_madrina",
-      "Hada Madrina",
-      "Fairy_Godmother_(Disney)",
-      "no_wiki_image"
-    ],
-    [
-      "merlin",
-      "Merlín",
-      "Merlin_(Disney)",
-      "no_wiki_image"
-    ],
-    [
-      "dr_strange",
-      "Doctor Strange",
-      "Doctor_Strange",
-      "no_wiki_image"
-    ],
-    [
       "shrek",
-      "Shrek",
-      "Shrek_(character)",
-      "no_wiki_image"
-    ],
-    [
-      "remy",
-      "Remy",
-      "Remy_(Ratatouille)",
-      "no_wiki_image"
-    ],
-    [
-      "jack_sparrow",
-      "Jack Sparrow",
-      "Jack_Sparrow",
-      "no_wiki_image"
-    ],
-    [
-      "sonic",
-      "Sonic",
-      "Sonic_the_Hedgehog_(character)",
-      "no_wiki_image"
-    ],
-    [
-      "yoda",
-      "Yoda",
-      "Yoda",
-      "no_wiki_image"
-    ],
-    [
-      "mufasa",
-      "Mufasa",
-      "Mufasa_(The_Lion_King)",
-      "no_wiki_image"
-    ],
-    [
-      "oogway",
-      "Maestro Oogway",
-      "Oogway",
-      "no_wiki_image"
-    ],
-    [
-      "dumbledore",
-      "Dumbledore",
-      "Albus_Dumbledore",
-      "no_wiki_image"
-    ],
-    [
-      "iroh",
-      "Tío Iroh",
-      "Iroh",
-      "no_wiki_image"
-    ],
-    [
-      "nemo",
-      "Nemo",
-      "Nemo_(Finding_Nemo)",
-      "no_wiki_image"
-    ],
-    [
-      "olaf",
-      "Olaf",
-      "Olaf_(Frozen)",
-      "no_wiki_image"
-    ],
-    [
-      "lilo",
-      "Lilo",
-      "Lilo_Pelekai",
-      "no_wiki_image"
+      "shrek",
+      "Shrek"
     ],
     [
       "hiccup",
-      "Hipo",
-      "Hiccup_Horrendous_Haddock_III",
-      "no_wiki_image"
-    ],
-    [
-      "miguel",
-      "Miguel",
-      "Miguel_(Coco)",
-      "no_wiki_image"
-    ],
-    [
-      "carl",
-      "Carl Fredricksen",
-      "Carl_Fredricksen",
-      "no_wiki_image"
-    ],
-    [
-      "baymax",
-      "Baymax",
-      "Baymax",
-      "no_wiki_image"
-    ],
-    [
-      "elastigirl",
-      "Elastigirl",
-      "Helen_Parr",
-      "no_wiki_image"
-    ],
-    [
-      "sam",
-      "Sam Gamgee",
-      "Samwise_Gamgee",
-      "no_wiki_image"
-    ],
-    [
-      "eve",
-      "EVE",
-      "EVE_(WALL-E)",
-      "no_wiki_image"
-    ],
-    [
-      "tony_stark",
-      "Tony Stark",
-      "Iron_Man",
-      "no_wiki_image"
-    ],
-    [
-      "edna",
-      "Edna Mode",
-      "Edna_Mode",
-      "no_wiki_image"
-    ],
-    [
-      "emmet",
-      "Emmet",
-      "Emmet_(The_Lego_Movie)",
-      "no_wiki_image"
-    ],
-    [
-      "hiro",
-      "Hiro Hamada",
-      "Hiro_Hamada",
-      "no_wiki_image"
-    ],
-    [
-      "simba",
-      "Simba",
-      "Simba",
-      "no_wiki_image"
-    ],
-    [
-      "black_panther",
-      "Black Panther",
-      "Black_Panther_(Marvel_Comics)",
-      "no_wiki_image"
-    ],
-    [
-      "elsa",
-      "Elsa",
-      "Elsa_(Frozen)",
-      "no_wiki_image"
-    ],
-    [
-      "triton",
-      "Rey Tritón",
-      "King_Triton",
-      "no_wiki_image"
-    ],
-    [
-      "elinor",
-      "Reina Elinor",
-      "Elinor_(Brave)",
-      "no_wiki_image"
-    ],
-    [
-      "walle",
-      "WALL-E",
-      "WALL-E_(character)",
-      "no_wiki_image"
-    ],
-    [
-      "ariel",
-      "Ariel",
-      "Ariel_(The_Little_Mermaid)",
-      "no_wiki_image"
-    ],
-    [
-      "rapunzel",
-      "Rapunzel",
-      "Rapunzel_(Tangled)",
-      "no_wiki_image"
-    ],
-    [
-      "belle",
-      "Bella",
-      "Belle_(Beauty_and_the_Beast)",
-      "no_wiki_image"
-    ],
-    [
-      "donkey",
-      "Burro (Shrek)",
-      "Donkey_(Shrek)",
-      "no_wiki_image"
-    ],
-    [
-      "timon",
-      "Timón",
-      "Timon_(The_Lion_King)",
-      "no_wiki_image"
-    ],
-    [
-      "mushu",
-      "Mushu",
-      "Mushu",
-      "no_wiki_image"
-    ],
-    [
-      "phil",
-      "Filoctetes",
-      "Philoctetes_(Disney)",
-      "no_wiki_image"
-    ],
-    [
-      "frodo",
-      "Frodo Bolsón",
-      "Frodo_Baggins",
-      "no_wiki_image"
-    ],
-    [
-      "cenicienta",
-      "Cenicienta",
-      "Cinderella_(Disney_character)",
-      "no_wiki_image"
-    ],
-    [
-      "tarzan",
-      "Tarzán",
-      "Tarzan_(Disney)",
-      "no_wiki_image"
+      "howtotrainyourdragon",
+      "Hiccup Horrendous Haddock III"
     ],
     [
       "oliver",
-      "Oliver",
-      "Oliver_(Oliver_&_Company)",
-      "no_wiki_image"
+      "disney",
+      "Oliver (Oliver & Company)"
     ]
   ]
 }

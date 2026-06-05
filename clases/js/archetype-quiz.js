@@ -60,7 +60,7 @@
     // 🧭 El Explorador
     { id: 'dora',          nombre: 'Dora',              obra: 'Dora la Exploradora',          img: 'img/arquetipos/dora.jpg',          correcto: ['explorador'] },
     { id: 'indiana',       nombre: 'Indiana Jones',     obra: 'Indiana Jones',                img: 'img/arquetipos/indiana.jpg',       correcto: ['explorador','heroe'] },
-    { id: 'hiccup',        nombre: 'Hipo',              obra: 'Cómo entrenar a tu Dragón',    img: 'img/arquetipos/hiccup.jpg',        correcto: ['explorador','heroe'] },
+    { id: 'hiccup',        nombre: 'Chimuelo',          obra: 'Cómo entrenar a tu Dragón',    img: 'img/arquetipos/hiccup.jpg',        correcto: ['cuidador','inocente'] },
     { id: 'miguel',        nombre: 'Miguel',            obra: 'Coco',                         img: 'img/arquetipos/miguel.jpg',        correcto: ['explorador','heroe'] },
     { id: 'carl',          nombre: 'Carl Fredricksen',  obra: 'Up',                           img: 'img/arquetipos/carl.jpg',          correcto: ['explorador','amante'] },
     // 💚 El Cuidador
