@@ -3,6 +3,25 @@
    Academia Da Vinci IA
    ============================================================ */
 
+/* ── Mueve .next div después del quiz y lo convierte en leyenda ── */
+;(function () {
+  function doMove() {
+    var nextDiv = document.querySelector('.next');
+    var nav     = document.querySelector('nav.lessonnav');
+    if (!nextDiv || !nav) return;
+    var em = nextDiv.querySelector('span.em');
+    if (em) em.remove();
+    nav.parentNode.insertBefore(nextDiv, nav);
+    nextDiv.style.cssText = 'text-align:center;padding:20px 16px 12px;border-top:1px solid rgba(0,0,0,.06);';
+    var lab = nextDiv.querySelector('.lab');
+    var ti  = nextDiv.querySelector('.ti');
+    if (lab) lab.style.cssText = 'font-size:11px;text-transform:uppercase;letter-spacing:.1em;font-weight:700;color:#aaa;margin-bottom:6px;display:block;';
+    if (ti)  ti.style.cssText  = 'font-size:20px;font-weight:900;color:#333;display:block;';
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', doMove);
+  else doMove();
+})();
+
 ;(function () {
   'use strict';
 
@@ -30,10 +49,11 @@
     nextBtnHref = nextBtn.getAttribute('href');
     nextBtn.removeAttribute('href');
     nextBtn.classList.add('lq-locked');
-    const msg = document.createElement('p');
-    msg.id = 'lq-lock-msg';
-    msg.textContent = '🔒 Completa el quiz para continuar';
-    nextBtn.parentElement.appendChild(msg);
+    nextBtn.style.position = 'relative';
+    const overlay = document.createElement('div');
+    overlay.id = 'lq-lock-overlay';
+    overlay.textContent = '🔒 Completa el quiz para continuar';
+    nextBtn.appendChild(overlay);
   }
 
   function unlockNextBtn() {
@@ -41,8 +61,9 @@
     nextBtn.setAttribute('href', nextBtnHref);
     nextBtn.classList.remove('lq-locked');
     nextBtn.classList.add('lq-unlocked');
-    const msg = document.getElementById('lq-lock-msg');
-    if (msg) { msg.textContent = '✅ ¡Quiz completado!'; msg.classList.add('lq-done-msg'); }
+    nextBtn.style.position = '';
+    const overlay = document.getElementById('lq-lock-overlay');
+    if (overlay) overlay.remove();
   }
 
   /* ── Supabase ── */

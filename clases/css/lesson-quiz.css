@@ -266,13 +266,35 @@
 }
 .lq-already-done .lq-result-msg { padding-bottom: 28px; }
 
+/* ── Overlay de candado sobre el botón siguiente ── */
+#lq-lock-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10,15,35,.82);
+  border-radius: inherit;
+  color: rgba(255,255,255,.95);
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: .02em;
+  z-index: 3;
+  text-align: center;
+  padding: 8px 12px;
+  pointer-events: none;
+}
+
 /* ── Botón siguiente bloqueado ── */
 .lnav-btn.next-btn.lq-locked {
-  opacity: .35;
+  opacity: .75;
   pointer-events: none;
   cursor: not-allowed;
-  filter: grayscale(.7);
+  filter: grayscale(.2);
 }
+
+/* El párrafo legacy ya no se usa */
+#lq-lock-msg { display: none !important; }
 .lnav-btn.next-btn.lq-unlocked {
   animation: lqPop .45s cubic-bezier(.34,1.56,.5,1);
 }
