@@ -42,11 +42,11 @@
     // ⚡ El Rebelde
     { id: 'shrek',         nombre: 'Shrek',             obra: 'DreamWorks',                   img: 'img/arquetipos/shrek.jpg',         correcto: ['rebelde','huerfano','heroe'] },
     { id: 'katniss',       nombre: 'Katniss Everdeen',  obra: 'Los Juegos del Hambre',        img: 'img/arquetipos/katniss.jpg',       correcto: ['rebelde','heroe'] },
-    { id: 'remy',          nombre: 'Remy',              obra: 'Ratatouille',                  img: 'img/arquetipos/remy.jpg',          correcto: ['rebelde','creador'] },
+    { id: 'remy',          nombre: 'Remy',              obra: 'Ratatouille',                  img: 'img/arquetipos/remy.jpg',          correcto: ['rebelde','creador','explorador'] },
     { id: 'jack_sparrow',  nombre: 'Jack Sparrow',      obra: 'Piratas del Caribe',           img: 'img/arquetipos/jack_sparrow.jpg',  correcto: ['rebelde','bufon','explorador'] },
     { id: 'sonic',         nombre: 'Sonic',             obra: 'Sonic the Hedgehog',           img: 'img/arquetipos/sonic.jpg',         correcto: ['rebelde','heroe'] },
     // 🦉 El Sabio
-    { id: 'yoda',          nombre: 'Yoda',              obra: 'Star Wars',                    img: 'img/arquetipos/yoda.jpg',          correcto: ['sabio'] },
+    { id: 'yoda',          nombre: 'Yoda',              obra: 'Star Wars',                    img: 'img/arquetipos/yoda.jpg',          correcto: ['sabio','mago'] },
     { id: 'mufasa',        nombre: 'Mufasa',            obra: 'El Rey León',                  img: 'img/arquetipos/mufasa.jpg',        correcto: ['gobernante','heroe','sabio'] },
     { id: 'rafiki',        nombre: 'Rafiki',            obra: 'El Rey León',                  img: 'img/arquetipos/rafiki.jpg',        correcto: ['sabio','bufon'] },
     { id: 'oogway',        nombre: 'Maestro Oogway',    obra: 'Kung Fu Panda',                img: 'img/arquetipos/oogway.jpg',        correcto: ['sabio'] },
@@ -83,7 +83,7 @@
     { id: 'triton',        nombre: 'Rey Tritón',        obra: 'La Sirenita',                  img: 'img/arquetipos/triton.jpg',        correcto: ['gobernante'] },
     { id: 'elinor',        nombre: 'Reina Elinor',      obra: 'Brave',                        img: 'img/arquetipos/elinor.jpg',        correcto: ['gobernante','cuidador'] },
     // ❤️ El Amante
-    { id: 'walle',         nombre: 'WALL-E',            obra: 'WALL-E',                       img: 'img/arquetipos/walle.jpg',         correcto: ['amante','inocente'] },
+    { id: 'walle',         nombre: 'WALL-E',            obra: 'WALL-E',                       img: 'img/arquetipos/walle.jpg',         correcto: ['amante','inocente','explorador'] },
     { id: 'ariel',         nombre: 'Ariel',             obra: 'La Sirenita',                  img: 'img/arquetipos/ariel.jpg',         correcto: ['amante','explorador'] },
     { id: 'rapunzel',      nombre: 'Rapunzel',          obra: 'Enredados',                    img: 'img/arquetipos/rapunzel.jpg',      correcto: ['amante','creador'] },
     { id: 'belle',         nombre: 'Bella',             obra: 'La Bella y la Bestia',         img: 'img/arquetipos/belle.jpg',         correcto: ['amante','sabio'] },
@@ -106,10 +106,10 @@
     { id: 'chuck',         nombre: 'Chuck',             obra: 'Angry Birds',                  img: 'img/arquetipos/chuck.jpg',         correcto: ['rebelde','explorador'] },
     { id: 'bomb',          nombre: 'Bomb',              obra: 'Angry Birds',                  img: 'img/arquetipos/bomb.jpg',          correcto: ['bufon','rebelde'] },
     { id: 'mighty_eagle',  nombre: 'Águila Poderosa',   obra: 'Angry Birds',                  img: 'img/arquetipos/mighty_eagle.jpg',  correcto: ['sabio','gobernante','heroe'] },
-    { id: 'stella',        nombre: 'Stella',            obra: 'Angry Birds',                  img: 'img/arquetipos/stella.jpg',        correcto: ['rebelde','heroe'] },
+    { id: 'stella',        nombre: 'Stella',            obra: 'Angry Birds',                  img: 'img/arquetipos/stella.jpg',        correcto: ['rebelde','cuidador'] },
 
     // ── Toy Story ─────────────────────────────────────────────────────────────
-    { id: 'woody',         nombre: 'Woody',             obra: 'Toy Story',                    img: 'img/arquetipos/woody.jpg',         correcto: ['cuidador','gobernante'] },
+    { id: 'woody',         nombre: 'Woody',             obra: 'Toy Story',                    img: 'img/arquetipos/woody.jpg',         correcto: ['cuidador','gobernante','heroe'] },
     { id: 'buzz',          nombre: 'Buzz Lightyear',    obra: 'Toy Story',                    img: 'img/arquetipos/buzz.jpg',          correcto: ['heroe','huerfano'] },
     { id: 'rex_ts',        nombre: 'Rex',               obra: 'Toy Story',                    img: 'img/arquetipos/rex_ts.jpg',        correcto: ['inocente','bufon'] },
     { id: 'jessie',        nombre: 'Jessie',            obra: 'Toy Story',                    img: 'img/arquetipos/jessie.jpg',        correcto: ['rebelde','explorador'] },
@@ -130,7 +130,7 @@
     // ── Más Mario Bros ────────────────────────────────────────────────────────
     { id: 'peach',         nombre: 'Princesa Peach',    obra: 'Super Mario Bros.',            img: 'img/arquetipos/peach.jpg',         correcto: ['gobernante','inocente'] },
     { id: 'yoshi',         nombre: 'Yoshi',             obra: 'Super Mario Bros.',            img: 'img/arquetipos/yoshi.jpg',         correcto: ['cuidador','inocente'] },
-    { id: 'luigi',         nombre: 'Luigi',             obra: 'Super Mario Bros.',            img: 'img/arquetipos/luigi.jpg',         correcto: ['heroe','huerfano'] },
+    { id: 'luigi',         nombre: 'Luigi',             obra: 'Super Mario Bros.',            img: 'img/arquetipos/luigi.jpg',         correcto: ['heroe','huerfano','cuidador'] },
     { id: 'bowser',        nombre: 'Bowser',            obra: 'Super Mario Bros.',            img: 'img/arquetipos/bowser.jpg',        correcto: ['gobernante','rebelde'] },
 
     // ── Minecraft ─────────────────────────────────────────────────────────────
@@ -158,7 +158,7 @@
     { id: 'chilindrina',   nombre: 'La Chilindrina',    obra: 'El Chavo del Ocho',            img: 'img/arquetipos/chilindrina.jpg',   correcto: ['rebelde','creador'] },
 
     // ── Goat Simulator ────────────────────────────────────────────────────────
-    { id: 'goat',          nombre: 'La Cabra',          obra: 'Goat Simulator',               img: 'img/arquetipos/goat.jpg',          correcto: ['bufon','rebelde'] },
+    { id: 'goat',          nombre: 'Will Harris',       obra: 'Goat: La Cabra (2026)',        img: 'img/arquetipos/goat.jpg',          correcto: ['heroe','explorador'] },
 
     // ── Los 5 finales para llegar a 100 ──────────────────────────────────────
     { id: 'tom',           nombre: 'Tom',               obra: 'Tom y Jerry',                  img: 'img/arquetipos/tom.jpg',           correcto: ['rebelde','bufon'] },
