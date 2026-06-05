@@ -188,8 +188,8 @@ body.lesson { --wc: var(--m1); }
   background:linear-gradient(120deg, var(--wc), color-mix(in srgb,var(--wc) 60%,#fff)); color:#fff;
   border-radius:var(--r); padding:24px 28px; box-shadow:var(--shadow); }
 .next .em { font-size:34px; }
-.next .lab { font-weight:900; font-size:20px; letter-spacing:.05em; text-transform:uppercase; opacity:1; }
-.next .ti { font-family:var(--font-display); font-weight:700; font-size:24px; }
+.next .lab { font-weight:900; font-size:32px; letter-spacing:.04em; text-transform:uppercase; color:#fff !important; opacity:1; }
+.next .ti { font-family:var(--font-display); font-weight:700; font-size:20px; color:rgba(255,255,255,.8) !important; }
 
 /* ── Navegación de lección ── */
 .lessonnav { display:flex; gap:12px; max-width:900px; margin:40px auto 0; padding:32px 22px 0; border-top:2px solid var(--line); }
