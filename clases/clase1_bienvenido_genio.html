@@ -124,17 +124,17 @@
         <div style="background:linear-gradient(135deg,#2C3E8C,#1a2560);border-radius:14px;padding:14px 10px;text-align:center;">
           <div style="font-size:32px;margin-bottom:6px;">💬</div>
           <div style="color:#74B9FF;font-weight:800;font-size:13px;">TEXTO</div>
-          <div style="color:rgba(255,255,255,.55);font-size:11px;margin-top:4px;">ChatGPT</div>
+          <div style="color:rgba(255,255,255,.55);font-size:11px;margin-top:4px;">ChatGPT / Gemini / Claude</div>
         </div>
         <div style="background:linear-gradient(135deg,#6C3483,#4a1f6e);border-radius:14px;padding:14px 10px;text-align:center;">
           <div style="font-size:32px;margin-bottom:6px;">🖼️</div>
           <div style="color:#C39BD3;font-weight:800;font-size:13px;">IMÁGENES</div>
-          <div style="color:rgba(255,255,255,.55);font-size:11px;margin-top:4px;">Midjourney / Firefly</div>
+          <div style="color:rgba(255,255,255,.55);font-size:11px;margin-top:4px;">ChatGPT / Google Flow</div>
         </div>
         <div style="background:linear-gradient(135deg,#C0392B,#7b1010);border-radius:14px;padding:14px 10px;text-align:center;">
           <div style="font-size:32px;margin-bottom:6px;">🎬</div>
           <div style="color:#F1948A;font-weight:800;font-size:13px;">VIDEO</div>
-          <div style="color:rgba(255,255,255,.55);font-size:11px;margin-top:4px;">Kling / Sora / Veo2</div>
+          <div style="color:rgba(255,255,255,.55);font-size:11px;margin-top:4px;">Google Flow / PixVerse</div>
         </div>
         <div style="background:linear-gradient(135deg,#1A5276,#0d3050);border-radius:14px;padding:14px 10px;text-align:center;">
           <div style="font-size:32px;margin-bottom:6px;">🎵</div>
@@ -304,6 +304,20 @@
       </div>
     </div>
 
+    <!-- Herramientas de IA para crear imágenes -->
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin:0 0 28px;justify-content:center;">
+      <a href="https://chatgpt.com" target="_blank" rel="noopener noreferrer"
+         style="display:inline-flex;align-items:center;gap:10px;background:#10a37f;color:#fff;font-weight:800;font-size:14px;padding:14px 24px;border-radius:14px;text-decoration:none;box-shadow:0 4px 18px rgba(16,163,127,.4);transition:opacity .2s;">
+        <span style="font-size:22px;">🤖</span>
+        <div><div style="font-size:12px;font-weight:600;opacity:.8;letter-spacing:.04em;">CREAR IMAGEN EN</div>ChatGPT</div>
+      </a>
+      <a href="https://labs.google.com/flow" target="_blank" rel="noopener noreferrer"
+         style="display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#4285f4,#34a853);color:#fff;font-weight:800;font-size:14px;padding:14px 24px;border-radius:14px;text-decoration:none;box-shadow:0 4px 18px rgba(66,133,244,.35);transition:opacity .2s;">
+        <span style="font-size:22px;">🎬</span>
+        <div><div style="font-size:12px;font-weight:600;opacity:.8;letter-spacing:.04em;">OPCIÓN 2</div>Google Flow</div>
+      </a>
+    </div>
+
     <div style="background:#1a1f35;border-radius:20px;padding:28px 24px;margin:24px 0 24px;border:1px solid rgba(255,255,255,.1);">
       <div style="font-weight:900;color:#F39C12;font-size:15px;margin-bottom:20px;text-align:center;letter-spacing:.5px;">🚀 FLUJO DE ACTIVIDADES — CLASE 1</div>
       <div style="display:flex;flex-direction:column;gap:4px;align-items:center;">
@@ -354,6 +368,48 @@
       <div>
         <h3>Dibuja a tu futuro personaje</h3>
         <p>En una hoja, dibuja al personaje que vas a crear este mundo. Dale un nombre. Piensa: ¿qué poderes tiene? ¿de dónde viene? ¿cuál es su misión? <strong>Trae ese dibujo a la Clase 2</strong> — lo convertiremos en imagen con IA.</p>
+      </div>
+    </div>
+
+    <!-- ═══ ENTREGA: sube tu imagen de IA ═══ -->
+    <div id="entrega-c1" style="margin:28px 0 8px;">
+      <div style="font-weight:900;color:#4A90D9;font-size:13px;text-transform:uppercase;letter-spacing:.07em;margin-bottom:14px;display:flex;align-items:center;gap:8px;">
+        <span>📸</span> Entrega — sube tu imagen creada con IA
+      </div>
+
+      <!-- Drop zone con borde animado estilo "marching ants" -->
+      <div id="dz1-box" style="position:relative;border-radius:16px;padding:38px 20px;text-align:center;cursor:pointer;background:rgba(13,18,36,.7);min-height:150px;display:flex;flex-direction:column;align-items:center;justify-content:center;box-sizing:border-box;">
+        <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;">
+          <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="#4A90D9" stroke-width="2" stroke-dasharray="9 6" stroke-linecap="round" vector-effect="non-scaling-stroke">
+            <animate attributeName="stroke-dashoffset" from="0" to="-15" dur="1.2s" repeatCount="indefinite"/>
+          </rect>
+        </svg>
+        <div id="dz1-icon" style="font-size:46px;margin-bottom:10px;line-height:1;">🖼️</div>
+        <div style="color:rgba(255,255,255,.85);font-weight:700;font-size:15px;">Arrastra tu imagen aquí</div>
+        <div style="color:rgba(255,255,255,.35);font-size:13px;margin:6px 0 14px;">— o —</div>
+        <button id="dz1-select" type="button" style="background:rgba(74,144,217,.15);border:1.5px solid rgba(74,144,217,.55);color:#74b9ff;font-weight:800;font-size:14px;padding:10px 26px;border-radius:10px;cursor:pointer;">
+          Seleccionar imagen
+        </button>
+        <input id="dz1-input" type="file" accept="image/*" style="display:none;">
+      </div>
+
+      <!-- Preview tras seleccionar -->
+      <div id="dz1-preview" style="display:none;margin-top:14px;border-radius:16px;overflow:hidden;background:#1a1f35;border:1px solid rgba(255,255,255,.08);">
+        <img id="dz1-img" alt="Vista previa" style="width:100%;max-height:300px;object-fit:cover;display:block;">
+        <div style="padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+          <div id="dz1-filename" style="color:rgba(255,255,255,.5);font-size:12px;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"></div>
+          <button id="dz1-upload-btn" type="button" style="background:#2F7BF6;color:#fff;font-weight:800;font-size:14px;padding:11px 24px;border-radius:10px;border:none;cursor:pointer;white-space:nowrap;">
+            Subir imagen ↑
+          </button>
+        </div>
+        <div id="dz1-status" style="display:none;padding:0 16px 14px;font-size:13px;font-weight:600;"></div>
+      </div>
+
+      <!-- Estado: ya subida -->
+      <div id="dz1-success" style="display:none;margin-top:14px;background:rgba(34,194,104,.1);border:1.5px solid rgba(34,194,104,.3);border-radius:14px;padding:16px 18px;text-align:center;">
+        <div style="color:#22C268;font-weight:800;font-size:16px;">✅ ¡Imagen entregada!</div>
+        <div id="dz1-success-name" style="color:rgba(255,255,255,.4);font-size:12px;margin-top:4px;"></div>
+        <button id="dz1-change" type="button" style="margin-top:10px;background:transparent;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.5);font-size:12px;padding:6px 14px;border-radius:8px;cursor:pointer;">Cambiar imagen</button>
       </div>
     </div>
 
@@ -508,5 +564,118 @@ if (/vercel\.app$|academiadavinci/.test(location.hostname)) {
 <!-- ── Lesson quiz ── -->
 <script>window.LESSON_QUIZ_DATA = {"claseNum": 1, "preguntas": [{"q": "¿Qué es la Inteligencia Artificial?", "opciones": ["Una persona muy inteligente", "Una herramienta que aprende de datos para ayudarte a crear", "Un robot físico que camina", "Un videojuego avanzado"], "correcta": 1, "pista": "No piensa ni siente — es una herramienta que TÚ diriges."}, {"q": "¿Qué es un 'prompt'?", "opciones": ["El nombre de un robot famoso", "Un tipo de computadora especial", "La instrucción que le das a la IA para crear algo", "Una app de teléfono"], "correcta": 2, "pista": "Es como pedir un deseo a un genio — más específico, mejor resultado."}, {"q": "¿Cuáles son los 4 ingredientes de un buen prompt?", "opciones": ["Título, autor, fecha y lugar", "¿Qué?, ¿Cómo?, ¿Dónde? y ¿Extras?", "Color, forma, tamaño y textura", "Inicio, nudo, clímax y final"], "correcta": 1, "pista": "Describe QUÉ quieres, CÓMO se ve, DÓNDE está y los detalles EXTRA."}, {"q": "Si quieres una mejor imagen, tu prompt debe ser…", "opciones": ["Lo más corto posible (una sola palabra)", "Solo en inglés", "Más detallado y específico", "Sin descripciones de colores"], "correcta": 2, "pista": "Mientras más le cuentes a la IA, mejor entiende tu idea."}]};</script>
 <script src="js/lesson-quiz.js"></script>
+
+<!-- ── Upload zona clase 1 ── -->
+<script>
+(function(){
+  var box    = document.getElementById('dz1-box');
+  var inp    = document.getElementById('dz1-input');
+  var selBtn = document.getElementById('dz1-select');
+  var prev   = document.getElementById('dz1-preview');
+  var img    = document.getElementById('dz1-img');
+  var fname  = document.getElementById('dz1-filename');
+  var upBtn  = document.getElementById('dz1-upload-btn');
+  var status = document.getElementById('dz1-status');
+  var succ   = document.getElementById('dz1-success');
+  var succNm = document.getElementById('dz1-success-name');
+  var chgBtn = document.getElementById('dz1-change');
+  if (!box) return;
+
+  var selectedFile = null;
+
+  function openPicker() { inp.click(); }
+  box.addEventListener('click', openPicker);
+  selBtn.addEventListener('click', function(e){ e.stopPropagation(); openPicker(); });
+
+  box.addEventListener('dragover', function(e){ e.preventDefault(); box.style.background='rgba(74,144,217,.1)'; });
+  box.addEventListener('dragleave', function(){ box.style.background='rgba(13,18,36,.7)'; });
+  box.addEventListener('drop', function(e){
+    e.preventDefault(); box.style.background='rgba(13,18,36,.7)';
+    var f = e.dataTransfer.files[0];
+    if (f && f.type.startsWith('image/')) setFile(f);
+  });
+  inp.addEventListener('change', function(){ if (inp.files[0]) setFile(inp.files[0]); });
+
+  function setFile(f) {
+    selectedFile = f;
+    img.src = URL.createObjectURL(f);
+    fname.textContent = f.name + ' · ' + (f.size/1024).toFixed(0) + ' KB';
+    box.style.display = 'none';
+    succ.style.display = 'none';
+    prev.style.display = 'block';
+    status.style.display = 'none';
+    upBtn.disabled = false;
+    upBtn.textContent = 'Subir imagen ↑';
+  }
+
+  chgBtn && chgBtn.addEventListener('click', function(){
+    succ.style.display = 'none';
+    box.style.display = 'flex';
+    inp.value = '';
+  });
+
+  upBtn.addEventListener('click', async function(){
+    if (!selectedFile) return;
+    var sb = window._supabase;
+    if (!sb) {
+      status.style.display = 'block';
+      status.style.color = '#F39C12';
+      status.textContent = 'Inicia sesión para guardar tu entrega.';
+      return;
+    }
+    upBtn.disabled = true;
+    upBtn.textContent = 'Subiendo...';
+    status.style.display = 'block';
+    status.style.color = 'rgba(255,255,255,.45)';
+    status.textContent = 'Subiendo a la nube...';
+    try {
+      var authResp = await sb.auth.getUser();
+      var user = authResp.data && authResp.data.user;
+      if (!user) throw new Error('Inicia sesión para guardar.');
+      var ext = (selectedFile.name.split('.').pop() || 'jpg').toLowerCase();
+      var path = 'clase1/' + user.id + '/' + Date.now() + '.' + ext;
+      var upErr = (await sb.storage.from('portafolio').upload(path, selectedFile, { upsert: true })).error;
+      if (upErr) throw upErr;
+      var signData = (await sb.storage.from('portafolio').createSignedUrl(path, 60*60*24*365)).data;
+      var publicUrl = (signData && signData.signedUrl) || '';
+      // check existing
+      var existingRow = (await sb.from('entregas').select('id').eq('user_id', user.id).eq('clase_num', 1).eq('tipo', 'imagen').maybeSingle()).data;
+      if (existingRow) {
+        await sb.from('entregas').update({ contenido: publicUrl, metadata: { filename: selectedFile.name, storage_path: path } }).eq('id', existingRow.id);
+      } else {
+        await sb.from('entregas').insert({ user_id: user.id, clase_num: 1, tipo: 'imagen', contenido: publicUrl, metadata: { filename: selectedFile.name, storage_path: path } });
+      }
+      prev.style.display = 'none';
+      succ.style.display = 'block';
+      succNm.textContent = selectedFile.name;
+    } catch(err) {
+      status.style.color = '#E74C3C';
+      status.textContent = 'Error: ' + (err.message || 'Intenta de nuevo');
+      upBtn.disabled = false;
+      upBtn.textContent = 'Subir imagen ↑';
+    }
+  });
+
+  // Verificar si ya hay entrega guardada
+  function checkExisting() {
+    var sb = window._supabase;
+    if (!sb) return;
+    sb.auth.getUser().then(function(authResp){
+      var user = authResp.data && authResp.data.user;
+      if (!user) return;
+      sb.from('entregas').select('contenido,metadata').eq('user_id', user.id).eq('clase_num', 1).eq('tipo', 'imagen').maybeSingle().then(function(r){
+        if (r.data && r.data.contenido) {
+          box.style.display = 'none';
+          prev.style.display = 'none';
+          succ.style.display = 'block';
+          var meta = r.data.metadata || {};
+          succNm.textContent = meta.filename || '';
+        }
+      });
+    });
+  }
+  var _chkInterval = setInterval(function(){ if (window._supabase){ clearInterval(_chkInterval); checkExisting(); } }, 500);
+})();
+</script>
 </body>
 </html>

@@ -200,6 +200,8 @@
       </div>
     </div>
 
+    <div id="dz-c14-animacion"></div>
+
     <div class="rmsg" style="--wc:var(--gold); margin-top:22px;">
       <span class="ava"><img src="robotsin/robotsin_director.png" alt="Robotsin"></span>
       <div>
@@ -356,6 +358,16 @@ if (/vercel\.app$|academiadavinci/.test(location.hostname)) {
 
 <!-- ── Lesson quiz ── -->
 <script>window.LESSON_QUIZ_DATA = {"claseNum": 14, "preguntas": [{"q": "¿Qué hace la animación con IA (Kling, Runway, Pika)?", "opciones": ["Convierte texto en un cómic automáticamente", "Transforma una imagen estática en un video corto con movimiento", "Graba en vivo con la cámara del teléfono", "Genera música automáticamente para el video"], "correcta": 1, "pista": "De imagen estática a video — la magia de la IA generativa."}, {"q": "¿Cuáles son los 3 tipos de movimiento en animación?", "opciones": ["Rápido, lento y normal", "Movimiento de cámara, movimiento del personaje y efectos de ambiente", "Horizontal, vertical y diagonal", "Entrada, acción y salida"], "correcta": 1, "pista": "Cámara (zoom/paneo), personaje (caminar/volar), ambiente (viento/lluvia)."}, {"q": "¿Cuál es el tip pro de Robotsin para empezar a animar?", "opciones": ["Empezar con las escenas más dramáticas y de mucha acción", "Usar siempre movimientos de cámara muy rápidos para impactar", "Empezar con movimientos simples (respiración, viento en el cabello)", "Hacer videos de mínimo 30 segundos desde el primer intento"], "correcta": 2, "pista": "La IA hace mejor lo sutil que lo dramático — practica primero lo suave."}, {"q": "¿Cuántos videos debes guardar al terminar esta clase?", "opciones": ["Solo 1 — el mejor que hayas logrado", "Mínimo 10 versiones para comparar", "2 videos: uno con movimiento suave y uno con movimiento de acción", "No es necesario guardarlos — solo mostrarlos en clase"], "correcta": 2, "pista": "Uno suave (respiración) y uno dramático (escena de acción)."}]};</script>
+<script src="js/upload-zone.js"></script>
+<script>
+new DvUploadZone({
+  containerId: 'dz-c14-animacion',
+  claseNum: 14, tipo: 'animacion',
+  label: 'Entrega — Sube tus animaciones',
+  sublabel: 'Sube uno o ambos videos generados (MP4 o GIF)',
+  icon: '🎞️', color: '#8E44AD'
+});
+</script>
 <script src="js/lesson-quiz.js"></script>
 </body>
 </html>

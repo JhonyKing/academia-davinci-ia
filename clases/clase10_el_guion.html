@@ -297,6 +297,8 @@
       </div>
     </div>
 
+    <div id="dz-c10-guion"></div>
+
     <div class="rmsg" style="--wc:var(--gold); margin-top:22px;">
       <span class="ava"><img src="robotsin/robotsin_escritor.png" alt="Robotsin"></span>
       <div>
@@ -453,6 +455,16 @@ if (/vercel\.app$|academiadavinci/.test(location.hostname)) {
 
 <!-- ── Lesson quiz ── -->
 <script>window.LESSON_QUIZ_DATA = {"claseNum": 10, "preguntas": [{"q": "¿Cuántos actos tiene la estructura básica de cualquier historia?", "opciones": ["2 actos (inicio y final)", "3 actos (planteamiento, nudo y desenlace)", "5 actos (como las obras de Shakespeare)", "7 actos (uno por cada día de la semana)"], "correcta": 1, "pista": "Hollywood lleva décadas usando esta estructura en todas sus películas."}, {"q": "¿Qué ocurre en el NUDO de la historia?", "opciones": ["El héroe conoce su mundo ordinario y a sus aliados", "La historia termina y el héroe regresa a casa", "El héroe enfrenta obstáculos y desafíos que lo cambian", "Se presentan todos los personajes secundarios"], "correcta": 2, "pista": "Es la parte más larga y emocionante — donde el héroe se enfrenta a sus miedos."}, {"q": "¿Qué películas famosas siguen el 'viaje del héroe'?", "opciones": ["Solo las películas de aventura — el drama y el romance no", "Ninguna — el viaje del héroe es solo para cómics", "Toy Story, Moana, Spider-Man — casi todas las grandes historias", "Solo las películas de Disney de los años 90"], "correcta": 2, "pista": "Es la 'receta de Hollywood' — aparece una y otra vez en los grandes éxitos."}, {"q": "Según Robotsin, ¿cuál es el conflicto más poderoso en una historia?", "opciones": ["Héroe vs. villano (dos personas peleando)", "Héroe vs. su miedo interior", "Héroe vs. la naturaleza (tormentas, volcanes)", "Héroe vs. el tiempo (una carrera contra el reloj)"], "correcta": 1, "pista": "El conflicto interno es el que conecta emocionalmente con el público."}]};</script>
+<script src="js/upload-zone.js"></script>
+<script>
+new DvUploadZone({
+  containerId: 'dz-c10-guion',
+  claseNum: 10, tipo: 'guion',
+  label: 'Entrega — Sube tu guion',
+  sublabel: 'Sube tu guion de 1 página (PDF, Word o imagen)',
+  icon: '📄', color: '#8E44AD'
+});
+</script>
 <script src="js/lesson-quiz.js"></script>
 </body>
 </html>

@@ -321,6 +321,8 @@
       </div>
     </div>
 
+    <div id="dz-c3-imagen"></div>
+
     <div class="rmsg" style="--wc:var(--gold); margin-top:22px;">
       <span class="ava"><img src="robotsin/robotsin_artista.png" alt="Robotsin"></span>
       <div>
@@ -475,6 +477,16 @@ if (/vercel\.app$|academiadavinci/.test(location.hostname)) {
 
 <!-- ── Lesson quiz ── -->
 <script>window.LESSON_QUIZ_DATA = {"claseNum": 3, "preguntas": [{"q": "¿Cuántos estilos visuales principales aprendiste en esta clase?", "opciones": ["3 estilos (Pixar, Anime y Disney)", "5 estilos (Pixar 3D, Anime, Cartoon Network, Disney Clásico, Cómic Americano)", "7 estilos incluyendo acuarela y realismo", "4 estilos (solo los de Hollywood)"], "correcta": 1, "pista": "Cada estilo tiene una forma específica de pedírselo al prompt."}, {"q": "¿Por qué el estilo visual es importante para tu personaje?", "opciones": ["Solo porque se ve más bonito en las redes sociales", "Porque es lo más fácil de cambiar si no te gusta", "Porque el estilo ES parte del personaje — cuenta la historia antes de decir una palabra", "Porque la IA solo puede dibujar en 5 estilos"], "correcta": 2, "pista": "Dragon Ball no sería Dragon Ball con estilo Pixar."}, {"q": "¿Cuántos componentes tiene el Prompt Maestro para retratos?", "opciones": ["4 componentes (los mismos de siempre)", "5 componentes", "7 componentes (nombre, descripción física, estilo, pose, expresión, iluminación, extras)", "10 componentes"], "correcta": 2, "pista": "Un retrato necesita más detalle que una imagen normal."}, {"q": "¿Qué debes hacer para encontrar el retrato oficial definitivo?", "opciones": ["Usar el primer resultado que da la IA siempre es el mejor", "Generar al menos 4 versiones y elegir la mejor", "Pedir exactamente 10 versiones para comparar", "Elegir el que más se parezca a un personaje famoso"], "correcta": 1, "pista": "La primera versión raramente es la definitiva — la iteración es clave."}]};</script>
+<script src="js/upload-zone.js"></script>
+<script>
+new DvUploadZone({
+  containerId: 'dz-c3-imagen',
+  claseNum: 3, tipo: 'imagen',
+  label: 'Entrega — Sube tu retrato oficial',
+  sublabel: 'Sube la imagen generada de tu personaje (PNG o JPG)',
+  icon: '🖼️', color: '#4A90D9'
+});
+</script>
 <script src="js/lesson-quiz.js"></script>
 </body>
 </html>

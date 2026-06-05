@@ -12,11 +12,18 @@
     var em = nextDiv.querySelector('span.em');
     if (em) em.remove();
     nav.parentNode.insertBefore(nextDiv, nav);
-    nextDiv.style.cssText = 'text-align:center;padding:20px 16px 12px;border-top:1px solid rgba(0,0,0,.06);';
+    // Override display:flex de lesson.css → columna centrada
+    nextDiv.style.cssText = [
+      'display:flex;flex-direction:column;align-items:center;justify-content:center;',
+      'text-align:center;',
+      'max-width:680px;width:100%;box-sizing:border-box;',
+      'margin:0 auto;padding:28px 20px 22px;',
+      'border-top:2px solid rgba(0,0,0,.09);'
+    ].join('');
     var lab = nextDiv.querySelector('.lab');
     var ti  = nextDiv.querySelector('.ti');
-    if (lab) lab.style.cssText = 'font-size:11px;text-transform:uppercase;letter-spacing:.1em;font-weight:700;color:#aaa;margin-bottom:6px;display:block;';
-    if (ti)  ti.style.cssText  = 'font-size:20px;font-weight:900;color:#333;display:block;';
+    if (lab) lab.style.cssText = 'font-size:11px;text-transform:uppercase;letter-spacing:.14em;font-weight:800;color:var(--wc);margin-bottom:10px;display:block;';
+    if (ti)  ti.style.cssText  = 'font-size:24px;font-weight:900;color:#111;display:block;line-height:1.25;';
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', doMove);
   else doMove();
@@ -32,7 +39,7 @@
   const { claseNum, preguntas } = window.LESSON_QUIZ_DATA;
   const PASS_RATE = 0.8;
   const startTime = Date.now();
-  const REQUIEREN_ENTREGA = new Set([2, 3, 4, 5, 10, 11, 14, 18, 23]);
+  const REQUIEREN_ENTREGA = new Set([1, 2, 3, 4, 5, 10, 11, 14, 18, 23]);
 
   let nextBtn = null;
   let nextBtnHref = null;
@@ -52,8 +59,15 @@
     nextBtn.style.position = 'relative';
     const overlay = document.createElement('div');
     overlay.id = 'lq-lock-overlay';
-    overlay.textContent = '🔒 Completa el quiz para continuar';
+    overlay.innerHTML = '<span class="lq-lock-ico">🔒</span><span>Completa el quiz para continuar</span>';
     nextBtn.appendChild(overlay);
+    // shake al hacer clic mientras está bloqueado
+    nextBtn._lockedClick = function() {
+      nextBtn.classList.remove('lq-shake');
+      void nextBtn.offsetWidth;
+      nextBtn.classList.add('lq-shake');
+    };
+    nextBtn.addEventListener('click', nextBtn._lockedClick);
   }
 
   function unlockNextBtn() {
@@ -64,6 +78,7 @@
     nextBtn.style.position = '';
     const overlay = document.getElementById('lq-lock-overlay');
     if (overlay) overlay.remove();
+    if (nextBtn._lockedClick) nextBtn.removeEventListener('click', nextBtn._lockedClick);
   }
 
   /* ── Supabase ── */
@@ -243,15 +258,21 @@
   }
 
   function showAlreadyPassed() {
-    container.innerHTML = `
-      <div class="lq-card lq-already-done">
-        <div class="lq-card-header">
-          <div class="lq-card-tag">🧠 QUIZ · Clase ${claseNum}</div>
-        </div>
-        <div class="lq-result-score">✅</div>
-        <div class="lq-result-msg">¡Ya completaste este quiz! Puedes continuar.</div>
-      </div>`;
+    // Muestra banner verde pero sigue mostrando el quiz para repasar
     unlockNextBtn();
+    const notice = document.createElement('div');
+    notice.id = 'lq-done-notice';
+    notice.innerHTML = `
+      <div style="background:rgba(34,194,104,.12);border:1.5px solid rgba(34,194,104,.35);
+        border-radius:14px;padding:14px 18px;display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+        <span style="font-size:28px;line-height:1;">✅</span>
+        <div>
+          <div style="font-weight:800;color:#22C268;font-size:15px;">¡Ya completaste este quiz!</div>
+          <div style="font-size:12px;color:rgba(255,255,255,.5);margin-top:3px;">Puedes volver a practicar las preguntas cuando quieras.</div>
+        </div>
+      </div>`;
+    container.prepend(notice);
+    startQuiz();
   }
 
   /* ── Init ── */

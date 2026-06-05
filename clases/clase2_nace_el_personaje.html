@@ -250,6 +250,20 @@
       </div>
     </div>
 
+    <!-- Herramientas de IA -->
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin:0 0 28px;justify-content:center;">
+      <a href="https://chatgpt.com" target="_blank" rel="noopener noreferrer"
+         style="display:inline-flex;align-items:center;gap:10px;background:#10a37f;color:#fff;font-weight:800;font-size:14px;padding:14px 24px;border-radius:14px;text-decoration:none;box-shadow:0 4px 18px rgba(16,163,127,.4);">
+        <span style="font-size:22px;">🤖</span>
+        <div><div style="font-size:12px;font-weight:600;opacity:.8;letter-spacing:.04em;">ABRIR</div>ChatGPT</div>
+      </a>
+      <a href="https://labs.google.com/flow" target="_blank" rel="noopener noreferrer"
+         style="display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#4285f4,#34a853);color:#fff;font-weight:800;font-size:14px;padding:14px 24px;border-radius:14px;text-decoration:none;box-shadow:0 4px 18px rgba(66,133,244,.35);">
+        <span style="font-size:22px;">🎬</span>
+        <div><div style="font-size:12px;font-weight:600;opacity:.8;letter-spacing:.04em;">OPCIÓN 2</div>Google Flow</div>
+      </a>
+    </div>
+
     <ul class="acts" data-reveal>
       <li class="act c1"><div class="num">1</div><div><h4>📋 "La Ficha Perdida" — Completar los 5 elementos</h4><p>Llena la ficha de tu personaje en papel o digital: Nombre, Origen, Misión, Poder y Debilidad. ¡Esta es la ficha que Robotsin necesita recuperar!</p></div><span class="t">10 min</span></li>
       <li class="act c2"><div class="num">2</div><div><h4>⚡ "El Origen Épico" — ChatGPT escribe tu historia</h4><p>Usa el Prompt Mágico con los datos de tu ficha. Copia el resultado y guárdalo — es la historia oficial de tu personaje.</p></div><span class="t">15 min</span></li>
@@ -275,6 +289,12 @@
         <h3>Tu personaje ya existe — ahora hay que mostrarlo</h3>
         <p>Completa la ficha con los 5 elementos de tu personaje. Elige la mejor imagen generada en la actividad de hoy. Piensa en ideas sobre el estilo visual definitivo: <strong>¿Pixar? ¿Anime? ¿Cartoon Network? ¿Disney?</strong> Trae esas ideas a la Clase 3.</p>
       </div>
+    </div>
+
+    <!-- ENTREGAS clase 2 -->
+    <div style="display:flex;flex-direction:column;gap:20px;margin:28px 0 8px;">
+      <div id="dz-c2-dibujo"></div>
+      <div id="dz-c2-imagen"></div>
     </div>
 
     <div class="rmsg" style="--wc:var(--gold); margin-top:22px;">
@@ -428,6 +448,24 @@ if (/vercel\.app$|academiadavinci/.test(location.hostname)) {
 }
 </script>
 
+<!-- ── Zonas de entrega ── -->
+<script src="js/upload-zone.js"></script>
+<script>
+new DvUploadZone({
+  containerId: 'dz-c2-dibujo',
+  claseNum: 2, tipo: 'dibujo',
+  label: 'Entrega 1 — Tu dibujo del personaje',
+  sublabel: 'Fotografía tu dibujo a mano y súbelo aquí.',
+  icon: '✏️', color: '#F39C12'
+});
+new DvUploadZone({
+  containerId: 'dz-c2-imagen',
+  claseNum: 2, tipo: 'imagen-ia',
+  label: 'Entrega 2 — Tu personaje con IA',
+  sublabel: 'Sube la imagen que generó ChatGPT o Google Flow a partir de tu dibujo.',
+  icon: '🖼️', color: '#8E44AD'
+});
+</script>
 
 <!-- ── Lesson quiz ── -->
 <script>window.LESSON_QUIZ_DATA = {"claseNum": 2, "preguntas": [{"q": "¿Cuáles son los 5 elementos que todo gran personaje necesita?", "opciones": ["Color, forma, tamaño, peso y material", "Nombre, Origen, Misión, Poder y Debilidad", "Pelo, ojos, ropa, zapatos y accesorio", "Villano, aliado, mentor, sidekick y héroe"], "correcta": 1, "pista": "Spider-Man sin historia de origen sería solo 'un chico con traje'."}, {"q": "¿Por qué la DEBILIDAD es el elemento más importante del personaje?", "opciones": ["Porque hace al personaje más fácil de dibujar", "Porque sin debilidad no puede tener superpoder", "Porque hace al personaje humano y relatable — puede perder", "Porque es lo que los fans recuerdan primero"], "correcta": 2, "pista": "Hasta Superman tiene Kryptonita. Sin debilidad, un personaje es aburrido."}, {"q": "¿Para qué sirve usar ChatGPT al crear tu personaje?", "opciones": ["Para que ChatGPT invente el personaje solo sin tu ayuda", "Para copiar un personaje famoso y cambiarlo de nombre", "Como copiloto que desarrolla tu idea en palabras — tú mandas, él escribe", "Para buscar imágenes del personaje en internet"], "correcta": 2, "pista": "Tú tienes la idea. ChatGPT te ayuda a expresarla mejor."}, {"q": "¿Qué hace el prompt 'Del Papel a la Pantalla'?", "opciones": ["Convierte texto en un video de animación automática", "Sube tu dibujo a mano a internet", "Convierte una foto de tu dibujo a mano en una imagen digital con estilo IA", "Imprime tu dibujo en papel fotográfico"], "correcta": 2, "pista": "Fotografía tu dibujo y ChatGPT lo transforma manteniendo la esencia del diseño."}]};</script>

@@ -277,6 +277,8 @@
       </div>
     </div>
 
+    <div id="dz-c11-dialogo"></div>
+
     <div class="rmsg" style="--wc:var(--gold); margin-top:22px;">
       <span class="ava"><img src="robotsin/robotsin_escritor.png" alt="Robotsin"></span>
       <div>
@@ -433,6 +435,16 @@ if (/vercel\.app$|academiadavinci/.test(location.hostname)) {
 
 <!-- ── Lesson quiz ── -->
 <script>window.LESSON_QUIZ_DATA = {"claseNum": 11, "preguntas": [{"q": "¿Cuáles son las 4 características de un buen diálogo?", "opciones": ["Largo, poético, dramático y filosófico", "Revela carácter, avanza la trama, suena natural y tiene conflicto", "Corto, gracioso, sorpresivo y con mucha acción", "Con muchas preguntas, respuestas largas, pausas y silencios"], "correcta": 1, "pista": "Si al leerlo en voz alta suena raro, está mal escrito."}, {"q": "¿Qué es la 'voz de personaje'?", "opciones": ["El tono de voz que usa el actor al doblar al personaje", "La forma única en que cada personaje habla según su personalidad", "El volumen al que habla el personaje en las escenas", "La música que suena cuando el personaje aparece en pantalla"], "correcta": 1, "pista": "El listo habla con preguntas, el valiente con exclamaciones, el misterioso con silencios."}, {"q": "¿Cómo habla Yoda diferente a los demás personajes?", "opciones": ["Habla más rápido que los otros personajes de Star Wars", "Habla siempre en inglés mientras los otros hablan en otros idiomas", "Invierte el orden de las palabras — 'El miedo, siempre presente está'", "Habla solo en preguntas, nunca en afirmaciones"], "correcta": 2, "pista": "La 'voz' hace al personaje — Yoda sería otro si hablara como todos."}, {"q": "¿Cuál es el tip pro de Robotsin para mejorar tus diálogos?", "opciones": ["Hacerlos más cortos — cuanto menos palabras, mejor", "Copiar diálogos de películas famosas y cambiar los nombres", "Leerlos en voz alta — si suena raro al hablar, está mal escrito", "Usar solo palabras de máximo 2 sílabas"], "correcta": 2, "pista": "Tu oído detecta lo que tus ojos a veces no ven."}]};</script>
+<script src="js/upload-zone.js"></script>
+<script>
+new DvUploadZone({
+  containerId: 'dz-c11-dialogo',
+  claseNum: 11, tipo: 'dialogo',
+  label: 'Entrega — Sube tus 10 líneas de diálogo',
+  sublabel: 'Sube el diálogo héroe vs villano (PDF, Word o imagen)',
+  icon: '📄', color: '#8E44AD'
+});
+</script>
 <script src="js/lesson-quiz.js"></script>
 </body>
 </html>

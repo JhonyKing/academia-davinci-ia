@@ -189,6 +189,8 @@
       </div>
     </div>
 
+    <div id="dz-c23-episodio"></div>
+
     <div class="rmsg" style="--wc:var(--gold); margin-top:22px;">
       <span class="ava"><img src="robotsin/robotsin_maestro.png" alt="Robotsin"></span>
       <div>
@@ -343,6 +345,16 @@ if (/vercel\.app$|academiadavinci/.test(location.hostname)) {
 
 <!-- ── Lesson quiz ── -->
 <script>window.LESSON_QUIZ_DATA = {"claseNum": 23, "preguntas": [{"q": "¿Qué significa 'post-producción integral'?", "opciones": ["Producir más contenido después del episodio principal", "Juntar video editado + audio mezclado + subtítulos + créditos en el producto final", "Publicar el episodio en todas las plataformas disponibles", "Hacer los retoques finales solo al audio del episodio"], "correcta": 1, "pista": "Es el ensamblaje de todos los elementos que creaste en los módulos anteriores."}, {"q": "¿Cuál es la estructura correcta de los créditos finales?", "opciones": ["Solo el nombre del creador en letras grandes", "Lista de todos los programas y aplicaciones usadas", "Título de la serie → episodio → creado por → música por → herramientas usadas → logo academia", "Los créditos van al inicio, no al final del episodio"], "correcta": 2, "pista": "Los créditos reconocen el trabajo y las herramientas — son parte profesional del episodio."}, {"q": "Según Robotsin, ¿qué significa guardar un 'master file'?", "opciones": ["Subir el archivo a la nube para que el instructor lo pueda ver", "Guardar el archivo final en la mayor calidad posible — la versión maestra", "Hacer una copia de seguridad del archivo en 10 dispositivos diferentes", "Convertir el archivo a formato MP3 para compartirlo fácil"], "correcta": 1, "pista": "El master file es la versión de máxima calidad — aunque en pantalla se vea igual, importa para proyecciones."}, {"q": "¿Cuándo debes ver el episodio de corrido por primera vez?", "opciones": ["Antes de empezar a editarlo para tener una referencia", "Solo al final de todo el curso en la graduación", "Al terminar el ensamble — es 'La Primera Vista' y es un momento especial", "No es necesario verlo completo hasta que lo vea el grupo"], "correcta": 2, "pista": "Ver tu episodio completo por primera vez es un momento único — ¡disfrútalo!"}]};</script>
+<script src="js/upload-zone.js"></script>
+<script>
+new DvUploadZone({
+  containerId: 'dz-c23-episodio',
+  claseNum: 23, tipo: 'episodio',
+  label: 'Entrega — Sube tu episodio completo',
+  sublabel: 'Sube el episodio exportado en 1080p (MP4)',
+  icon: '🎬', color: '#8E44AD'
+});
+</script>
 <script src="js/lesson-quiz.js"></script>
 </body>
 </html>
