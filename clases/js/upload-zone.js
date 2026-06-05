@@ -21,7 +21,7 @@ window.DvUploadZone = function (cfg) {
   if (!el) return;
 
   var icon   = cfg.icon    || '🖼️';  // 🖼️
-  var color  = cfg.color   || '#4A90D9';
+  var color  = cfg.color   || '#E74C3C';
   var label  = cfg.label   || 'Sube tu archivo';
   var sub    = cfg.sublabel || '';
   var accept = cfg.accept  || 'image/*';
@@ -37,7 +37,7 @@ window.DvUploadZone = function (cfg) {
 
     /* drop box */
     '<div id="', p, '-box" style="position:relative;border-radius:16px;padding:38px 20px;',
-    'text-align:center;cursor:pointer;background:rgba(13,18,36,.7);min-height:150px;',
+    'text-align:center;cursor:pointer;background:rgba(36,10,10,.75);min-height:150px;',
     'display:flex;flex-direction:column;align-items:center;justify-content:center;box-sizing:border-box;">',
 
       '<svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" ',
@@ -101,8 +101,8 @@ window.DvUploadZone = function (cfg) {
   box.addEventListener('click', pick);
   sel.addEventListener('click', function (e) { e.stopPropagation(); pick(); });
 
-  box.addEventListener('dragover', function (e) { e.preventDefault(); box.style.background = 'rgba(74,144,217,.1)'; });
-  box.addEventListener('dragleave', function () { box.style.background = 'rgba(13,18,36,.7)'; });
+  box.addEventListener('dragover', function (e) { e.preventDefault(); box.style.background = 'rgba(231,76,60,.15)'; });
+  box.addEventListener('dragleave', function () { box.style.background = 'rgba(36,10,10,.75)'; });
   box.addEventListener('drop', function (e) {
     e.preventDefault(); box.style.background = 'rgba(13,18,36,.7)';
     if (e.dataTransfer.files[0]) setFile(e.dataTransfer.files[0]);

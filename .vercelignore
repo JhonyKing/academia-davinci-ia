@@ -1,3 +1,10 @@
+# Videos procesados y audios de trabajo (carpetas internas, no se sirven)
+clases/robotsin/videos/audios_nuevos/
+tmp_remix/
+
+# PDFs generados localmente (no son parte del sitio web)
+libro_pdf/
+
 # Carpetas con video pesado (no son parte del sitio web)
 public/hooks_videos/
 public/MATERIALES/

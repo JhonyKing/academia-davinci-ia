@@ -5,6 +5,38 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Clase 15 — Planos y Cámara · Genios Creativos</title>
 <link rel="icon" type="image/svg+xml" href="robotsin/favicon.svg">
+<style>
+/* Mision glamorosa shimmer */
+.mission-numero {
+  font-family: var(--font-display, 'Space Grotesk', sans-serif);
+  font-size: clamp(22px, 5vw, 36px);
+  font-weight: 900;
+  letter-spacing: .04em;
+  text-align: center;
+  margin: 0 0 14px;
+  background: linear-gradient(90deg,
+    #FFD700 0%, #FF8C42 20%, #FFD700 40%,
+    #fff9e0 50%, #FFD700 60%, #FF8C42 80%, #FFD700 100%);
+  background-size: 250% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: missionShimmer 2.8s linear infinite;
+  text-shadow: none;
+}
+.mission-numero .mn-num { font-size: 1.5em; line-height: 1; }
+.mission-numero .mn-of  { font-size: .65em; opacity: .85; }
+@keyframes missionShimmer {
+  0%   { background-position: 0% center; }
+  100% { background-position: 250% center; }
+}
+.next .lab { font-size: 11px; font-weight: 700; opacity: .7; letter-spacing: .08em; text-transform: uppercase; }
+.next .ti  { font-size: 20px; font-weight: 900; color: #FFD700 !important; margin-top: 4px; line-height: 1.2; }
+nav.lessonnav .lnav-btn.next-btn .lab { font-size: 11px; opacity: .7; letter-spacing: .06em; }
+nav.lessonnav .lnav-btn.next-btn .ti  { font-size: 16px; font-weight: 900; color: #FFD700 !important; }
+#claimBtn:disabled { opacity: .35; cursor: not-allowed; }
+#badge-lock-msg { text-align: center; font-size: 13px; color: rgba(255,255,255,.45); margin-top: 10px; display: none; }
+</style>
 <link rel="stylesheet" href="css/genios.css">
 <link rel="stylesheet" href="css/lesson.css">
 <link rel="stylesheet" href="css/juice.css">
@@ -32,7 +64,7 @@
   <span class="spark" data-parallax="-0.12" style="top:80px;right:16%;font-size:18px;animation-delay:1s;">✧</span>
   <div class="lread" data-reveal>
     <span class="badge-pill">🎬 Mundo 4 — El Genio en Movimiento</span>
-    <div class="kicker">Misión 15 de 26</div>
+    <div class="mission-numero">❖ MISIÓN <span class="mn-num">15</span> <span class="mn-of">de 26</span> ❖</div>
 
     <div class="mascot-stage">
       <img src="robotsin/robotsin_director.png" alt="D-IA Vinci Robotsin Director">
@@ -182,6 +214,25 @@
   </div>
 </section>
 
+<!-- ═══════════ CIERRE ═══════════ -->
+<section class="block tint">
+  <div class="lread">
+    <div class="shead">
+      <span class="ava"><img src="robotsin/robotsin_director.png" alt="Robotsin"></span>
+      <div>
+        <div class="lab">Resumen · 5 min</div>
+        <h2>Lo que <em>aprendiste hoy</em></h2>
+      </div>
+    </div>
+
+    <div class="cierre" data-reveal>
+      <div class="rec"><div class="em">🌍</div><h4>Plano General = el mundo</h4><p>Establece el escenario. El espectador entiende al instante dónde está la historia.</p></div>
+      <div class="rec"><div class="em">🧍</div><h4>Plano Medio = la acción</h4><p>Muestra lo que hace el personaje. Es el plano más común en el cine de acción.</p></div>
+      <div class="rec"><div class="em">😊</div><h4>Primer Plano = la emoción</h4><p>Conecta al espectador con el personaje. Una lágrima en primer plano vale mil palabras.</p></div>
+      <div class="rec"><div class="em">✍️</div><h4>El prompt manda la cámara</h4><p>Escribir el tipo de plano al inicio del prompt da resultados mucho más precisos.</p></div>
+    </div>
+  </div>
+</section>
 <!-- ═══════════ TAREA ═══════════ -->
 <section class="block tint">
   <div class="lread">
@@ -211,6 +262,10 @@
   </div>
 </section>
 
+
+<!-- ══ MINI QUIZ ══ -->
+<div id="lesson-quiz-container"></div>
+
 <!-- ═══════════ INSIGNIA ═══════════ -->
 <section class="block badge-sec" id="badgeSec">
   <span class="spark" style="top:24px;left:18%;font-size:22px;">✦</span>
@@ -221,27 +276,13 @@
     <div class="bname">"Maestro de la Cámara"</div>
     <div class="bmeta">Clase 15 · Mundo 4 — El Genio en Movimiento</div>
     <button class="btn gold btn-lg" id="claimBtn">⭐ ¡Reclamar mi insignia!</button>
+    <p id="badge-lock-msg">Completa la entrega y el quiz para desbloquear</p>
   </div>
 </section>
 
-<!-- ═══════════ CIERRE ═══════════ -->
-<section class="block tint">
+<!-- SIGUIENTE MISION -->
+<section class="block" style="padding-top:0">
   <div class="lread">
-    <div class="shead">
-      <span class="ava"><img src="robotsin/robotsin_director.png" alt="Robotsin"></span>
-      <div>
-        <div class="lab">Resumen · 5 min</div>
-        <h2>Lo que <em>aprendiste hoy</em></h2>
-      </div>
-    </div>
-
-    <div class="cierre" data-reveal>
-      <div class="rec"><div class="em">🌍</div><h4>Plano General = el mundo</h4><p>Establece el escenario. El espectador entiende al instante dónde está la historia.</p></div>
-      <div class="rec"><div class="em">🧍</div><h4>Plano Medio = la acción</h4><p>Muestra lo que hace el personaje. Es el plano más común en el cine de acción.</p></div>
-      <div class="rec"><div class="em">😊</div><h4>Primer Plano = la emoción</h4><p>Conecta al espectador con el personaje. Una lágrima en primer plano vale mil palabras.</p></div>
-      <div class="rec"><div class="em">✍️</div><h4>El prompt manda la cámara</h4><p>Escribir el tipo de plano al inicio del prompt da resultados mucho más precisos.</p></div>
-    </div>
-
     <div class="next">
       <span class="em">▶️</span>
       <div>
@@ -254,8 +295,7 @@
 
 <!-- ═══════════ NAV LECCIÓN ═══════════ -->
 
-<!-- ══ MINI QUIZ ══ -->
-<div id="lesson-quiz-container"></div>
+
 <nav class="lessonnav">
   <a href="clase14_primera_animacion.html" class="lnav-btn prev-btn">
     <span class="ar">←</span>
@@ -267,7 +307,7 @@
   <a href="index.html" class="lnav-home" title="Mapa de aventura">🗺️</a>
   <a href="clase16_las_escenas.html" class="lnav-btn next-btn">
     <div>
-      <div class="lab">Siguiente lección</div>
+      <div class="lab">Siguiente misión</div>
       <div class="ti">Clase 16 — Las Escenas</div>
     </div>
     <span class="ar">→</span>
@@ -358,5 +398,35 @@ if (/vercel\.app$|academiadavinci/.test(location.hostname)) {
 <!-- ── Lesson quiz ── -->
 <script>window.LESSON_QUIZ_DATA = {"claseNum": 15, "preguntas": [{"q": "¿Qué muestra el 'plano general' en una escena?", "opciones": ["El detalle de la cara del personaje y su expresión", "La acción del cuerpo del personaje", "El mundo completo: dónde está el personaje, el escenario", "Un objeto pequeño e importante de la escena"], "correcta": 2, "pista": "Es el más alejado — establece el contexto antes de acercarse."}, {"q": "¿Para qué sirve el 'primer plano'?", "opciones": ["Para mostrar el universo completo donde vive el personaje", "Para mostrar la secuencia de acciones del cuerpo del personaje", "Para mostrar la emoción: la cara, los ojos, el detalle importante", "Para hacer que el personaje se vea más pequeño dentro del mundo"], "correcta": 2, "pista": "'Primer plano' = acercamiento = emoción o detalle crucial."}, {"q": "¿Cómo especificas el tipo de plano en un prompt de animación con IA?", "opciones": ["No se puede — la IA decide el plano sola", "Describes el tipo de plano directamente en el prompt ('plano general de...', 'primer plano de...')", "Necesitas un código especial que solo funciona en Kling", "Debes dibujar un esquema antes de escribir el prompt"], "correcta": 1, "pista": "La IA entiende el lenguaje cinematográfico si se lo describes claramente."}, {"q": "¿Cuál es el orden correcto de planos para presentar una escena nueva?", "opciones": ["Primero primer plano, luego plano medio, luego plano general", "Siempre plano medio — nunca se mezclan los tipos en una misma escena", "Primero plano general (establece el mundo), luego acercar según la acción", "El orden no importa — cualquier plano funciona para cualquier momento"], "correcta": 2, "pista": "General → medio → primer plano: de lo global a lo íntimo."}]};</script>
 <script src="js/lesson-quiz.js"></script>
+
+<!-- Badge lock: requiere entrega + quiz -->
+<script>
+(function(){
+  var btn = document.getElementById('claimBtn');
+  var lockMsg = document.getElementById('badge-lock-msg');
+  if (!btn) return;
+  btn.disabled = true;
+  if (lockMsg) lockMsg.style.display = 'block';
+  window._entregaDone = false;
+  window._quizPassed  = false;
+  window.checkBadgeUnlock = function() {
+    var ready = window._entregaDone && window._quizPassed;
+    btn.disabled = !ready;
+    if (lockMsg) lockMsg.style.display = ready ? 'none' : 'block';
+  };
+  var qc = document.getElementById('lesson-quiz-container');
+  if (qc) {
+    var obs = new MutationObserver(function() {
+      if (qc.querySelector('.lq-passed')) {
+        window._quizPassed = true; obs.disconnect();
+        window.checkBadgeUnlock();
+      }
+    });
+    obs.observe(qc, { childList: true, subtree: true });
+  }
+  var hasDz = document.querySelector('[id^="dz"]');
+  if (!hasDz) { window._entregaDone = true; }
+})();
+</script>
 </body>
 </html>

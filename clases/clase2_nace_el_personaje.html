@@ -5,6 +5,39 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Clase 2 — Nace el Personaje · Genios Creativos</title>
 <link rel="icon" type="image/svg+xml" href="robotsin/favicon.svg">
+<style>
+/* Mision glamorosa shimmer */
+.mission-numero {
+  font-family: var(--font-display, 'Space Grotesk', sans-serif);
+  font-size: clamp(22px, 5vw, 36px);
+  font-weight: 900;
+  letter-spacing: .04em;
+  text-align: center;
+  margin: 0 0 14px;
+  background: linear-gradient(90deg,
+    #FFD700 0%, #FF8C42 20%, #FFD700 40%,
+    #fff9e0 50%, #FFD700 60%, #FF8C42 80%, #FFD700 100%);
+  background-size: 250% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: missionShimmer 2.8s linear infinite;
+  text-shadow: none;
+}
+.mission-numero .mn-num { font-size: 1.5em; line-height: 1; }
+.mission-numero .mn-of  { font-size: .65em; opacity: .85; }
+@keyframes missionShimmer {
+  0%   { background-position: 0% center; }
+  100% { background-position: 250% center; }
+}
+.next .lab { font-size: 11px; font-weight: 700; opacity: .7; letter-spacing: .08em; text-transform: uppercase; }
+.next .ti  { font-size: 20px; font-weight: 900; color: #FFD700 !important; margin-top: 4px; line-height: 1.2; }
+nav.lessonnav .lnav-btn.next-btn .lab { font-size: 11px; opacity: .7; letter-spacing: .06em; }
+nav.lessonnav .lnav-btn.next-btn .ti  { font-size: 16px; font-weight: 900; color: #FFD700 !important; }
+#claimBtn:disabled { opacity: .35; cursor: not-allowed; }
+#badge-lock-msg { text-align: center; font-size: 13px; color: rgba(255,255,255,.45); margin-top: 10px; display: none; }
+.step-sublabel { font-size: 11px; font-weight: 600; color: rgba(255,255,255,.55); text-align: center; margin-top: 6px; max-width: 90px; line-height: 1.3; }
+</style>
 <link rel="stylesheet" href="css/genios.css">
 <link rel="stylesheet" href="css/lesson.css">
 <link rel="stylesheet" href="css/juice.css">
@@ -32,7 +65,7 @@
   <span class="spark" data-parallax="-0.12" style="top:80px;right:16%;font-size:18px;animation-delay:1s;">✧</span>
   <div class="lread" data-reveal>
     <span class="badge-pill">🎨 Mundo 1 — El Genio Creativo</span>
-    <div class="kicker">Misión 2 de 26</div>
+    <div class="mission-numero">❖ MISIÓN <span class="mn-num">2</span> <span class="mn-of">de 26</span> ❖</div>
 
     <div class="mascot-stage">
       <img src="robotsin/robotsin_artista.png" alt="D-IA Vinci Robotsin Artista">
@@ -196,36 +229,45 @@
     <div style="background:#1a1f35;border-radius:20px;padding:28px 24px;margin:24px 0;border:1px solid rgba(255,255,255,.1);">
       <div style="font-weight:900;color:#F39C12;font-size:15px;margin-bottom:20px;text-align:center;letter-spacing:.5px;">✏️ DEL DIBUJO A LA IMAGEN IA — EL PROCESO COMPLETO</div>
       <div style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center;align-items:center;">
-        <div style="background:linear-gradient(135deg,#2C5F8A,#4A90D9);border-radius:12px;padding:14px 16px;text-align:center;min-width:90px;">
-          <div style="font-size:28px;">✏️</div>
-          <div style="color:#fff;font-weight:800;font-size:12px;margin-top:5px;">Dibujo<br>a mano</div>
+        <div style="text-align:center;">
+          <div style="background:linear-gradient(135deg,#2C5F8A,#4A90D9);border-radius:12px;padding:14px 16px;text-align:center;min-width:90px;">
+            <div style="font-size:28px;">✏️</div>
+            <div style="color:#fff;font-weight:800;font-size:12px;margin-top:5px;">Dibujo<br>a mano</div>
+          </div>
+          <div class="step-sublabel">Este es tu dibujo real</div>
         </div>
         <div style="font-size:20px;color:rgba(255,255,255,.35);">→</div>
-        <div style="background:linear-gradient(135deg,#6C3483,#8E44AD);border-radius:12px;padding:14px 16px;text-align:center;min-width:90px;">
-          <div style="font-size:28px;">📸</div>
-          <div style="color:#fff;font-weight:800;font-size:12px;margin-top:5px;">Foto del<br>dibujo</div>
+        <div style="text-align:center;">
+          <div style="background:linear-gradient(135deg,#6C3483,#8E44AD);border-radius:12px;padding:14px 16px;text-align:center;min-width:90px;">
+            <div style="font-size:28px;">📸</div>
+            <div style="color:#fff;font-weight:800;font-size:12px;margin-top:5px;">Foto del<br>dibujo</div>
+          </div>
+          <div class="step-sublabel">Fotografías con celular</div>
         </div>
         <div style="font-size:20px;color:rgba(255,255,255,.35);">→</div>
-        <div style="background:linear-gradient(135deg,#A04000,#E67E22);border-radius:12px;padding:14px 16px;text-align:center;min-width:90px;">
-          <div style="font-size:28px;">💬</div>
-          <div style="color:#fff;font-weight:800;font-size:12px;margin-top:5px;">Describe en<br>ChatGPT</div>
+        <div style="text-align:center;">
+          <div style="background:linear-gradient(135deg,#A04000,#E67E22);border-radius:12px;padding:14px 16px;text-align:center;min-width:90px;">
+            <div style="font-size:28px;">💬</div>
+            <div style="color:#fff;font-weight:800;font-size:12px;margin-top:5px;">Describe en<br>ChatGPT</div>
+          </div>
+          <div class="step-sublabel">Subir a ChatGPT</div>
         </div>
         <div style="font-size:20px;color:rgba(255,255,255,.35);">→</div>
-        <div style="background:linear-gradient(135deg,#1E8449,#27AE60);border-radius:12px;padding:14px 16px;text-align:center;min-width:90px;">
-          <div style="font-size:28px;">🖼️</div>
-          <div style="color:#fff;font-weight:800;font-size:12px;margin-top:5px;">Imagen<br>con IA</div>
+        <div style="text-align:center;">
+          <div style="background:linear-gradient(135deg,#1E8449,#27AE60);border-radius:12px;padding:14px 16px;text-align:center;min-width:90px;">
+            <div style="font-size:28px;">🖼️</div>
+            <div style="color:#fff;font-weight:800;font-size:12px;margin-top:5px;">Imagen<br>con IA</div>
+          </div>
+          <div class="step-sublabel">La IA lo transforma</div>
         </div>
         <div style="font-size:20px;color:rgba(255,255,255,.35);">→</div>
-        <div style="background:linear-gradient(135deg,#D68910,#F39C12);border-radius:12px;padding:14px 16px;text-align:center;min-width:90px;">
-          <div style="font-size:28px;">🌟</div>
-          <div style="color:#2C3E50;font-weight:800;font-size:12px;margin-top:5px;">Personaje<br>Oficial</div>
+        <div style="text-align:center;">
+          <div style="background:linear-gradient(135deg,#D68910,#F39C12);border-radius:12px;padding:14px 16px;text-align:center;min-width:90px;">
+            <div style="font-size:28px;">🌟</div>
+            <div style="color:#2C3E50;font-weight:800;font-size:12px;margin-top:5px;">Personaje<br>Oficial</div>
+          </div>
+          <div class="step-sublabel">¡Listo!</div>
         </div>
-      </div>
-      <div style="margin-top:14px;display:flex;flex-wrap:wrap;gap:8px;justify-content:space-around;">
-        <div style="background:rgba(255,255,255,.06);border-radius:10px;padding:8px 12px;font-size:11px;color:rgba(255,255,255,.6);text-align:center;">📱 Fotografías<br>con celular</div>
-        <div style="background:rgba(255,255,255,.06);border-radius:10px;padding:8px 12px;font-size:11px;color:rgba(255,255,255,.6);text-align:center;">⬆️ Subir a<br>ChatGPT</div>
-        <div style="background:rgba(255,255,255,.06);border-radius:10px;padding:8px 12px;font-size:11px;color:rgba(255,255,255,.6);text-align:center;">🤖 La IA<br>lo transforma</div>
-        <div style="background:rgba(255,255,255,.06);border-radius:10px;padding:8px 12px;font-size:11px;color:rgba(255,255,255,.6);text-align:center;">🎉 ¡Listo!</div>
       </div>
     </div>
 
@@ -264,6 +306,20 @@
       </a>
     </div>
 
+    <!-- Nota: 3 entregas para esta clase -->
+    <div style="background:linear-gradient(135deg,rgba(255,215,0,.12),rgba(255,140,66,.10));border:1px solid rgba(255,215,0,.35);border-radius:16px;padding:16px 20px;margin:0 0 24px;display:flex;gap:14px;align-items:flex-start;" data-reveal>
+      <span style="font-size:26px;flex-shrink:0;">📦</span>
+      <div>
+        <div style="font-size:13px;font-weight:900;color:#FFD700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px;">Esta clase tiene 3 entregas</div>
+        <ol style="margin:0;padding-left:18px;font-size:13px;line-height:1.8;color:rgba(255,255,255,.85);">
+          <li>Foto del dibujo a mano</li>
+          <li>Imagen generada con IA</li>
+          <li>Ficha del personaje completa</li>
+        </ol>
+        <div style="font-size:12px;opacity:.6;margin-top:8px;">Completa las 3 para desbloquear tu insignia.</div>
+      </div>
+    </div>
+
     <ul class="acts" data-reveal>
       <li class="act c1"><div class="num">1</div><div><h4>📋 "La Ficha Perdida" — Completar los 5 elementos</h4><p>Llena la ficha de tu personaje en papel o digital: Nombre, Origen, Misión, Poder y Debilidad. ¡Esta es la ficha que Robotsin necesita recuperar!</p></div><span class="t">10 min</span></li>
       <li class="act c2"><div class="num">2</div><div><h4>⚡ "El Origen Épico" — ChatGPT escribe tu historia</h4><p>Usa el Prompt Mágico con los datos de tu ficha. Copia el resultado y guárdalo — es la historia oficial de tu personaje.</p></div><span class="t">15 min</span></li>
@@ -272,6 +328,25 @@
   </div>
 </section>
 
+<!-- ═══════════ CIERRE ═══════════ -->
+<section class="block tint">
+  <div class="lread">
+    <div class="shead">
+      <span class="ava"><img src="robotsin/robotsin_artista.png" alt="Robotsin"></span>
+      <div>
+        <div class="lab">Resumen · 5 min</div>
+        <h2>Lo que <em>aprendiste hoy</em></h2>
+      </div>
+    </div>
+
+    <div class="cierre" data-reveal>
+      <div class="rec"><div class="em">📋</div><h4>Los 5 elementos del personaje</h4><p>Nombre, Origen, Misión, Poder y Debilidad. Con ellos cualquier personaje se vuelve memorable.</p></div>
+      <div class="rec"><div class="em">💔</div><h4>La debilidad es clave</h4><p>Hace al personaje humano y relatable. Hasta Superman tiene Kryptonita — la tuya lo hará especial.</p></div>
+      <div class="rec"><div class="em">💬</div><h4>ChatGPT es tu copiloto</h4><p>Tú pones la idea, él la convierte en historia. El Prompt Mágico es tu herramienta secreta.</p></div>
+      <div class="rec"><div class="em">🖼️</div><h4>Del papel a la IA</h4><p>Un dibujo a mano + una foto + ChatGPT = imagen oficial de tu personaje. ¡Así de fácil!</p></div>
+    </div>
+  </div>
+</section>
 <!-- ═══════════ TAREA ═══════════ -->
 <section class="block">
   <div class="lread">
@@ -295,6 +370,45 @@
     <div style="display:flex;flex-direction:column;gap:20px;margin:28px 0 8px;">
       <div id="dz-c2-dibujo"></div>
       <div id="dz-c2-imagen"></div>
+
+      <!-- Entrega 3: Ficha del personaje -->
+      <div class="ficha-form-wrapper" style="margin-top: 28px;">
+        <div class="ficha-form-header" style="text-align:center; margin-bottom: 16px;">
+          <span style="font-size:28px;">📋</span>
+          <h3 style="margin: 8px 0 4px; font-size: 1.2em; font-weight: 900; color: #FFD700;">
+            Entrega 3: Ficha del Personaje
+          </h3>
+          <p style="font-size: 13px; opacity: 0.7; margin: 0;">
+            Completa los 5 elementos de tu personaje y guárdalos
+          </p>
+        </div>
+        <form id="ficha-personaje-form" style="display:flex; flex-direction:column; gap:14px;">
+          <div class="ficha-field">
+            <label style="font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; opacity:.7; display:block; margin-bottom:6px;">🏷️ Nombre del personaje</label>
+            <input type="text" id="fp-nombre" placeholder="Ej: Lyra la Inventora" style="width:100%; padding:12px 14px; border-radius:12px; border:1px solid rgba(255,255,255,0.15); background:rgba(255,255,255,0.07); color:#fff; font-size:15px; box-sizing:border-box;" />
+          </div>
+          <div class="ficha-field">
+            <label style="font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; opacity:.7; display:block; margin-bottom:6px;">🌍 Origen</label>
+            <input type="text" id="fp-origen" placeholder="Ej: Una ciudad flotante en las nubes" style="width:100%; padding:12px 14px; border-radius:12px; border:1px solid rgba(255,255,255,0.15); background:rgba(255,255,255,0.07); color:#fff; font-size:15px; box-sizing:border-box;" />
+          </div>
+          <div class="ficha-field">
+            <label style="font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; opacity:.7; display:block; margin-bottom:6px;">🎯 Misión</label>
+            <input type="text" id="fp-mision" placeholder="Ej: Descubrir el secreto del cristal antiguo" style="width:100%; padding:12px 14px; border-radius:12px; border:1px solid rgba(255,255,255,0.15); background:rgba(255,255,255,0.07); color:#fff; font-size:15px; box-sizing:border-box;" />
+          </div>
+          <div class="ficha-field">
+            <label style="font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; opacity:.7; display:block; margin-bottom:6px;">⚡ Poder especial</label>
+            <input type="text" id="fp-poder" placeholder="Ej: Puede hablar con las máquinas" style="width:100%; padding:12px 14px; border-radius:12px; border:1px solid rgba(255,255,255,0.15); background:rgba(255,255,255,0.07); color:#fff; font-size:15px; box-sizing:border-box;" />
+          </div>
+          <div class="ficha-field">
+            <label style="font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; opacity:.7; display:block; margin-bottom:6px;">💔 Debilidad</label>
+            <input type="text" id="fp-debilidad" placeholder="Ej: Le tiene miedo a la oscuridad" style="width:100%; padding:12px 14px; border-radius:12px; border:1px solid rgba(255,255,255,0.15); background:rgba(255,255,255,0.07); color:#fff; font-size:15px; box-sizing:border-box;" />
+          </div>
+          <button type="button" id="ficha-guardar-btn" style="margin-top:8px; padding:14px 24px; border-radius:14px; border:none; background: linear-gradient(135deg, #FFD700, #FF8C42); color:#1a0a00; font-weight:900; font-size:16px; cursor:pointer; width:100%;">
+            💾 Guardar ficha del personaje
+          </button>
+          <div id="ficha-status" style="text-align:center; font-size:13px; min-height:20px; opacity:0.8;"></div>
+        </form>
+      </div>
     </div>
 
     <div class="rmsg" style="--wc:var(--gold); margin-top:22px;">
@@ -307,6 +421,10 @@
   </div>
 </section>
 
+
+<!-- ══ MINI QUIZ ══ -->
+<div id="lesson-quiz-container"></div>
+
 <!-- ═══════════ INSIGNIA ═══════════ -->
 <section class="block badge-sec" id="badgeSec">
   <span class="spark" style="top:24px;left:18%;font-size:22px;">✦</span>
@@ -317,27 +435,13 @@
     <div class="bname">"Creador de Personajes"</div>
     <div class="bmeta">Clase 2 · Mundo 1 — El Genio Creativo</div>
     <button class="btn gold btn-lg" id="claimBtn">⭐ ¡Reclamar mi insignia!</button>
+    <p id="badge-lock-msg">Completa la entrega y el quiz para desbloquear</p>
   </div>
 </section>
 
-<!-- ═══════════ CIERRE ═══════════ -->
-<section class="block tint">
+<!-- SIGUIENTE MISION -->
+<section class="block" style="padding-top:0">
   <div class="lread">
-    <div class="shead">
-      <span class="ava"><img src="robotsin/robotsin_artista.png" alt="Robotsin"></span>
-      <div>
-        <div class="lab">Resumen · 5 min</div>
-        <h2>Lo que <em>aprendiste hoy</em></h2>
-      </div>
-    </div>
-
-    <div class="cierre" data-reveal>
-      <div class="rec"><div class="em">📋</div><h4>Los 5 elementos del personaje</h4><p>Nombre, Origen, Misión, Poder y Debilidad. Con ellos cualquier personaje se vuelve memorable.</p></div>
-      <div class="rec"><div class="em">💔</div><h4>La debilidad es clave</h4><p>Hace al personaje humano y relatable. Hasta Superman tiene Kryptonita — la tuya lo hará especial.</p></div>
-      <div class="rec"><div class="em">💬</div><h4>ChatGPT es tu copiloto</h4><p>Tú pones la idea, él la convierte en historia. El Prompt Mágico es tu herramienta secreta.</p></div>
-      <div class="rec"><div class="em">🖼️</div><h4>Del papel a la IA</h4><p>Un dibujo a mano + una foto + ChatGPT = imagen oficial de tu personaje. ¡Así de fácil!</p></div>
-    </div>
-
     <div class="next">
       <span class="em">▶️</span>
       <div>
@@ -350,8 +454,7 @@
 
 <!-- ═══════════ NAV LECCIÓN ═══════════ -->
 
-<!-- ══ MINI QUIZ ══ -->
-<div id="lesson-quiz-container"></div>
+
 <nav class="lessonnav">
   <a href="clase1_bienvenido_genio.html" class="lnav-btn prev-btn">
     <span class="ar">←</span>
@@ -363,7 +466,7 @@
   <a href="index.html" class="lnav-home" title="Mapa de aventura">🗺️</a>
   <a href="clase3_retrato_oficial.html" class="lnav-btn next-btn">
     <div>
-      <div class="lab">Siguiente lección</div>
+      <div class="lab">Siguiente misión</div>
       <div class="ti">Clase 3 — El Retrato Oficial</div>
     </div>
     <span class="ar">→</span>
@@ -470,5 +573,90 @@ new DvUploadZone({
 <!-- ── Lesson quiz ── -->
 <script>window.LESSON_QUIZ_DATA = {"claseNum": 2, "preguntas": [{"q": "¿Cuáles son los 5 elementos que todo gran personaje necesita?", "opciones": ["Color, forma, tamaño, peso y material", "Nombre, Origen, Misión, Poder y Debilidad", "Pelo, ojos, ropa, zapatos y accesorio", "Villano, aliado, mentor, sidekick y héroe"], "correcta": 1, "pista": "Spider-Man sin historia de origen sería solo 'un chico con traje'."}, {"q": "¿Por qué la DEBILIDAD es el elemento más importante del personaje?", "opciones": ["Porque hace al personaje más fácil de dibujar", "Porque sin debilidad no puede tener superpoder", "Porque hace al personaje humano y relatable — puede perder", "Porque es lo que los fans recuerdan primero"], "correcta": 2, "pista": "Hasta Superman tiene Kryptonita. Sin debilidad, un personaje es aburrido."}, {"q": "¿Para qué sirve usar ChatGPT al crear tu personaje?", "opciones": ["Para que ChatGPT invente el personaje solo sin tu ayuda", "Para copiar un personaje famoso y cambiarlo de nombre", "Como copiloto que desarrolla tu idea en palabras — tú mandas, él escribe", "Para buscar imágenes del personaje en internet"], "correcta": 2, "pista": "Tú tienes la idea. ChatGPT te ayuda a expresarla mejor."}, {"q": "¿Qué hace el prompt 'Del Papel a la Pantalla'?", "opciones": ["Convierte texto en un video de animación automática", "Sube tu dibujo a mano a internet", "Convierte una foto de tu dibujo a mano en una imagen digital con estilo IA", "Imprime tu dibujo en papel fotográfico"], "correcta": 2, "pista": "Fotografía tu dibujo y ChatGPT lo transforma manteniendo la esencia del diseño."}]};</script>
 <script src="js/lesson-quiz.js"></script>
+
+<!-- Guardar ficha del personaje en Supabase -->
+<script>
+(function(){
+  var btn = document.getElementById('ficha-guardar-btn');
+  var statusEl = document.getElementById('ficha-status');
+  if (!btn) return;
+
+  btn.addEventListener('click', async function() {
+    var nombre   = document.getElementById('fp-nombre').value.trim();
+    var origen   = document.getElementById('fp-origen').value.trim();
+    var mision   = document.getElementById('fp-mision').value.trim();
+    var poder    = document.getElementById('fp-poder').value.trim();
+    var debilidad = document.getElementById('fp-debilidad').value.trim();
+
+    if (!nombre || !origen || !mision || !poder || !debilidad) {
+      statusEl.textContent = '⚠️ Completa todos los campos antes de guardar.';
+      statusEl.style.color = '#FF8C42';
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Guardando...';
+    statusEl.textContent = '';
+
+    try {
+      var user = supabase.auth ? (await supabase.auth.getUser()).data.user : null;
+      var userId = user ? user.id : null;
+
+      var payload = { nombre, origen, mision, poder, debilidad };
+      if (userId) payload.user_id = userId;
+
+      var { error } = await supabase.from('personaje').upsert(payload, { onConflict: 'user_id' });
+
+      if (error) throw error;
+
+      statusEl.textContent = '✅ ¡Ficha guardada con éxito!';
+      statusEl.style.color = '#4ade80';
+      btn.textContent = '✅ Guardado';
+
+      // Marcar entrega 3 como completada
+      if (typeof window.checkBadgeUnlock === 'function') {
+        window._entregaDone = true;
+        window.checkBadgeUnlock();
+      }
+    } catch(e) {
+      console.error('Error guardando ficha:', e);
+      statusEl.textContent = '❌ Error al guardar. Intenta de nuevo.';
+      statusEl.style.color = '#f87171';
+      btn.disabled = false;
+      btn.textContent = '💾 Guardar ficha del personaje';
+    }
+  });
+})();
+</script>
+
+<!-- Badge lock: requiere entrega + quiz -->
+<script>
+(function(){
+  var btn = document.getElementById('claimBtn');
+  var lockMsg = document.getElementById('badge-lock-msg');
+  if (!btn) return;
+  btn.disabled = true;
+  if (lockMsg) lockMsg.style.display = 'block';
+  window._entregaDone = false;
+  window._quizPassed  = false;
+  window.checkBadgeUnlock = function() {
+    var ready = window._entregaDone && window._quizPassed;
+    btn.disabled = !ready;
+    if (lockMsg) lockMsg.style.display = ready ? 'none' : 'block';
+  };
+  var qc = document.getElementById('lesson-quiz-container');
+  if (qc) {
+    var obs = new MutationObserver(function() {
+      if (qc.querySelector('.lq-passed')) {
+        window._quizPassed = true; obs.disconnect();
+        window.checkBadgeUnlock();
+      }
+    });
+    obs.observe(qc, { childList: true, subtree: true });
+  }
+  var hasDz = document.querySelector('[id^="dz"]');
+  if (!hasDz) { window._entregaDone = true; }
+})();
+</script>
 </body>
 </html>

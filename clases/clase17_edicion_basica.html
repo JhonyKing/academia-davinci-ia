@@ -5,6 +5,38 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Clase 17 — Edición Básica · Genios Creativos</title>
 <link rel="icon" type="image/svg+xml" href="robotsin/favicon.svg">
+<style>
+/* Mision glamorosa shimmer */
+.mission-numero {
+  font-family: var(--font-display, 'Space Grotesk', sans-serif);
+  font-size: clamp(22px, 5vw, 36px);
+  font-weight: 900;
+  letter-spacing: .04em;
+  text-align: center;
+  margin: 0 0 14px;
+  background: linear-gradient(90deg,
+    #FFD700 0%, #FF8C42 20%, #FFD700 40%,
+    #fff9e0 50%, #FFD700 60%, #FF8C42 80%, #FFD700 100%);
+  background-size: 250% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: missionShimmer 2.8s linear infinite;
+  text-shadow: none;
+}
+.mission-numero .mn-num { font-size: 1.5em; line-height: 1; }
+.mission-numero .mn-of  { font-size: .65em; opacity: .85; }
+@keyframes missionShimmer {
+  0%   { background-position: 0% center; }
+  100% { background-position: 250% center; }
+}
+.next .lab { font-size: 11px; font-weight: 700; opacity: .7; letter-spacing: .08em; text-transform: uppercase; }
+.next .ti  { font-size: 20px; font-weight: 900; color: #FFD700 !important; margin-top: 4px; line-height: 1.2; }
+nav.lessonnav .lnav-btn.next-btn .lab { font-size: 11px; opacity: .7; letter-spacing: .06em; }
+nav.lessonnav .lnav-btn.next-btn .ti  { font-size: 16px; font-weight: 900; color: #FFD700 !important; }
+#claimBtn:disabled { opacity: .35; cursor: not-allowed; }
+#badge-lock-msg { text-align: center; font-size: 13px; color: rgba(255,255,255,.45); margin-top: 10px; display: none; }
+</style>
 <link rel="stylesheet" href="css/genios.css">
 <link rel="stylesheet" href="css/lesson.css">
 <link rel="stylesheet" href="css/juice.css">
@@ -32,7 +64,7 @@
   <span class="spark" data-parallax="-0.12" style="top:80px;right:16%;font-size:18px;animation-delay:1s;">✧</span>
   <div class="lread" data-reveal>
     <span class="badge-pill">🎬 Mundo 4 — El Genio en Movimiento</span>
-    <div class="kicker">Misión 17 de 26</div>
+    <div class="mission-numero">❖ MISIÓN <span class="mn-num">17</span> <span class="mn-of">de 26</span> ❖</div>
 
     <div class="mascot-stage">
       <img src="robotsin/robotsin_director.png" alt="D-IA Vinci Robotsin Director">
@@ -174,6 +206,25 @@
   </div>
 </section>
 
+<!-- ═══════════ CIERRE ═══════════ -->
+<section class="block tint">
+  <div class="lread">
+    <div class="shead">
+      <span class="ava"><img src="robotsin/robotsin_director.png" alt="Robotsin"></span>
+      <div>
+        <div class="lab">Resumen · 5 min</div>
+        <h2>Lo que <em>aprendiste hoy</em></h2>
+      </div>
+    </div>
+
+    <div class="cierre" data-reveal>
+      <div class="rec"><div class="em">✂️</div><h4>Montaje = el arte del orden</h4><p>Cortar, ordenar y agregar transiciones es lo que convierte clips separados en una historia.</p></div>
+      <div class="rec"><div class="em">🛠️</div><h4>CapCut es tu herramienta</h4><p>Importar, cortar, transición, velocidad y exportar — las 5 funciones que ya dominas.</p></div>
+      <div class="rec"><div class="em">⚡</div><h4>Ritmo > duración</h4><p>Un video corto y emocionante siempre gana sobre uno largo y aburrido. Corta sin miedo.</p></div>
+      <div class="rec"><div class="em">🎞️</div><h4>Ya tienes un episodio completo</h4><p>Apertura + clímax + cierre montados = tu primer episodio de serie. ¡Eso es un logro enorme!</p></div>
+    </div>
+  </div>
+</section>
 <!-- ═══════════ TAREA ═══════════ -->
 <section class="block tint">
   <div class="lread">
@@ -203,6 +254,10 @@
   </div>
 </section>
 
+
+<!-- ══ MINI QUIZ ══ -->
+<div id="lesson-quiz-container"></div>
+
 <!-- ═══════════ INSIGNIA ═══════════ -->
 <section class="block badge-sec" id="badgeSec">
   <span class="spark" style="top:24px;left:18%;font-size:22px;">✦</span>
@@ -213,27 +268,13 @@
     <div class="bname">"Editor de Video"</div>
     <div class="bmeta">Clase 17 · Mundo 4 — El Genio en Movimiento</div>
     <button class="btn gold btn-lg" id="claimBtn">⭐ ¡Reclamar mi insignia!</button>
+    <p id="badge-lock-msg">Completa la entrega y el quiz para desbloquear</p>
   </div>
 </section>
 
-<!-- ═══════════ CIERRE ═══════════ -->
-<section class="block tint">
+<!-- SIGUIENTE MISION -->
+<section class="block" style="padding-top:0">
   <div class="lread">
-    <div class="shead">
-      <span class="ava"><img src="robotsin/robotsin_director.png" alt="Robotsin"></span>
-      <div>
-        <div class="lab">Resumen · 5 min</div>
-        <h2>Lo que <em>aprendiste hoy</em></h2>
-      </div>
-    </div>
-
-    <div class="cierre" data-reveal>
-      <div class="rec"><div class="em">✂️</div><h4>Montaje = el arte del orden</h4><p>Cortar, ordenar y agregar transiciones es lo que convierte clips separados en una historia.</p></div>
-      <div class="rec"><div class="em">🛠️</div><h4>CapCut es tu herramienta</h4><p>Importar, cortar, transición, velocidad y exportar — las 5 funciones que ya dominas.</p></div>
-      <div class="rec"><div class="em">⚡</div><h4>Ritmo > duración</h4><p>Un video corto y emocionante siempre gana sobre uno largo y aburrido. Corta sin miedo.</p></div>
-      <div class="rec"><div class="em">🎞️</div><h4>Ya tienes un episodio completo</h4><p>Apertura + clímax + cierre montados = tu primer episodio de serie. ¡Eso es un logro enorme!</p></div>
-    </div>
-
     <div class="next">
       <span class="em">▶️</span>
       <div>
@@ -246,8 +287,7 @@
 
 <!-- ═══════════ NAV LECCIÓN ═══════════ -->
 
-<!-- ══ MINI QUIZ ══ -->
-<div id="lesson-quiz-container"></div>
+
 <nav class="lessonnav">
   <a href="clase16_las_escenas.html" class="lnav-btn prev-btn">
     <span class="ar">←</span>
@@ -259,7 +299,7 @@
   <a href="index.html" class="lnav-home" title="Mapa de aventura">🗺️</a>
   <a href="clase18_el_trailer.html" class="lnav-btn next-btn">
     <div>
-      <div class="lab">Siguiente lección</div>
+      <div class="lab">Siguiente misión</div>
       <div class="ti">Clase 18 — El Tráiler</div>
     </div>
     <span class="ar">→</span>
@@ -350,5 +390,35 @@ if (/vercel\.app$|academiadavinci/.test(location.hostname)) {
 <!-- ── Lesson quiz ── -->
 <script>window.LESSON_QUIZ_DATA = {"claseNum": 17, "preguntas": [{"q": "¿Qué herramienta usas para editar tu video en esta clase?", "opciones": ["Adobe Premiere Pro", "Final Cut Pro", "CapCut", "iMovie de Apple"], "correcta": 2, "pista": "Es gratuita, está disponible en celular y PC, y es perfecta para empezar."}, {"q": "¿Cuál es el proceso completo de edición en orden?", "opciones": ["Exportar → editar → importar → guardar", "Importar → ordenar → cortar → transiciones → música → exportar", "Grabar → cortar → subir → compartir", "Diseñar → animar → editar → publicar"], "correcta": 1, "pista": "Sigue este orden y el proceso fluye de manera natural."}, {"q": "Según Robotsin, ¿cuál es el error más común al editar?", "opciones": ["Poner demasiada música de fondo", "Usar transiciones muy elaboradas", "Dejar los clips demasiado largos — si aburre al editor, aburre al público", "Exportar en baja resolución"], "correcta": 2, "pista": "'Corta sin miedo' — cada segundo de más debilita el ritmo."}, {"q": "¿Cómo se diferencia la edición 'lineal' de la 'no lineal'?", "opciones": ["Lineal es más antigua y no lineal es más moderna — pero hacen lo mismo", "Lineal se edita en orden de inicio a fin; no lineal permite editar cualquier parte en cualquier momento", "Lineal es para videos cortos; no lineal solo funciona para videos de más de 10 minutos", "No existe diferencia real — son términos intercambiables"], "correcta": 1, "pista": "CapCut es no lineal — puedes saltar a cualquier parte y editar sin seguir un orden."}]};</script>
 <script src="js/lesson-quiz.js"></script>
+
+<!-- Badge lock: requiere entrega + quiz -->
+<script>
+(function(){
+  var btn = document.getElementById('claimBtn');
+  var lockMsg = document.getElementById('badge-lock-msg');
+  if (!btn) return;
+  btn.disabled = true;
+  if (lockMsg) lockMsg.style.display = 'block';
+  window._entregaDone = false;
+  window._quizPassed  = false;
+  window.checkBadgeUnlock = function() {
+    var ready = window._entregaDone && window._quizPassed;
+    btn.disabled = !ready;
+    if (lockMsg) lockMsg.style.display = ready ? 'none' : 'block';
+  };
+  var qc = document.getElementById('lesson-quiz-container');
+  if (qc) {
+    var obs = new MutationObserver(function() {
+      if (qc.querySelector('.lq-passed')) {
+        window._quizPassed = true; obs.disconnect();
+        window.checkBadgeUnlock();
+      }
+    });
+    obs.observe(qc, { childList: true, subtree: true });
+  }
+  var hasDz = document.querySelector('[id^="dz"]');
+  if (!hasDz) { window._entregaDone = true; }
+})();
+</script>
 </body>
 </html>

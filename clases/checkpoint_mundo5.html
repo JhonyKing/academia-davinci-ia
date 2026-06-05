@@ -3,14 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Reto del Mundo 5 — Genios Creativos</title>
+<title>Checkpoint Mundo 5 — La Voz del Genio · Academia Da Vinci IA</title>
 <link rel="icon" type="image/svg+xml" href="robotsin/favicon.svg">
 <link rel="stylesheet" href="css/genios.css">
+<link rel="stylesheet" href="css/lesson.css">
 <link rel="stylesheet" href="css/juice.css">
 <link rel="stylesheet" href="css/quiz.css">
 </head>
 <body class="lesson" style="--wc: var(--m5)">
 
+<!-- ═══════════ TOPBAR ═══════════ -->
 <header class="topbar">
   <div class="wrap">
     <a class="lback" href="index.html">← Mapa</a>
@@ -20,25 +22,50 @@
   </div>
 </header>
 
-<section class="lhero" style="padding-bottom:24px;">
-  <span class="spark" data-parallax="0.14" style="top:30px;left:16%;font-size:24px;">✦</span>
-  <span class="spark" data-parallax="-0.12" style="top:70px;right:18%;font-size:18px;animation-delay:1s;">✧</span>
+<!-- ═══════════ HERO ═══════════ -->
+<section class="lhero">
+  <span class="spark" data-parallax="0.14" style="top:30px;left:14%;font-size:24px;">✦</span>
+  <span class="spark" data-parallax="-0.12" style="top:80px;right:16%;font-size:18px;animation-delay:1s;">✧</span>
+  <span class="spark" data-parallax="0.08" style="top:140px;left:4%;font-size:16px;animation-delay:2.5s;">✦</span>
   <div class="lread" data-reveal>
     <span class="badge-pill">🎯 Checkpoint del Mundo 5</span>
-    <div class="mascot-stage" style="width:120px;height:120px;margin:18px auto 14px;">
-      <img src="robotsin/robotsin_musico.png" alt="Robotsin">
+    <div class="kicker">Reto final · Clases 18 a 22</div>
+
+    <div class="mascot-stage" style="width:140px;height:140px;margin:18px auto 14px;">
+      <img src="robotsin/robotsin_musico.png" alt="D-IA Vinci Robotsin Músico">
     </div>
-    <h1>El <span>Reto</span> del Genio</h1>
-    <p class="lead">Responde para demostrar que dominas el Mundo 5… ¡y gana tu insignia de maestría!</p>
+
+    <h1>¡Demuestra que dominas el <span>Poder del Sonido</span>!</h1>
+    <p class="lead">Responde 20 preguntas sobre tráilers, música, voz, efectos de sonido y mezcla de audio. Necesitas al menos 80% para ganar tu insignia.</p>
+
+    <div style="background:rgba(21,194,201,.1);border:2px solid rgba(21,194,201,.25);border-radius:20px;padding:22px 20px;margin:22px 0 0;text-align:left;">
+      <div style="font-family:var(--font-display);font-weight:700;color:var(--m5);font-size:14px;margin-bottom:14px;letter-spacing:.04em;">📚 TEMAS DE ESTE MUNDO</div>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;">
+        <li style="display:flex;align-items:center;gap:10px;"><span style="background:var(--m5);color:#fff;border-radius:8px;padding:3px 10px;font-size:12px;font-weight:800;white-space:nowrap;">Clase 18</span><span style="color:var(--ink-2);font-size:14px;">El Tráiler — 60 segundos para emocionar al mundo</span></li>
+        <li style="display:flex;align-items:center;gap:10px;"><span style="background:var(--m5);color:#fff;border-radius:8px;padding:3px 10px;font-size:12px;font-weight:800;white-space:nowrap;">Clase 19</span><span style="color:var(--ink-2);font-size:14px;">El Tema Musical — Crear música con Suno.ai</span></li>
+        <li style="display:flex;align-items:center;gap:10px;"><span style="background:var(--m5);color:#fff;border-radius:8px;padding:3px 10px;font-size:12px;font-weight:800;white-space:nowrap;">Clase 20</span><span style="color:var(--ink-2);font-size:14px;">La Voz del Personaje — ElevenLabs y text-to-speech</span></li>
+        <li style="display:flex;align-items:center;gap:10px;"><span style="background:var(--m5);color:#fff;border-radius:8px;padding:3px 10px;font-size:12px;font-weight:800;white-space:nowrap;">Clase 21</span><span style="color:var(--ink-2);font-size:14px;">Efectos de Sonido — Las 3 capas del sound design</span></li>
+        <li style="display:flex;align-items:center;gap:10px;"><span style="background:var(--m5);color:#fff;border-radius:8px;padding:3px 10px;font-size:12px;font-weight:800;white-space:nowrap;">Clase 22</span><span style="color:var(--ink-2);font-size:14px;">Audio Completo — Mezcla final y balance de sonido</span></li>
+      </ul>
+    </div>
   </div>
 </section>
 
-<section class="block" style="padding-top:10px;">
+<!-- ═══════════ QUIZ ═══════════ -->
+<section class="block tint" style="padding-top:14px;">
   <div class="lread">
+    <div class="shead" data-reveal>
+      <span class="ava"><img src="robotsin/robotsin_musico.png" alt="Robotsin"></span>
+      <div>
+        <div class="lab">20 preguntas · Mínimo 80% para pasar</div>
+        <h2>El <em>Gran Reto</em> del Mundo 5</h2>
+      </div>
+    </div>
     <div class="quiz" data-reveal><div id="quiz"></div></div>
   </div>
 </section>
 
+<!-- ═══════════ FOOTER ═══════════ -->
 <footer class="foot">
   <div class="ico">🎵✨</div>
   <b>Academia Da Vinci IA</b> · Checkpoint · Mundo 5 — La Voz del Genio
@@ -56,48 +83,124 @@ window.QUIZ_DATA = {
   "siguienteLabel": "▶ Siguiente mundo",
   "preguntas": [
     {
-      "q": "Con una IA como Suno puedes crear…",
-      "opciones": [
-        "Música original",
-        "Pizzas",
-        "Dibujos",
-        "Mapas"
-      ],
-      "correcta": 0,
-      "pista": "¡Compones canciones aunque no sepas tocar! 🎵"
+      "q": "¿Cuántos segundos tienes para enganchar al espectador en un tráiler?",
+      "opciones": ["30 segundos", "10 segundos", "3 segundos", "1 minuto completo"],
+      "correcta": 2,
+      "pista": "¡3 segundos! Si no enganchas ahí, ya perdiste al espectador. ⚡"
     },
     {
-      "q": "La \"voz del personaje\" es…",
-      "opciones": [
-        "Cómo suena cuando habla",
-        "Su color",
-        "Su tamaño",
-        "Su nombre"
-      ],
-      "correcta": 0,
-      "pista": "Es el sonido y la forma de hablar de tu personaje. 🎙️"
+      "q": "¿Qué significa 'ritmo en crescendo' en un tráiler?",
+      "opciones": ["Que la música sea cada vez más suave hasta el final", "Que el tráiler empiece épico y termine tranquilo", "Que el tráiler empiece lento y termine épico — siempre de menos a más", "Que haya exactamente 5 cortes por segundo al final"],
+      "correcta": 2,
+      "pista": "De menos a más — así se construye la emoción. 🚀"
     },
     {
-      "q": "Los efectos de sonido sirven para…",
-      "opciones": [
-        "Hacer la escena más real (pasos, viento…)",
-        "Borrar el audio",
-        "Subir el brillo",
-        "Cambiar el idioma"
-      ],
-      "correcta": 0,
-      "pista": "Pasos, lluvia, explosiones… dan vida a la escena. 🔊"
+      "q": "¿Qué va en los primeros 3 segundos del tráiler de 60 segundos?",
+      "opciones": ["El título de la serie con música épica", "La presentación completa del héroe y su historia de origen", "La imagen o acción más impactante de toda tu serie", "Los créditos del creador y las herramientas usadas"],
+      "correcta": 2,
+      "pista": "El gancho va primero — lo más impresionante de tu historia. 💥"
     },
     {
-      "q": "La banda sonora es…",
-      "opciones": [
-        "La música que acompaña tu película",
-        "El nombre del director",
-        "Una banda de amigos",
-        "El final"
-      ],
-      "correcta": 0,
-      "pista": "Es la música de fondo de tu historia. 🎶"
+      "q": "¿Por qué NO debes revelar el final de tu historia en el tráiler?",
+      "opciones": ["Porque el final está protegido por derechos de autor", "Porque el misterio es lo que lleva al espectador a querer ver la serie completa", "Porque el final todavía no está terminado cuando se hace el tráiler", "Porque revelar el final hace que el tráiler sea demasiado largo"],
+      "correcta": 1,
+      "pista": "El misterio es el imán que atrae a la audiencia. 🎣"
+    },
+    {
+      "q": "¿Cómo se llama la herramienta que usas para crear música con IA en la Clase 19?",
+      "opciones": ["Spotify Studio", "GarageBand", "Suno.ai", "SoundCloud Creator"],
+      "correcta": 2,
+      "pista": "¡Con Suno.ai compones canciones aunque no sepas tocar! 🎵"
+    },
+    {
+      "q": "¿Cuáles son los 4 elementos básicos de la música?",
+      "opciones": ["Piano, guitarra, batería y voz", "Ritmo, melodía, armonía y letra", "Intro, verso, coro y outro", "Alegre, triste, épico y tranquilo"],
+      "correcta": 1,
+      "pista": "Ritmo, melodía, armonía y letra — los pilares de toda canción. 🎼"
+    },
+    {
+      "q": "¿Cuántas versiones del tema musical debes crear en la Clase 19?",
+      "opciones": ["Solo 1 versión — la definitiva desde el primer intento", "Al menos 2 versiones (tema principal + versión tranquila para escenas de drama)", "Mínimo 10 versiones para elegir", "3 versiones exactas: rock, balada y electrónica"],
+      "correcta": 1,
+      "pista": "Una versión épica y una tranquila — para diferentes tipos de escena. 🎹"
+    },
+    {
+      "q": "¿Qué diferencia a un 'jingle' de un 'tema musical'?",
+      "opciones": ["El jingle es para películas; el tema musical es para publicidad", "Un jingle es corto y pegajoso; un tema musical es más largo y establece la emoción de la serie", "El jingle siempre tiene letra; el tema musical nunca tiene letra", "No hay diferencia — son exactamente lo mismo con diferente nombre"],
+      "correcta": 1,
+      "pista": "El jingle entra fácil; el tema musical te transporta al mundo de la historia. 🎶"
+    },
+    {
+      "q": "¿Qué es el 'text-to-speech' con IA?",
+      "opciones": ["Una tecnología que convierte audio en texto escrito", "Un sistema que lee en voz alta los textos que tú escribes, usando voces generadas por IA", "Una función que traduce texto de un idioma a otro automáticamente", "Una IA que escribe textos por ti sin que tú escribas nada"],
+      "correcta": 1,
+      "pista": "Tú escribes, la IA le pone voz. ¡Así de simple! 🗣️"
+    },
+    {
+      "q": "¿Qué significa poner una palabra en MAYÚSCULAS en el texto para ElevenLabs?",
+      "opciones": ["Que esa palabra no debe pronunciarse", "Que esa palabra debe pronunciarse más despacio", "Que esa palabra lleva énfasis — se pronuncia con más fuerza", "Que esa palabra debe eliminarse de la narración"],
+      "correcta": 2,
+      "pista": "MAYÚSCULAS = más fuerza al pronunciar esa palabra. 💪"
+    },
+    {
+      "q": "¿Cómo debe sonar la voz de un VILLANO según Robotsin?",
+      "opciones": ["Aguda y rápida para que parezca nervioso", "Exactamente igual que la del héroe para confundir al espectador", "Grave y lenta para transmitir amenaza", "Con mucho eco y reverberación electrónica"],
+      "correcta": 2,
+      "pista": "Grave y lenta = amenazante y poderoso. 😈"
+    },
+    {
+      "q": "¿Qué debes guardar como tarea al terminar la Clase 20?",
+      "opciones": ["Una imagen del personaje hablando", "El monólogo del personaje grabado como archivo de audio MP3", "Un video de 30 segundos con la voz sincronizada", "El texto escrito del monólogo en un documento"],
+      "correcta": 1,
+      "pista": "¡El archivo de audio MP3 es tu entrega estrella de esta clase! 🎙️"
+    },
+    {
+      "q": "¿Cuáles son las 3 capas de audio en el sound design?",
+      "opciones": ["Música, silencio y ruido", "Voz principal, voz secundaria y coro", "Ambiente/atmósfera, efectos de acción y música", "Agudo, medio y bajo"],
+      "correcta": 2,
+      "pista": "Ambiente + efectos de acción + música = la experiencia sonora completa. 🔊"
+    },
+    {
+      "q": "¿A qué volumen debe estar la música de fondo cuando alguien está hablando?",
+      "opciones": ["Al 100% — que todo suene con la misma fuerza", "Al 30% aproximadamente — la voz siempre debe ganar", "Al 80% para que el ambiente sea inmersivo", "La música debe apagarse completamente cuando hay diálogo"],
+      "correcta": 1,
+      "pista": "La voz siempre gana — baja la música al 30% para que se escuche bien. 🎚️"
+    },
+    {
+      "q": "¿Cómo crearon el sonido del T-Rex en Jurassic Park antes de verlo?",
+      "opciones": ["Grabaron el rugido de un elefante a máxima velocidad", "Usaron efectos de sonido digitales de computadora", "El agua en un vaso tiembla — ese sonido lo crearon con una guitarra", "Filmaron a un actor gruñendo y modificaron la frecuencia"],
+      "correcta": 2,
+      "pista": "El sonido más aterrador de la historia del cine usó un vaso de agua y una guitarra. 🎸"
+    },
+    {
+      "q": "¿Dónde puedes conseguir efectos de sonido GRATUITOS según la Clase 21?",
+      "opciones": ["Solo en Spotify y Apple Music", "Freesound.org, Pixabay Audio o ElevenLabs Sound Effects", "Solo comprándolos en tiendas especializadas", "Grabándolos siempre tú mismo con el micrófono del teléfono"],
+      "correcta": 1,
+      "pista": "¡Freesound y Pixabay tienen miles de efectos gratis para tu proyecto! 🎁"
+    },
+    {
+      "q": "¿A qué volumen debe estar la VOZ del personaje en la mezcla final?",
+      "opciones": ["Al 50% para equilibrarse con la música", "Al 75% para que no tape los efectos", "Al 100% — la voz siempre es lo más importante", "Al 60% para que la música tenga protagonismo"],
+      "correcta": 2,
+      "pista": "La voz manda. Siempre al 100%. El resto se adapta a ella. 🎤"
+    },
+    {
+      "q": "¿Qué es el 'fade in' en el audio?",
+      "opciones": ["Cuando el audio se corta de repente al terminar una escena", "Cuando la música sube gradualmente al inicio de una escena", "Cuando se silencia la voz del personaje para escuchar el ambiente", "Cuando se duplica el volumen de los efectos de sonido"],
+      "correcta": 1,
+      "pista": "Fade in = entra suave, crece. Fade out = baja suave, desaparece. 🌅"
+    },
+    {
+      "q": "¿Qué significa 'duck' en la mezcla de audio?",
+      "opciones": ["Eliminar completamente la música de una escena", "Bajar la música automáticamente cuando alguien habla y subirla cuando termina", "Duplicar el volumen de los efectos de sonido", "Añadir eco y reverberación a la voz del personaje"],
+      "correcta": 1,
+      "pista": "La música 'se agacha' (duck) para que la voz se escuche claro. 🦆"
+    },
+    {
+      "q": "¿Cuál es la señal de que lograste una buena mezcla de audio?",
+      "opciones": ["Que la música sea lo más fuerte de todo", "Que todos los elementos estén al mismo volumen exacto", "Que el espectador NO note el sonido porque está perfectamente equilibrado", "Que los efectos de sonido sean más fuertes que la voz"],
+      "correcta": 2,
+      "pista": "Cuando el sonido es perfecto, nadie lo nota — ¡y eso es el mayor elogio! 🎯"
     }
   ]
 };

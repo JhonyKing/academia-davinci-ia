@@ -3,14 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Reto del Mundo 3 — Genios Creativos</title>
+<title>Checkpoint Mundo 3 — La Historia del Genio · Academia Da Vinci IA</title>
 <link rel="icon" type="image/svg+xml" href="robotsin/favicon.svg">
 <link rel="stylesheet" href="css/genios.css">
+<link rel="stylesheet" href="css/lesson.css">
 <link rel="stylesheet" href="css/juice.css">
 <link rel="stylesheet" href="css/quiz.css">
 </head>
 <body class="lesson" style="--wc: var(--m3)">
 
+<!-- ═══════════ TOPBAR ═══════════ -->
 <header class="topbar">
   <div class="wrap">
     <a class="lback" href="index.html">← Mapa</a>
@@ -20,25 +22,49 @@
   </div>
 </header>
 
-<section class="lhero" style="padding-bottom:24px;">
-  <span class="spark" data-parallax="0.14" style="top:30px;left:16%;font-size:24px;">✦</span>
-  <span class="spark" data-parallax="-0.12" style="top:70px;right:18%;font-size:18px;animation-delay:1s;">✧</span>
+<!-- ═══════════ HERO ═══════════ -->
+<section class="lhero">
+  <span class="spark" data-parallax="0.14" style="top:30px;left:14%;font-size:24px;">✦</span>
+  <span class="spark" data-parallax="-0.12" style="top:80px;right:16%;font-size:18px;animation-delay:1s;">✧</span>
+  <span class="spark" data-parallax="0.08" style="top:150px;left:7%;font-size:14px;animation-delay:1.8s;">✦</span>
   <div class="lread" data-reveal>
     <span class="badge-pill">🎯 Checkpoint del Mundo 3</span>
-    <div class="mascot-stage" style="width:120px;height:120px;margin:18px auto 14px;">
-      <img src="robotsin/robotsin_escritor.png" alt="Robotsin">
+    <div class="kicker">Reto final · Clases 10 a 13</div>
+
+    <div class="mascot-stage" style="width:140px;height:140px;margin:18px auto 14px;">
+      <img src="robotsin/robotsin_escritor.png" alt="D-IA Vinci Robotsin Escritor">
     </div>
-    <h1>El <span>Reto</span> del Genio</h1>
-    <p class="lead">Responde para demostrar que dominas el Mundo 3… ¡y gana tu insignia de maestría!</p>
+
+    <h1>¡Demuestra que sabes contar una <span>Gran Historia</span>!</h1>
+    <p class="lead">Responde 20 preguntas sobre guiones, diálogos, cómics y narrativa. Necesitas al menos 80% para ganar tu insignia.</p>
+
+    <div style="background:rgba(255,159,28,.1);border:2px solid rgba(255,159,28,.3);border-radius:20px;padding:22px 20px;margin:22px 0 0;text-align:left;">
+      <div style="font-family:var(--font-display);font-weight:700;color:var(--m3);font-size:14px;margin-bottom:14px;letter-spacing:.04em;">📚 TEMAS DE ESTE MUNDO</div>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;">
+        <li style="display:flex;align-items:center;gap:10px;"><span style="background:var(--m3);color:#fff;border-radius:8px;padding:3px 10px;font-size:12px;font-weight:800;white-space:nowrap;">Clase 10</span><span style="color:var(--ink-2);font-size:14px;">El Guion — Estructura en 3 actos y el viaje del héroe</span></li>
+        <li style="display:flex;align-items:center;gap:10px;"><span style="background:var(--m3);color:#fff;border-radius:8px;padding:3px 10px;font-size:12px;font-weight:800;white-space:nowrap;">Clase 11</span><span style="color:var(--ink-2);font-size:14px;">Los Diálogos — Voz de personaje y diálogos naturales</span></li>
+        <li style="display:flex;align-items:center;gap:10px;"><span style="background:var(--m3);color:#fff;border-radius:8px;padding:3px 10px;font-size:12px;font-weight:800;white-space:nowrap;">Clase 12</span><span style="color:var(--ink-2);font-size:14px;">El Cómic — Viñetas, bocadillos y narrativa visual</span></li>
+        <li style="display:flex;align-items:center;gap:10px;"><span style="background:var(--m3);color:#fff;border-radius:8px;padding:3px 10px;font-size:12px;font-weight:800;white-space:nowrap;">Clase 13</span><span style="color:var(--ink-2);font-size:14px;">Episodio Completo — Proceso editorial y publicación</span></li>
+      </ul>
+    </div>
   </div>
 </section>
 
-<section class="block" style="padding-top:10px;">
+<!-- ═══════════ QUIZ ═══════════ -->
+<section class="block tint" style="padding-top:14px;">
   <div class="lread">
+    <div class="shead" data-reveal>
+      <span class="ava"><img src="robotsin/robotsin_escritor.png" alt="Robotsin"></span>
+      <div>
+        <div class="lab">20 preguntas · Mínimo 80% para pasar</div>
+        <h2>El <em>Gran Reto</em> del Mundo 3</h2>
+      </div>
+    </div>
     <div class="quiz" data-reveal><div id="quiz"></div></div>
   </div>
 </section>
 
+<!-- ═══════════ FOOTER ═══════════ -->
 <footer class="foot">
   <div class="ico">📖✨</div>
   <b>Academia Da Vinci IA</b> · Checkpoint · Mundo 3 — La Historia del Genio
@@ -56,48 +82,124 @@ window.QUIZ_DATA = {
   "siguienteLabel": "▶ Siguiente mundo",
   "preguntas": [
     {
-      "q": "La estructura en 3 actos es…",
-      "opciones": [
-        "Rápido, lento y rápido",
-        "Inicio, nudo y final",
-        "Uno, dos, tres",
-        "Arriba, abajo y al centro"
-      ],
+      "q": "¿Cuántos actos tiene la estructura básica de cualquier historia?",
+      "opciones": ["2 actos (inicio y final)", "3 actos (planteamiento, nudo y desenlace)", "5 actos (como las obras de Shakespeare)", "7 actos (uno por cada día de la semana)"],
       "correcta": 1,
       "pista": "Toda buena historia tiene principio, problema y final. 📖"
     },
     {
-      "q": "Los diálogos son…",
-      "opciones": [
-        "Lo que hablan los personajes",
-        "Los dibujos",
-        "La música",
-        "Los títulos"
-      ],
-      "correcta": 0,
-      "pista": "Son las conversaciones entre tus personajes. 💬"
+      "q": "¿Qué ocurre en el NUDO de la historia?",
+      "opciones": ["El héroe conoce su mundo ordinario y a sus aliados", "La historia termina y el héroe regresa a casa", "El héroe enfrenta obstáculos y desafíos que lo cambian", "Se presentan todos los personajes secundarios"],
+      "correcta": 2,
+      "pista": "El nudo es donde todo se complica — y ahí está la emoción. ⚡"
     },
     {
-      "q": "Un cómic cuenta la historia con…",
-      "opciones": [
-        "Solo texto",
-        "Viñetas e imágenes",
-        "Números",
-        "Sonidos"
-      ],
+      "q": "¿Qué películas famosas siguen el 'viaje del héroe'?",
+      "opciones": ["Solo las películas de aventura — el drama y el romance no", "Ninguna — el viaje del héroe es solo para cómics", "Toy Story, Moana, Spider-Man — casi todas las grandes historias", "Solo las películas de Disney de los años 90"],
+      "correcta": 2,
+      "pista": "El viaje del héroe es la estructura más universal de la narrativa. 🌟"
+    },
+    {
+      "q": "Según Robotsin, ¿cuál es el conflicto más poderoso en una historia?",
+      "opciones": ["Héroe vs. villano (dos personas peleando)", "Héroe vs. su miedo interior", "Héroe vs. la naturaleza (tormentas, volcanes)", "Héroe vs. el tiempo (una carrera contra el reloj)"],
       "correcta": 1,
-      "pista": "Cuadritos (viñetas) con dibujos y globos de diálogo. 🖼️"
+      "pista": "El conflicto interno es el que más conecta con el público. 💭"
     },
     {
-      "q": "El \"conflicto\" de una historia es…",
-      "opciones": [
-        "El problema que el personaje debe resolver",
-        "El color favorito",
-        "El final feliz",
-        "El nombre del héroe"
-      ],
-      "correcta": 0,
-      "pista": "Es el reto o problema que mueve la aventura. ⚡"
+      "q": "¿Cuáles son las 4 características de un buen diálogo?",
+      "opciones": ["Largo, poético, dramático y filosófico", "Revela carácter, avanza la trama, suena natural y tiene conflicto", "Corto, gracioso, sorpresivo y con mucha acción", "Con muchas preguntas, respuestas largas, pausas y silencios"],
+      "correcta": 1,
+      "pista": "Un buen diálogo hace varias cosas a la vez. 💬"
+    },
+    {
+      "q": "¿Qué es la 'voz de personaje' en los diálogos?",
+      "opciones": ["El tono de voz que usa el actor al doblar al personaje", "La forma única en que cada personaje habla según su personalidad", "El volumen al que habla el personaje en las escenas", "La música que suena cuando el personaje aparece en pantalla"],
+      "correcta": 1,
+      "pista": "Cada personaje tiene su manera de hablar — como tú tienes la tuya. 🎭"
+    },
+    {
+      "q": "¿Cómo habla Yoda diferente a los demás personajes?",
+      "opciones": ["Habla más rápido que los otros personajes de Star Wars", "Habla siempre en inglés mientras los otros hablan en otros idiomas", "Invierte el orden de las palabras — 'El miedo, siempre presente está'", "Habla solo en preguntas, nunca en afirmaciones"],
+      "correcta": 2,
+      "pista": "El orden invertido hace a Yoda inconfundible entre millones de personajes. 🟢"
+    },
+    {
+      "q": "¿Cuál es el tip pro de Robotsin para mejorar tus diálogos?",
+      "opciones": ["Hacerlos más cortos — cuanto menos palabras, mejor", "Copiar diálogos de películas famosas y cambiar los nombres", "Leerlos en voz alta — si suena raro al hablar, está mal escrito", "Usar solo palabras de máximo 2 sílabas"],
+      "correcta": 2,
+      "pista": "Si no lo dirías en voz alta, tampoco lo diría tu personaje. 🗣️"
+    },
+    {
+      "q": "¿Qué es una 'viñeta' en el lenguaje del cómic?",
+      "opciones": ["Un personaje pequeño que aparece en segundo plano", "Un cuadro o panel individual que muestra una escena del cómic", "El tipo de letra especial que se usa en los cómics", "La portada del cómic"],
+      "correcta": 1,
+      "pista": "La viñeta es como un fotograma de tu historia visual. 🖼️"
+    },
+    {
+      "q": "¿Cuántas viñetas necesitas para contar una historia completa básica?",
+      "opciones": ["Al menos 20 viñetas por página", "Entre 50 y 100 viñetas para un episodio completo", "4 viñetas: situación → problema → acción → resultado", "Solo 1 viñeta si es muy expresiva"],
+      "correcta": 2,
+      "pista": "4 viñetas son suficientes para contar un minirrelato completo. 📐"
+    },
+    {
+      "q": "¿Qué proceso sigues para crear el cómic con IA?",
+      "opciones": ["Escribes el texto primero y luego buscas imágenes en Google", "Generas imágenes de las escenas con IA y las montas con diálogos en Canva", "Dibujas a mano todas las viñetas y las escaneas", "Descargas un cómic existente y cambias los diálogos"],
+      "correcta": 1,
+      "pista": "IA para las imágenes + Canva para el montaje = tu cómic listo. 🤖"
+    },
+    {
+      "q": "¿Cómo se llama la nube que muestra los PENSAMIENTOS de un personaje (no sus palabras)?",
+      "opciones": ["Bocadillo de diálogo", "Splash page", "Onomatopeya", "Bocadillo de pensamiento"],
+      "correcta": 3,
+      "pista": "La nube esponjosa es para pensamientos; el globo es para palabras. 💭"
+    },
+    {
+      "q": "¿Cuáles son los 4 pasos del proceso editorial según la Clase 13?",
+      "opciones": ["Escribir, ilustrar, colorear y publicar", "Revisión, corrección, mejora y publicación", "Borrador, copia, impresión y distribución", "Idea, guion, cómic y presentación"],
+      "correcta": 1,
+      "pista": "Revisar, corregir, mejorar y publicar — en ese orden. ✅"
+    },
+    {
+      "q": "¿Cuántas cosas debes mejorar en la revisión según Robotsin?",
+      "opciones": ["Todo lo que puedas hasta que sea perfecto", "Nada — si lo terminaste ya está listo", "Solo 1 cosa — la más importante", "3 cosas — porque la perfección es enemiga de lo publicado"],
+      "correcta": 3,
+      "pista": "La perfección es enemiga de lo terminado. ¡Publica! 🚀"
+    },
+    {
+      "q": "¿Qué incluye la 'Portada' de tu cómic?",
+      "opciones": ["Solo una imagen grande sin texto", "El precio y el código de barras del cómic", "Título de la serie, número de episodio, imagen impactante y créditos", "Un resumen de todo lo que pasa en el episodio"],
+      "correcta": 2,
+      "pista": "La portada es lo primero que ve el lector — ¡hazla impactar! 🎨"
+    },
+    {
+      "q": "¿Por qué compartir el episodio con tu familia es parte de la tarea?",
+      "opciones": ["Para que ellos lo corrijan antes de entregarlo al instructor", "Porque la obra cobra vida cuando alguien más la ve", "Para que te digan si necesitas cambiar el título", "Solo es opcional — no es realmente parte de la tarea"],
+      "correcta": 1,
+      "pista": "Una historia existe de verdad cuando alguien más la lee. 📚"
+    },
+    {
+      "q": "¿Qué es el 'conflicto' de una historia?",
+      "opciones": ["El nombre del villano de la historia", "El color favorito del personaje principal", "El problema o reto que el personaje debe resolver", "El final feliz de la aventura"],
+      "correcta": 2,
+      "pista": "Sin conflicto no hay historia — es el motor de todo. ⚡"
+    },
+    {
+      "q": "¿Cuál es la diferencia entre el guion y el cómic?",
+      "opciones": ["Son exactamente lo mismo con diferente nombre", "El guion usa palabras para describir escenas; el cómic combina imágenes y texto", "El guion es para adultos; el cómic es solo para niños", "El cómic siempre tiene más páginas que el guion"],
+      "correcta": 1,
+      "pista": "El guion describe; el cómic muestra. Ambos cuentan la misma historia de formas distintas. 📝"
+    },
+    {
+      "q": "¿Qué hace que el espectador se identifique con el héroe?",
+      "opciones": ["Que el héroe sea el más fuerte de todos", "Que el héroe tenga los mismos miedos y sueños que el espectador", "Que el héroe nunca cometa errores", "Que el héroe sea perfecto físicamente"],
+      "correcta": 1,
+      "pista": "Nos identificamos con los personajes que sienten lo mismo que nosotros. 💙"
+    },
+    {
+      "q": "¿Cuándo debes usar una 'splash page' (página completa) en tu cómic?",
+      "opciones": ["En cada página para que se vea más bonito", "Solo para la portada, nunca dentro del cómic", "Para los momentos más épicos e impactantes de la historia", "Solo para las escenas de acción con muchos efectos"],
+      "correcta": 2,
+      "pista": "La splash page es una bala — úsala solo cuando algo merece todo el espacio. 💥"
     }
   ]
 };

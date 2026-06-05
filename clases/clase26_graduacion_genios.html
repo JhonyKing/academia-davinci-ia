@@ -5,6 +5,38 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Clase 26 — Graduación Genios · Genios Creativos</title>
 <link rel="icon" type="image/svg+xml" href="robotsin/favicon.svg">
+<style>
+/* Mision glamorosa shimmer */
+.mission-numero {
+  font-family: var(--font-display, 'Space Grotesk', sans-serif);
+  font-size: clamp(22px, 5vw, 36px);
+  font-weight: 900;
+  letter-spacing: .04em;
+  text-align: center;
+  margin: 0 0 14px;
+  background: linear-gradient(90deg,
+    #FFD700 0%, #FF8C42 20%, #FFD700 40%,
+    #fff9e0 50%, #FFD700 60%, #FF8C42 80%, #FFD700 100%);
+  background-size: 250% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: missionShimmer 2.8s linear infinite;
+  text-shadow: none;
+}
+.mission-numero .mn-num { font-size: 1.5em; line-height: 1; }
+.mission-numero .mn-of  { font-size: .65em; opacity: .85; }
+@keyframes missionShimmer {
+  0%   { background-position: 0% center; }
+  100% { background-position: 250% center; }
+}
+.next .lab { font-size: 11px; font-weight: 700; opacity: .7; letter-spacing: .08em; text-transform: uppercase; }
+.next .ti  { font-size: 20px; font-weight: 900; color: #FFD700 !important; margin-top: 4px; line-height: 1.2; }
+nav.lessonnav .lnav-btn.next-btn .lab { font-size: 11px; opacity: .7; letter-spacing: .06em; }
+nav.lessonnav .lnav-btn.next-btn .ti  { font-size: 16px; font-weight: 900; color: #FFD700 !important; }
+#claimBtn:disabled { opacity: .35; cursor: not-allowed; }
+#badge-lock-msg { text-align: center; font-size: 13px; color: rgba(255,255,255,.45); margin-top: 10px; display: none; }
+</style>
 <link rel="stylesheet" href="css/genios.css">
 <link rel="stylesheet" href="css/lesson.css">
 <link rel="stylesheet" href="css/juice.css">
@@ -33,7 +65,7 @@
   <span class="spark" data-parallax="0.10" style="top:60px;left:40%;font-size:20px;animation-delay:0.5s;">★</span>
   <div class="lread" data-reveal>
     <span class="badge-pill">🏆 Mundo 6 — El Genio al Mundo</span>
-    <div class="kicker">Misión 26 de 26 · ¡Última clase!</div>
+    <div class="mission-numero">❖ MISIÓN <span class="mn-num">26</span> <span class="mn-of">de 26</span> ❖</div>
 
     <div class="mascot-stage">
       <img src="robotsin/robotsin_maestro.png" alt="Robotsin Maestro">
@@ -177,6 +209,10 @@
   </div>
 </section>
 
+
+<!-- ══ MINI QUIZ ══ -->
+<div id="lesson-quiz-container"></div>
+
 <!-- ═══════════ INSIGNIA ESPECIAL ═══════════ -->
 <section class="block badge-sec" id="badgeSec">
   <span class="spark" style="top:24px;left:10%;font-size:26px;">✦</span>
@@ -189,45 +225,13 @@
     <div class="bname">"GENIO CREATIVO MÁSTER ⭐⭐⭐"</div>
     <div class="bmeta">Clase 26 de 26 · ¡Curso completado! · Mundo 6 — El Genio al Mundo</div>
     <button class="btn gold btn-lg" id="claimBtn">🎓 ¡Reclamar mi diploma!</button>
-  </div>
-</section>
-
-<!-- ═══════════ MENSAJE DE ROBOTSIN MAESTRO ═══════════ -->
-<section class="block tint">
-  <div class="lread">
-    <div class="shead">
-      <span class="ava"><img src="robotsin/robotsin_maestro.png" alt="Robotsin Maestro"></span>
-      <div>
-        <div class="lab">Un mensaje especial para ti</div>
-        <h2>Robotsin Maestro <em>te habla</em></h2>
-      </div>
-    </div>
-
-    <div class="rmsg" style="--wc:var(--gold);">
-      <span class="ava"><img src="robotsin/robotsin_maestro.png" alt="Robotsin"></span>
-      <div>
-        <div class="who">Robotsin Maestro — discurso de graduación</div>
-        <div class="say">
-          "Querido Genio Creativo:<br><br>
-          Cuando llegaste a la Clase 1, no sabías qué era un prompt. Hoy tienes un personaje con historia, poderes, un universo entero, una serie animada, un tema musical propio y una voz inconfundible. <strong>¿Eso no es increíble?</strong><br><br>
-          Hay personas que pasan toda su vida con ideas brillantes en la cabeza que nunca crean. Tú eres diferente. Tú <em>terminaste</em>. Tú dijiste: 'Voy a crear algo y lo voy a terminar hasta el final.' Y lo hiciste. En 26 clases, con inteligencia artificial, a tu edad.<br><br>
-          Las herramientas que usaste — ChatGPT, Suno.ai, ElevenLabs, CapCut — seguirán mejorando. Habrá herramientas más potentes en el futuro. Pero lo que nadie puede darte ni quitarte es la mentalidad de creador que ahora tienes dentro.<br><br>
-          Sabes que las grandes historias necesitan un personaje con un problema real. Sabes que la música puede hacer llorar a una persona sin que diga una sola palabra. Sabes que revisar es lo que separa lo bueno de lo extraordinario. Sabes que el feedback de otros hace tu trabajo mejor, no peor.<br><br>
-          <strong>Esas cosas las llevarás contigo toda la vida.</strong><br><br>
-          No sé qué vas a ser cuando crezcas. Quizás director de cine. Quizás ingeniero. Quizás músico o escritor. Quizás algo que todavía no existe. Pero sé esto con certeza: el mundo que te espera necesita personas que puedan imaginar y también <em>crear</em>. No solo soñar — sino hacer realidad lo que sueñan.<br><br>
-          Tú ya eres esa persona.<br><br>
-          <em>Con orgullo, tu amigo robótico y eterno fan:</em><br>
-          <strong>D-IA Vinci Robotsin Maestro 🎓</strong>"
-        </div>
-      </div>
-    </div>
+    <p id="badge-lock-msg">Completa la entrega y el quiz para desbloquear</p>
   </div>
 </section>
 
 <!-- ═══════════ NAV LECCIÓN ═══════════ -->
 
-<!-- ══ MINI QUIZ ══ -->
-<div id="lesson-quiz-container"></div>
+
 <nav class="lessonnav">
   <a href="clase25_estreno_privado.html" class="lnav-btn prev-btn">
     <span class="ar">←</span>
@@ -328,5 +332,35 @@ if (/vercel\.app$|academiadavinci/.test(location.hostname)) {
 <!-- ── Lesson quiz ── -->
 <script>window.LESSON_QUIZ_DATA = {"claseNum": 26, "preguntas": [{"q": "¿Cuántas habilidades para la vida te llevas al terminar el curso?", "opciones": ["3 habilidades (prompts, edición y presentación)", "6 habilidades — una por cada Mundo del curso", "Solo 1 habilidad — la más importante de todas", "10 habilidades detalladas"], "correcta": 1, "pista": "Cada Mundo desarrolló una habilidad diferente: prompts, world-building, guion, animación, música y post-producción."}, {"q": "¿Qué habilidad desarrollaste en el Mundo 4 (El Genio en Movimiento)?", "opciones": ["Componer música con IA", "Escribir guiones y diálogos", "Animación con IA — dar vida a personajes en pantalla", "Diseño gráfico en Canva"], "correcta": 2, "pista": "En el Mundo 4 aprendiste a convertir imágenes estáticas en videos animados."}, {"q": "¿Qué hashtag debes usar al compartir tu episodio en redes sociales?", "opciones": ["#DaVinciAnimation", "#IACreativa", "#GenioCreativoDA", "#AcademiaDaVinci"], "correcta": 2, "pista": "El hashtag conecta todos los proyectos de los Genios Creativos en redes sociales."}, {"q": "¿Qué dice Robotsin Maestro sobre la importancia de lo que lograste?", "opciones": ["Que es un buen inicio pero aún falta mucho para ser creador profesional", "Que el logro más importante es haber aprendido a usar la IA", "Que un episodio de Pixar lo crean 350 personas en 4 años — tú lo hiciste en semanas con IA", "Que el certificado es lo más valioso que te llevas del curso"], "correcta": 2, "pista": "Lo que lograste es el futuro del entretenimiento — y tú ya sabes cómo funciona."}]};</script>
 <script src="js/lesson-quiz.js"></script>
+
+<!-- Badge lock: requiere entrega + quiz -->
+<script>
+(function(){
+  var btn = document.getElementById('claimBtn');
+  var lockMsg = document.getElementById('badge-lock-msg');
+  if (!btn) return;
+  btn.disabled = true;
+  if (lockMsg) lockMsg.style.display = 'block';
+  window._entregaDone = false;
+  window._quizPassed  = false;
+  window.checkBadgeUnlock = function() {
+    var ready = window._entregaDone && window._quizPassed;
+    btn.disabled = !ready;
+    if (lockMsg) lockMsg.style.display = ready ? 'none' : 'block';
+  };
+  var qc = document.getElementById('lesson-quiz-container');
+  if (qc) {
+    var obs = new MutationObserver(function() {
+      if (qc.querySelector('.lq-passed')) {
+        window._quizPassed = true; obs.disconnect();
+        window.checkBadgeUnlock();
+      }
+    });
+    obs.observe(qc, { childList: true, subtree: true });
+  }
+  var hasDz = document.querySelector('[id^="dz"]');
+  if (!hasDz) { window._entregaDone = true; }
+})();
+</script>
 </body>
 </html>

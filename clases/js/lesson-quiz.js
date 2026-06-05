@@ -59,7 +59,7 @@
     nextBtn.style.position = 'relative';
     const overlay = document.createElement('div');
     overlay.id = 'lq-lock-overlay';
-    overlay.innerHTML = '<span class="lq-lock-ico">🔒</span><span>Completa el quiz para continuar</span>';
+    overlay.innerHTML = '<span class="lq-lock-ico">🔒</span><span>' + (REQUIEREN_ENTREGA.has(claseNum) ? 'Completa la entrega y el quiz para continuar' : 'Completa el quiz para continuar') + '</span>';
     nextBtn.appendChild(overlay);
     // shake al hacer clic mientras está bloqueado
     nextBtn._lockedClick = function() {

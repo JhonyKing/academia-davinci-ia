@@ -3,14 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Reto del Mundo 6 — Genios Creativos</title>
+<title>Checkpoint Mundo 6 — El Genio al Mundo · Academia Da Vinci IA</title>
 <link rel="icon" type="image/svg+xml" href="robotsin/favicon.svg">
 <link rel="stylesheet" href="css/genios.css">
+<link rel="stylesheet" href="css/lesson.css">
 <link rel="stylesheet" href="css/juice.css">
 <link rel="stylesheet" href="css/quiz.css">
 </head>
 <body class="lesson" style="--wc: var(--m6)">
 
+<!-- ═══════════ TOPBAR ═══════════ -->
 <header class="topbar">
   <div class="wrap">
     <a class="lback" href="index.html">← Mapa</a>
@@ -20,28 +22,53 @@
   </div>
 </header>
 
-<section class="lhero" style="padding-bottom:24px;">
-  <span class="spark" data-parallax="0.14" style="top:30px;left:16%;font-size:24px;">✦</span>
-  <span class="spark" data-parallax="-0.12" style="top:70px;right:18%;font-size:18px;animation-delay:1s;">✧</span>
+<!-- ═══════════ HERO ═══════════ -->
+<section class="lhero">
+  <span class="spark" data-parallax="0.14" style="top:30px;left:14%;font-size:24px;">✦</span>
+  <span class="spark" data-parallax="-0.12" style="top:80px;right:16%;font-size:18px;animation-delay:1s;">✧</span>
+  <span class="spark" data-parallax="0.08" style="top:130px;left:6%;font-size:14px;animation-delay:1.5s;">✦</span>
+  <span class="spark" data-parallax="-0.06" style="top:170px;right:8%;font-size:20px;animation-delay:2.5s;">✧</span>
   <div class="lread" data-reveal>
-    <span class="badge-pill">🎯 Checkpoint del Mundo 6</span>
-    <div class="mascot-stage" style="width:120px;height:120px;margin:18px auto 14px;">
-      <img src="robotsin/robotsin_maestro.png" alt="Robotsin">
+    <span class="badge-pill">🎯 Checkpoint Final del Mundo 6</span>
+    <div class="kicker">¡El último reto! · Clases 23 a 26</div>
+
+    <div class="mascot-stage" style="width:140px;height:140px;margin:18px auto 14px;">
+      <img src="robotsin/robotsin_maestro.png" alt="D-IA Vinci Robotsin Maestro">
     </div>
-    <h1>El <span>Reto</span> del Genio</h1>
-    <p class="lead">Responde para demostrar que dominas el Mundo 6… ¡y gana tu insignia de maestría!</p>
+
+    <h1>¡El <span>Reto Final</span> del Genio Completo!</h1>
+    <p class="lead">Este es el último checkpoint antes de tu certificado. Responde 20 preguntas sobre ensamble, revisión, estreno y graduación. ¡80% mínimo para ganar tu insignia dorada!</p>
+
+    <div style="background:rgba(255,77,94,.1);border:2px solid rgba(255,77,94,.25);border-radius:20px;padding:22px 20px;margin:22px 0 0;text-align:left;">
+      <div style="font-family:var(--font-display);font-weight:700;color:var(--m6);font-size:14px;margin-bottom:14px;letter-spacing:.04em;">📚 TEMAS DE ESTE MUNDO FINAL</div>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;">
+        <li style="display:flex;align-items:center;gap:10px;"><span style="background:var(--m6);color:#fff;border-radius:8px;padding:3px 10px;font-size:12px;font-weight:800;white-space:nowrap;">Clase 23</span><span style="color:var(--ink-2);font-size:14px;">Ensamble Final — Post-producción integral</span></li>
+        <li style="display:flex;align-items:center;gap:10px;"><span style="background:var(--m6);color:#fff;border-radius:8px;padding:3px 10px;font-size:12px;font-weight:800;white-space:nowrap;">Clase 24</span><span style="color:var(--ink-2);font-size:14px;">Revisión y Edición — Checklist de calidad</span></li>
+        <li style="display:flex;align-items:center;gap:10px;"><span style="background:var(--m6);color:#fff;border-radius:8px;padding:3px 10px;font-size:12px;font-weight:800;white-space:nowrap;">Clase 25</span><span style="color:var(--ink-2);font-size:14px;">Estreno Privado — Feedback constructivo</span></li>
+        <li style="display:flex;align-items:center;gap:10px;"><span style="background:var(--m6);color:#fff;border-radius:8px;padding:3px 10px;font-size:12px;font-weight:800;white-space:nowrap;">Clase 26</span><span style="color:var(--ink-2);font-size:14px;">Graduación — 6 habilidades para toda la vida</span></li>
+      </ul>
+    </div>
   </div>
 </section>
 
-<section class="block" style="padding-top:10px;">
+<!-- ═══════════ QUIZ ═══════════ -->
+<section class="block tint" style="padding-top:14px;">
   <div class="lread">
+    <div class="shead" data-reveal>
+      <span class="ava"><img src="robotsin/robotsin_maestro.png" alt="Robotsin"></span>
+      <div>
+        <div class="lab">20 preguntas · Mínimo 80% para el certificado</div>
+        <h2>El <em>Gran Reto Final</em> del Genio</h2>
+      </div>
+    </div>
     <div class="quiz" data-reveal><div id="quiz"></div></div>
   </div>
 </section>
 
+<!-- ═══════════ FOOTER ═══════════ -->
 <footer class="foot">
   <div class="ico">🏆✨</div>
-  <b>Academia Da Vinci IA</b> · Checkpoint · Mundo 6 — El Genio al Mundo
+  <b>Academia Da Vinci IA</b> · Checkpoint Final · Mundo 6 — El Genio al Mundo
 </footer>
 
 <script src="js/juice.js"></script>
@@ -56,48 +83,124 @@ window.QUIZ_DATA = {
   "siguienteLabel": "🏆 Ver mi certificado",
   "preguntas": [
     {
-      "q": "\"Ensamblar\" tu proyecto significa…",
-      "opciones": [
-        "Romperlo",
-        "Unir todas las piezas (video, audio y música)",
-        "Empezar de cero",
-        "Esconderlo"
-      ],
+      "q": "¿Qué significa 'post-producción integral'?",
+      "opciones": ["Producir más contenido después del episodio principal", "Juntar video editado + audio mezclado + subtítulos + créditos en el producto final", "Publicar el episodio en todas las plataformas disponibles", "Hacer los retoques finales solo al audio del episodio"],
       "correcta": 1,
-      "pista": "Es juntar todo en una sola película. 🧩"
+      "pista": "Post-producción = ensamblar todas las piezas en el producto final. 🧩"
+    },
+    {
+      "q": "¿Cuál es la estructura correcta de los créditos finales?",
+      "opciones": ["Solo el nombre del creador en letras grandes", "Lista de todos los programas y aplicaciones usadas", "Título de la serie, episodio, creado por, música por, herramientas usadas y logo academia", "Los créditos van al inicio, no al final del episodio"],
+      "correcta": 2,
+      "pista": "Los créditos le dan crédito a todo lo que hizo posible tu episodio. 🎬"
+    },
+    {
+      "q": "Según Robotsin, ¿qué significa guardar un 'master file'?",
+      "opciones": ["Subir el archivo a la nube para que el instructor lo pueda ver", "Guardar el archivo final en la mayor calidad posible — la versión maestra", "Hacer una copia de seguridad del archivo en 10 dispositivos diferentes", "Convertir el archivo a formato MP3 para compartirlo fácil"],
+      "correcta": 1,
+      "pista": "El master file es tu original — de él salen todas las demás versiones. 💎"
+    },
+    {
+      "q": "¿Cuándo debes ver el episodio de corrido por primera vez?",
+      "opciones": ["Antes de empezar a editarlo para tener una referencia", "Solo al final de todo el curso en la graduación", "Al terminar el ensamble — es 'La Primera Vista' y es un momento especial", "No es necesario verlo completo hasta que lo vea el grupo"],
+      "correcta": 2,
+      "pista": "'La Primera Vista' es un momento único — ¡disfrútala! 🎬"
+    },
+    {
+      "q": "¿Cuántos puntos tiene el 'checklist de calidad' que aplicas en la Clase 24?",
+      "opciones": ["3 puntos básicos", "5 puntos (imagen nítida, audio sincronizado, subtítulos correctos, créditos completos, duración adecuada)", "10 puntos detallados", "Solo 1 punto — el más importante"],
+      "correcta": 1,
+      "pista": "5 checkmarks para asegurarte de que tu episodio está listo. ✅"
+    },
+    {
+      "q": "¿Cuántas cosas debes mejorar en los 'Retoques'?",
+      "opciones": ["Todas las que puedas — más mejoras es siempre mejor", "Solo 1 — la más urgente", "Las 3 más importantes que identificaste en la revisión", "Exactamente 7 cosas, ni más ni menos"],
+      "correcta": 2,
+      "pista": "3 retoques estratégicos valen más que 100 cambios sin foco. 🎯"
+    },
+    {
+      "q": "¿Cómo detectar si la transición entre escenas es 'brusca'?",
+      "opciones": ["Si la transición dura menos de 1 segundo", "Si el espectador nota el corte porque rompe el ritmo o la continuidad", "Si no hay música de fondo durante la transición", "Si los colores de ambas escenas son muy diferentes"],
+      "correcta": 1,
+      "pista": "Si notas el corte, la transición no está bien. Debe ser invisible. 🔍"
+    },
+    {
+      "q": "¿Cuál es el mejor método para detectar problemas en tu episodio?",
+      "opciones": ["Verlo tú solo en un cuarto a oscuras con auriculares", "Leer el guion original y compararlo con el video", "Mostrárselo a alguien que no lo haya visto y observar su reacción", "Contar cuántos segundos dura cada escena y comparar con el plan original"],
+      "correcta": 2,
+      "pista": "Los ojos frescos ven lo que tú ya no ves. ¡Deja que otros te ayuden! 👀"
+    },
+    {
+      "q": "¿Cuál es la 'fórmula de retroalimentación constructiva' que aprendiste?",
+      "opciones": ["Decir lo que estuvo mal, lo regular y lo que estuvo bien", "1 cosa que funcionó MUY bien + 1 pregunta genuina + 1 sugerencia amable", "Solo hablar de los puntos negativos para que el creador mejore", "Calificar con un número del 1 al 10 y explicar la nota"],
+      "correcta": 1,
+      "pista": "Positivo + pregunta + sugerencia amable = feedback que construye. 💬"
+    },
+    {
+      "q": "¿Cómo debe comenzar el mejor feedback según Robotsin?",
+      "opciones": ["'Esto estuvo mal porque...'", "'Yo lo hubiera hecho diferente...'", "'Sentí que...'", "'En mi opinión, deberías...'"],
+      "correcta": 2,
+      "pista": "'Sentí que...' habla de tu experiencia, no critica al creador. 🤝"
+    },
+    {
+      "q": "¿Qué hace el 'Braintrust' de Pixar antes de lanzar una película?",
+      "opciones": ["Vota para eliminar escenas que no les gustan", "Da feedback brutal en privado para mejorar la película antes de que nadie la vea", "Decide el precio de entrada para la premiere", "Crea el tráiler oficial de la película"],
+      "correcta": 1,
+      "pista": "El Braintrust mejora las películas antes de que el mundo las vea. Tú puedes hacer lo mismo. 🎬"
+    },
+    {
+      "q": "¿Qué debes hacer cuando recibes retroalimentación que no te gusta?",
+      "opciones": ["Defender inmediatamente tu decisión creativa", "Ignorar completamente el feedback si no estás de acuerdo", "Escuchar sin defenderte, anotar todo, agradecer y decidir qué incorporar", "Cambiar todo lo que te sugieran sin filtrar nada"],
+      "correcta": 2,
+      "pista": "Escucha todo, agradece y filtra lo que sirve. El creador decide. 👑"
+    },
+    {
+      "q": "¿Cuántas habilidades para la vida te llevas al terminar el curso?",
+      "opciones": ["3 habilidades (prompts, edición y presentación)", "6 habilidades — una por cada Mundo del curso", "Solo 1 habilidad — la más importante de todas", "10 habilidades detalladas"],
+      "correcta": 1,
+      "pista": "6 mundos = 6 habilidades que te acompañarán toda la vida. 🌟"
+    },
+    {
+      "q": "¿Qué habilidad desarrollaste en el Mundo 4 (El Genio en Movimiento)?",
+      "opciones": ["Componer música con IA", "Escribir guiones y diálogos", "Animación con IA — dar vida a personajes en pantalla", "Diseño gráfico en Canva"],
+      "correcta": 2,
+      "pista": "¡Animaste a tu personaje! Eso se llama producción cinematográfica con IA. 🎬"
+    },
+    {
+      "q": "¿Qué hashtag debes usar al compartir tu episodio en redes sociales?",
+      "opciones": ["#DaVinciAnimation", "#IACreativa", "#GenioCreativoDA", "#AcademiaDaVinci"],
+      "correcta": 2,
+      "pista": "#GenioCreativoDA te conecta con todos los genios de la Academia. 🌐"
+    },
+    {
+      "q": "¿Qué dice Robotsin Maestro sobre la importancia de lo que lograste?",
+      "opciones": ["Que es un buen inicio pero aún falta mucho para ser creador profesional", "Que el logro más importante es haber aprendido a usar la IA", "Que un episodio de Pixar lo crean 350 personas en 4 años — tú lo hiciste en semanas con IA", "Que el certificado es lo más valioso que te llevas del curso"],
+      "correcta": 2,
+      "pista": "350 personas, 4 años vs. 1 genio con IA en semanas. ¡Eso eres tú! 🏆"
     },
     {
       "q": "Antes de publicar en YouTube, lo mejor es subirlo como…",
-      "opciones": [
-        "Público para todos",
-        "Oculto, hasta que papá/mamá aprueben",
-        "En vivo",
-        "Borrado"
-      ],
+      "opciones": ["Público para todos", "Oculto, hasta que papá/mamá aprueben", "En vivo", "Borrado"],
       "correcta": 1,
-      "pista": "Primero oculto y con permiso de un adulto. 🔒"
+      "pista": "Primero oculto y con permiso de un adulto — seguridad ante todo. 🔒"
     },
     {
       "q": "El estreno privado es…",
-      "opciones": [
-        "Mostrar tu peli a tu familia",
-        "Venderla",
-        "Borrarla",
-        "Esconderla para siempre"
-      ],
+      "opciones": ["Mostrar tu peli a tu familia antes de publicarla al mundo", "Venderla al mejor postor", "Borrarla si no gustó", "Esconderla para siempre"],
       "correcta": 0,
-      "pista": "¡Es tu première para la familia! 🎉"
+      "pista": "¡Es tu première familiar! El primer público es el que más te quiere. 🎉"
     },
     {
-      "q": "Un buen creador siempre…",
-      "opciones": [
-        "Usa la IA con seguridad y supervisión de un adulto",
-        "Trabaja solo y a escondidas",
-        "Copia todo",
-        "No revisa nada"
-      ],
+      "q": "Un buen creador digital siempre…",
+      "opciones": ["Usa la IA con seguridad y supervisión de un adulto", "Trabaja solo y a escondidas para sorprender", "Copia lo que más le gusta sin dar crédito", "No revisa su trabajo antes de publicarlo"],
       "correcta": 0,
-      "pista": "Seguridad y acompañamiento adulto, siempre. 🛡️"
+      "pista": "Seguridad, acompañamiento adulto y ética — siempre. 🛡️"
+    },
+    {
+      "q": "¿Qué aprendiste en el Mundo 1 que usaste en TODOS los mundos del curso?",
+      "opciones": ["Cómo usar Canva para diseño", "El prompt — la habilidad de hablarle a la IA para crear cualquier cosa", "Cómo editar videos con CapCut", "La estructura en 3 actos de las historias"],
+      "correcta": 1,
+      "pista": "El prompt es la llave maestra — con ella puedes crear imágenes, música, animación y más. 🗝️"
     }
   ]
 };

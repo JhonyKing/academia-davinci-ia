@@ -5,6 +5,38 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Clase 13 — Episodio Completo · Genios Creativos</title>
 <link rel="icon" type="image/svg+xml" href="robotsin/favicon.svg">
+<style>
+/* Mision glamorosa shimmer */
+.mission-numero {
+  font-family: var(--font-display, 'Space Grotesk', sans-serif);
+  font-size: clamp(22px, 5vw, 36px);
+  font-weight: 900;
+  letter-spacing: .04em;
+  text-align: center;
+  margin: 0 0 14px;
+  background: linear-gradient(90deg,
+    #FFD700 0%, #FF8C42 20%, #FFD700 40%,
+    #fff9e0 50%, #FFD700 60%, #FF8C42 80%, #FFD700 100%);
+  background-size: 250% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: missionShimmer 2.8s linear infinite;
+  text-shadow: none;
+}
+.mission-numero .mn-num { font-size: 1.5em; line-height: 1; }
+.mission-numero .mn-of  { font-size: .65em; opacity: .85; }
+@keyframes missionShimmer {
+  0%   { background-position: 0% center; }
+  100% { background-position: 250% center; }
+}
+.next .lab { font-size: 11px; font-weight: 700; opacity: .7; letter-spacing: .08em; text-transform: uppercase; }
+.next .ti  { font-size: 20px; font-weight: 900; color: #FFD700 !important; margin-top: 4px; line-height: 1.2; }
+nav.lessonnav .lnav-btn.next-btn .lab { font-size: 11px; opacity: .7; letter-spacing: .06em; }
+nav.lessonnav .lnav-btn.next-btn .ti  { font-size: 16px; font-weight: 900; color: #FFD700 !important; }
+#claimBtn:disabled { opacity: .35; cursor: not-allowed; }
+#badge-lock-msg { text-align: center; font-size: 13px; color: rgba(255,255,255,.45); margin-top: 10px; display: none; }
+</style>
 <link rel="stylesheet" href="css/genios.css">
 <link rel="stylesheet" href="css/lesson.css">
 <link rel="stylesheet" href="css/juice.css">
@@ -32,7 +64,7 @@
   <span class="spark" data-parallax="-0.12" style="top:80px;right:16%;font-size:18px;animation-delay:1s;">✧</span>
   <div class="lread" data-reveal>
     <span class="badge-pill">📖 Mundo 3 — La Historia del Genio</span>
-    <div class="kicker">Misión 13 de 26 · Final del Mundo 3</div>
+    <div class="mission-numero">❖ MISIÓN <span class="mn-num">13</span> <span class="mn-of">de 26</span> ❖</div>
 
     <div class="mascot-stage">
       <img src="robotsin/robotsin_escritor.png" alt="D-IA Vinci Robotsin Escritor">
@@ -213,6 +245,25 @@
   </div>
 </section>
 
+<!-- ═══════════ CIERRE ═══════════ -->
+<section class="block tint">
+  <div class="lread">
+    <div class="shead">
+      <span class="ava"><img src="robotsin/robotsin_escritor.png" alt="Robotsin"></span>
+      <div>
+        <div class="lab">Resumen del Mundo 3</div>
+        <h2>Todo lo que <em>creaste</em> en estas 4 clases</h2>
+      </div>
+    </div>
+
+    <div class="cierre" data-reveal>
+      <div class="rec"><div class="em">📜</div><h4>El Guion (Clase 10)</h4><p>Estructura de 3 actos + viaje del héroe. Tu historia tiene inicio, desarrollo y final épico.</p></div>
+      <div class="rec"><div class="em">💬</div><h4>Los Diálogos (Clase 11)</h4><p>Cada personaje tiene su propia voz. Tu héroe y tu villano hablan diferente y con propósito.</p></div>
+      <div class="rec"><div class="em">📖</div><h4>El Cómic (Clase 12)</h4><p>Imágenes generadas con IA + bocadillos + onomatopeyas. Tu historia se hizo visible.</p></div>
+      <div class="rec"><div class="em">🚀</div><h4>La Publicación (Clase 13)</h4><p>Proceso editorial completo. Tu episodio está en el mundo. Eso es lo que hacen los creadores.</p></div>
+    </div>
+  </div>
+</section>
 <!-- ═══════════ TAREA ═══════════ -->
 <section class="block tint">
   <div class="lread">
@@ -253,6 +304,10 @@
   </div>
 </section>
 
+
+<!-- ══ MINI QUIZ ══ -->
+<div id="lesson-quiz-container"></div>
+
 <!-- ═══════════ INSIGNIA ═══════════ -->
 <section class="block badge-sec" id="badgeSec">
   <span class="spark" style="top:24px;left:18%;font-size:22px;">✦</span>
@@ -263,27 +318,13 @@
     <div class="bname">"Escritor Creativo"</div>
     <div class="bmeta">Clase 13 · Mundo 3 — La Historia del Genio · Insignia de Módulo</div>
     <button class="btn gold btn-lg" id="claimBtn">🏆 ¡Reclamar mi insignia de módulo!</button>
+    <p id="badge-lock-msg">Completa la entrega y el quiz para desbloquear</p>
   </div>
 </section>
 
-<!-- ═══════════ CIERRE ═══════════ -->
-<section class="block tint">
+<!-- SIGUIENTE MISION -->
+<section class="block" style="padding-top:0">
   <div class="lread">
-    <div class="shead">
-      <span class="ava"><img src="robotsin/robotsin_escritor.png" alt="Robotsin"></span>
-      <div>
-        <div class="lab">Resumen del Mundo 3</div>
-        <h2>Todo lo que <em>creaste</em> en estas 4 clases</h2>
-      </div>
-    </div>
-
-    <div class="cierre" data-reveal>
-      <div class="rec"><div class="em">📜</div><h4>El Guion (Clase 10)</h4><p>Estructura de 3 actos + viaje del héroe. Tu historia tiene inicio, desarrollo y final épico.</p></div>
-      <div class="rec"><div class="em">💬</div><h4>Los Diálogos (Clase 11)</h4><p>Cada personaje tiene su propia voz. Tu héroe y tu villano hablan diferente y con propósito.</p></div>
-      <div class="rec"><div class="em">📖</div><h4>El Cómic (Clase 12)</h4><p>Imágenes generadas con IA + bocadillos + onomatopeyas. Tu historia se hizo visible.</p></div>
-      <div class="rec"><div class="em">🚀</div><h4>La Publicación (Clase 13)</h4><p>Proceso editorial completo. Tu episodio está en el mundo. Eso es lo que hacen los creadores.</p></div>
-    </div>
-
     <div class="next">
       <span class="em">🎬</span>
       <div>
@@ -296,8 +337,7 @@
 
 <!-- ═══════════ NAV LECCIÓN ═══════════ -->
 
-<!-- ══ MINI QUIZ ══ -->
-<div id="lesson-quiz-container"></div>
+
 <nav class="lessonnav">
   <a href="clase12_el_comic.html" class="lnav-btn prev-btn">
     <span class="ar">←</span>
@@ -400,5 +440,35 @@ if (/vercel\.app$|academiadavinci/.test(location.hostname)) {
 <!-- ── Lesson quiz ── -->
 <script>window.LESSON_QUIZ_DATA = {"claseNum": 13, "preguntas": [{"q": "¿Cuáles son los 4 pasos del proceso editorial?", "opciones": ["Escribir, ilustrar, colorear y publicar", "Revisión, corrección, mejora y publicación", "Borrador, copia, impresión y distribución", "Idea, guion, cómic y presentación"], "correcta": 1, "pista": "Los escritores profesionales nunca publican el primer borrador."}, {"q": "¿Cuántas cosas debes mejorar en la revisión según Robotsin?", "opciones": ["Todo lo que puedas hasta que sea perfecto", "Nada — si lo terminaste ya está listo", "Solo 1 cosa — la más importante", "3 cosas — porque la perfección es enemiga de lo publicado"], "correcta": 3, "pista": "Identifica las 3, mejóralas y publica con orgullo."}, {"q": "¿Qué incluye la 'Portada' de tu cómic?", "opciones": ["Solo una imagen grande sin texto", "El precio y el código de barras del cómic", "Título de la serie, número de episodio, imagen impactante y créditos", "Un resumen de todo lo que pasa en el episodio"], "correcta": 2, "pista": "La portada es la primera impresión — debe enganchar a quien la vea."}, {"q": "¿Por qué compartir el episodio con tu familia es parte de la tarea?", "opciones": ["Para que ellos lo corrijan antes de entregarlo al instructor", "Porque la obra cobra vida cuando alguien más la ve", "Para que te digan si necesitas cambiar el título", "Solo es opcional — no es realmente parte de la tarea"], "correcta": 1, "pista": "El arte sin público es solo un dibujo en un cajón."}]};</script>
 <script src="js/lesson-quiz.js"></script>
+
+<!-- Badge lock: requiere entrega + quiz -->
+<script>
+(function(){
+  var btn = document.getElementById('claimBtn');
+  var lockMsg = document.getElementById('badge-lock-msg');
+  if (!btn) return;
+  btn.disabled = true;
+  if (lockMsg) lockMsg.style.display = 'block';
+  window._entregaDone = false;
+  window._quizPassed  = false;
+  window.checkBadgeUnlock = function() {
+    var ready = window._entregaDone && window._quizPassed;
+    btn.disabled = !ready;
+    if (lockMsg) lockMsg.style.display = ready ? 'none' : 'block';
+  };
+  var qc = document.getElementById('lesson-quiz-container');
+  if (qc) {
+    var obs = new MutationObserver(function() {
+      if (qc.querySelector('.lq-passed')) {
+        window._quizPassed = true; obs.disconnect();
+        window.checkBadgeUnlock();
+      }
+    });
+    obs.observe(qc, { childList: true, subtree: true });
+  }
+  var hasDz = document.querySelector('[id^="dz"]');
+  if (!hasDz) { window._entregaDone = true; }
+})();
+</script>
 </body>
 </html>

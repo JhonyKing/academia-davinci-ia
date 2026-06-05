@@ -5,6 +5,38 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Clase 22 — Audio Completo · Genios Creativos</title>
 <link rel="icon" type="image/svg+xml" href="robotsin/favicon.svg">
+<style>
+/* Mision glamorosa shimmer */
+.mission-numero {
+  font-family: var(--font-display, 'Space Grotesk', sans-serif);
+  font-size: clamp(22px, 5vw, 36px);
+  font-weight: 900;
+  letter-spacing: .04em;
+  text-align: center;
+  margin: 0 0 14px;
+  background: linear-gradient(90deg,
+    #FFD700 0%, #FF8C42 20%, #FFD700 40%,
+    #fff9e0 50%, #FFD700 60%, #FF8C42 80%, #FFD700 100%);
+  background-size: 250% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: missionShimmer 2.8s linear infinite;
+  text-shadow: none;
+}
+.mission-numero .mn-num { font-size: 1.5em; line-height: 1; }
+.mission-numero .mn-of  { font-size: .65em; opacity: .85; }
+@keyframes missionShimmer {
+  0%   { background-position: 0% center; }
+  100% { background-position: 250% center; }
+}
+.next .lab { font-size: 11px; font-weight: 700; opacity: .7; letter-spacing: .08em; text-transform: uppercase; }
+.next .ti  { font-size: 20px; font-weight: 900; color: #FFD700 !important; margin-top: 4px; line-height: 1.2; }
+nav.lessonnav .lnav-btn.next-btn .lab { font-size: 11px; opacity: .7; letter-spacing: .06em; }
+nav.lessonnav .lnav-btn.next-btn .ti  { font-size: 16px; font-weight: 900; color: #FFD700 !important; }
+#claimBtn:disabled { opacity: .35; cursor: not-allowed; }
+#badge-lock-msg { text-align: center; font-size: 13px; color: rgba(255,255,255,.45); margin-top: 10px; display: none; }
+</style>
 <link rel="stylesheet" href="css/genios.css">
 <link rel="stylesheet" href="css/lesson.css">
 <link rel="stylesheet" href="css/juice.css">
@@ -32,7 +64,7 @@
   <span class="spark" data-parallax="-0.12" style="top:80px;right:16%;font-size:18px;animation-delay:1s;">✧</span>
   <div class="lread" data-reveal>
     <span class="badge-pill">🎵 Mundo 5 — La Voz del Genio</span>
-    <div class="kicker">Misión 22 de 26 · Final de Mundo 5</div>
+    <div class="mission-numero">❖ MISIÓN <span class="mn-num">22</span> <span class="mn-of">de 26</span> ❖</div>
 
     <div class="mascot-stage">
       <img src="robotsin/robotsin_musico.png" alt="Robotsin Músico">
@@ -168,6 +200,25 @@
   </div>
 </section>
 
+<!-- ═══════════ CIERRE ═══════════ -->
+<section class="block tint">
+  <div class="lread">
+    <div class="shead">
+      <span class="ava"><img src="robotsin/robotsin_musico.png" alt="Robotsin"></span>
+      <div>
+        <div class="lab">Resumen · 5 min</div>
+        <h2>Lo que <em>aprendiste hoy</em></h2>
+      </div>
+    </div>
+
+    <div class="cierre" data-reveal>
+      <div class="rec"><div class="em">🎚️</div><h4>La regla de oro del audio</h4><p>Voz 100%, música 25%, efectos 60% — la fórmula que usan los estudios de Hollywood.</p></div>
+      <div class="rec"><div class="em">🎬</div><h4>Sincronización dominada</h4><p>La voz del personaje se mueve perfectamente sincronizada con la imagen.</p></div>
+      <div class="rec"><div class="em">🏆</div><h4>Episodio sonorizado</h4><p>El episodio completo tiene música, efectos y voz con niveles profesionales.</p></div>
+      <div class="rec"><div class="em">⭐</div><h4>¡Mundo 5 completado!</h4><p>Tema musical + voz del personaje + efectos de sonido + mezcla de audio = Genio del Sonido.</p></div>
+    </div>
+  </div>
+</section>
 <!-- ═══════════ TAREA ═══════════ -->
 <section class="block tint">
   <div class="lread">
@@ -197,6 +248,10 @@
   </div>
 </section>
 
+
+<!-- ══ MINI QUIZ ══ -->
+<div id="lesson-quiz-container"></div>
+
 <!-- ═══════════ INSIGNIA ═══════════ -->
 <section class="block badge-sec" id="badgeSec">
   <span class="spark" style="top:24px;left:18%;font-size:22px;">✦</span>
@@ -207,27 +262,13 @@
     <div class="bname">"Productor Musical"</div>
     <div class="bmeta">Clase 22 · Mundo 5 — La Voz del Genio · ¡Completaste el Mundo 5!</div>
     <button class="btn gold btn-lg" id="claimBtn">⭐ ¡Reclamar mi insignia!</button>
+    <p id="badge-lock-msg">Completa la entrega y el quiz para desbloquear</p>
   </div>
 </section>
 
-<!-- ═══════════ CIERRE ═══════════ -->
-<section class="block tint">
+<!-- SIGUIENTE MISION -->
+<section class="block" style="padding-top:0">
   <div class="lread">
-    <div class="shead">
-      <span class="ava"><img src="robotsin/robotsin_musico.png" alt="Robotsin"></span>
-      <div>
-        <div class="lab">Resumen · 5 min</div>
-        <h2>Lo que <em>aprendiste hoy</em></h2>
-      </div>
-    </div>
-
-    <div class="cierre" data-reveal>
-      <div class="rec"><div class="em">🎚️</div><h4>La regla de oro del audio</h4><p>Voz 100%, música 25%, efectos 60% — la fórmula que usan los estudios de Hollywood.</p></div>
-      <div class="rec"><div class="em">🎬</div><h4>Sincronización dominada</h4><p>La voz del personaje se mueve perfectamente sincronizada con la imagen.</p></div>
-      <div class="rec"><div class="em">🏆</div><h4>Episodio sonorizado</h4><p>El episodio completo tiene música, efectos y voz con niveles profesionales.</p></div>
-      <div class="rec"><div class="em">⭐</div><h4>¡Mundo 5 completado!</h4><p>Tema musical + voz del personaje + efectos de sonido + mezcla de audio = Genio del Sonido.</p></div>
-    </div>
-
     <div class="next">
       <span class="em">▶️</span>
       <div>
@@ -240,8 +281,7 @@
 
 <!-- ═══════════ NAV LECCIÓN ═══════════ -->
 
-<!-- ══ MINI QUIZ ══ -->
-<div id="lesson-quiz-container"></div>
+
 <nav class="lessonnav">
   <a href="clase21_efectos_de_sonido.html" class="lnav-btn prev-btn">
     <span class="ar">←</span>
@@ -342,5 +382,35 @@ if (/vercel\.app$|academiadavinci/.test(location.hostname)) {
 <!-- ── Lesson quiz ── -->
 <script>window.LESSON_QUIZ_DATA = {"claseNum": 22, "preguntas": [{"q": "¿A qué volumen debe estar la VOZ del personaje en la mezcla final?", "opciones": ["Al 50% para equilibrarse con la música", "Al 75% para que no tape los efectos", "Al 100% — la voz siempre es lo más importante", "Al 60% para que la música tenga protagonismo"], "correcta": 2, "pista": "La voz ES la historia. Todo lo demás la apoya."}, {"q": "¿Qué es el 'fade in' en el audio?", "opciones": ["Cuando el audio se corta de repente al terminar una escena", "Cuando la música sube gradualmente al inicio de una escena", "Cuando se silencia la voz del personaje para escuchar el ambiente", "Cuando se duplica el volumen de los efectos de sonido"], "correcta": 1, "pista": "Fade in = entrar suave; fade out = salir suave. Respira naturalmente."}, {"q": "¿Qué significa 'duck' en la mezcla de audio?", "opciones": ["Eliminar completamente la música de una escena", "Bajar la música automáticamente cuando alguien habla y subirla cuando termina", "Duplicar el volumen de los efectos de sonido", "Añadir eco y reverberación a la voz del personaje"], "correcta": 1, "pista": "El 'duck' es lo que hace que todo suene profesional sin que el espectador lo note."}, {"q": "¿Cuál es la señal de que lograste una buena mezcla de audio?", "opciones": ["Que la música sea lo más fuerte de todo", "Que todos los elementos estén al mismo volumen exacto", "Que el espectador NO note el sonido porque está perfectamente equilibrado", "Que los efectos de sonido sean más fuertes que la voz"], "correcta": 2, "pista": "El mejor sonido es el que no se nota — simplemente te sumerge en la historia."}]};</script>
 <script src="js/lesson-quiz.js"></script>
+
+<!-- Badge lock: requiere entrega + quiz -->
+<script>
+(function(){
+  var btn = document.getElementById('claimBtn');
+  var lockMsg = document.getElementById('badge-lock-msg');
+  if (!btn) return;
+  btn.disabled = true;
+  if (lockMsg) lockMsg.style.display = 'block';
+  window._entregaDone = false;
+  window._quizPassed  = false;
+  window.checkBadgeUnlock = function() {
+    var ready = window._entregaDone && window._quizPassed;
+    btn.disabled = !ready;
+    if (lockMsg) lockMsg.style.display = ready ? 'none' : 'block';
+  };
+  var qc = document.getElementById('lesson-quiz-container');
+  if (qc) {
+    var obs = new MutationObserver(function() {
+      if (qc.querySelector('.lq-passed')) {
+        window._quizPassed = true; obs.disconnect();
+        window.checkBadgeUnlock();
+      }
+    });
+    obs.observe(qc, { childList: true, subtree: true });
+  }
+  var hasDz = document.querySelector('[id^="dz"]');
+  if (!hasDz) { window._entregaDone = true; }
+})();
+</script>
 </body>
 </html>

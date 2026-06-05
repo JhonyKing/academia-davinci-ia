@@ -5,6 +5,38 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Clase 23 — Ensamble Final · Genios Creativos</title>
 <link rel="icon" type="image/svg+xml" href="robotsin/favicon.svg">
+<style>
+/* Mision glamorosa shimmer */
+.mission-numero {
+  font-family: var(--font-display, 'Space Grotesk', sans-serif);
+  font-size: clamp(22px, 5vw, 36px);
+  font-weight: 900;
+  letter-spacing: .04em;
+  text-align: center;
+  margin: 0 0 14px;
+  background: linear-gradient(90deg,
+    #FFD700 0%, #FF8C42 20%, #FFD700 40%,
+    #fff9e0 50%, #FFD700 60%, #FF8C42 80%, #FFD700 100%);
+  background-size: 250% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: missionShimmer 2.8s linear infinite;
+  text-shadow: none;
+}
+.mission-numero .mn-num { font-size: 1.5em; line-height: 1; }
+.mission-numero .mn-of  { font-size: .65em; opacity: .85; }
+@keyframes missionShimmer {
+  0%   { background-position: 0% center; }
+  100% { background-position: 250% center; }
+}
+.next .lab { font-size: 11px; font-weight: 700; opacity: .7; letter-spacing: .08em; text-transform: uppercase; }
+.next .ti  { font-size: 20px; font-weight: 900; color: #FFD700 !important; margin-top: 4px; line-height: 1.2; }
+nav.lessonnav .lnav-btn.next-btn .lab { font-size: 11px; opacity: .7; letter-spacing: .06em; }
+nav.lessonnav .lnav-btn.next-btn .ti  { font-size: 16px; font-weight: 900; color: #FFD700 !important; }
+#claimBtn:disabled { opacity: .35; cursor: not-allowed; }
+#badge-lock-msg { text-align: center; font-size: 13px; color: rgba(255,255,255,.45); margin-top: 10px; display: none; }
+</style>
 <link rel="stylesheet" href="css/genios.css">
 <link rel="stylesheet" href="css/lesson.css">
 <link rel="stylesheet" href="css/juice.css">
@@ -32,7 +64,7 @@
   <span class="spark" data-parallax="-0.12" style="top:80px;right:16%;font-size:18px;animation-delay:1s;">✧</span>
   <div class="lread" data-reveal>
     <span class="badge-pill">🏆 Mundo 6 — El Genio al Mundo</span>
-    <div class="kicker">Misión 23 de 26</div>
+    <div class="mission-numero">❖ MISIÓN <span class="mn-num">23</span> <span class="mn-of">de 26</span> ❖</div>
 
     <div class="mascot-stage">
       <img src="robotsin/robotsin_maestro.png" alt="Robotsin Maestro">
@@ -170,6 +202,25 @@
   </div>
 </section>
 
+<!-- ═══════════ CIERRE ═══════════ -->
+<section class="block tint">
+  <div class="lread">
+    <div class="shead">
+      <span class="ava"><img src="robotsin/robotsin_maestro.png" alt="Robotsin"></span>
+      <div>
+        <div class="lab">Resumen · 5 min</div>
+        <h2>Lo que <em>aprendiste hoy</em></h2>
+      </div>
+    </div>
+
+    <div class="cierre" data-reveal>
+      <div class="rec"><div class="em">🎬</div><h4>Post-producción completa</h4><p>Video + audio + subtítulos + créditos = un episodio profesional listo para el mundo.</p></div>
+      <div class="rec"><div class="em">📝</div><h4>Subtítulos en CapCut</h4><p>Tu episodio es accesible para todos — con diálogos escritos y bien posicionados.</p></div>
+      <div class="rec"><div class="em">🎞️</div><h4>Créditos con tu firma</h4><p>Tu nombre aparece en los créditos — eres el creador oficial de esta serie.</p></div>
+      <div class="rec"><div class="em">⭐</div><h4>¡Ya eres Productor Ejecutivo!</h4><p>Ensamblaste todo en un producto final. Solo los más comprometidos llegan aquí.</p></div>
+    </div>
+  </div>
+</section>
 <!-- ═══════════ TAREA ═══════════ -->
 <section class="block tint">
   <div class="lread">
@@ -201,6 +252,10 @@
   </div>
 </section>
 
+
+<!-- ══ MINI QUIZ ══ -->
+<div id="lesson-quiz-container"></div>
+
 <!-- ═══════════ INSIGNIA ═══════════ -->
 <section class="block badge-sec" id="badgeSec">
   <span class="spark" style="top:24px;left:18%;font-size:22px;">✦</span>
@@ -211,27 +266,13 @@
     <div class="bname">"Productor Ejecutivo"</div>
     <div class="bmeta">Clase 23 · Mundo 6 — El Genio al Mundo</div>
     <button class="btn gold btn-lg" id="claimBtn">⭐ ¡Reclamar mi insignia!</button>
+    <p id="badge-lock-msg">Completa la entrega y el quiz para desbloquear</p>
   </div>
 </section>
 
-<!-- ═══════════ CIERRE ═══════════ -->
-<section class="block tint">
+<!-- SIGUIENTE MISION -->
+<section class="block" style="padding-top:0">
   <div class="lread">
-    <div class="shead">
-      <span class="ava"><img src="robotsin/robotsin_maestro.png" alt="Robotsin"></span>
-      <div>
-        <div class="lab">Resumen · 5 min</div>
-        <h2>Lo que <em>aprendiste hoy</em></h2>
-      </div>
-    </div>
-
-    <div class="cierre" data-reveal>
-      <div class="rec"><div class="em">🎬</div><h4>Post-producción completa</h4><p>Video + audio + subtítulos + créditos = un episodio profesional listo para el mundo.</p></div>
-      <div class="rec"><div class="em">📝</div><h4>Subtítulos en CapCut</h4><p>Tu episodio es accesible para todos — con diálogos escritos y bien posicionados.</p></div>
-      <div class="rec"><div class="em">🎞️</div><h4>Créditos con tu firma</h4><p>Tu nombre aparece en los créditos — eres el creador oficial de esta serie.</p></div>
-      <div class="rec"><div class="em">⭐</div><h4>¡Ya eres Productor Ejecutivo!</h4><p>Ensamblaste todo en un producto final. Solo los más comprometidos llegan aquí.</p></div>
-    </div>
-
     <div class="next">
       <span class="em">▶️</span>
       <div>
@@ -244,8 +285,7 @@
 
 <!-- ═══════════ NAV LECCIÓN ═══════════ -->
 
-<!-- ══ MINI QUIZ ══ -->
-<div id="lesson-quiz-container"></div>
+
 <nav class="lessonnav">
   <a href="clase22_audio_completo.html" class="lnav-btn prev-btn">
     <span class="ar">←</span>
@@ -257,7 +297,7 @@
   <a href="index.html" class="lnav-home" title="Mapa de aventura">🗺️</a>
   <a href="clase24_revision_edicion.html" class="lnav-btn next-btn">
     <div>
-      <div class="lab">Siguiente lección</div>
+      <div class="lab">Siguiente misión</div>
       <div class="ti">Clase 24 — Revisión y Edición</div>
     </div>
     <span class="ar">→</span>
@@ -356,5 +396,35 @@ new DvUploadZone({
 });
 </script>
 <script src="js/lesson-quiz.js"></script>
+
+<!-- Badge lock: requiere entrega + quiz -->
+<script>
+(function(){
+  var btn = document.getElementById('claimBtn');
+  var lockMsg = document.getElementById('badge-lock-msg');
+  if (!btn) return;
+  btn.disabled = true;
+  if (lockMsg) lockMsg.style.display = 'block';
+  window._entregaDone = false;
+  window._quizPassed  = false;
+  window.checkBadgeUnlock = function() {
+    var ready = window._entregaDone && window._quizPassed;
+    btn.disabled = !ready;
+    if (lockMsg) lockMsg.style.display = ready ? 'none' : 'block';
+  };
+  var qc = document.getElementById('lesson-quiz-container');
+  if (qc) {
+    var obs = new MutationObserver(function() {
+      if (qc.querySelector('.lq-passed')) {
+        window._quizPassed = true; obs.disconnect();
+        window.checkBadgeUnlock();
+      }
+    });
+    obs.observe(qc, { childList: true, subtree: true });
+  }
+  var hasDz = document.querySelector('[id^="dz"]');
+  if (!hasDz) { window._entregaDone = true; }
+})();
+</script>
 </body>
 </html>

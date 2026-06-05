@@ -3,14 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Reto del Mundo 1 — Genios Creativos</title>
+<title>Checkpoint Mundo 1 — El Genio Creativo · Academia Da Vinci IA</title>
 <link rel="icon" type="image/svg+xml" href="robotsin/favicon.svg">
 <link rel="stylesheet" href="css/genios.css">
+<link rel="stylesheet" href="css/lesson.css">
 <link rel="stylesheet" href="css/juice.css">
 <link rel="stylesheet" href="css/quiz.css">
 </head>
 <body class="lesson" style="--wc: var(--m1)">
 
+<!-- ═══════════ TOPBAR ═══════════ -->
 <header class="topbar">
   <div class="wrap">
     <a class="lback" href="index.html">← Mapa</a>
@@ -20,25 +22,50 @@
   </div>
 </header>
 
-<section class="lhero" style="padding-bottom:24px;">
-  <span class="spark" data-parallax="0.14" style="top:30px;left:16%;font-size:24px;">✦</span>
-  <span class="spark" data-parallax="-0.12" style="top:70px;right:18%;font-size:18px;animation-delay:1s;">✧</span>
+<!-- ═══════════ HERO ═══════════ -->
+<section class="lhero">
+  <span class="spark" data-parallax="0.14" style="top:30px;left:14%;font-size:24px;">✦</span>
+  <span class="spark" data-parallax="-0.12" style="top:80px;right:16%;font-size:18px;animation-delay:1s;">✧</span>
+  <span class="spark" data-parallax="0.08" style="top:120px;left:5%;font-size:14px;animation-delay:2s;">✦</span>
   <div class="lread" data-reveal>
     <span class="badge-pill">🎯 Checkpoint del Mundo 1</span>
-    <div class="mascot-stage" style="width:120px;height:120px;margin:18px auto 14px;">
-      <img src="robotsin/robotsin_artista.png" alt="Robotsin">
+    <div class="kicker">Reto final · Clases 1 a 5</div>
+
+    <div class="mascot-stage" style="width:140px;height:140px;margin:18px auto 14px;">
+      <img src="robotsin/robotsin_artista.png" alt="D-IA Vinci Robotsin Artista">
     </div>
-    <h1>El <span>Reto</span> del Genio</h1>
-    <p class="lead">Responde para demostrar que dominas el Mundo 1… ¡y gana tu insignia de maestría!</p>
+
+    <h1>¡Demuestra que eres un <span>Genio Creativo</span>!</h1>
+    <p class="lead">Responde 20 preguntas sobre lo que aprendiste en el Mundo 1. Necesitas al menos un 80% para ganar tu insignia.</p>
+
+    <div style="background:rgba(47,123,246,.1);border:2px solid rgba(47,123,246,.25);border-radius:20px;padding:22px 20px;margin:22px 0 0;text-align:left;">
+      <div style="font-family:var(--font-display);font-weight:700;color:var(--m1);font-size:14px;margin-bottom:14px;letter-spacing:.04em;">📚 TEMAS DE ESTE MUNDO</div>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;">
+        <li style="display:flex;align-items:center;gap:10px;"><span style="background:var(--m1);color:#fff;border-radius:8px;padding:3px 10px;font-size:12px;font-weight:800;white-space:nowrap;">Clase 1</span><span style="color:var(--ink-2);font-size:14px;">¡Bienvenido, Genio! — Qué es la IA y qué es un prompt</span></li>
+        <li style="display:flex;align-items:center;gap:10px;"><span style="background:var(--m1);color:#fff;border-radius:8px;padding:3px 10px;font-size:12px;font-weight:800;white-space:nowrap;">Clase 2</span><span style="color:var(--ink-2);font-size:14px;">Nace el Personaje — Los 5 elementos del gran personaje</span></li>
+        <li style="display:flex;align-items:center;gap:10px;"><span style="background:var(--m1);color:#fff;border-radius:8px;padding:3px 10px;font-size:12px;font-weight:800;white-space:nowrap;">Clase 3</span><span style="color:var(--ink-2);font-size:14px;">Retrato Oficial — Estilos visuales y prompts maestros</span></li>
+        <li style="display:flex;align-items:center;gap:10px;"><span style="background:var(--m1);color:#fff;border-radius:8px;padding:3px 10px;font-size:12px;font-weight:800;white-space:nowrap;">Clase 4</span><span style="color:var(--ink-2);font-size:14px;">Tarjeta Oficial — Diseño en Canva y presentación</span></li>
+        <li style="display:flex;align-items:center;gap:10px;"><span style="background:var(--m1);color:#fff;border-radius:8px;padding:3px 10px;font-size:12px;font-weight:800;white-space:nowrap;">Clase 5</span><span style="color:var(--ink-2);font-size:14px;">Los Arquetipos — El alma del personaje</span></li>
+      </ul>
+    </div>
   </div>
 </section>
 
-<section class="block" style="padding-top:10px;">
+<!-- ═══════════ QUIZ ═══════════ -->
+<section class="block tint" style="padding-top:14px;">
   <div class="lread">
+    <div class="shead" data-reveal>
+      <span class="ava"><img src="robotsin/robotsin_artista.png" alt="Robotsin"></span>
+      <div>
+        <div class="lab">20 preguntas · Mínimo 80% para pasar</div>
+        <h2>El <em>Gran Reto</em> del Mundo 1</h2>
+      </div>
+    </div>
     <div class="quiz" data-reveal><div id="quiz"></div></div>
   </div>
 </section>
 
+<!-- ═══════════ FOOTER ═══════════ -->
 <footer class="foot">
   <div class="ico">🎨✨</div>
   <b>Academia Da Vinci IA</b> · Checkpoint · Mundo 1 — El Genio Creativo
@@ -56,48 +83,124 @@ window.QUIZ_DATA = {
   "siguienteLabel": "▶ Siguiente mundo",
   "preguntas": [
     {
-      "q": "¿Qué es un \"prompt\"?",
-      "opciones": [
-        "Un robot que dibuja solo",
-        "Las instrucciones que le das a la IA",
-        "Un tipo de computadora",
-        "Un videojuego"
-      ],
+      "q": "¿Qué es la Inteligencia Artificial?",
+      "opciones": ["Una persona muy inteligente", "Una herramienta que aprende de datos para ayudarte a crear", "Un robot físico que camina", "Un videojuego avanzado"],
       "correcta": 1,
-      "pista": "Es lo que tú le escribes para pedirle lo que imaginas. 🪄"
+      "pista": "No piensa ni siente — es una herramienta que TÚ diriges. 🤖"
+    },
+    {
+      "q": "¿Qué es un 'prompt'?",
+      "opciones": ["El nombre de un robot famoso", "Un tipo de computadora especial", "La instrucción que le das a la IA para crear algo", "Una app de teléfono"],
+      "correcta": 2,
+      "pista": "Es como pedir un deseo a un genio — más específico, mejor resultado. 🪄"
     },
     {
       "q": "¿Cuáles son los 4 ingredientes de un buen prompt?",
-      "opciones": [
-        "Rojo, azul, verde y amarillo",
-        "¿Qué?, ¿Cómo?, ¿Dónde? y ¿Extras?",
-        "Inicio, nudo y final",
-        "Sumar, restar, multiplicar y dividir"
-      ],
+      "opciones": ["Título, autor, fecha y lugar", "¿Qué?, ¿Cómo?, ¿Dónde? y ¿Extras?", "Color, forma, tamaño y textura", "Inicio, nudo, clímax y final"],
       "correcta": 1,
-      "pista": "Describe QUÉ quieres, CÓMO se ve, DÓNDE está y los EXTRAS. ✨"
+      "pista": "Describe QUÉ quieres, CÓMO se ve, DÓNDE está y los detalles EXTRA. ✨"
     },
     {
-      "q": "Si quieres una mejor imagen, tu prompt debe ser…",
-      "opciones": [
-        "Lo más corto posible",
-        "Más detallado y específico",
-        "Solo una palabra",
-        "En mayúsculas"
-      ],
-      "correcta": 1,
-      "pista": "Mientras más le cuentas a la IA, mejor entiende tu idea. 🎯"
+      "q": "Si quieres una mejor imagen con IA, tu prompt debe ser…",
+      "opciones": ["Lo más corto posible (una sola palabra)", "Solo en inglés", "Más detallado y específico", "Sin descripciones de colores"],
+      "correcta": 2,
+      "pista": "Mientras más le cuentes a la IA, mejor entiende tu idea. 🎯"
     },
     {
-      "q": "La Inteligencia Artificial es…",
-      "opciones": [
-        "Una persona de verdad",
-        "Una herramienta que te ayuda a crear",
-        "Magia real",
-        "Un ser vivo que piensa y siente"
-      ],
+      "q": "¿Cuáles son los 5 elementos que todo gran personaje necesita?",
+      "opciones": ["Color, forma, tamaño, peso y material", "Nombre, Origen, Misión, Poder y Debilidad", "Pelo, ojos, ropa, zapatos y accesorio", "Villano, aliado, mentor, sidekick y héroe"],
       "correcta": 1,
-      "pista": "No piensa ni siente: es una herramienta que TÚ diriges. 🤖"
+      "pista": "NOMPD: Nombre, Origen, Misión, Poder y Debilidad. 🦸"
+    },
+    {
+      "q": "¿Por qué la DEBILIDAD es el elemento más importante del personaje?",
+      "opciones": ["Porque hace al personaje más fácil de dibujar", "Porque sin debilidad no puede tener superpoder", "Porque hace al personaje humano y relatable — puede perder", "Porque es lo que los fans recuerdan primero"],
+      "correcta": 2,
+      "pista": "La debilidad hace que los demás se identifiquen con el personaje. 💙"
+    },
+    {
+      "q": "¿Para qué sirve usar ChatGPT al crear tu personaje?",
+      "opciones": ["Para que ChatGPT invente el personaje solo sin tu ayuda", "Para copiar un personaje famoso y cambiarlo de nombre", "Como copiloto que desarrolla tu idea en palabras — tú mandas, él escribe", "Para buscar imágenes del personaje en internet"],
+      "correcta": 2,
+      "pista": "Tú tienes la idea; la IA te ayuda a escribirla mejor. 🤝"
+    },
+    {
+      "q": "¿Qué hace el prompt 'Del Papel a la Pantalla'?",
+      "opciones": ["Convierte texto en un video de animación automática", "Sube tu dibujo a mano a internet", "Convierte una foto de tu dibujo a mano en una imagen digital con estilo IA", "Imprime tu dibujo en papel fotográfico"],
+      "correcta": 2,
+      "pista": "Con una foto de tu dibujo + un buen prompt, la IA lo digitaliza. 📸"
+    },
+    {
+      "q": "¿Cuántos estilos visuales principales aprendiste en la Clase 3?",
+      "opciones": ["3 estilos (Pixar, Anime y Disney)", "5 estilos (Pixar 3D, Anime, Cartoon Network, Disney Clásico, Cómic Americano)", "7 estilos incluyendo acuarela y realismo", "4 estilos (solo los de Hollywood)"],
+      "correcta": 1,
+      "pista": "Pixar 3D, Anime, Cartoon Network, Disney Clásico y Cómic Americano. 🎨"
+    },
+    {
+      "q": "¿Por qué el estilo visual es importante para tu personaje?",
+      "opciones": ["Solo porque se ve más bonito en las redes sociales", "Porque es lo más fácil de cambiar si no te gusta", "Porque el estilo ES parte del personaje — cuenta la historia antes de decir una palabra", "Porque la IA solo puede dibujar en 5 estilos"],
+      "correcta": 2,
+      "pista": "El estilo visual habla del personaje sin usar palabras. 👁️"
+    },
+    {
+      "q": "¿Cuántos componentes tiene el Prompt Maestro para retratos?",
+      "opciones": ["4 componentes (los mismos de siempre)", "5 componentes", "7 componentes (nombre, descripción física, estilo, pose, expresión, iluminación, extras)", "10 componentes"],
+      "correcta": 2,
+      "pista": "7 ingredientes para un retrato perfecto. 🖼️"
+    },
+    {
+      "q": "¿Qué debes hacer para encontrar el retrato oficial definitivo?",
+      "opciones": ["Usar el primer resultado que da la IA siempre es el mejor", "Generar al menos 4 versiones y elegir la mejor", "Pedir exactamente 10 versiones para comparar", "Elegir el que más se parezca a un personaje famoso"],
+      "correcta": 1,
+      "pista": "¡Experimenta y compara! La IA no siempre acierta a la primera. 🔄"
+    },
+    {
+      "q": "¿Qué herramienta usas en la Clase 4 para diseñar la Tarjeta Oficial?",
+      "opciones": ["ChatGPT con modo imagen", "Photoshop profesional", "Canva", "PowerPoint"],
+      "correcta": 2,
+      "pista": "Canva tiene plantillas perfectas para tarjetas de personaje. 🃏"
+    },
+    {
+      "q": "¿Qué información debe aparecer en la Tarjeta Oficial de tu personaje?",
+      "opciones": ["Solo el nombre y una imagen grande", "Nombre, alias, origen, poder, debilidad, historia corta y frase característica", "Solo el poder y la debilidad", "El nombre, la edad y el signo zodiacal"],
+      "correcta": 1,
+      "pista": "La tarjeta es la ficha completa del personaje. 📋"
+    },
+    {
+      "q": "¿Cuánto tiempo tienes para presentar tu personaje en 'El Gran Estreno'?",
+      "opciones": ["30 segundos", "2 minutos", "60 segundos", "5 minutos"],
+      "correcta": 2,
+      "pista": "¡60 segundos son suficientes si preparas bien tu presentación! ⏱️"
+    },
+    {
+      "q": "¿Qué es un 'arquetipo' de personaje?",
+      "opciones": ["El nombre del disfraz del superhéroe", "El 'alma' o tipo universal de personaje que aparece en todas las historias", "El villano principal de una historia", "La habilidad especial que tiene un personaje"],
+      "correcta": 1,
+      "pista": "Los arquetipos son modelos de personaje que existen en todas las culturas. 🌍"
+    },
+    {
+      "q": "¿Cuál es el arquetipo de Yoda, Dumbledore y Mufasa?",
+      "opciones": ["El Héroe", "El Gobernante", "El Mago", "El Sabio"],
+      "correcta": 3,
+      "pista": "Guían con sabiduría, no con fuerza. 🦉"
+    },
+    {
+      "q": "¿Qué tienen en común Tony Stark y Elsa según los arquetipos?",
+      "opciones": ["Los dos son el arquetipo del Héroe puro", "Los dos mezclan 2 arquetipos (Tony = Creador+Rebelde; Elsa = Gobernante+Cuidador)", "Los dos son el arquetipo del Sabio", "No tienen nada en común — son opuestos"],
+      "correcta": 1,
+      "pista": "Los personajes más interesantes mezclan arquetipos. 🎭"
+    },
+    {
+      "q": "¿Cómo se relaciona el arquetipo del villano con el del héroe?",
+      "opciones": ["El villano siempre es el mismo arquetipo que el héroe", "No tienen ninguna relación entre sí", "El villano es la 'sombra' del héroe — lo opuesto de lo que el héroe representa", "El villano siempre es El Gobernante, sin importar quién sea el héroe"],
+      "correcta": 2,
+      "pista": "El mejor villano es como un espejo oscuro del héroe. 🪞"
+    },
+    {
+      "q": "¿Cuál es el secreto de Canva según Robotsin?",
+      "opciones": ["Diseñar siempre desde cero sin usar plantillas", "Pagar la versión premium para tener más opciones", "Elegir una plantilla y personalizarla con los datos de tu personaje", "Copiar el diseño de otro alumno y cambiar el nombre"],
+      "correcta": 2,
+      "pista": "Las plantillas son el punto de partida — tú las transformas. ✨"
     }
   ]
 };

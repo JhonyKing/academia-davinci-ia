@@ -5,6 +5,47 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Clase 1 — ¡Bienvenido, Genio! · Genios Creativos</title>
 <link rel="icon" type="image/svg+xml" href="robotsin/favicon.svg">
+<style>
+/* ── Misión glamorosa con efecto shimmer ─────────────────────── */
+.mission-numero {
+  font-family: var(--font-display, 'Space Grotesk', sans-serif);
+  font-size: clamp(22px, 5vw, 36px);
+  font-weight: 900;
+  letter-spacing: .04em;
+  text-align: center;
+  margin: 0 0 14px;
+  background: linear-gradient(90deg,
+    #FFD700 0%, #FF8C42 20%, #FFD700 40%,
+    #fff9e0 50%, #FFD700 60%, #FF8C42 80%, #FFD700 100%);
+  background-size: 250% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: missionShimmer 2.8s linear infinite;
+  text-shadow: none;
+}
+.mission-numero .mn-num {
+  font-size: 1.5em;
+  line-height: 1;
+}
+.mission-numero .mn-of {
+  font-size: .65em;
+  opacity: .85;
+}
+@keyframes missionShimmer {
+  0%   { background-position: 0% center; }
+  100% { background-position: 250% center; }
+}
+/* ── Botón siguiente misión — más visible ─────────────────────── */
+.next .lab { font-size: 11px; font-weight: 700; opacity: .7; letter-spacing: .08em; text-transform: uppercase; }
+.next .ti  { font-size: 20px; font-weight: 900; color: #FFD700 !important; margin-top: 4px; line-height: 1.2; }
+/* ── Nav next-btn más visible ─────────────────────────────────── */
+nav.lessonnav .lnav-btn.next-btn .lab { font-size: 11px; opacity: .7; letter-spacing: .06em; }
+nav.lessonnav .lnav-btn.next-btn .ti  { font-size: 16px; font-weight: 900; color: #FFD700 !important; }
+/* ── Badge locked state más claro ─────────────────────────────── */
+#claimBtn:disabled { opacity: .35; cursor: not-allowed; }
+#badge-lock-msg { text-align: center; font-size: 13px; color: rgba(255,255,255,.45); margin-top: 10px; display: none; }
+</style>
 <link rel="stylesheet" href="css/genios.css">
 <link rel="stylesheet" href="css/lesson.css">
 <link rel="stylesheet" href="css/juice.css">
@@ -31,8 +72,8 @@
   <span class="spark" data-parallax="0.14" style="top:30px;left:14%;font-size:24px;">✦</span>
   <span class="spark" data-parallax="-0.12" style="top:80px;right:16%;font-size:18px;animation-delay:1s;">✧</span>
   <div class="lread" data-reveal>
+    <div class="mission-numero">✦ MISIÓN <span class="mn-num">1</span> <span class="mn-of">de 26</span> ✦</div>
     <span class="badge-pill">🎨 Mundo 1 — El Genio Creativo</span>
-    <div class="kicker">Misión 1 de 26</div>
 
     <div class="mascot-stage">
       <img src="robotsin/robotsin_artista.png" alt="D-IA Vinci Robotsin Artista">
@@ -311,7 +352,7 @@
         <span style="font-size:22px;">🤖</span>
         <div><div style="font-size:12px;font-weight:600;opacity:.8;letter-spacing:.04em;">CREAR IMAGEN EN</div>ChatGPT</div>
       </a>
-      <a href="https://labs.google.com/flow" target="_blank" rel="noopener noreferrer"
+      <a href="https://labs.google/fx/es/tools/flow" target="_blank" rel="noopener noreferrer"
          style="display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#4285f4,#34a853);color:#fff;font-weight:800;font-size:14px;padding:14px 24px;border-radius:14px;text-decoration:none;box-shadow:0 4px 18px rgba(66,133,244,.35);transition:opacity .2s;">
         <span style="font-size:22px;">🎬</span>
         <div><div style="font-size:12px;font-weight:600;opacity:.8;letter-spacing:.04em;">OPCIÓN 2</div>Google Flow</div>
@@ -344,11 +385,31 @@
     </div>
 
     <ul class="acts" data-reveal>
-      <li class="act c1"><div class="num">1</div><div><h4>🚪 "El Portal Mágico" — Crear cuenta en ChatGPT</h4><p>Abre tu puerta al mundo de la IA. El instructor guía paso a paso; quien ya tiene cuenta ayuda a los demás.</p></div><span class="t">5 min</span></li>
+      <li class="act c1"><div class="num">1</div><div><h4>🚪 "El Portal Mágico" — Crear cuenta en ChatGPT</h4><p>Abre tu puerta al mundo de la IA. Créate una cuenta en ChatGPT. Quien ya tiene cuenta ayuda a los demás.</p></div><span class="t">5 min</span></li>
       <li class="act c2"><div class="num">2</div><div><h4>🖼️ "El Primer Conjuro" — Tu primera imagen</h4><p>Usa la fórmula de los 4 ingredientes y escribe tu primer prompt. Genera la imagen y observa el resultado.</p></div><span class="t">10 min</span></li>
-      <li class="act c3"><div class="num">3</div><div><h4>🎪 "La Galería Relámpago" — Compartir en pantalla</h4><p>Cada genio muestra su imagen. Robotsin explica qué funcionó bien en cada prompt.</p></div><span class="t">10 min</span></li>
+      <li class="act c3"><div class="num">3</div><div><h4>🎪 "La Galería Relámpago" — Compartir en pantalla</h4><p>Cada genio muestra su imagen en pantalla y responde: <strong>¿Qué crees que funcionó bien en tu prompt?</strong></p></div><span class="t">10 min</span></li>
       <li class="act c4"><div class="num">4</div><div><h4>⚡ "El Prompt Mejorado" — Reto extra</h4><p>Toma tu primera imagen y escribe un prompt más detallado. ¿Qué cambia al ser más específico?</p></div><span class="t">15 min</span></li>
     </ul>
+  </div>
+</section>
+
+<!-- ═══════════ CIERRE ═══════════ -->
+<section class="block tint">
+  <div class="lread">
+    <div class="shead">
+      <span class="ava"><img src="robotsin/robotsin_artista.png" alt="Robotsin"></span>
+      <div>
+        <div class="lab">Resumen · 5 min</div>
+        <h2>Lo que <em>aprendiste hoy</em></h2>
+      </div>
+    </div>
+
+    <div class="cierre" data-reveal>
+      <div class="rec"><div class="em">🤖</div><h4>La IA es una herramienta</h4><p>No piensa ni siente — pero crea cosas increíbles cuando le dices qué quieres.</p></div>
+      <div class="rec"><div class="em">✍️</div><h4>El prompt es tu poder</h4><p>Cuanto más claro y detallado, mejor el resultado. ¡Tú controlas la magia!</p></div>
+      <div class="rec"><div class="em">🖼️</div><h4>Ya eres un Creador IA</h4><p>Usaste los 4 ingredientes del prompt. Eso se llama "Prompt Engineering".</p></div>
+      <div class="rec"><div class="em">⭐</div><h4>Robotsin te acompaña</h4><p>En cada clase hay nuevas misiones, retos y una insignia especial.</p></div>
+    </div>
   </div>
 </section>
 
@@ -371,23 +432,35 @@
       </div>
     </div>
 
-    <!-- ═══ ENTREGA: sube tu imagen de IA ═══ -->
-    <div id="entrega-c1" style="margin:28px 0 8px;">
-      <div style="font-weight:900;color:#4A90D9;font-size:13px;text-transform:uppercase;letter-spacing:.07em;margin-bottom:14px;display:flex;align-items:center;gap:8px;">
+    <div class="rmsg" style="--wc:var(--gold); margin-top:22px;">
+      <span class="ava"><img src="robotsin/robotsin_artista.png" alt="Robotsin"></span>
+      <div>
+        <div class="who">Robotsin te dice</div>
+        <div class="say">"¡No te preocupes si no dibujas bien! <strong>Yo tampoco sabía antes de usar IA.</strong> Un palito con capa ya es un superhéroe. Lo que importa es la idea que vive en tu cabeza. <em>¡Nos vemos en la Clase 2! 🎨</em>"</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ ENTREGA ═══════════ -->
+<section class="block tint">
+  <div class="lread">
+    <div id="entrega-c1" style="margin:8px 0;">
+      <div style="font-weight:900;color:#E74C3C;font-size:13px;text-transform:uppercase;letter-spacing:.07em;margin-bottom:14px;display:flex;align-items:center;gap:8px;">
         <span>📸</span> Entrega — sube tu imagen creada con IA
       </div>
 
       <!-- Drop zone con borde animado estilo "marching ants" -->
-      <div id="dz1-box" style="position:relative;border-radius:16px;padding:38px 20px;text-align:center;cursor:pointer;background:rgba(13,18,36,.7);min-height:150px;display:flex;flex-direction:column;align-items:center;justify-content:center;box-sizing:border-box;">
+      <div id="dz1-box" style="position:relative;border-radius:16px;padding:38px 20px;text-align:center;cursor:pointer;background:rgba(36,10,10,.75);min-height:150px;display:flex;flex-direction:column;align-items:center;justify-content:center;box-sizing:border-box;">
         <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;">
-          <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="#4A90D9" stroke-width="2" stroke-dasharray="9 6" stroke-linecap="round" vector-effect="non-scaling-stroke">
+          <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="#E74C3C" stroke-width="2" stroke-dasharray="9 6" stroke-linecap="round" vector-effect="non-scaling-stroke">
             <animate attributeName="stroke-dashoffset" from="0" to="-15" dur="1.2s" repeatCount="indefinite"/>
           </rect>
         </svg>
         <div id="dz1-icon" style="font-size:46px;margin-bottom:10px;line-height:1;">🖼️</div>
         <div style="color:rgba(255,255,255,.85);font-weight:700;font-size:15px;">Arrastra tu imagen aquí</div>
         <div style="color:rgba(255,255,255,.35);font-size:13px;margin:6px 0 14px;">— o —</div>
-        <button id="dz1-select" type="button" style="background:rgba(74,144,217,.15);border:1.5px solid rgba(74,144,217,.55);color:#74b9ff;font-weight:800;font-size:14px;padding:10px 26px;border-radius:10px;cursor:pointer;">
+        <button id="dz1-select" type="button" style="background:rgba(231,76,60,.15);border:1.5px solid rgba(231,76,60,.55);color:#ff7675;font-weight:800;font-size:14px;padding:10px 26px;border-radius:10px;cursor:pointer;">
           Seleccionar imagen
         </button>
         <input id="dz1-input" type="file" accept="image/*" style="display:none;">
@@ -412,16 +485,11 @@
         <button id="dz1-change" type="button" style="margin-top:10px;background:transparent;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.5);font-size:12px;padding:6px 14px;border-radius:8px;cursor:pointer;">Cambiar imagen</button>
       </div>
     </div>
-
-    <div class="rmsg" style="--wc:var(--gold); margin-top:22px;">
-      <span class="ava"><img src="robotsin/robotsin_artista.png" alt="Robotsin"></span>
-      <div>
-        <div class="who">Robotsin te dice</div>
-        <div class="say">"¡No te preocupes si no dibujas bien! <strong>Yo tampoco sabía antes de usar IA.</strong> Un palito con capa ya es un superhéroe. Lo que importa es la idea que vive en tu cabeza. <em>¡Nos vemos en la Clase 2! 🎨</em>"</div>
-      </div>
-    </div>
   </div>
 </section>
+
+<!-- ══ MINI QUIZ ══ -->
+<div id="lesson-quiz-container"></div>
 
 <!-- ═══════════ INSIGNIA ═══════════ -->
 <section class="block badge-sec" id="badgeSec">
@@ -433,27 +501,13 @@
     <div class="bname">"Conjurador de Palabras"</div>
     <div class="bmeta">Clase 1 · Mundo 1 — El Genio Creativo</div>
     <button class="btn gold btn-lg" id="claimBtn">⭐ ¡Reclamar mi insignia!</button>
+    <p id="badge-lock-msg">Completa la entrega y el quiz para desbloquear</p>
   </div>
 </section>
 
-<!-- ═══════════ CIERRE ═══════════ -->
-<section class="block tint">
+<!-- ═══════════ SIGUIENTE MISIÓN ═══════════ -->
+<section class="block" style="padding-top:0">
   <div class="lread">
-    <div class="shead">
-      <span class="ava"><img src="robotsin/robotsin_artista.png" alt="Robotsin"></span>
-      <div>
-        <div class="lab">Resumen · 5 min</div>
-        <h2>Lo que <em>aprendiste hoy</em></h2>
-      </div>
-    </div>
-
-    <div class="cierre" data-reveal>
-      <div class="rec"><div class="em">🤖</div><h4>La IA es una herramienta</h4><p>No piensa ni siente — pero crea cosas increíbles cuando le dices qué quieres.</p></div>
-      <div class="rec"><div class="em">✍️</div><h4>El prompt es tu poder</h4><p>Cuanto más claro y detallado, mejor el resultado. ¡Tú controlas la magia!</p></div>
-      <div class="rec"><div class="em">🖼️</div><h4>Ya eres un Creador IA</h4><p>Usaste los 4 ingredientes del prompt. Eso se llama "Prompt Engineering".</p></div>
-      <div class="rec"><div class="em">⭐</div><h4>Robotsin te acompaña</h4><p>En cada clase hay nuevas misiones, retos y una insignia especial.</p></div>
-    </div>
-
     <div class="next">
       <span class="em">▶️</span>
       <div>
@@ -465,15 +519,12 @@
 </section>
 
 <!-- ═══════════ NAV LECCIÓN ═══════════ -->
-
-<!-- ══ MINI QUIZ ══ -->
-<div id="lesson-quiz-container"></div>
 <nav class="lessonnav">
   <div class="lnav-spacer"></div>
   <a href="index.html" class="lnav-home" title="Mapa de aventura">🗺️</a>
   <a href="clase2_nace_el_personaje.html" class="lnav-btn next-btn">
     <div>
-      <div class="lab">Siguiente lección</div>
+      <div class="lab">Siguiente misión</div>
       <div class="ti">Clase 2 — Nace el Personaje</div>
     </div>
     <span class="ar">→</span>
@@ -508,10 +559,38 @@
   const coin = document.getElementById('badgeCoin');
   const sec = document.getElementById('badgeSec');
   const title = document.getElementById('badgeTitle');
+  const lockMsg = document.getElementById('badge-lock-msg');
   let claimed = false;
 
+  // Deshabilitar badge al cargar — requiere entrega + quiz
+  btn.disabled = true;
+  if (lockMsg) lockMsg.style.display = 'block';
+
+  // Flags de desbloqueo
+  window._entregaDone = false;
+  window._quizPassed  = false;
+
+  window.checkBadgeUnlock = function() {
+    var ready = window._entregaDone && window._quizPassed;
+    btn.disabled = !ready;
+    if (lockMsg) lockMsg.style.display = ready ? 'none' : 'block';
+  };
+
+  // Observar el quiz container: cuando aparece .lq-passed el quiz fue aprobado
+  var quizContainer = document.getElementById('lesson-quiz-container');
+  if (quizContainer) {
+    var obs = new MutationObserver(function() {
+      if (quizContainer.querySelector('.lq-passed')) {
+        window._quizPassed = true;
+        obs.disconnect();
+        window.checkBadgeUnlock();
+      }
+    });
+    obs.observe(quizContainer, { childList: true, subtree: true });
+  }
+
   btn.addEventListener('click', ()=>{
-    if(claimed) return; claimed=true;
+    if(claimed || btn.disabled) return; claimed=true;
     coin.classList.remove('locked'); sec.classList.add('won');
     coin.style.animation='none'; void coin.offsetWidth; coin.style.animation='popIn .5s cubic-bezier(.34,1.7,.5,1) both';
     title.textContent='🎉 ¡Insignia desbloqueada!';
@@ -587,10 +666,10 @@ if (/vercel\.app$|academiadavinci/.test(location.hostname)) {
   box.addEventListener('click', openPicker);
   selBtn.addEventListener('click', function(e){ e.stopPropagation(); openPicker(); });
 
-  box.addEventListener('dragover', function(e){ e.preventDefault(); box.style.background='rgba(74,144,217,.1)'; });
-  box.addEventListener('dragleave', function(){ box.style.background='rgba(13,18,36,.7)'; });
+  box.addEventListener('dragover', function(e){ e.preventDefault(); box.style.background='rgba(231,76,60,.15)'; });
+  box.addEventListener('dragleave', function(){ box.style.background='rgba(36,10,10,.75)'; });
   box.addEventListener('drop', function(e){
-    e.preventDefault(); box.style.background='rgba(13,18,36,.7)';
+    e.preventDefault(); box.style.background='rgba(36,10,10,.75)';
     var f = e.dataTransfer.files[0];
     if (f && f.type.startsWith('image/')) setFile(f);
   });
@@ -648,6 +727,8 @@ if (/vercel\.app$|academiadavinci/.test(location.hostname)) {
       prev.style.display = 'none';
       succ.style.display = 'block';
       succNm.textContent = selectedFile.name;
+      window._entregaDone = true;
+      if (window.checkBadgeUnlock) window.checkBadgeUnlock();
     } catch(err) {
       status.style.color = '#E74C3C';
       status.textContent = 'Error: ' + (err.message || 'Intenta de nuevo');
@@ -670,6 +751,8 @@ if (/vercel\.app$|academiadavinci/.test(location.hostname)) {
           succ.style.display = 'block';
           var meta = r.data.metadata || {};
           succNm.textContent = meta.filename || '';
+          window._entregaDone = true;
+          if (window.checkBadgeUnlock) window.checkBadgeUnlock();
         }
       });
     });

@@ -3,14 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Reto del Mundo 2 — Genios Creativos</title>
+<title>Checkpoint Mundo 2 — El Mundo del Genio · Academia Da Vinci IA</title>
 <link rel="icon" type="image/svg+xml" href="robotsin/favicon.svg">
 <link rel="stylesheet" href="css/genios.css">
+<link rel="stylesheet" href="css/lesson.css">
 <link rel="stylesheet" href="css/juice.css">
 <link rel="stylesheet" href="css/quiz.css">
 </head>
 <body class="lesson" style="--wc: var(--m2)">
 
+<!-- ═══════════ TOPBAR ═══════════ -->
 <header class="topbar">
   <div class="wrap">
     <a class="lback" href="index.html">← Mapa</a>
@@ -20,25 +22,49 @@
   </div>
 </header>
 
-<section class="lhero" style="padding-bottom:24px;">
-  <span class="spark" data-parallax="0.14" style="top:30px;left:16%;font-size:24px;">✦</span>
-  <span class="spark" data-parallax="-0.12" style="top:70px;right:18%;font-size:18px;animation-delay:1s;">✧</span>
+<!-- ═══════════ HERO ═══════════ -->
+<section class="lhero">
+  <span class="spark" data-parallax="0.14" style="top:30px;left:14%;font-size:24px;">✦</span>
+  <span class="spark" data-parallax="-0.12" style="top:80px;right:16%;font-size:18px;animation-delay:1s;">✧</span>
+  <span class="spark" data-parallax="0.08" style="top:140px;left:5%;font-size:14px;animation-delay:2.2s;">✦</span>
   <div class="lread" data-reveal>
     <span class="badge-pill">🎯 Checkpoint del Mundo 2</span>
-    <div class="mascot-stage" style="width:120px;height:120px;margin:18px auto 14px;">
-      <img src="robotsin/robotsin_arquitecto.png" alt="Robotsin">
+    <div class="kicker">Reto final · Clases 6 a 9</div>
+
+    <div class="mascot-stage" style="width:140px;height:140px;margin:18px auto 14px;">
+      <img src="robotsin/robotsin_arquitecto.png" alt="D-IA Vinci Robotsin Arquitecto">
     </div>
-    <h1>El <span>Reto</span> del Genio</h1>
-    <p class="lead">Responde para demostrar que dominas el Mundo 2… ¡y gana tu insignia de maestría!</p>
+
+    <h1>¡Demuestra que construiste un <span>Mundo Increíble</span>!</h1>
+    <p class="lead">Responde 20 preguntas sobre worldbuilding, personajes y universos. Necesitas al menos 80% para ganar tu insignia.</p>
+
+    <div style="background:rgba(140,92,240,.1);border:2px solid rgba(140,92,240,.25);border-radius:20px;padding:22px 20px;margin:22px 0 0;text-align:left;">
+      <div style="font-family:var(--font-display);font-weight:700;color:var(--m2);font-size:14px;margin-bottom:14px;letter-spacing:.04em;">📚 TEMAS DE ESTE MUNDO</div>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;">
+        <li style="display:flex;align-items:center;gap:10px;"><span style="background:var(--m2);color:#fff;border-radius:8px;padding:3px 10px;font-size:12px;font-weight:800;white-space:nowrap;">Clase 6</span><span style="color:var(--ink-2);font-size:14px;">El Universo — World-building y tipos de mundo</span></li>
+        <li style="display:flex;align-items:center;gap:10px;"><span style="background:var(--m2);color:#fff;border-radius:8px;padding:3px 10px;font-size:12px;font-weight:800;white-space:nowrap;">Clase 7</span><span style="color:var(--ink-2);font-size:14px;">Aliados y Villanos — Personajes secundarios</span></li>
+        <li style="display:flex;align-items:center;gap:10px;"><span style="background:var(--m2);color:#fff;border-radius:8px;padding:3px 10px;font-size:12px;font-weight:800;white-space:nowrap;">Clase 8</span><span style="color:var(--ink-2);font-size:14px;">Mapa del Mundo — Ubicaciones y geografía</span></li>
+        <li style="display:flex;align-items:center;gap:10px;"><span style="background:var(--m2);color:#fff;border-radius:8px;padding:3px 10px;font-size:12px;font-weight:800;white-space:nowrap;">Clase 9</span><span style="color:var(--ink-2);font-size:14px;">Galería del Mundo — Gran Exposición Da Vinci</span></li>
+      </ul>
+    </div>
   </div>
 </section>
 
-<section class="block" style="padding-top:10px;">
+<!-- ═══════════ QUIZ ═══════════ -->
+<section class="block tint" style="padding-top:14px;">
   <div class="lread">
+    <div class="shead" data-reveal>
+      <span class="ava"><img src="robotsin/robotsin_arquitecto.png" alt="Robotsin"></span>
+      <div>
+        <div class="lab">20 preguntas · Mínimo 80% para pasar</div>
+        <h2>El <em>Gran Reto</em> del Mundo 2</h2>
+      </div>
+    </div>
     <div class="quiz" data-reveal><div id="quiz"></div></div>
   </div>
 </section>
 
+<!-- ═══════════ FOOTER ═══════════ -->
 <footer class="foot">
   <div class="ico">🌍✨</div>
   <b>Academia Da Vinci IA</b> · Checkpoint · Mundo 2 — El Mundo del Genio
@@ -48,7 +74,7 @@
 <script>
 window.QUIZ_DATA = {
   "insignia": "🌍",
-  "insigniaNombre": "Constructor de Mundos",
+  "insigniaNombre": "Arquitecto del Universo",
   "avatar": "robotsin/robotsin_arquitecto.png",
   "btnClass": "",
   "volverHref": "index.html",
@@ -56,48 +82,124 @@ window.QUIZ_DATA = {
   "siguienteLabel": "▶ Siguiente mundo",
   "preguntas": [
     {
-      "q": "¿Qué es \"construir un mundo\" (worldbuilding)?",
-      "opciones": [
-        "Jugar con bloques",
-        "Inventar el lugar donde vive tu personaje",
-        "Dibujar un mapa de tu casa",
-        "Hacer la tarea"
-      ],
+      "q": "¿Qué es el 'world-building'?",
+      "opciones": ["Un videojuego de construcción de mundos virtuales", "La habilidad de construir el mundo donde vive tu personaje", "Una técnica de dibujo para mapas de fantasía", "El proceso de crear un nombre para el mundo de tu historia"],
       "correcta": 1,
-      "pista": "Es crear el universo: ciudades, criaturas y reglas. 🌍"
+      "pista": "Es crear el universo completo: lugares, reglas y criaturas. 🌍"
     },
     {
-      "q": "¿Para qué sirve un villano en tu historia?",
-      "opciones": [
-        "Para ponerle retos al héroe",
-        "Para no hacer nada",
-        "Para ganar siempre",
-        "Para aburrir"
-      ],
-      "correcta": 0,
-      "pista": "Sin un buen reto, la aventura no emociona. 😈"
+      "q": "¿Cuáles son los 4 ingredientes de un escenario?",
+      "opciones": ["Color, forma, tamaño y textura", "Héroe, villano, aliado y sidekick", "Lugar, clima, época y reglas especiales", "Música, luz, sombra y movimiento"],
+      "correcta": 2,
+      "pista": "¿Dónde? ¿Qué tiempo hace? ¿Cuándo? ¿Qué reglas especiales hay? 🗺️"
     },
     {
-      "q": "El mapa de tu mundo sirve para…",
-      "opciones": [
-        "Decorar nada más",
-        "Saber dónde pasan las aventuras",
-        "Perderte",
-        "Comer"
-      ],
+      "q": "¿Cuál de estos es un tipo de mundo posible para tu personaje?",
+      "opciones": ["Solo existen los mundos realistas y los de ciencia ficción", "Fantástico (magia), futurista (tecnología), misterioso (secretos) o cotidiano-mágico", "Solo cuentan los mundos que ya existen en películas famosas", "Un mundo siempre debe tener ciudades"],
       "correcta": 1,
-      "pista": "Ayuda a ubicar los lugares de tu historia. 🗺️"
+      "pista": "¡Hay muchos tipos de mundo! Elige el que mejor cuente tu historia. ✨"
     },
     {
-      "q": "Los personajes secundarios son…",
-      "opciones": [
-        "Los aliados y villanos que acompañan al héroe",
-        "Solo el protagonista",
-        "Personas reales",
-        "Robots de verdad"
-      ],
-      "correcta": 0,
-      "pista": "Amigos y enemigos hacen más rica la historia. 👥"
+      "q": "¿Por qué un mundo sin reglas no funciona bien en una historia?",
+      "opciones": ["Porque las reglas hacen que el mundo sea aburrido y predecible", "Porque los lectores necesitan saber cuántos personajes hay", "Porque sin reglas no hay consecuencias, conflicto ni lógica interna", "Porque la IA no puede dibujar mundos sin reglas"],
+      "correcta": 2,
+      "pista": "Las reglas crean conflicto — y el conflicto crea la historia. ⚡"
+    },
+    {
+      "q": "¿Cuáles son los 4 tipos de personajes secundarios?",
+      "opciones": ["Héroe, anti-héroe, villain y sidekick", "Aliado/compañero, mentor/sabio, villano/antagonista, cómico/sidekick", "Padre, madre, hermano y amigo", "Mago, guerrero, ladrón y sacerdote"],
+      "correcta": 1,
+      "pista": "Aliado, mentor, villano y el personaje cómico que anima el equipo. 👥"
+    },
+    {
+      "q": "¿Qué hace a un buen villano memorable?",
+      "opciones": ["Que sea el más fuerte físicamente y nunca pierda", "Que sea completamente misterioso y no tenga ninguna motivación", "Motivación clara, debilidad relacionada con el héroe, no 'malo por ser malo'", "Que sea aterrador solo en apariencia"],
+      "correcta": 2,
+      "pista": "El mejor villano cree que él tiene la razón. 😈"
+    },
+    {
+      "q": "¿Cuál es la diferencia entre un antagonista y un villano?",
+      "opciones": ["No hay diferencia — son exactamente lo mismo", "El antagonista es siempre el más fuerte; el villano es el más débil", "Un antagonista se opone al héroe sin ser necesariamente malvado; el villano tiene intenciones malignas", "El villano siempre tiene poderes mágicos; el antagonista no"],
+      "correcta": 2,
+      "pista": "Un rival deportivo puede ser antagonista sin ser villano. 🏆"
+    },
+    {
+      "q": "Según Robotsin, ¿qué tienen en común el héroe y el villano ideal?",
+      "opciones": ["Los dos deben ser del mismo país de origen", "Los dos deben tener el mismo poder especial", "El mejor villano tiene algo en común con el héroe — es como un espejo oscuro", "Los dos deben haber sido amigos en el pasado"],
+      "correcta": 2,
+      "pista": "El villano muestra lo que el héroe podría ser si tomara el camino equivocado. 🪞"
+    },
+    {
+      "q": "¿Cuáles son los 3 tipos de plano cinematográfico que aprendiste en la Clase 8?",
+      "opciones": ["Plano corto, plano largo y plano diagonal", "Plano general, plano medio y primer plano", "Plano aéreo, plano submarino y plano terrestre", "Plano rojo, plano azul y plano verde"],
+      "correcta": 1,
+      "pista": "General (todo el mundo), medio (el cuerpo) y primer plano (la cara). 🎥"
+    },
+    {
+      "q": "¿Cuántas ubicaciones clave debe tener el mapa de tu mundo?",
+      "opciones": ["Solo 1 — el lugar donde vive el héroe", "Exactamente 10 lugares para que sea completo", "Al menos 5 (base del héroe, territorio del villano, zona neutral, lugar secreto, frontera)", "Entre 50 y 100 para que se vea detallado"],
+      "correcta": 2,
+      "pista": "5 ubicaciones crean la geografía del conflicto. 📍"
+    },
+    {
+      "q": "¿Qué herramienta usas para crear el Mapa Oficial de tu mundo?",
+      "opciones": ["Solo papel y lápiz, sin tecnología", "ChatGPT con prompts de texto", "Canva", "Una app especial de cartografía"],
+      "correcta": 2,
+      "pista": "Canva tiene plantillas perfectas para mapas de fantasía. 🗺️"
+    },
+    {
+      "q": "¿Por qué Robotsin recomienda poner 'al menos un lugar misterioso sin nombre' en el mapa?",
+      "opciones": ["Porque los nombres son difíciles de inventar", "Porque genera curiosidad y ganas de explorar en los lectores", "Porque es un error dejar lugares sin nombre en los mapas reales", "Porque la IA no puede generar nombres de lugares"],
+      "correcta": 1,
+      "pista": "El misterio hace que los lectores quieran saber más. 🔍"
+    },
+    {
+      "q": "¿Qué es un 'elevator pitch' de creador?",
+      "opciones": ["Una presentación técnica muy larga y detallada para inversores", "Un resumen de tu mundo en 60 segundos: nombre, tipo, personaje, conflicto y gancho", "Un elevator de ascensor que se mueve mientras presentas", "Un pitch musical para una canción del mundo"],
+      "correcta": 1,
+      "pista": "¡60 segundos para enamorar a tu audiencia! 🚀"
+    },
+    {
+      "q": "¿Cuál es el objetivo principal de la Galería del Mundo (Clase 9)?",
+      "opciones": ["Crear más personajes para el mundo", "Diseñar el mapa final en Canva por primera vez", "Presentar el universo completo ante el grupo en la Gran Exposición Da Vinci", "Corregir los errores de las clases anteriores"],
+      "correcta": 2,
+      "pista": "Es tu primera gran presentación como creador. 🎪"
+    },
+    {
+      "q": "¿Qué elementos debes incluir en tu presentación de 60 segundos de la Galería?",
+      "opciones": ["Solo el nombre del mundo y una descripción de los colores", "Nombre del mundo, tipo de mundo, personaje principal, conflicto principal y gancho", "Leer todo el guion del episodio completo en voz alta", "Mostrar todas las imágenes generadas durante el módulo"],
+      "correcta": 1,
+      "pista": "5 elementos clave que enganchen a tu audiencia. 🎯"
+    },
+    {
+      "q": "¿Qué insignia se gana al completar el Mundo 2?",
+      "opciones": ["Explorador de Mundos", "Cartógrafo Digital", "Arquitecto del Universo — Nivel 2", "Constructor de Historias"],
+      "correcta": 2,
+      "pista": "Construiste todo un universo desde cero — ¡mereces ese título! 🏆"
+    },
+    {
+      "q": "¿Cuál es la 'regla especial' más interesante que puede tener un mundo fantástico?",
+      "opciones": ["Que tenga exactamente los mismos países que el mundo real", "Una ley que cambia cómo funciona todo (la magia, la gravedad, el tiempo)", "Que no haya villanos para que sea un lugar más seguro", "Que todos los personajes hablen el mismo idioma"],
+      "correcta": 1,
+      "pista": "Las reglas únicas hacen que tu mundo sea inconfundible. ⚡"
+    },
+    {
+      "q": "¿Por qué es importante que el mentor del héroe tenga una debilidad?",
+      "opciones": ["Para que el héroe se sienta superior al mentor", "Para que el lector no confíe en él", "Porque lo hace más humano y real — nadie sabe todo", "Para que el villano pueda derrotarlo fácilmente"],
+      "correcta": 2,
+      "pista": "Los mentores perfectos son aburridos — ¡la falla los hace interesantes! 🦉"
+    },
+    {
+      "q": "¿Qué significa 'zona neutral' en el mapa de tu mundo?",
+      "opciones": ["Un lugar donde no pasa nada interesante en la historia", "Un territorio donde héroe y villano pueden encontrarse sin reglas de ninguno", "El centro exacto del mapa, calculado matemáticamente", "Un lugar abandonado que nadie visita"],
+      "correcta": 1,
+      "pista": "Es donde el conflicto puede ocurrir en terreno de nadie. 🤝"
+    },
+    {
+      "q": "¿Cuántos mundos posibles existen para tus historias según la Clase 6?",
+      "opciones": ["Solo 2: fantástico y realista", "Solo 3: pasado, presente y futuro", "Infinitos — puedes combinar tipos de mundo y crear algo completamente nuevo", "Exactamente 7 tipos de mundo"],
+      "correcta": 2,
+      "pista": "¡Tu imaginación es el único límite! Mezcla géneros y crea algo único. 🌟"
     }
   ]
 };

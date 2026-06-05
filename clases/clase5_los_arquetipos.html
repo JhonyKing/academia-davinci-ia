@@ -5,6 +5,38 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Clase 5 — Los 12 Arquetipos · Genios Creativos</title>
 <link rel="icon" type="image/svg+xml" href="robotsin/favicon.svg">
+<style>
+/* Mision glamorosa shimmer */
+.mission-numero {
+  font-family: var(--font-display, 'Space Grotesk', sans-serif);
+  font-size: clamp(22px, 5vw, 36px);
+  font-weight: 900;
+  letter-spacing: .04em;
+  text-align: center;
+  margin: 0 0 14px;
+  background: linear-gradient(90deg,
+    #FFD700 0%, #FF8C42 20%, #FFD700 40%,
+    #fff9e0 50%, #FFD700 60%, #FF8C42 80%, #FFD700 100%);
+  background-size: 250% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: missionShimmer 2.8s linear infinite;
+  text-shadow: none;
+}
+.mission-numero .mn-num { font-size: 1.5em; line-height: 1; }
+.mission-numero .mn-of  { font-size: .65em; opacity: .85; }
+@keyframes missionShimmer {
+  0%   { background-position: 0% center; }
+  100% { background-position: 250% center; }
+}
+.next .lab { font-size: 11px; font-weight: 700; opacity: .7; letter-spacing: .08em; text-transform: uppercase; }
+.next .ti  { font-size: 20px; font-weight: 900; color: #FFD700 !important; margin-top: 4px; line-height: 1.2; }
+nav.lessonnav .lnav-btn.next-btn .lab { font-size: 11px; opacity: .7; letter-spacing: .06em; }
+nav.lessonnav .lnav-btn.next-btn .ti  { font-size: 16px; font-weight: 900; color: #FFD700 !important; }
+#claimBtn:disabled { opacity: .35; cursor: not-allowed; }
+#badge-lock-msg { text-align: center; font-size: 13px; color: rgba(255,255,255,.45); margin-top: 10px; display: none; }
+</style>
 <link rel="stylesheet" href="css/genios.css">
 <link rel="stylesheet" href="css/lesson.css">
 <link rel="stylesheet" href="css/juice.css">
@@ -33,7 +65,7 @@
   <span class="spark" data-parallax="-0.12" style="top:80px;right:16%;font-size:18px;animation-delay:1s;">✧</span>
   <div class="lread" data-reveal>
     <span class="badge-pill">🎨 Mundo 1 — El Genio Creativo</span>
-    <div class="kicker">Misión 5 de 26</div>
+    <div class="mission-numero">❖ MISIÓN <span class="mn-num">5</span> <span class="mn-of">de 26</span> ❖</div>
 
     <div class="mascot-stage">
       <img src="robotsin/robotsin_artista.png" alt="D-IA Vinci Robotsin Artista">
@@ -288,6 +320,25 @@
   </div>
 </section>
 
+<!-- ═══════════ CIERRE ═══════════ -->
+<section class="block tint">
+  <div class="lread">
+    <div class="shead">
+      <span class="ava"><img src="robotsin/robotsin_artista.png" alt="Robotsin"></span>
+      <div>
+        <div class="lab">Resumen · 5 min</div>
+        <h2>Lo que <em>aprendiste hoy</em></h2>
+      </div>
+    </div>
+
+    <div class="cierre" data-reveal>
+      <div class="rec"><div class="em">🔮</div><h4>Qué es un arquetipo</h4><p>El "alma" de un personaje. Carl Jung descubrió que los mismos 12 tipos aparecen en todas las historias del mundo.</p></div>
+      <div class="rec"><div class="em">🎬</div><h4>El código de Hollywood</h4><p>Los directores de cine usan los arquetipos para crear personajes que conectan emocionalmente con el público.</p></div>
+      <div class="rec"><div class="em">🎭</div><h4>El alma de tu personaje</h4><p>Ya sabes cuál arquetipo (o combinación) define a tu personaje. Eso lo hace único e irresistible.</p></div>
+      <div class="rec"><div class="em">😈</div><h4>La sombra del héroe</h4><p>El villano es siempre lo opuesto del héroe. Conocer el arquetipo del protagonista revela el arquetipo del antagonista.</p></div>
+    </div>
+  </div>
+</section>
 <!-- ═══════════ TAREA ═══════════ -->
 <section class="block">
   <div class="lread">
@@ -344,6 +395,10 @@
   </div>
 </section>
 
+
+<!-- ══ MINI QUIZ ══ -->
+<div id="lesson-quiz-container"></div>
+
 <!-- ═══════════ INSIGNIA ═══════════ -->
 <section class="block badge-sec" id="badgeSec">
   <span class="spark" style="top:24px;left:18%;font-size:22px;">✦</span>
@@ -354,27 +409,13 @@
     <div class="bname">"Descubridor de Arquetipos"</div>
     <div class="bmeta">Clase 5 · Mundo 1 — El Genio Creativo</div>
     <button class="btn gold btn-lg" id="claimBtn">⭐ ¡Reclamar mi insignia!</button>
+    <p id="badge-lock-msg">Completa la entrega y el quiz para desbloquear</p>
   </div>
 </section>
 
-<!-- ═══════════ CIERRE ═══════════ -->
-<section class="block tint">
+<!-- SIGUIENTE MISION -->
+<section class="block" style="padding-top:0">
   <div class="lread">
-    <div class="shead">
-      <span class="ava"><img src="robotsin/robotsin_artista.png" alt="Robotsin"></span>
-      <div>
-        <div class="lab">Resumen · 5 min</div>
-        <h2>Lo que <em>aprendiste hoy</em></h2>
-      </div>
-    </div>
-
-    <div class="cierre" data-reveal>
-      <div class="rec"><div class="em">🔮</div><h4>Qué es un arquetipo</h4><p>El "alma" de un personaje. Carl Jung descubrió que los mismos 12 tipos aparecen en todas las historias del mundo.</p></div>
-      <div class="rec"><div class="em">🎬</div><h4>El código de Hollywood</h4><p>Los directores de cine usan los arquetipos para crear personajes que conectan emocionalmente con el público.</p></div>
-      <div class="rec"><div class="em">🎭</div><h4>El alma de tu personaje</h4><p>Ya sabes cuál arquetipo (o combinación) define a tu personaje. Eso lo hace único e irresistible.</p></div>
-      <div class="rec"><div class="em">😈</div><h4>La sombra del héroe</h4><p>El villano es siempre lo opuesto del héroe. Conocer el arquetipo del protagonista revela el arquetipo del antagonista.</p></div>
-    </div>
-
     <div class="next">
       <span class="em">▶️</span>
       <div>
@@ -387,8 +428,7 @@
 
 <!-- ═══════════ NAV LECCIÓN ═══════════ -->
 
-<!-- ══ MINI QUIZ ══ -->
-<div id="lesson-quiz-container"></div>
+
 <nav class="lessonnav">
   <a href="clase4_tarjeta_oficial.html" class="lnav-btn prev-btn">
     <span class="ar">←</span>
@@ -615,5 +655,35 @@ window.initMisArquetipos = async function () {
 <!-- ── Lesson quiz ── -->
 <script>window.LESSON_QUIZ_DATA = {"claseNum": 5, "preguntas": [{"q": "¿Qué es un 'arquetipo' de personaje?", "opciones": ["El nombre del disfraz del superhéroe", "El 'alma' o tipo universal de personaje que aparece en todas las historias", "El villano principal de una historia", "La habilidad especial que tiene un personaje"], "correcta": 1, "pista": "Carl Jung descubrió que los mismos 12 tipos aparecen en TODAS las historias del mundo."}, {"q": "¿Cuál es el arquetipo de Yoda, Dumbledore y Mufasa?", "opciones": ["El Héroe", "El Gobernante", "El Mago", "El Sabio"], "correcta": 3, "pista": "Guía a otros con su sabiduría y experiencia."}, {"q": "¿Qué tienen en común Tony Stark y Elsa según lo que aprendiste?", "opciones": ["Los dos son el arquetipo del Héroe puro", "Los dos mezclan 2 arquetipos (Tony = Creador+Rebelde; Elsa = Gobernante+Cuidador)", "Los dos son el arquetipo del Sabio", "No tienen nada en común — son opuestos"], "correcta": 1, "pista": "Los mejores personajes mezclan 2 arquetipos. Eso los hace únicos y fascinantes."}, {"q": "¿Cómo se relaciona el arquetipo del villano con el del héroe?", "opciones": ["El villano siempre es el mismo arquetipo que el héroe", "No tienen ninguna relación entre sí", "El villano es la 'sombra' del héroe — lo opuesto de lo que el héroe representa", "El villano siempre es El Gobernante, sin importar quién sea el héroe"], "correcta": 2, "pista": "Si tu héroe es El Inocente, su villano querría controlar o destruir esa libertad."}]};</script>
 <script src="js/lesson-quiz.js"></script>
+
+<!-- Badge lock: requiere entrega + quiz -->
+<script>
+(function(){
+  var btn = document.getElementById('claimBtn');
+  var lockMsg = document.getElementById('badge-lock-msg');
+  if (!btn) return;
+  btn.disabled = true;
+  if (lockMsg) lockMsg.style.display = 'block';
+  window._entregaDone = false;
+  window._quizPassed  = false;
+  window.checkBadgeUnlock = function() {
+    var ready = window._entregaDone && window._quizPassed;
+    btn.disabled = !ready;
+    if (lockMsg) lockMsg.style.display = ready ? 'none' : 'block';
+  };
+  var qc = document.getElementById('lesson-quiz-container');
+  if (qc) {
+    var obs = new MutationObserver(function() {
+      if (qc.querySelector('.lq-passed')) {
+        window._quizPassed = true; obs.disconnect();
+        window.checkBadgeUnlock();
+      }
+    });
+    obs.observe(qc, { childList: true, subtree: true });
+  }
+  var hasDz = document.querySelector('[id^="dz"]');
+  if (!hasDz) { window._entregaDone = true; }
+})();
+</script>
 </body>
 </html>
