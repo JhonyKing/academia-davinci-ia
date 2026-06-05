@@ -105,7 +105,7 @@
     { id: 'red',           nombre: 'Red',               obra: 'Angry Birds',                  img: 'img/arquetipos/red.jpg',           correcto: ['heroe','cuidador'] },
     { id: 'chuck',         nombre: 'Chuck',             obra: 'Angry Birds',                  img: 'img/arquetipos/chuck.jpg',         correcto: ['rebelde','explorador'] },
     { id: 'bomb',          nombre: 'Bomb',              obra: 'Angry Birds',                  img: 'img/arquetipos/bomb.jpg',          correcto: ['bufon','rebelde'] },
-    { id: 'mighty_eagle',  nombre: 'Águila Poderosa',   obra: 'Angry Birds',                  img: 'img/arquetipos/mighty_eagle.jpg',  correcto: ['sabio','gobernante'] },
+    { id: 'mighty_eagle',  nombre: 'Águila Poderosa',   obra: 'Angry Birds',                  img: 'img/arquetipos/mighty_eagle.jpg',  correcto: ['sabio','gobernante','heroe'] },
     { id: 'stella',        nombre: 'Stella',            obra: 'Angry Birds',                  img: 'img/arquetipos/stella.jpg',        correcto: ['rebelde','heroe'] },
 
     // ── Toy Story ─────────────────────────────────────────────────────────────
