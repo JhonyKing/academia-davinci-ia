@@ -38,7 +38,7 @@
     { id: 'genie',         nombre: 'Genio',             obra: 'Aladdin',                      img: 'img/arquetipos/genie.jpg',         correcto: ['mago','bufon'] },
     { id: 'hada_madrina',  nombre: 'Hada Madrina',      obra: 'Cenicienta',                   img: 'img/arquetipos/hada_madrina.jpg',  correcto: ['mago','cuidador'] },
     { id: 'merlin',        nombre: 'Merlín',            obra: 'La Espada en la Piedra',       img: 'img/arquetipos/merlin.jpg',        correcto: ['mago','sabio'] },
-    { id: 'dr_strange',    nombre: 'Doctor Strange',    obra: 'Marvel',                       img: 'img/arquetipos/dr_strange.jpg',    correcto: ['mago','heroe'] },
+    { id: 'dr_strange',    nombre: 'Doctor Strange',    obra: 'Marvel',                       img: 'img/arquetipos/dr_strange.jpg',    correcto: ['mago','heroe','gobernante'] },
     // ⚡ El Rebelde
     { id: 'shrek',         nombre: 'Shrek',             obra: 'DreamWorks',                   img: 'img/arquetipos/shrek.jpg',         correcto: ['rebelde','huerfano','heroe'] },
     { id: 'katniss',       nombre: 'Katniss Everdeen',  obra: 'Los Juegos del Hambre',        img: 'img/arquetipos/katniss.jpg',       correcto: ['rebelde','heroe'] },
