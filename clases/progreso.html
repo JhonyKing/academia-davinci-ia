@@ -109,6 +109,18 @@
             <div class="stat-value" id="stat-entregas">—</div>
             <div class="stat-label">Entregas realizadas</div>
           </div>
+          <div class="stat-card">
+            <div class="stat-value" id="stat-tiempo-total">—</div>
+            <div class="stat-label">Tiempo total de estudio</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="stat-tiempo-7d">—</div>
+            <div class="stat-label">Últimos 7 días</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="stat-tiempo-hoy">—</div>
+            <div class="stat-label">Tiempo hoy</div>
+          </div>
         </div>
       </div>
 
@@ -310,11 +322,12 @@
       const userId = session.user.id
 
       // Cargar datos en paralelo
-      const [profileRes, progressRes, entregasRes, logrosRes] = await Promise.all([
+      const [profileRes, progressRes, entregasRes, logrosRes, sesionesRes] = await Promise.all([
         sb.from('profiles').select('nombre,rol,created_at').eq('id', userId).single(),
         sb.from('progress').select('clase_num,completada_at').eq('user_id', userId).eq('completada', true),
         sb.from('entregas').select('clase_num', { count: 'exact', head: true }).eq('user_id', userId),
         sb.from('logros').select('*').eq('user_id', userId).order('fecha_ganado', { ascending: false }),
+        sb.from('sesiones').select('duracion_segundos,inicio').eq('user_id', userId),
       ])
 
       const nombre        = profileRes.data?.nombre || session.user.email.split('@')[0]
@@ -343,6 +356,29 @@
       document.getElementById('barra-fill').style.width = `${pct}%`
       document.getElementById('barra-label').innerHTML =
         `<strong>${completadas}</strong> de <strong>${TOTAL_CLASES}</strong> clases completadas`
+
+      // Tiempo de estudio
+      const sesiones = sesionesRes.data || []
+      const totalSecs = sesiones.reduce((s, r) => s + (r.duracion_segundos || 0), 0)
+      const secsHoy   = sesiones.filter(r => r.inicio?.startsWith(new Date().toISOString().slice(0,10)))
+                                .reduce((s, r) => s + (r.duracion_segundos || 0), 0)
+      const secsHoy7  = sesiones.filter(r => {
+        const d = new Date(r.inicio); const now = new Date()
+        return (now - d) / 864e5 <= 7
+      }).reduce((s, r) => s + (r.duracion_segundos || 0), 0)
+
+      function fmtTiempo(secs) {
+        if (secs < 60) return secs + 's'
+        const h = Math.floor(secs / 3600), m = Math.floor((secs % 3600) / 60)
+        return h ? `${h}h ${m}m` : `${m}m`
+      }
+
+      const tiempoEl = document.getElementById('stat-tiempo-total')
+      if (tiempoEl) tiempoEl.textContent = fmtTiempo(totalSecs)
+      const tiempoHoyEl = document.getElementById('stat-tiempo-hoy')
+      if (tiempoHoyEl) tiempoHoyEl.textContent = fmtTiempo(secsHoy)
+      const tiempo7El = document.getElementById('stat-tiempo-7d')
+      if (tiempo7El) tiempo7El.textContent = fmtTiempo(secsHoy7)
 
       // Módulos, logros y actividad
       renderModulos(completadasSet)
