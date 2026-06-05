@@ -99,6 +99,72 @@
     { id: 'tarzan',        nombre: 'Tarzán',            obra: 'Disney',                       img: 'img/arquetipos/tarzan.jpg',        correcto: ['huerfano','explorador'] },
     { id: 'pinocho',       nombre: 'Pinocho',           obra: 'Disney',                       img: 'img/arquetipos/pinocho.jpg',       correcto: ['huerfano','inocente'] },
     { id: 'oliver',        nombre: 'Oliver',            obra: 'Oliver & Company',             img: 'img/arquetipos/oliver.jpg',        correcto: ['huerfano','inocente'] },
+
+    // ── Angry Birds ──────────────────────────────────────────────────────────
+    { id: 'red',           nombre: 'Red',               obra: 'Angry Birds',                  img: 'img/arquetipos/red.jpg',           correcto: ['heroe','cuidador'] },
+    { id: 'chuck',         nombre: 'Chuck',             obra: 'Angry Birds',                  img: 'img/arquetipos/chuck.jpg',         correcto: ['rebelde','explorador'] },
+    { id: 'bomb',          nombre: 'Bomb',              obra: 'Angry Birds',                  img: 'img/arquetipos/bomb.jpg',          correcto: ['bufon','rebelde'] },
+    { id: 'mighty_eagle',  nombre: 'Águila Poderosa',   obra: 'Angry Birds',                  img: 'img/arquetipos/mighty_eagle.jpg',  correcto: ['sabio','gobernante'] },
+    { id: 'stella',        nombre: 'Stella',            obra: 'Angry Birds',                  img: 'img/arquetipos/stella.jpg',        correcto: ['rebelde','heroe'] },
+
+    // ── Toy Story ─────────────────────────────────────────────────────────────
+    { id: 'woody',         nombre: 'Woody',             obra: 'Toy Story',                    img: 'img/arquetipos/woody.jpg',         correcto: ['cuidador','gobernante'] },
+    { id: 'buzz',          nombre: 'Buzz Lightyear',    obra: 'Toy Story',                    img: 'img/arquetipos/buzz.jpg',          correcto: ['heroe','huerfano'] },
+    { id: 'rex_ts',        nombre: 'Rex',               obra: 'Toy Story',                    img: 'img/arquetipos/rex_ts.jpg',        correcto: ['inocente','bufon'] },
+    { id: 'jessie',        nombre: 'Jessie',            obra: 'Toy Story',                    img: 'img/arquetipos/jessie.jpg',        correcto: ['rebelde','explorador'] },
+    { id: 'forky',         nombre: 'Forky',             obra: 'Toy Story 4',                  img: 'img/arquetipos/forky.jpg',         correcto: ['huerfano','inocente'] },
+
+    // ── El Jefe en Pañales ────────────────────────────────────────────────────
+    { id: 'boss_baby',     nombre: 'El Jefe',           obra: 'El Jefe en Pañales',           img: 'img/arquetipos/boss_baby.jpg',     correcto: ['gobernante','rebelde'] },
+
+    // ── Capitán Calzoncillos ──────────────────────────────────────────────────
+    { id: 'capitan_calzoncillos', nombre: 'Capitán Calzoncillos', obra: 'El Capitán Calzoncillos', img: 'img/arquetipos/capitan_calzoncillos.jpg', correcto: ['heroe','bufon'] },
+
+    // ── Intensamente (Inside Out) ─────────────────────────────────────────────
+    { id: 'joy',           nombre: 'Alegría',           obra: 'Intensamente',                 img: 'img/arquetipos/joy.jpg',           correcto: ['inocente','cuidador'] },
+    { id: 'sadness',       nombre: 'Tristeza',          obra: 'Intensamente',                 img: 'img/arquetipos/sadness.jpg',       correcto: ['cuidador','sabio'] },
+    { id: 'anger',         nombre: 'Ira',               obra: 'Intensamente',                 img: 'img/arquetipos/anger.jpg',         correcto: ['rebelde','gobernante'] },
+    { id: 'bing_bong',     nombre: 'Bing Bong',         obra: 'Intensamente',                 img: 'img/arquetipos/bing_bong.jpg',     correcto: ['amante','inocente'] },
+
+    // ── Más Mario Bros ────────────────────────────────────────────────────────
+    { id: 'peach',         nombre: 'Princesa Peach',    obra: 'Super Mario Bros.',            img: 'img/arquetipos/peach.jpg',         correcto: ['gobernante','inocente'] },
+    { id: 'yoshi',         nombre: 'Yoshi',             obra: 'Super Mario Bros.',            img: 'img/arquetipos/yoshi.jpg',         correcto: ['cuidador','inocente'] },
+    { id: 'luigi',         nombre: 'Luigi',             obra: 'Super Mario Bros.',            img: 'img/arquetipos/luigi.jpg',         correcto: ['heroe','huerfano'] },
+    { id: 'bowser',        nombre: 'Bowser',            obra: 'Super Mario Bros.',            img: 'img/arquetipos/bowser.jpg',        correcto: ['gobernante','rebelde'] },
+
+    // ── Minecraft ─────────────────────────────────────────────────────────────
+    { id: 'steve_mc',      nombre: 'Steve',             obra: 'Minecraft',                    img: 'img/arquetipos/steve_mc.jpg',      correcto: ['creador','explorador'] },
+    { id: 'creeper',       nombre: 'Creeper',           obra: 'Minecraft',                    img: 'img/arquetipos/creeper.jpg',       correcto: ['bufon','rebelde'] },
+    { id: 'alex_mc',       nombre: 'Alex',              obra: 'Minecraft',                    img: 'img/arquetipos/alex_mc.jpg',       correcto: ['explorador','creador'] },
+
+    // ── Cars ──────────────────────────────────────────────────────────────────
+    { id: 'lightning',     nombre: 'Rayo McQueen',      obra: 'Cars',                         img: 'img/arquetipos/lightning.jpg',     correcto: ['heroe','rebelde'] },
+    { id: 'mater',         nombre: 'Mate',              obra: 'Cars',                         img: 'img/arquetipos/mater.jpg',         correcto: ['bufon','cuidador'] },
+    { id: 'doc_hudson',    nombre: 'Doc Hudson',        obra: 'Cars',                         img: 'img/arquetipos/doc_hudson.jpg',    correcto: ['sabio','cuidador'] },
+
+    // ── Stranger Things ───────────────────────────────────────────────────────
+    { id: 'eleven',        nombre: 'Once (Eleven)',     obra: 'Stranger Things',              img: 'img/arquetipos/eleven.jpg',        correcto: ['heroe','huerfano'] },
+    { id: 'dustin',        nombre: 'Dustin',            obra: 'Stranger Things',              img: 'img/arquetipos/dustin.jpg',        correcto: ['bufon','sabio'] },
+    { id: 'steve_st',      nombre: 'Steve Harrington',  obra: 'Stranger Things',              img: 'img/arquetipos/steve_st.jpg',      correcto: ['cuidador','rebelde'] },
+
+    // ── Demon Slayer / Kimetsu no Yaiba ──────────────────────────────────────
+    { id: 'tanjiro',       nombre: 'Tanjiro Kamado',    obra: 'Demon Slayer',                 img: 'img/arquetipos/tanjiro.jpg',       correcto: ['heroe','cuidador'] },
+    { id: 'nezuko',        nombre: 'Nezuko Kamado',     obra: 'Demon Slayer',                 img: 'img/arquetipos/nezuko.jpg',        correcto: ['cuidador','inocente'] },
+
+    // ── El Chavo del Ocho ─────────────────────────────────────────────────────
+    { id: 'chavo',         nombre: 'El Chavo del 8',    obra: 'El Chavo del Ocho',            img: 'img/arquetipos/chavo.jpg',         correcto: ['huerfano','inocente'] },
+    { id: 'quico',         nombre: 'Quico',             obra: 'El Chavo del Ocho',            img: 'img/arquetipos/quico.jpg',         correcto: ['bufon','gobernante'] },
+    { id: 'chilindrina',   nombre: 'La Chilindrina',    obra: 'El Chavo del Ocho',            img: 'img/arquetipos/chilindrina.jpg',   correcto: ['rebelde','creador'] },
+
+    // ── Goat Simulator ────────────────────────────────────────────────────────
+    { id: 'goat',          nombre: 'La Cabra',          obra: 'Goat Simulator',               img: 'img/arquetipos/goat.jpg',          correcto: ['bufon','rebelde'] },
+
+    // ── Los 5 finales para llegar a 100 ──────────────────────────────────────
+    { id: 'tom',           nombre: 'Tom',               obra: 'Tom y Jerry',                  img: 'img/arquetipos/tom.jpg',           correcto: ['rebelde','bufon'] },
+    { id: 'jerry',         nombre: 'Jerry',             obra: 'Tom y Jerry',                  img: 'img/arquetipos/jerry.jpg',         correcto: ['bufon','explorador'] },
+    { id: 'pocoyo',        nombre: 'Pocoyó',            obra: 'Pocoyó',                       img: 'img/arquetipos/pocoyo.jpg',        correcto: ['inocente','explorador'] },
+    { id: 'bart',          nombre: 'Bart Simpson',      obra: 'Los Simpson',                  img: 'img/arquetipos/bart.jpg',          correcto: ['rebelde','bufon'] },
+    { id: 'goku',          nombre: 'Son Goku',          obra: 'Dragon Ball',                  img: 'img/arquetipos/goku.jpg',          correcto: ['heroe','inocente'] },
   ];
 
   // State
