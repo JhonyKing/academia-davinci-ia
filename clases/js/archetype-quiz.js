@@ -165,6 +165,7 @@
     { id: 'pocoyo',        nombre: 'Pocoyó',            obra: 'Pocoyó',                       img: 'img/arquetipos/pocoyo.jpg',        correcto: ['inocente','explorador'] },
     { id: 'bart',          nombre: 'Bart Simpson',      obra: 'Los Simpson',                  img: 'img/arquetipos/bart.jpg',          correcto: ['rebelde','bufon'] },
     { id: 'goku',          nombre: 'Son Goku',          obra: 'Dragon Ball',                  img: 'img/arquetipos/goku.jpg',          correcto: ['heroe','inocente'] },
+    { id: 'pikachu',       nombre: 'Pikachu',           obra: 'Pokémon',                      img: 'img/arquetipos/pikachu.jpg',       correcto: ['inocente','cuidador'] },
   ];
 
   // State
