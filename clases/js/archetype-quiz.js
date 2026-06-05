@@ -66,7 +66,7 @@
     // 💚 El Cuidador
     { id: 'baymax',        nombre: 'Baymax',            obra: 'Big Hero 6',                   img: 'img/arquetipos/baymax.jpg',        correcto: ['cuidador'] },
     { id: 'elastigirl',    nombre: 'Elastigirl',        obra: 'Los Increíbles',               img: 'img/arquetipos/elastigirl.jpg',    correcto: ['cuidador','heroe'] },
-    { id: 'paddington',    nombre: 'Paddington',        obra: 'Paddington',                   img: 'img/arquetipos/paddington.jpg',    correcto: ['cuidador','inocente'] },
+    { id: 'mario',         nombre: 'Mario',             obra: 'Super Mario Bros.',            img: 'img/arquetipos/mario.jpg',         correcto: ['heroe','explorador'] },
     { id: 'sam',           nombre: 'Sam Gamgee',        obra: 'El Señor de los Anillos',      img: 'img/arquetipos/sam.jpg',           correcto: ['cuidador'] },
     { id: 'eve',           nombre: 'EVE',               obra: 'WALL-E',                       img: 'img/arquetipos/eve.jpg',           correcto: ['cuidador','amante'] },
     // 🎨 El Creador
@@ -299,6 +299,18 @@
         S.fanfare();
         if (window.GCConfetti) window.GCConfetti(100);
       }, 350);
+    }
+
+    // Guardar trofeo en Supabase
+    if (window.dvAwardLogro) {
+      window.dvAwardLogro({
+        clave:     'trofeo_arquetipos',
+        titulo:    `${t.nivel} ${t.titulo}`,
+        emoji:     t.emoji,
+        tipo:      'trofeo',
+        subtitulo: `${pct}% — ${score}/${total} personajes identificados`,
+        color:     t.color,
+      });
     }
 
     const retryBtn = document.getElementById('aq-retry-btn');

@@ -129,6 +129,14 @@
         <!-- generado por JS -->
       </div>
 
+      <!-- LOGROS Y TROFEOS -->
+      <div class="logros-section">
+        <div class="section-title">🏆 Trofeos e Insignias</div>
+        <div id="logros-container">
+          <p class="actividad-empty">Completa lecciones para ganar insignias.</p>
+        </div>
+      </div>
+
       <!-- ACTIVIDAD RECIENTE -->
       <div class="actividad-section">
         <div class="section-title">Actividad reciente</div>
@@ -224,6 +232,36 @@
       })
     }
 
+    // ── RENDER: LOGROS ──────────────────────────────────────
+    function renderLogros(logros) {
+      const container = document.getElementById('logros-container')
+      if (!logros || logros.length === 0) {
+        container.innerHTML = '<p class="actividad-empty">Completa lecciones y retos para ganar tus primeras insignias. ¡Tú puedes! 🌟</p>'
+        return
+      }
+
+      const sorted = [...logros].sort((a,b) => new Date(b.fecha_ganado) - new Date(a.fecha_ganado))
+
+      const TIPO_LABEL = { insignia: 'Insignia', trofeo: 'Trofeo', reto: 'Reto', campeon: 'Campeón' }
+
+      container.innerHTML = `
+        <div class="logros-count">${sorted.length} logro${sorted.length !== 1 ? 's' : ''} ganado${sorted.length !== 1 ? 's' : ''}</div>
+        <div class="logros-grid">
+          ${sorted.map(l => `
+            <div class="logro-card logro-tipo-${l.tipo}" ${l.color ? `style="--lc:${l.color}"` : ''}>
+              <div class="logro-emoji">${l.emoji || '🏆'}</div>
+              <div class="logro-body">
+                <div class="logro-tipo-tag">${TIPO_LABEL[l.tipo] || l.tipo}</div>
+                <div class="logro-titulo">${l.titulo}</div>
+                ${l.subtitulo ? `<div class="logro-sub">${l.subtitulo}</div>` : ''}
+                <div class="logro-fecha">${fmtFecha(l.fecha_ganado)}</div>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      `
+    }
+
     // ── RENDER: ACTIVIDAD RECIENTE ───────────────────────────
     function renderActividad(progress) {
       const container = document.getElementById('actividad-container')
@@ -272,10 +310,11 @@
       const userId = session.user.id
 
       // Cargar datos en paralelo
-      const [profileRes, progressRes, entregasRes] = await Promise.all([
+      const [profileRes, progressRes, entregasRes, logrosRes] = await Promise.all([
         sb.from('profiles').select('nombre,rol,created_at').eq('id', userId).single(),
         sb.from('progress').select('clase_num,completada_at').eq('user_id', userId).eq('completada', true),
         sb.from('entregas').select('clase_num', { count: 'exact', head: true }).eq('user_id', userId),
+        sb.from('logros').select('*').eq('user_id', userId).order('fecha_ganado', { ascending: false }),
       ])
 
       const nombre        = profileRes.data?.nombre || session.user.email.split('@')[0]
@@ -305,8 +344,9 @@
       document.getElementById('barra-label').innerHTML =
         `<strong>${completadas}</strong> de <strong>${TOTAL_CLASES}</strong> clases completadas`
 
-      // Módulos y actividad
+      // Módulos, logros y actividad
       renderModulos(completadasSet)
+      renderLogros(logrosRes.data || [])
       renderActividad(progress)
 
       // Mostrar contenido

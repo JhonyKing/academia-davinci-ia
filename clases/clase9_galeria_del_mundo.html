@@ -342,6 +342,22 @@
     try { localStorage.setItem('gc_seen_level', '3'); } catch(e){}
 
     if (window.dvMarkClassComplete) window.dvMarkClassComplete();
+    // Guardar insignia en Supabase
+    if (window.dvAwardLogro) {
+      var _bn = (document.querySelector('.bname')||{}).textContent||'Insignia';
+      _bn = _bn.replace(/[\u201C\u201D\u201E\u201F"']/g,'').trim();
+      var _be = ((document.getElementById('badgeCoin')||{}).textContent||'\u2B50').trim();
+      var _cn = (window.LESSON_QUIZ_DATA||{}).claseNum||0;
+      var _wc = getComputedStyle(document.documentElement).getPropertyValue('--wc')||'';
+      window.dvAwardLogro({
+        clave: 'insignia_clase_' + _cn,
+        titulo: _bn,
+        emoji: _be,
+        tipo: 'insignia',
+        subtitulo: 'Clase ' + _cn + ' de 26',
+        color: _wc.trim()
+      });
+    }
   });
 })();
 </script>
@@ -355,7 +371,7 @@
 if (/vercel\.app$|academiadavinci/.test(location.hostname)) {
   const add=(src,cb)=>{const s=document.createElement('script');s.src=src;s.onload=cb;document.head.appendChild(s);};
   add('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js',()=>{
-    add('js/supabase-client.js',()=>{ add('js/auth.js'); });
+    add('js/supabase-client.js',()=>{ add('js/auth.js', ()=>{ add('js/logros.js'); }); });
   });
 }
 </script>

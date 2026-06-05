@@ -171,7 +171,11 @@
   color: #fff;
 }
 .aq-arch-btn:disabled { cursor: default; }
-.aq-arch-emoji { font-size: 20px; line-height: 1; }
+.aq-arch-emoji {
+  font-size: 20px;
+  line-height: 1;
+  font-family: "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", "Twemoji Mozilla", sans-serif;
+}
 .aq-arch-name  { font-size: 11px; font-weight: 700; text-align: center; line-height: 1.2; }
 
 /* Estados después de responder */
