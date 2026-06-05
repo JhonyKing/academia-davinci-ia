@@ -225,7 +225,7 @@
       <span class="ava"><img src="robotsin/robotsin_artista.png" alt="Robotsin"></span>
       <div>
         <div class="who">Dato Secreto de Director</div>
-        <div class="say">"Los mejores personajes <strong>mezclan 2 arquetipos</strong>. Por ejemplo, Tony Stark es El Creador + El Rebelde. Elsa es El Gobernante + El Cuidador. <em>Esa combinación es lo que los hace tan únicos y fascinantes. 💡</em>"</div>
+        <div class="say">"Los mejores personajes <strong>mezclan 2 o más arquetipos</strong>. Por ejemplo, Tony Stark es El Creador + El Rebelde. Elsa es El Gobernante + El Mago + El Rebelde. <em>Esa combinación es lo que los hace tan únicos y fascinantes. 💡</em>"</div>
       </div>
     </div>
   </div>
@@ -246,7 +246,7 @@
       <span class="ava"><img src="robotsin/robotsin_artista.png" alt="Robotsin"></span>
       <div>
         <div class="who">D-IA Vinci te reta</div>
-        <div class="say">"¡Ahora prueba cuánto aprendiste! Voy a mostrarte <strong>60 personajes famosos</strong> del cine y la TV. Tu misión: identificar a qué arquetipo pertenece cada uno. <em>¡Algunos tienen más de un arquetipo correcto! 🎯</em>"</div>
+        <div class="say">"¡Ahora prueba cuánto aprendiste! Voy a mostrarte <strong>102 personajes famosos</strong> del cine, la TV y los videojuegos. Tu misión: identificar a qué arquetipo pertenece cada uno. <em>¡Muchos tienen más de un arquetipo correcto! 🎯</em>"</div>
       </div>
     </div>
 
@@ -269,7 +269,7 @@
       <span class="em">🎭</span>
       <div>
         <h3>¿Cuál arquetipo es TU personaje?</h3>
-        <p>Lee cada arquetipo y piensa: ¿Cuál se parece más a la personalidad de tu personaje? ¿Cuál es su mayor motivación? ¿Proteger? ¿Explorar? ¿Crear? ¿Cómo reacciona cuando hay un problema? Recuerda: los mejores personajes <strong>mezclan 2 arquetipos</strong>.</p>
+        <p>Lee cada arquetipo y piensa: ¿Cuál se parece más a la personalidad de tu personaje? ¿Cuál es su mayor motivación? ¿Proteger? ¿Explorar? ¿Crear? ¿Cómo reacciona cuando hay un problema? Recuerda: los mejores personajes <strong>mezclan 2 o más arquetipos</strong>.</p>
       </div>
     </div>
 
@@ -317,6 +317,29 @@
         <div class="who">D-IA Vinci Robotsin te dice</div>
         <div class="say">"<strong>¡Ahora ya tienes el superpoder de los directores! 🎬</strong> Entender los arquetipos cambia completamente cómo ves las películas, series y libros. La próxima vez que veas a tu personaje favorito, vas a saber exactamente cuál es su arquetipo. <em>Eso es pensar como un creador profesional. ¡Estás creciendo rápido, Genio! 🚀</em>"</div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ ARQUETIPOS DE TU PERSONAJE ═══════════ -->
+<section class="block" id="sec-mis-arquetipos">
+  <div class="lread">
+    <div class="shead">
+      <span class="ava"><img src="robotsin/robotsin_artista.png" alt="Robotsin"></span>
+      <div>
+        <div class="lab">Actividad final · El alma de tu personaje</div>
+        <h2>Los Arquetipos de <em>Tu Personaje</em></h2>
+      </div>
+    </div>
+    <div class="rmsg" data-reveal>
+      <span class="ava"><img src="robotsin/robotsin_artista.png" alt="Robotsin"></span>
+      <div>
+        <div class="who">D-IA Vinci te pregunta</div>
+        <div class="say">"Ahora que conoces los 12 arquetipos, ¿cuál o cuáles son el alma de TU personaje? Puedes elegir 1, 2 o hasta 3 si tu personaje los combina. <em>Guarda tu selección para poder reclamar la insignia de esta clase. ⭐</em>"</div>
+      </div>
+    </div>
+    <div id="ma-container" style="margin-top:8px;">
+      <div style="text-align:center;padding:32px 0;color:rgba(100,120,180,.7);font-size:15px;">Cargando tu personaje…</div>
     </div>
   </div>
 </section>
@@ -415,7 +438,11 @@
   let claimed = false;
 
   btn.addEventListener('click', ()=>{
-    if(claimed) return; claimed=true;
+    if(claimed) return;
+    if (window._arquetiposGuardados === false) {
+      if (!confirm('¿Reclamar la insignia sin guardar los arquetipos de tu personaje?\n\nTe recomendamos seleccionarlos primero en la sección de arriba.')) return;
+    }
+    claimed=true;
     coin.classList.remove('locked'); sec.classList.add('won');
     coin.style.animation='none'; void coin.offsetWidth; coin.style.animation='popIn .5s cubic-bezier(.34,1.7,.5,1) both';
     title.textContent='🎉 ¡Insignia desbloqueada!';
@@ -457,11 +484,130 @@
 if (/vercel\.app$|academiadavinci/.test(location.hostname)) {
   const add=(src,cb)=>{const s=document.createElement('script');s.src=src;s.onload=cb;document.head.appendChild(s);};
   add('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js',()=>{
-    add('js/supabase-client.js',()=>{ add('js/auth.js', ()=>{ add('js/logros.js'); }); });
+    add('js/supabase-client.js',()=>{ add('js/auth.js', ()=>{ add('js/logros.js', ()=>{ if(window.initMisArquetipos) window.initMisArquetipos(); }); }); });
   });
 }
 </script>
 
+
+<!-- ── Arquetipos de mi personaje ── -->
+<script>
+window.initMisArquetipos = async function () {
+  var container = document.getElementById('ma-container');
+  if (!container) return;
+  var sb = window._supabase;
+  if (!sb) return;
+
+  var authData = await sb.auth.getUser();
+  var user = authData.data && authData.data.user;
+  if (!user) { container.innerHTML = ''; return; }
+
+  var results = await Promise.all([
+    sb.from('personaje').select('nombre,imagen_retrato_url').eq('user_id', user.id).maybeSingle(),
+    sb.from('entregas').select('metadata').eq('user_id', user.id).eq('clase_num', 5).maybeSingle(),
+  ]);
+  var personaje = results[0].data;
+  var saved = (results[1].data && results[1].data.metadata && results[1].data.metadata.arquetipos) || [];
+  window._arquetiposGuardados = saved.length > 0;
+
+  if (!personaje || !personaje.nombre) {
+    container.innerHTML = '<div style="background:#12172b;border-radius:20px;padding:40px 28px;text-align:center;box-shadow:0 12px 40px rgba(0,0,0,.25);"><div style="font-size:64px;margin-bottom:16px;">🎨</div><p style="color:rgba(255,255,255,.7);font-size:16px;line-height:1.75;margin:0 0 24px;">Todavía no tienes un personaje creado.<br><strong style="color:#F39C12;">Debes crear tu personaje principal</strong> para poder seleccionar sus arquetipos y continuar.</p><a href="mi-personaje.html" style="display:inline-block;background:#E74C3C;color:#fff;padding:13px 30px;border-radius:12px;font-weight:800;font-size:15px;text-decoration:none;">Crear mi personaje →</a></div>';
+    return;
+  }
+
+  var imgSrc = null;
+  if (personaje.imagen_retrato_url) {
+    try {
+      var signRes = await sb.storage.from('portafolio').createSignedUrl(personaje.imagen_retrato_url, 3600);
+      imgSrc = signRes.data && signRes.data.signedUrl;
+    } catch(e) {}
+  }
+
+  var ARQUETIPOS = [
+    {id:'heroe',nombre:'El Héroe',emoji:'🦸'},
+    {id:'mago',nombre:'El Mago',emoji:'🔮'},
+    {id:'rebelde',nombre:'El Rebelde',emoji:'⚡'},
+    {id:'sabio',nombre:'El Sabio',emoji:'🦉'},
+    {id:'inocente',nombre:'El Inocente',emoji:'☀️'},
+    {id:'explorador',nombre:'El Explorador',emoji:'🧭'},
+    {id:'cuidador',nombre:'El Cuidador',emoji:'💚'},
+    {id:'creador',nombre:'El Creador',emoji:'🎨'},
+    {id:'gobernante',nombre:'El Gobernante',emoji:'👑'},
+    {id:'amante',nombre:'El Amante',emoji:'❤️'},
+    {id:'bufon',nombre:'El Bufón',emoji:'🃏'},
+    {id:'huerfano',nombre:'El Huérfano',emoji:'🌟'},
+  ];
+
+  var imgHTML = imgSrc
+    ? '<img src="' + imgSrc + '" style="width:68px;height:68px;border-radius:12px;object-fit:cover;object-position:top center;border:2px solid rgba(255,255,255,.3);" alt="' + personaje.nombre + '">'
+    : '<div style="width:68px;height:68px;border-radius:12px;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:30px;">🦸</div>';
+
+  var savedBadge = saved.length > 0
+    ? '<div style="margin-left:auto;background:rgba(34,194,104,.25);border:1.5px solid #22C268;border-radius:100px;padding:5px 14px;font-size:13px;font-weight:700;color:#22C268;">✓ Guardado</div>'
+    : '';
+
+  var checksHTML = ARQUETIPOS.map(function(a) {
+    var isChecked = saved.indexOf(a.id) >= 0;
+    return '<label style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,' + (isChecked?'.1':'.04') + ');border:2px solid rgba(255,255,255,' + (isChecked?'.25':'.08') + ');border-radius:12px;padding:10px 12px;cursor:pointer;transition:background .18s,border-color .18s;">'
+      + '<input type="checkbox" data-id="' + a.id + '" style="width:18px;height:18px;accent-color:#E74C3C;cursor:pointer;flex-shrink:0;" ' + (isChecked?'checked':'') + '>'
+      + '<span style="font-size:19px;line-height:1;font-family:\'Segoe UI Emoji\',\'Apple Color Emoji\',sans-serif;">' + a.emoji + '</span>'
+      + '<span style="font-size:13px;font-weight:700;color:rgba(255,255,255,.85);line-height:1.2;">' + a.nombre + '</span>'
+      + '</label>';
+  }).join('');
+
+  container.innerHTML = '<div style="background:#12172b;border-radius:20px;overflow:hidden;box-shadow:0 12px 48px rgba(0,0,0,.28);">'
+    + '<div style="background:var(--wc,#E74C3C);padding:18px 24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;">'
+    + imgHTML
+    + '<div style="flex:1;"><div style="font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.65);">Tu Personaje Principal</div>'
+    + '<div style="font-size:20px;font-weight:900;color:#fff;margin-top:2px;">' + personaje.nombre + '</div></div>'
+    + savedBadge + '</div>'
+    + '<div style="padding:24px 24px 28px;">'
+    + '<p style="color:rgba(255,255,255,.6);font-size:14px;margin:0 0 18px;">Selecciona <strong style="color:#fff;">1, 2 o 3 arquetipos</strong> que mejor describan a tu personaje:</p>'
+    + '<div id="ma-checks" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:9px;margin-bottom:24px;">' + checksHTML + '</div>'
+    + '<div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">'
+    + '<button id="ma-save-btn" style="background:#E74C3C;color:#fff;border:none;border-radius:12px;padding:13px 26px;font-weight:800;font-size:15px;cursor:pointer;font-family:var(--font-display,\'Nunito\',sans-serif);transition:filter .2s,transform .2s;">💾 Guardar arquetipos de mi personaje</button>'
+    + '<span id="ma-msg" style="font-size:14px;display:none;font-weight:600;"></span>'
+    + '</div></div></div>';
+
+  var saveBtn = document.getElementById('ma-save-btn');
+  var msgEl = document.getElementById('ma-msg');
+  saveBtn.addEventListener('mouseenter', function(){ saveBtn.style.filter='brightness(1.1)'; saveBtn.style.transform='translateY(-2px)'; });
+  saveBtn.addEventListener('mouseleave', function(){ saveBtn.style.filter=''; saveBtn.style.transform=''; });
+
+  saveBtn.addEventListener('click', async function() {
+    var checks = Array.from(document.querySelectorAll('#ma-checks input:checked'));
+    var selected = checks.map(function(c){ return c.dataset.id; });
+    if (selected.length === 0) {
+      msgEl.textContent = '⚠️ Selecciona al menos 1 arquetipo';
+      msgEl.style.color = '#F39C12';
+      msgEl.style.display = 'inline';
+      return;
+    }
+    saveBtn.disabled = true;
+    saveBtn.textContent = '⏳ Guardando…';
+    var res = await sb.from('entregas').upsert({
+      user_id: user.id, clase_num: 5, tipo: 'eleccion',
+      contenido_texto: selected.join(', '),
+      metadata: { arquetipos: selected }
+    }, { onConflict: 'user_id,clase_num' });
+    if (res.error) {
+      saveBtn.disabled = false;
+      saveBtn.textContent = '💾 Guardar arquetipos de mi personaje';
+      msgEl.textContent = '❌ Error al guardar. Intenta de nuevo.';
+      msgEl.style.color = '#E74C3C';
+    } else {
+      saveBtn.textContent = '✅ ¡Guardado!';
+      saveBtn.style.background = '#22C268';
+      msgEl.textContent = selected.length + ' arquetipo' + (selected.length !== 1 ? 's' : '') + ' guardado' + (selected.length !== 1 ? 's' : '');
+      msgEl.style.color = '#22C268';
+      msgEl.style.display = 'inline';
+      window._arquetiposGuardados = true;
+      if (window.GCSound) window.GCSound.win();
+      if (window.GCConfetti) window.GCConfetti(40);
+    }
+  });
+};
+</script>
 
 <!-- ── Archetype activity ── -->
 <script src="js/archetype-quiz.js"></script>
