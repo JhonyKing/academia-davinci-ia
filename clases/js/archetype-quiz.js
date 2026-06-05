@@ -91,7 +91,7 @@
     { id: 'donkey',        nombre: 'Burro',             obra: 'Shrek',                        img: 'img/arquetipos/donkey.jpg',        correcto: ['bufon','amante'] },
     { id: 'timon',         nombre: 'Timón',             obra: 'El Rey León',                  img: 'img/arquetipos/timon.jpg',         correcto: ['bufon'] },
     { id: 'mushu',         nombre: 'Mushu',             obra: 'Mulan',                        img: 'img/arquetipos/mushu.jpg',         correcto: ['bufon','cuidador'] },
-    { id: 'patrick',       nombre: 'Patrick Star',      obra: 'Bob Esponja',                  img: 'img/arquetipos/patrick.jpg',       correcto: ['bufon','inocente'] },
+    { id: 'patrick',       nombre: 'Patricio Estrella', obra: 'Bob Esponja',                  img: 'img/arquetipos/patrick.jpg',       correcto: ['bufon','inocente'] },
     { id: 'phil',          nombre: 'Filoctetes',        obra: 'Hércules',                     img: 'img/arquetipos/phil.jpg',          correcto: ['bufon','sabio'] },
     // 🌟 El Huérfano
     { id: 'frodo',         nombre: 'Frodo Bolsón',      obra: 'El Señor de los Anillos',      img: 'img/arquetipos/frodo.jpg',         correcto: ['huerfano','heroe'] },
