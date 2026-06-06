@@ -88,42 +88,35 @@
       .eq('id', userId)
   }
 
-  // ── 4. Inyectar saludo en la nav ─────────────────────────────────────────
+  // ── 4. Inyectar botón de logout en .topbar-right ────────────────────────
   function injectGreeting(nombre) {
-    // Busca el elemento con clase .nav-title o .nav-module-title
-    const navTitle = document.querySelector('.nav-title')
-    if (navTitle) {
-      navTitle.innerHTML = `Hola, <span>${nombre}</span> 👋`
-    }
-    // También inyectar un botón de logout si hay un .nav-spacer
-    const navSpacer = document.querySelector('.nav-spacer')
-    if (navSpacer) {
-      const logoutBtn = document.createElement('button')
-      logoutBtn.id        = 'dv-logout-btn'
-      logoutBtn.textContent = 'Salir'
-      logoutBtn.style.cssText = `
-        background: transparent;
-        border: 1px solid rgba(255,255,255,0.2);
-        color: rgba(255,255,255,0.5);
-        padding: 6px 14px;
-        border-radius: 20px;
-        font-family: 'Poppins', sans-serif;
-        font-size: 12px;
-        cursor: pointer;
-        transition: all .2s;
-        margin-left: 8px;
-      `
-      logoutBtn.addEventListener('mouseover', () => {
-        logoutBtn.style.color  = '#fff'
-        logoutBtn.style.borderColor = 'rgba(255,255,255,0.5)'
-      })
-      logoutBtn.addEventListener('mouseout', () => {
-        logoutBtn.style.color  = 'rgba(255,255,255,0.5)'
-        logoutBtn.style.borderColor = 'rgba(255,255,255,0.2)'
-      })
-      logoutBtn.addEventListener('click', window.dvLogout)
-      navSpacer.after(logoutBtn)
-    }
+    const right = document.querySelector('.topbar-right')
+    if (!right) return
+    const logoutBtn = document.createElement('button')
+    logoutBtn.id          = 'dv-logout-btn'
+    logoutBtn.textContent = 'Salir'
+    logoutBtn.style.cssText = `
+      background: transparent;
+      border: 1.5px solid var(--line, rgba(0,0,0,.15));
+      color: var(--ink-2, #5a5f7a);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all .2s;
+    `
+    logoutBtn.addEventListener('mouseover', () => {
+      logoutBtn.style.borderColor = 'var(--red, #E74C3C)'
+      logoutBtn.style.color = 'var(--red, #E74C3C)'
+    })
+    logoutBtn.addEventListener('mouseout', () => {
+      logoutBtn.style.borderColor = 'var(--line, rgba(0,0,0,.15))'
+      logoutBtn.style.color = 'var(--ink-2, #5a5f7a)'
+    })
+    logoutBtn.addEventListener('click', window.dvLogout)
+    right.appendChild(logoutBtn)
   }
 
   // ── 5a. Nudge visual cuando la clase requiere entrega ───────────────────

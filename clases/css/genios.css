@@ -99,7 +99,26 @@ h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.05; letter-spa
   backdrop-filter: blur(14px);
   border-bottom: 2px solid var(--line);
 }
-.topbar .wrap { display: flex; align-items: center; gap: 14px; height: 70px; }
+.topbar .wrap { display: flex; align-items: center; gap: 10px; height: 70px; position: relative; }
+
+/* ── Nav izquierda ── */
+.topbar-nav { display: flex; align-items: center; gap: 2px; }
+
+/* ── Brand centrado absolutamente ── */
+.topbar-brand {
+  position: absolute; left: 50%; transform: translateX(-50%);
+  display: flex; align-items: center; gap: 8px;
+  font-family: var(--font-display); font-weight: 700; font-size: 18px; color: var(--ink);
+  white-space: nowrap; pointer-events: none; user-select: none;
+}
+.topbar-brand .brand-robot { height: 36px; width: 36px; object-fit: contain; }
+.topbar-brand .brand-blue { color: var(--blue); }
+
+/* ── Grupo derecho ── */
+.topbar-right { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+
+/* Legacy — mantener por si algo todavía lo usa */
+.topbar-spacer { flex: 1; }
 .brand { display: flex; align-items: center; gap: 11px; }
 .brand-badge {
   width: 44px; height: 44px; border-radius: 13px; flex-shrink: 0;
@@ -111,7 +130,6 @@ h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.05; letter-spa
 .brand-name { font-family: var(--font-display); font-weight: 700; font-size: 19px; color: var(--ink); line-height: 1; }
 .brand-name span { color: var(--blue); }
 .brand-sub { font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
-.topbar-spacer { flex: 1; }
 
 .tlink {
   display: inline-flex; align-items: center; gap: 7px;
@@ -469,7 +487,10 @@ h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.05; letter-spa
 /* Teléfono grande */
 @media (max-width: 620px) {
   .wrap { padding: 0 16px; }
-  .topbar .wrap { height: 60px; gap: 10px; }
+  .topbar .wrap { height: 60px; gap: 6px; }
+  .topbar-brand { display: none; }
+  .topbar-nav .tlink span:not(.ic) { display: none; }
+  .topbar-nav .tlink { padding: 8px 10px; }
   .brand-sub, .tlink span { display: none; }
   .brand-name { font-size: 17px; }
   .brand-badge { width: 40px; height: 40px; }
