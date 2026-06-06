@@ -139,7 +139,7 @@ window.DvUploadZone = function (cfg) {
       var user = (await sb.auth.getUser()).data.user;
       if (!user) throw new Error('Inicia sesión para guardar.');
       var ext  = (file.name.split('.').pop() || 'bin').toLowerCase();
-      var path = 'clase' + cfg.claseNum + '/' + cfg.tipo + '/' + user.id + '/' + Date.now() + '.' + ext;
+      var path = user.id + '/clase' + cfg.claseNum + '/' + cfg.tipo + '/' + Date.now() + '.' + ext;
       var uErr = (await sb.storage.from(bucket).upload(path, file, { upsert: true })).error;
       if (uErr) throw uErr;
       var sign = (await sb.storage.from(bucket).createSignedUrl(path, 60 * 60 * 24 * 365)).data;
@@ -147,9 +147,9 @@ window.DvUploadZone = function (cfg) {
       var row  = (await sb.from('entregas').select('id')
         .eq('user_id', user.id).eq('clase_num', cfg.claseNum).eq('tipo', cfg.tipo).maybeSingle()).data;
       if (row) {
-        await sb.from('entregas').update({ contenido: url, metadata: { filename: file.name, storage_path: path } }).eq('id', row.id);
+        await sb.from('entregas').update({ archivo_url: url, archivo_nombre: file.name, metadata: { storage_path: path } }).eq('id', row.id);
       } else {
-        await sb.from('entregas').insert({ user_id: user.id, clase_num: cfg.claseNum, tipo: cfg.tipo, contenido: url, metadata: { filename: file.name, storage_path: path } });
+        await sb.from('entregas').insert({ user_id: user.id, clase_num: cfg.claseNum, tipo: cfg.tipo, archivo_url: url, archivo_nombre: file.name, metadata: { storage_path: path } });
       }
       prev.style.display = 'none';
       okEl.style.display = 'block';
@@ -167,14 +167,14 @@ window.DvUploadZone = function (cfg) {
     sb.auth.getUser().then(function (r) {
       var user = r.data && r.data.user;
       if (!user) return;
-      sb.from('entregas').select('contenido,metadata')
+      sb.from('entregas').select('archivo_url,archivo_nombre')
         .eq('user_id', user.id).eq('clase_num', cfg.claseNum).eq('tipo', cfg.tipo).maybeSingle()
         .then(function (r2) {
-          if (r2.data && r2.data.contenido) {
+          if (r2.data && r2.data.archivo_url) {
             box.style.display  = 'none';
             prev.style.display = 'none';
             okEl.style.display = 'block';
-            oknm.textContent   = (r2.data.metadata && r2.data.metadata.filename) || '';
+            oknm.textContent   = r2.data.archivo_nombre || '';
           }
         });
     });
