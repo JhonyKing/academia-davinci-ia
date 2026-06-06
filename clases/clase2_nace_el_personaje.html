@@ -9,7 +9,7 @@
 /* Mision glamorosa shimmer */
 .mission-numero {
   font-family: var(--font-display, 'Space Grotesk', sans-serif);
-  font-size: clamp(22px, 5vw, 36px);
+  font-size: clamp(32px, 7vw, 52px);
   font-weight: 900;
   letter-spacing: .04em;
   text-align: center;
@@ -24,7 +24,7 @@
   animation: missionShimmer 2.8s linear infinite;
   text-shadow: none;
 }
-.mission-numero .mn-num { font-size: 1.5em; line-height: 1; }
+.mission-numero .mn-num { font-size: 1em; line-height: 1; }
 .mission-numero .mn-of  { font-size: .65em; opacity: .85; }
 @keyframes missionShimmer {
   0%   { background-position: 0% center; }
@@ -599,13 +599,15 @@ new DvUploadZone({
     statusEl.textContent = '';
 
     try {
-      var user = supabase.auth ? (await supabase.auth.getUser()).data.user : null;
-      var userId = user ? user.id : null;
+      var sb = window._supabase;
+      if (!sb) throw new Error('Cliente Supabase no listo. Recarga la página.');
+      var user = (await sb.auth.getUser()).data.user;
+      if (!user) throw new Error('Debes iniciar sesión para guardar.');
+      var userId = user.id;
 
-      var payload = { nombre, origen, mision, poder, debilidad };
-      if (userId) payload.user_id = userId;
+      var payload = { user_id: userId, nombre, origen, mision, poder, debilidad };
 
-      var { error } = await supabase.from('personaje').upsert(payload, { onConflict: 'user_id' });
+      var { error } = await sb.from('personaje').upsert(payload, { onConflict: 'user_id' });
 
       if (error) throw error;
 

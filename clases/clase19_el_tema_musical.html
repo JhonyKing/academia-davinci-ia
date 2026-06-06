@@ -9,7 +9,7 @@
 /* Mision glamorosa shimmer */
 .mission-numero {
   font-family: var(--font-display, 'Space Grotesk', sans-serif);
-  font-size: clamp(22px, 5vw, 36px);
+  font-size: clamp(32px, 7vw, 52px);
   font-weight: 900;
   letter-spacing: .04em;
   text-align: center;
@@ -24,7 +24,7 @@
   animation: missionShimmer 2.8s linear infinite;
   text-shadow: none;
 }
-.mission-numero .mn-num { font-size: 1.5em; line-height: 1; }
+.mission-numero .mn-num { font-size: 1em; line-height: 1; }
 .mission-numero .mn-of  { font-size: .65em; opacity: .85; }
 @keyframes missionShimmer {
   0%   { background-position: 0% center; }
@@ -188,6 +188,20 @@ nav.lessonnav .lnav-btn.next-btn .ti  { font-size: 16px; font-weight: 900; color
       <div>
         <div class="who">Jingle vs Tema — la diferencia</div>
         <div class="say">"Un <strong>jingle</strong> es corto y repetitivo (como el de McDonald's). Un <strong>tema</strong> es la identidad sonora completa del universo — transmite el espíritu del héroe. <em>Tú vas a crear un tema, no un jingle.</em>"</div>
+      </div>
+    </div>
+
+    <!-- Resultado real: imagen generada con prompt musical -->
+    <div style="margin:28px auto 0;max-width:380px;">
+      <div style="background:#1a1f35;border-radius:20px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.08);">
+        <img src="img/turtle_rock.jpg" alt="Turtle Rock — tortuga rockera en el prom — resultado generado con ChatGPT" style="width:100%;display:block;object-fit:cover;max-height:380px;">
+        <div style="padding:14px 18px 16px;display:flex;align-items:center;gap:10px;">
+          <div style="background:#10a37f;border-radius:8px;padding:5px 9px;font-size:11px;font-weight:800;color:#fff;letter-spacing:.04em;flex-shrink:0;">ChatGPT</div>
+          <div>
+            <div style="color:#fff;font-weight:800;font-size:14px;line-height:1.2;">Resultado real del prompt</div>
+            <div style="color:rgba(255,255,255,.5);font-size:11px;margin-top:2px;">"Turtle Rock · rockero · guitarra eléctrica · prom night · neon"</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

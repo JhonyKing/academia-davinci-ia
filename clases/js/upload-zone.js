@@ -33,7 +33,7 @@ window.DvUploadZone = function (cfg) {
     'letter-spacing:.07em;margin-bottom:14px;display:flex;align-items:center;gap:8px;">',
       '<span>', icon, '</span> ', label,
     '</div>',
-    sub ? '<p style="color:rgba(255,255,255,.55);font-size:13px;margin:-8px 0 14px;">' + sub + '</p>' : '',
+    sub ? '<p style="color:rgba(30,37,71,.75);font-size:13px;font-weight:600;margin:-8px 0 14px;">' + sub + '</p>' : '',
 
     /* drop box */
     '<div id="', p, '-box" style="position:relative;border-radius:16px;padding:38px 20px;',
