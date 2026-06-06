@@ -726,7 +726,7 @@ if (/vercel\.app$|academiadavinci/.test(location.hostname)) {
       var user = authResp.data && authResp.data.user;
       if (!user) throw new Error('Inicia sesión para guardar.');
       var ext = (selectedFile.name.split('.').pop() || 'jpg').toLowerCase();
-      var path = 'clase1/' + user.id + '/' + Date.now() + '.' + ext;
+      var path = user.id + '/clase1/' + Date.now() + '.' + ext;
       var upErr = (await sb.storage.from('portafolio').upload(path, selectedFile, { upsert: true })).error;
       if (upErr) throw upErr;
       var signData = (await sb.storage.from('portafolio').createSignedUrl(path, 60*60*24*365)).data;
@@ -734,9 +734,9 @@ if (/vercel\.app$|academiadavinci/.test(location.hostname)) {
       // check existing
       var existingRow = (await sb.from('entregas').select('id').eq('user_id', user.id).eq('clase_num', 1).eq('tipo', 'imagen').maybeSingle()).data;
       if (existingRow) {
-        await sb.from('entregas').update({ contenido: publicUrl, metadata: { filename: selectedFile.name, storage_path: path } }).eq('id', existingRow.id);
+        await sb.from('entregas').update({ archivo_url: publicUrl, archivo_nombre: selectedFile.name, metadata: { storage_path: path } }).eq('id', existingRow.id);
       } else {
-        await sb.from('entregas').insert({ user_id: user.id, clase_num: 1, tipo: 'imagen', contenido: publicUrl, metadata: { filename: selectedFile.name, storage_path: path } });
+        await sb.from('entregas').insert({ user_id: user.id, clase_num: 1, tipo: 'imagen', archivo_url: publicUrl, archivo_nombre: selectedFile.name, metadata: { storage_path: path } });
       }
       prev.style.display = 'none';
       succ.style.display = 'block';
@@ -758,13 +758,12 @@ if (/vercel\.app$|academiadavinci/.test(location.hostname)) {
     sb.auth.getUser().then(function(authResp){
       var user = authResp.data && authResp.data.user;
       if (!user) return;
-      sb.from('entregas').select('contenido,metadata').eq('user_id', user.id).eq('clase_num', 1).eq('tipo', 'imagen').maybeSingle().then(function(r){
-        if (r.data && r.data.contenido) {
+      sb.from('entregas').select('archivo_url,archivo_nombre,metadata').eq('user_id', user.id).eq('clase_num', 1).eq('tipo', 'imagen').maybeSingle().then(function(r){
+        if (r.data && r.data.archivo_url) {
           box.style.display = 'none';
           prev.style.display = 'none';
           succ.style.display = 'block';
-          var meta = r.data.metadata || {};
-          succNm.textContent = meta.filename || '';
+          succNm.textContent = r.data.archivo_nombre || '';
           window._entregaDone = true;
           if (window.checkBadgeUnlock) window.checkBadgeUnlock();
         }
