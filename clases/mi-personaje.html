@@ -111,12 +111,13 @@
     return str.length > max ? str.slice(0, max) + '...' : str
   }
 
-  // Obtiene signed URL de Supabase Storage para bucket privado
-  async function getSignedUrl(path) {
-    if (!path) return null
+  // Obtiene signed URL — si ya es una URL completa la devuelve tal cual
+  async function getSignedUrl(urlOrPath) {
+    if (!urlOrPath) return null
+    if (urlOrPath.startsWith('http')) return urlOrPath
     const { data } = await window._supabase.storage
       .from('portafolio')
-      .createSignedUrl(path, 3600) // 1 hora
+      .createSignedUrl(urlOrPath, 3600)
     return data?.signedUrl || null
   }
 
@@ -124,8 +125,15 @@
   async function renderProtagonistaSection(perfil, personaje, entregas) {
     const el = document.getElementById('protagonista-section')
 
-    // Si no tiene personaje creado todavía
-    if (!personaje && !entregas?.find(e => e.clase_num === 2)) {
+    const entrega1 = entregas?.find(e => e.clase_num === 1 && e.tipo === 'imagen')
+    const entrega2 = entregas?.find(e => e.clase_num === 2)
+    const entrega3 = entregas?.find(e => e.clase_num === 3)
+    const entrega4 = entregas?.find(e => e.clase_num === 4)
+    const entrega5 = entregas?.find(e => e.clase_num === 5)
+
+    const hayDatos = personaje || entrega1 || entrega2
+
+    if (!hayDatos) {
       el.innerHTML = `
         <div class="empty-state">
           <div class="ico">🎭</div>
@@ -135,67 +143,82 @@
       return
     }
 
-    // Datos del personaje
-    const entrega2 = entregas?.find(e => e.clase_num === 2)
-    const entrega3 = entregas?.find(e => e.clase_num === 3)
-    const entrega4 = entregas?.find(e => e.clase_num === 4)
-    const entrega5 = entregas?.find(e => e.clase_num === 5)
-
-    const nombre     = personaje?.nombre      || entrega2?.contenido_texto?.split('\n')[0]?.slice(0,40) || perfil?.nombre || 'Mi Personaje'
-    const arquetipo  = entrega5?.arquetipo_nombre || personaje?.arquetipo || null
+    const nombre      = personaje?.nombre || perfil?.nombre || 'Mi Personaje'
+    const arquetipo   = personaje?.arquetipo || entrega5?.arquetipo_nombre || null
     const descripcion = entrega2?.contenido_texto || personaje?.descripcion || null
 
-    // Obtener imagen de retrato (clase 3)
-    let retratoUrl = null
-    if (entrega3?.archivo_url) {
-      retratoUrl = await getSignedUrl(entrega3.archivo_url)
-    }
-
-    // Inicial para avatar fallback
-    const inicial = nombre.charAt(0).toUpperCase()
+    // Imagen principal: retrato (clase3) > primera imagen IA (clase1) > inicial
+    const retratoUrl  = entrega3?.archivo_url ? await getSignedUrl(entrega3.archivo_url) : null
+    const primeraUrl  = entrega1?.archivo_url ? await getSignedUrl(entrega1.archivo_url) : null
+    const avatarUrl   = retratoUrl || primeraUrl
+    const inicial     = nombre.charAt(0).toUpperCase()
 
     let html = `
       <div class="protagonist-card">
         <div class="avatar-circle" id="avatar-protagonista">
-          ${retratoUrl
-            ? `<img src="${retratoUrl}" alt="${nombre}" onerror="this.style.display='none';this.parentElement.textContent='${inicial}'">`
+          ${avatarUrl
+            ? `<img src="${avatarUrl}" alt="${nombre}" onerror="this.style.display='none';this.parentElement.textContent='${inicial}'">`
             : inicial}
         </div>
         <div class="protagonist-info">
           <div class="protagonist-name">${nombre}</div>
           ${arquetipo ? `<div class="arquetipo-badge">⚡ ${arquetipo}</div>` : ''}
-          ${descripcion
-            ? `<div class="protagonist-desc" id="desc-protagonista" style="max-height:72px;overflow:hidden;">
-                ${descripcion}
-               </div>
-               <button class="expand-btn" onclick="expandirDesc()">Ver descripción completa ▼</button>`
-            : '<div class="protagonist-desc" style="color:rgba(255,255,255,.35);">Completa la Clase 2 para agregar la descripción de tu personaje.</div>'}
         </div>
       </div>`
 
-    // Galería: retrato (clase3) + tarjeta (clase4)
-    const imagenes = []
-    if (retratoUrl) imagenes.push({ url: retratoUrl, label: 'Retrato Oficial' })
+    // ── FICHA DEL PERSONAJE ──
+    if (personaje && (personaje.origen || personaje.mision || personaje.poder || personaje.debilidad)) {
+      const filaFicha = (label, valor) => valor ? `
+        <div style="display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.06);">
+          <span style="font-size:11px;font-weight:700;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.06em;min-width:120px;flex-shrink:0;padding-top:2px;">${label}</span>
+          <span style="color:#fff;font-weight:600;font-size:14px;line-height:1.4;">${valor}</span>
+        </div>` : ''
 
+      html += `
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:6px 20px 4px;margin:16px 0;">
+          <div style="font-size:11px;font-weight:800;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.08em;padding:12px 0 6px;">📋 Ficha del personaje</div>
+          ${filaFicha('Nombre', personaje.nombre)}
+          ${filaFicha('Origen', personaje.origen)}
+          ${filaFicha('Misión', personaje.mision)}
+          ${filaFicha('Poder especial', personaje.poder)}
+          ${filaFicha('Debilidad', personaje.debilidad)}
+        </div>`
+    }
+
+    // ── DESCRIPCIÓN (clase 2 texto) ──
+    if (descripcion) {
+      html += `
+        <div style="margin:12px 0;">
+          <div style="font-size:11px;font-weight:800;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;">📝 Descripción</div>
+          <div class="protagonist-desc" id="desc-protagonista" style="max-height:80px;overflow:hidden;color:rgba(255,255,255,.8);font-size:14px;line-height:1.6;">${descripcion}</div>
+          <button class="expand-btn" onclick="expandirDesc()" style="margin-top:6px;">Ver completa ▼</button>
+        </div>`
+    }
+
+    // ── GALERÍA DE IMÁGENES ──
+    const imagenes = []
+    if (primeraUrl) imagenes.push({ url: primeraUrl, label: '🖼️ Primera imagen con IA', sub: 'Clase 1' })
+    if (retratoUrl) imagenes.push({ url: retratoUrl, label: '🎨 Retrato Oficial', sub: 'Clase 3' })
     if (entrega4?.archivo_url) {
       const tarjetaUrl = await getSignedUrl(entrega4.archivo_url)
-      if (tarjetaUrl) imagenes.push({ url: tarjetaUrl, label: 'Tarjeta Oficial' })
+      if (tarjetaUrl) imagenes.push({ url: tarjetaUrl, label: '🃏 Tarjeta Oficial', sub: 'Clase 4' })
     }
 
     if (imagenes.length > 0) {
+      html += `<div style="margin-top:16px;"><div style="font-size:11px;font-weight:800;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;">🖼️ Imágenes</div>`
       html += `<div class="retratos-grid">`
       imagenes.forEach(img => {
         html += `
           <div class="retrato-card">
-            <img src="${img.url}" alt="${img.label}"
-                 onerror="this.parentElement.style.background='rgba(255,255,255,.03)'">
+            <img src="${img.url}" alt="${img.label}" onerror="this.parentElement.style.background='rgba(255,255,255,.03)'">
             <div class="retrato-label">${img.label}</div>
+            <div style="font-size:10px;color:rgba(255,255,255,.3);margin-top:2px;">${img.sub}</div>
           </div>`
       })
-      html += `</div>`
+      html += `</div></div>`
     }
 
-    // Botón para crear nuevo personaje
+    // ── BOTÓN NUEVO PERSONAJE ──
     html += `
       <div style="margin-top:20px;text-align:right;">
         <button onclick="window.iniciarNuevoPersonaje()"
@@ -211,14 +234,10 @@
 
     el.innerHTML = html
 
-    // Función expandir descripción
     window.expandirDesc = function () {
       const desc = document.getElementById('desc-protagonista')
       const btn  = document.querySelector('.expand-btn')
-      if (desc && btn) {
-        desc.style.maxHeight = 'none'
-        btn.style.display    = 'none'
-      }
+      if (desc && btn) { desc.style.maxHeight = 'none'; btn.style.display = 'none' }
     }
   }
 
