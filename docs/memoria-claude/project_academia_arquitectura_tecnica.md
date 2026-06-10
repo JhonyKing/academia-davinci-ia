@@ -294,12 +294,16 @@ Secciones de texto, video embed de YouTube, diagramas, interactividades.
 
 ## Session Tracker (`session-tracker.js`)
 
-- Crea registro en `sesiones` al cargar la página (campo `inicio`)
-- Heartbeat cada 60s: actualiza `duracion_segundos`
-- Pausa cuando `document.hidden = true` (tab en segundo plano)
-- Guarda con `navigator.sendBeacon` en `pagehide` (cierre de tab)
-- Expone `window.dvSessionSecs()` → segundos de la sesión actual
-- `progreso.html` suma todas las filas de `sesiones` para mostrar tiempo total
+- Una "sesión" abarca TODA la visita: el id vive en sessionStorage y se comparte entre páginas
+- Al navegar, retoma la misma fila con **baseline** (lo ya acumulado) y suma — NUNCA sobreescribir
+- Heartbeat cada 30s: `duracion_segundos = baseline + segundos de esta página`
+- Pausa cuando `document.hidden = true` (tab en segundo plano) y guarda al ocultarse
+- Guardado al salir (`pagehide`): **fetch keepalive PATCH** con headers apikey + Bearer JWT cacheado
+  - ⚠️ NUNCA usar `navigator.sendBeacon` con Supabase: no permite PATCH ni headers → falla siempre
+- Expone `window.dvSessionSecs()` → segundos totales de la sesión
+- DEBE cargarse en TODAS las páginas donde el alumno pasa tiempo: 26 clases, checkpoints,
+  index, galeria, mi-personaje, progreso
+- `progreso.html` y `mi-personaje.html` suman las filas de `sesiones` (campos: duracion_segundos, inicio)
 
 ---
 
