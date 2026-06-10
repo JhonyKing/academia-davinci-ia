@@ -55,6 +55,9 @@ Remotion cannot process audio. For audio cleanup (noise reduction), use FFmpeg p
 ## NUNCA borrar archivos sin preguntar
 - [Confirmar antes de borrar cualquier archivo](feedback_never_delete_without_asking.md) — SIEMPRE pedir permiso explícito antes de rm/del/shutil
 
+## Memoria Claude → siempre sincronizar con GitHub
+- [Sincronizar docs/memoria-claude/ a GitHub tras cada cambio de MD](feedback_memoria_github_sync.md) — cp local → docs/memoria-claude/ + git push al final de sesión
+
 ## Responder SIEMPRE en español
 - [Idioma operativo de Jhony es español mexicano](feedback_responder_en_espanol.md) — sin importar el idioma del input
 
