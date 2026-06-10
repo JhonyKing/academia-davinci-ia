@@ -60,9 +60,9 @@ export default async function handler(req, res) {
   // ── Pago completado ───────────────────────────────────────────────────────
   if (event.type === 'checkout.session.completed') {
     const session       = event.data.object
-    const email         = session.customer_email
+    const email         = session.customer_email || session.metadata?.email
     const nombre_alumno = session.metadata?.nombre_alumno || ''
-    const subscription_id = session.subscription
+    const subscription_id = session.subscription || session.payment_intent
 
     if (!email) {
       console.error('[DaVinci/webhook] Sin email en session')
@@ -78,40 +78,51 @@ export default async function handler(req, res) {
       auth: { autoRefreshToken: false, persistSession: false }
     })
 
-    // Crear usuario en Supabase Auth con contraseña temporal
-    const tempPassword = Math.random().toString(36).slice(-10) + 'Aa1!'
+    const siteUrl = process.env.SITE_URL || 'https://academia-davinci-ia.vercel.app'
 
-    const { data: authData, error: authError } = await sb.auth.admin.createUser({
-      email,
-      password:       tempPassword,
-      email_confirm:  true,  // confirmar automáticamente
-      user_metadata: {
-        nombre:    nombre_alumno,
-        rol:       'alumno',
-        stripe_subscription_id: subscription_id,
-      },
-    })
+    // Verificar si el usuario ya existe
+    const { data: existingList } = await sb.auth.admin.listUsers()
+    const existingUser = existingList?.users?.find(u => u.email === email)
 
-    if (authError && authError.message !== 'User already registered') {
-      console.error('[DaVinci/webhook] Error creando usuario:', authError.message)
-      return res.status(200).end()
-    }
+    let userId
 
-    const userId = authData?.user?.id
-    if (!userId) {
-      // Usuario ya existía — buscar su ID
-      const { data: existing } = await sb.auth.admin.listUsers()
-      const user = existing?.users?.find(u => u.email === email)
-      if (user) {
-        // Actualizar suscripción en metadata
-        await sb.auth.admin.updateUserById(user.id, {
-          user_metadata: { ...user.user_metadata, stripe_subscription_id: subscription_id }
-        })
+    if (existingUser) {
+      // Ya existe — actualizar metadata y activar
+      userId = existingUser.id
+      await sb.auth.admin.updateUserById(userId, {
+        user_metadata: {
+          ...existingUser.user_metadata,
+          nombre: nombre_alumno || existingUser.user_metadata?.nombre,
+          stripe_subscription_id: subscription_id,
+        }
+      })
+      console.log('[DaVinci/webhook] Usuario ya existía, actualizado:', email)
+    } else {
+      // Usuario nuevo — invitar (crea cuenta Y manda correo para elegir contraseña)
+      const { data: inviteData, error: inviteError } = await sb.auth.admin.inviteUserByEmail(email, {
+        redirectTo: `${siteUrl}/login.html`,
+        data: {
+          nombre:    nombre_alumno,
+          rol:       'alumno',
+          stripe_subscription_id: subscription_id,
+        },
+      })
+
+      if (inviteError) {
+        console.error('[DaVinci/webhook] Error invitando usuario:', inviteError.message)
+        return res.status(200).end()
       }
+
+      userId = inviteData?.user?.id
+      console.log('[DaVinci/webhook] Alumno invitado (correo enviado):', email, userId)
+    }
+
+    if (!userId) {
+      console.error('[DaVinci/webhook] No se pudo obtener userId para:', email)
       return res.status(200).end()
     }
 
-    // Crear perfil en tabla profiles
+    // Crear/actualizar perfil en tabla profiles
     await sb.from('profiles').upsert({
       id:                    userId,
       nombre:                nombre_alumno || email.split('@')[0],
@@ -119,17 +130,6 @@ export default async function handler(req, res) {
       stripe_subscription_id: subscription_id,
       activo:                true,
     }, { onConflict: 'id' })
-
-    // Mandar email de bienvenida con contraseña temporal via Supabase
-    // (Supabase Auth manda el email automáticamente con email_confirm: true)
-    // Para mandar link de reset-password además:
-    await sb.auth.admin.generateLink({
-      type:  'recovery',
-      email,
-      options: { redirectTo: `${process.env.SITE_URL || 'https://academia-davinci-ia.vercel.app'}/login.html` }
-    })
-
-    console.log('[DaVinci/webhook] Alumno creado:', email, userId)
   }
 
   // ── Suscripción cancelada ─────────────────────────────────────────────────
