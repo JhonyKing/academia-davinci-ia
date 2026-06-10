@@ -286,7 +286,7 @@ const MUNDOS = [
 const TOTAL = CLASES.length;
 const claseById = n => CLASES.find(c => c.n === n);
 
-function render(completadas) {
+function render(completadas, userId) {
   const done = new Set(completadas);
   let current = null;
   for (let i = 1; i <= TOTAL; i++) { if (!done.has(i)) { current = i; break; } }
@@ -370,15 +370,18 @@ function render(completadas) {
   // Re-vincular efectos (ripple/sonido/reveal) a los nodos recién creados
   if (window.GCBind) window.GCBind();
 
-  // Detectar subida de nivel (mundo) desde la última visita
+  // Detectar subida de nivel (mundo) desde la última visita — clave por usuario
   try {
-    const nivelActual = total >= TOTAL ? 7 : mundoActual.id;
-    const prev = parseInt(localStorage.getItem('gc_seen_level') || '0', 10);
-    if (total > 0 && nivelActual > prev && prev > 0 && window.GCLevelUp) {
-      const m = MUNDOS.find(x => x.id === nivelActual);
-      setTimeout(() => window.GCLevelUp(nivelActual, m ? m.nombre : ''), 700);
+    const lvlKey = userId ? `gc_seen_level_${userId}` : null;
+    if (lvlKey) {
+      const nivelActual = total >= TOTAL ? 7 : mundoActual.id;
+      const prev = parseInt(localStorage.getItem(lvlKey) || '0', 10);
+      if (total > 0 && nivelActual > prev && prev > 0 && window.GCLevelUp) {
+        const m = MUNDOS.find(x => x.id === nivelActual);
+        setTimeout(() => window.GCLevelUp(nivelActual, m ? m.nombre : ''), 700);
+      }
+      localStorage.setItem(lvlKey, String(nivelActual));
     }
-    localStorage.setItem('gc_seen_level', String(nivelActual));
   } catch (e) {}
 }
 
@@ -388,10 +391,10 @@ function cargarProgreso() {
   if (ES_PRODUCCION && window._supabase) {
     const sb = window._supabase;
     sb.auth.getSession().then(({ data:{ session } }) => {
-      if (!session) { render([1]); return; }
+      if (!session) { render([1], null); return; }
       sb.from('progress').select('clase_num')
         .eq('user_id', session.user.id).eq('completada', true)
-        .then(({ data }) => render((data||[]).map(r => r.clase_num)));
+        .then(({ data }) => render((data||[]).map(r => r.clase_num), session.user.id));
     }).catch(() => render([1]));
   } else {
     // Modo demo para la vista previa (muestra el diseño "con avance")
