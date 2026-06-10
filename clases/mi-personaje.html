@@ -41,17 +41,17 @@
   <p class="sub">Todo lo que has creado en la aventura, en un solo lugar.</p>
 </section>
 
-<div id="tiempo-ia-widget" style="display:none; text-align:center; padding:0 16px 8px;">
+<div id="tiempo-ia-widget" style="display:none; text-align:center; padding:0 16px 12px;">
   <div style="
-    display:inline-flex; align-items:center; gap:12px;
-    background:linear-gradient(135deg,#0F1830,#1A2540);
-    border:1px solid rgba(74,144,217,.25); border-radius:16px;
-    padding:14px 24px; box-shadow:0 4px 20px rgba(0,0,0,.2);
+    display:inline-flex; align-items:center; gap:14px;
+    background:var(--card); border:2px solid var(--line);
+    border-radius:var(--r); padding:16px 28px;
+    box-shadow:var(--shadow-sm);
   ">
-    <span style="font-size:22px;">⏱️</span>
+    <span style="font-size:26px;">⏱️</span>
     <div style="text-align:left;">
-      <div style="font-size:10px;font-weight:800;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.08em;">Tiempo invertido aprendiendo IA</div>
-      <div id="tiempo-ia-valor" style="font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:900;color:#4A90D9;letter-spacing:.02em;">—</div>
+      <div style="font-size:10px;font-weight:800;color:var(--ink-3);text-transform:uppercase;letter-spacing:.08em;font-family:var(--font-body);">Tiempo aprendiendo IA</div>
+      <div id="tiempo-ia-valor" style="font-family:var(--font-display);font-size:26px;font-weight:700;color:var(--blue);">—</div>
     </div>
   </div>
 </div>
@@ -140,31 +140,31 @@
 <!-- ═══ MODAL TIEMPO IA ═══ -->
 <div id="tiempo-modal" style="
   display:none; position:fixed; inset:0; z-index:9999;
-  background:rgba(0,0,0,.65); backdrop-filter:blur(4px);
+  background:rgba(30,37,71,.55); backdrop-filter:blur(6px);
   align-items:center; justify-content:center;
 ">
   <div style="
-    background:linear-gradient(160deg,#0F1830 0%,#1A2540 100%);
-    border:1px solid rgba(74,144,217,.35); border-radius:24px;
-    padding:40px 36px 32px; max-width:380px; width:90%; text-align:center;
-    box-shadow:0 24px 60px rgba(0,0,0,.6);
+    background:var(--card); border:2px solid var(--line);
+    border-radius:var(--r-lg); padding:40px 36px 32px;
+    max-width:380px; width:90%; text-align:center;
+    box-shadow:var(--shadow);
     animation:modalIn .35s cubic-bezier(.22,1,.36,1) both;
     position:relative;
   ">
     <button id="tiempo-modal-close" style="
       position:absolute; top:14px; right:16px;
-      background:transparent; border:none; color:rgba(255,255,255,.35);
+      background:transparent; border:none; color:var(--ink-3);
       font-size:20px; cursor:pointer; line-height:1; padding:4px 8px;
-      transition:color .15s;
-    " onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.35)'">✕</button>
+      transition:color .15s; font-family:var(--font-body);
+    " onmouseover="this.style.color='var(--red)'" onmouseout="this.style.color='var(--ink-3)'">✕</button>
 
     <div style="font-size:48px; margin-bottom:12px;">⏱️</div>
-    <div style="font-size:11px;font-weight:800;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;">Tiempo invertido aprendiendo IA</div>
-    <div id="tiempo-modal-valor" style="font-family:'Space Grotesk',sans-serif;font-size:clamp(32px,8vw,52px);font-weight:900;color:#4A90D9;letter-spacing:.02em;line-height:1.1;margin:12px 0 8px;">—</div>
-    <div id="tiempo-modal-desglose" style="font-size:13px;color:rgba(255,255,255,.4);margin-bottom:20px;">cargando...</div>
+    <div style="font-size:11px;font-weight:800;color:var(--ink-3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;font-family:var(--font-body);">Tiempo invertido aprendiendo IA</div>
+    <div id="tiempo-modal-valor" style="font-family:var(--font-display);font-size:clamp(36px,8vw,56px);font-weight:700;color:var(--blue);line-height:1.1;margin:12px 0 8px;">—</div>
+    <div id="tiempo-modal-desglose" style="font-size:14px;color:var(--ink-2);font-family:var(--font-body);font-weight:600;margin-bottom:20px;">cargando...</div>
 
-    <div style="font-size:12px;color:rgba(255,255,255,.3);">
-      Se cierra en <span id="tiempo-modal-countdown" style="font-weight:700;color:rgba(255,255,255,.5);">10</span>s
+    <div style="font-size:12px;color:var(--ink-3);font-family:var(--font-body);">
+      Se cierra en <span id="tiempo-modal-countdown" style="font-weight:800;color:var(--blue);">10</span>s
     </div>
   </div>
 </div>
@@ -173,22 +173,33 @@
   from { opacity:0; transform:scale(.92) translateY(12px); }
   to   { opacity:1; transform:none; }
 }
-/* ── Tiempo Records ── */
-.tiempo-records-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:32px;}
+/* ── Tarjetas de tiempo de estudio ── */
+.tiempo-records-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:32px;}
 @media(max-width:640px){.tiempo-records-grid{grid-template-columns:repeat(2,1fr);}}
-.tiempo-record-card{background:linear-gradient(145deg,#0F1830,#141E35);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:24px 16px 20px;text-align:center;position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s;}
-.tiempo-record-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:16px 16px 0 0;}
-.tiempo-record-card:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.3);}
-.tc-total::before{background:linear-gradient(90deg,#F39C12,#E67E22);}
-.tc-mes::before{background:linear-gradient(90deg,#4A90D9,#7B68EE);}
-.tc-semana::before{background:linear-gradient(90deg,#27AE60,#2ECC71);}
-.tc-hoy::before{background:linear-gradient(90deg,#E74C3C,#FF6B6B);}
-.tiempo-record-value{font-family:'Space Grotesk',sans-serif;font-size:clamp(20px,4.5vw,34px);font-weight:900;line-height:1;margin-bottom:10px;}
-.tc-total .tiempo-record-value{color:#F39C12;}
-.tc-mes .tiempo-record-value{color:#4A90D9;}
-.tc-semana .tiempo-record-value{color:#27AE60;}
-.tc-hoy .tiempo-record-value{color:#E74C3C;}
-.tiempo-record-label{font-size:11px;font-weight:700;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.08em;}
+.tiempo-record-card{
+  background:var(--card); border:2px solid var(--line);
+  border-radius:var(--r); padding:26px 16px 22px;
+  text-align:center; position:relative; overflow:hidden;
+  box-shadow:var(--shadow-sm); transition:transform .2s,box-shadow .2s;
+}
+.tiempo-record-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;}
+.tiempo-record-card:hover{transform:translateY(-5px);box-shadow:var(--shadow);}
+.tc-total::before  {background:var(--gold);}
+.tc-mes::before    {background:var(--blue);}
+.tc-semana::before {background:var(--green);}
+.tc-hoy::before    {background:var(--red);}
+.tiempo-record-value{
+  font-family:var(--font-display); font-size:clamp(22px,4vw,34px);
+  font-weight:700; line-height:1; margin-bottom:8px;
+}
+.tc-total  .tiempo-record-value{color:var(--gold);}
+.tc-mes    .tiempo-record-value{color:var(--blue);}
+.tc-semana .tiempo-record-value{color:var(--green);}
+.tc-hoy    .tiempo-record-value{color:var(--red);}
+.tiempo-record-label{
+  font-family:var(--font-body); font-size:11px; font-weight:800;
+  color:var(--ink-3); text-transform:uppercase; letter-spacing:.06em;
+}
 </style>
 
 <footer>

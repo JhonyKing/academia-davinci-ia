@@ -8,22 +8,33 @@
   <link rel="stylesheet" href="css/genios.css">
   <link rel="stylesheet" href="css/progreso.css">
   <style>
-/* ── Tiempo Records ── */
-.tiempo-records-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:32px;}
+/* ── Tarjetas de tiempo de estudio ── */
+.tiempo-records-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:32px;}
 @media(max-width:640px){.tiempo-records-grid{grid-template-columns:repeat(2,1fr);}}
-.tiempo-record-card{background:linear-gradient(145deg,#0F1830,#141E35);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:24px 16px 20px;text-align:center;position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s;}
-.tiempo-record-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:16px 16px 0 0;}
-.tiempo-record-card:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.3);}
-.tc-total::before{background:linear-gradient(90deg,#F39C12,#E67E22);}
-.tc-mes::before{background:linear-gradient(90deg,#4A90D9,#7B68EE);}
-.tc-semana::before{background:linear-gradient(90deg,#27AE60,#2ECC71);}
-.tc-hoy::before{background:linear-gradient(90deg,#E74C3C,#FF6B6B);}
-.tiempo-record-value{font-family:'Space Grotesk',sans-serif;font-size:clamp(20px,4.5vw,34px);font-weight:900;line-height:1;margin-bottom:10px;}
-.tc-total .tiempo-record-value{color:#F39C12;}
-.tc-mes .tiempo-record-value{color:#4A90D9;}
-.tc-semana .tiempo-record-value{color:#27AE60;}
-.tc-hoy .tiempo-record-value{color:#E74C3C;}
-.tiempo-record-label{font-size:11px;font-weight:700;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.08em;}
+.tiempo-record-card{
+  background:var(--card); border:2px solid var(--line);
+  border-radius:var(--r); padding:26px 16px 22px;
+  text-align:center; position:relative; overflow:hidden;
+  box-shadow:var(--shadow-sm); transition:transform .2s,box-shadow .2s;
+}
+.tiempo-record-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;}
+.tiempo-record-card:hover{transform:translateY(-5px);box-shadow:var(--shadow);}
+.tc-total::before  {background:var(--gold);}
+.tc-mes::before    {background:var(--blue);}
+.tc-semana::before {background:var(--green);}
+.tc-hoy::before    {background:var(--red);}
+.tiempo-record-value{
+  font-family:var(--font-display); font-size:clamp(22px,4vw,34px);
+  font-weight:700; line-height:1; margin-bottom:8px;
+}
+.tc-total  .tiempo-record-value{color:var(--gold);}
+.tc-mes    .tiempo-record-value{color:var(--blue);}
+.tc-semana .tiempo-record-value{color:var(--green);}
+.tc-hoy    .tiempo-record-value{color:var(--red);}
+.tiempo-record-label{
+  font-family:var(--font-body); font-size:11px; font-weight:800;
+  color:var(--ink-3); text-transform:uppercase; letter-spacing:.06em;
+}
   </style>
 
 </head>
