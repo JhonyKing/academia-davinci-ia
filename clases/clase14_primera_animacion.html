@@ -1,6 +1,7 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
+<script>/*dv-guard*/if(/vercel\.app$|academiadavinci|genioscreativos/.test(location.hostname)){document.documentElement.style.visibility='hidden';setTimeout(function(){if(!window._dvAuthOk)location.href='login.html'},9000)}</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Clase 14 — Primera Animación · Genios Creativos</title>
@@ -396,7 +397,7 @@ nav.lessonnav .lnav-btn.next-btn .ti  { font-size: 16px; font-weight: 900; color
 
 <!-- ── Supabase + auth (sólo producción; en preview no redirige al login) ── -->
 <script>
-if (/vercel\.app$|academiadavinci/.test(location.hostname)) {
+if (/vercel\.app$|academiadavinci|genioscreativos/.test(location.hostname)) {
   const add=(src,cb)=>{const s=document.createElement('script');s.src=src;s.onload=cb;document.head.appendChild(s);};
   add('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js',()=>{
     add('js/supabase-client.js',()=>{ add('js/auth.js', ()=>{ add('js/logros.js', ()=>{ add('js/session-tracker.js'); }); }); });

@@ -21,10 +21,9 @@
 
   const CLASE_NUM       = detectClaseNum()
   const TOTAL_CLASES    = 26
-  const SCROLL_TRIGGER  = 0.90   // 90 % de scroll para marcar completada
 
-  // Clases que SOLO se completan al entregar — el scroll nunca las marca
-  const REQUIEREN_ENTREGA = new Set([2, 3, 4, 5, 10, 11, 14, 18, 23])
+  // Clases que requieren entrega además del quiz para completarse
+  const REQUIEREN_ENTREGA = new Set([1, 2, 3, 4, 5, 10, 11, 14, 18, 23])
 
   // ── 1b. Carga celebration.js de forma diferida ──────────────────────────
   function loadCelebration() {
@@ -121,7 +120,6 @@
 
   // ── 5a. Nudge visual cuando la clase requiere entrega ───────────────────
   function nudgeEntrega() {
-    // No mostrar si ya hay un nudge visible
     if (document.getElementById('dv-entrega-nudge')) return
 
     const nudge = document.createElement('div')
@@ -137,7 +135,6 @@
       z-index: 9000; cursor: pointer; white-space: nowrap;
       animation: dv-nudge-in .3s ease both;
     `
-    // Inyectar animación si no existe
     if (!document.getElementById('dv-nudge-style')) {
       const st = document.createElement('style')
       st.id = 'dv-nudge-style'
@@ -148,53 +145,59 @@
     }
     document.body.appendChild(nudge)
 
-    // Al hacer clic, baja al widget de entrega
     nudge.addEventListener('click', () => {
       nudge.remove()
       const widget = document.getElementById('entrega-widget')
       if (widget) widget.scrollIntoView({ behavior: 'smooth', block: 'center' })
     })
 
-    // Auto-desaparece en 5 s
     setTimeout(() => nudge.remove(), 5000)
   }
 
-  // ── 5b. Scroll listener: trigger al 90 % ────────────────────────────────
-  function setupScrollListener(userId) {
-    // Si la lección tiene quiz propio, el quiz controla cuándo se marca completa
-    if (window.LESSON_HAS_QUIZ) return;
-    let marked = false
-    function onScroll() {
-      if (marked) return
-      const scrollTop    = window.scrollY || document.documentElement.scrollTop
-      const docHeight    = document.documentElement.scrollHeight - window.innerHeight
-      if (docHeight <= 0) return
-      const ratio = scrollTop / docHeight
-      if (ratio >= SCROLL_TRIGGER) {
-        marked = true
-        window.removeEventListener('scroll', onScroll)
+  // ── 5b. Inyectar botón "Completar misión" para clases sin quiz ni entrega ──
+  // Las clases con LESSON_HAS_QUIZ se completan desde el quiz.
+  // Las clases en REQUIEREN_ENTREGA se completan desde el widget de entrega.
+  // Esta función agrega un botón visible para las demás clases de solo contenido.
+  function injectCompletionButton(userId) {
+    if (!CLASE_NUM) return  // No inyectar en páginas que no son clases (mi-personaje, etc.)
+    if (window.LESSON_HAS_QUIZ) return
+    if (REQUIEREN_ENTREGA.has(CLASE_NUM)) return
+    if (document.getElementById('dv-complete-btn-wrap')) return
 
-        if (CLASE_NUM && REQUIEREN_ENTREGA.has(CLASE_NUM)) {
-          // Esta clase solo se completa al entregar — mostrar nudge
-          nudgeEntrega()
-        } else {
-          markClassComplete(userId)
-        }
-      }
-    }
-    window.addEventListener('scroll', onScroll, { passive: true })
+    const wrap = document.createElement('div')
+    wrap.id = 'dv-complete-btn-wrap'
+    wrap.style.cssText = `
+      text-align: center; padding: 32px 20px 48px; margin-top: 16px;
+    `
+    wrap.innerHTML = `
+      <button id="dv-complete-btn" style="
+        background: var(--green, #27AE60); color: #fff; border: none;
+        padding: 16px 36px; border-radius: 50px; font-family: 'Poppins', sans-serif;
+        font-size: 16px; font-weight: 700; cursor: pointer;
+        box-shadow: 0 4px 18px rgba(39,174,96,.35);
+        transition: transform .15s, box-shadow .15s;
+      ">✅ ¡Completar esta misión!</button>
+      <p style="margin-top:10px;font-size:13px;color:var(--ink-3,#8890b5);font-family:'Poppins',sans-serif;">
+        Haz clic cuando hayas terminado de leer y practicar.
+      </p>
+    `
+    // Insertar antes del footer o al final del body
+    const foot = document.querySelector('footer') || document.querySelector('.foot')
+    if (foot) foot.before(wrap)
+    else document.body.appendChild(wrap)
 
-    // Edge case: página corta (sin scroll) → marcar al cabo de 30s de permanencia
-    if (document.documentElement.scrollHeight <= window.innerHeight + 50) {
-      setTimeout(() => {
-        if (!marked) {
-          marked = true
-          if (!CLASE_NUM || !REQUIEREN_ENTREGA.has(CLASE_NUM)) {
-            markClassComplete(userId)
-          }
-        }
-      }, 30_000)
-    }
+    const btn = document.getElementById('dv-complete-btn')
+    btn.addEventListener('mouseover', () => { btn.style.transform = 'translateY(-2px)'; btn.style.boxShadow = '0 8px 28px rgba(39,174,96,.45)' })
+    btn.addEventListener('mouseout',  () => { btn.style.transform = ''; btn.style.boxShadow = '0 4px 18px rgba(39,174,96,.35)' })
+    btn.addEventListener('click', async () => {
+      btn.disabled = true
+      btn.textContent = '⏳ Guardando…'
+      await markClassComplete(userId)
+      btn.textContent = '🏆 ¡Misión completada!'
+      btn.style.background = 'var(--ink-3, #8890b5)'
+      btn.style.cursor = 'default'
+      btn.style.boxShadow = 'none'
+    })
   }
 
   // ── 6. Función global logout ─────────────────────────────────────────────
@@ -270,14 +273,18 @@
       }
     }
 
+    // Sesión y permisos válidos → revelar la página (oculta por el guard del <head>)
+    window._dvAuthOk = true
+    document.documentElement.style.visibility = ''
+
     // Inyectar saludo en nav
     injectGreeting(nombre)
 
     // Actualizar último acceso (sin await para no bloquear)
     updateLastAccess(user.id)
 
-    // Configurar listener de scroll para marcar progreso
-    setupScrollListener(user.id)
+    // Inyectar botón de completar para clases de solo contenido
+    injectCompletionButton(user.id)
   }
 
   // Arrancar

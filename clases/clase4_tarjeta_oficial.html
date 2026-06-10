@@ -1,6 +1,7 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
+<script>/*dv-guard*/if(/vercel\.app$|academiadavinci|genioscreativos/.test(location.hostname)){document.documentElement.style.visibility='hidden';setTimeout(function(){if(!window._dvAuthOk)location.href='login.html'},9000)}</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Clase 4 — La Tarjeta Oficial · Genios Creativos</title>
@@ -295,6 +296,13 @@ nav.lessonnav .lnav-btn.next-btn .ti  { font-size: 16px; font-weight: 900; color
 </section>
 
 
+<!-- ═══════════ ENTREGA ═══════════ -->
+<section class="block tint">
+  <div class="lread">
+    <div id="dz-c4-tarjeta"></div>
+  </div>
+</section>
+
 <!-- ══ MINI QUIZ ══ -->
 <div id="lesson-quiz-container"></div>
 
@@ -416,10 +424,10 @@ nav.lessonnav .lnav-btn.next-btn .ti  { font-size: 16px; font-weight: 900; color
 
 <!-- ── Supabase + auth (sólo producción; en preview no redirige al login) ── -->
 <script>
-if (/vercel\.app$|academiadavinci/.test(location.hostname)) {
+if (/vercel\.app$|academiadavinci|genioscreativos/.test(location.hostname)) {
   const add=(src,cb)=>{const s=document.createElement('script');s.src=src;s.onload=cb;document.head.appendChild(s);};
   add('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js',()=>{
-    add('js/supabase-client.js',()=>{ add('js/auth.js', ()=>{ add('js/logros.js'); }); });
+    add('js/supabase-client.js',()=>{ add('js/auth.js', ()=>{ add('js/logros.js', ()=>{ add('js/session-tracker.js'); }); }); });
   });
 }
 </script>
@@ -428,6 +436,18 @@ if (/vercel\.app$|academiadavinci/.test(location.hostname)) {
 <!-- ── Lesson quiz ── -->
 <script>window.LESSON_QUIZ_DATA = {"claseNum": 4, "preguntas": [{"q": "¿Qué herramienta usas en esta clase para diseñar la Tarjeta Oficial?", "opciones": ["ChatGPT con modo imagen", "Photoshop profesional", "Canva", "PowerPoint"], "correcta": 2, "pista": "Es gratuita, fácil y en 20 minutos puedes tener algo que parece de diseñador."}, {"q": "¿Cuál es el secreto de Canva según Robotsin?", "opciones": ["Diseñar siempre desde cero sin usar plantillas", "Pagar la versión premium para tener más opciones", "Elegir una plantilla y personalizarla con los datos de tu personaje", "Copiar el diseño de otro alumno y cambiar el nombre"], "correcta": 2, "pista": "Los mejores diseñadores del mundo empiezan con una base."}, {"q": "¿Qué información debe aparecer en la Tarjeta Oficial de tu personaje?", "opciones": ["Solo el nombre y una imagen grande", "Nombre, alias, origen, poder, debilidad, historia corta y frase característica", "Solo el poder y la debilidad", "El nombre, la edad y el signo zodiacal"], "correcta": 1, "pista": "Es como la ficha de un superhéroe — todo lo esencial en un vistazo."}, {"q": "¿Cuánto tiempo tienes para presentar tu personaje ante el grupo en 'El Gran Estreno'?", "opciones": ["30 segundos", "2 minutos", "60 segundos", "5 minutos"], "correcta": 2, "pista": "Nombre+poder (15s) → historia de origen (30s) → por qué elegiste ese estilo (15s)."}]};</script>
 <script src="js/lesson-quiz.js"></script>
+
+<!-- ── Upload zone: Tarjeta Oficial ── -->
+<script src="js/upload-zone.js"></script>
+<script>
+new DvUploadZone({
+  containerId: 'dz-c4-tarjeta',
+  claseNum: 4, tipo: 'tarjeta',
+  label: 'Entrega — Sube tu Tarjeta Oficial',
+  sublabel: 'Sube la tarjeta de identidad de tu personaje diseñada en Canva (PNG o JPG)',
+  icon: '🃏', color: '#8E44AD'
+});
+</script>
 
 <!-- Badge lock: requiere entrega + quiz -->
 <script>

@@ -1,6 +1,7 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
+<script>/*dv-guard*/if(/vercel\.app$|academiadavinci|genioscreativos/.test(location.hostname)){document.documentElement.style.visibility='hidden';setTimeout(function(){if(!window._dvAuthOk)location.href='login.html'},9000)}</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Clase 18 — El Tráiler · Genios Creativos</title>
@@ -275,6 +276,13 @@ nav.lessonnav .lnav-btn.next-btn .ti  { font-size: 16px; font-weight: 900; color
 </section>
 
 
+<!-- ═══════════ ENTREGA ═══════════ -->
+<section class="block tint">
+  <div class="lread">
+    <div id="dz-c18-trailer"></div>
+  </div>
+</section>
+
 <!-- ══ MINI QUIZ ══ -->
 <div id="lesson-quiz-container"></div>
 
@@ -398,7 +406,7 @@ nav.lessonnav .lnav-btn.next-btn .ti  { font-size: 16px; font-weight: 900; color
 
 <!-- ── Supabase + auth (sólo producción; en preview no redirige al login) ── -->
 <script>
-if (/vercel\.app$|academiadavinci/.test(location.hostname)) {
+if (/vercel\.app$|academiadavinci|genioscreativos/.test(location.hostname)) {
   const add=(src,cb)=>{const s=document.createElement('script');s.src=src;s.onload=cb;document.head.appendChild(s);};
   add('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js',()=>{
     add('js/supabase-client.js',()=>{ add('js/auth.js', ()=>{ add('js/logros.js', ()=>{ add('js/session-tracker.js'); }); }); });
@@ -410,6 +418,110 @@ if (/vercel\.app$|academiadavinci/.test(location.hostname)) {
 <!-- ── Lesson quiz ── -->
 <script>window.LESSON_QUIZ_DATA = {"claseNum": 18, "preguntas": [{"q": "¿Cuántos segundos tienes para enganchar al espectador en un tráiler?", "opciones": ["30 segundos", "10 segundos", "3 segundos", "1 minuto completo"], "correcta": 2, "pista": "Si los primeros 3 segundos no impactan, el espectador cambia de canal."}, {"q": "¿Qué significa 'ritmo en crescendo' en un tráiler?", "opciones": ["Que la música sea cada vez más suave hasta el final", "Que el tráiler empiece épico y termine tranquilo", "Que el tráiler empiece lento y termine épico — siempre de menos a más", "Que haya exactamente 5 cortes por segundo al final"], "correcta": 2, "pista": "El crescendo es la clave emocional de todo buen tráiler."}, {"q": "¿Qué va en los primeros 3 segundos del tráiler de 60 segundos?", "opciones": ["El título de la serie con música épica", "La presentación completa del héroe y su historia de origen", "La imagen o acción más impactante de toda tu serie", "Los créditos del creador y las herramientas usadas"], "correcta": 2, "pista": "El gancho va primero — luego construyes el contexto."}, {"q": "¿Por qué NO debes revelar el final de tu historia en el tráiler?", "opciones": ["Porque el final está protegido por derechos de autor", "Porque el misterio es lo que lleva al espectador a querer ver la serie completa", "Porque el final todavía no está terminado cuando se hace el tráiler", "Porque revelar el final hace que el tráiler sea demasiado largo"], "correcta": 1, "pista": "Muestra sin revelar — esa es la magia del tráiler."}]};</script>
 <script src="js/lesson-quiz.js"></script>
+
+<!-- ── Entrega: URL de YouTube del tráiler ── -->
+<script>
+(function(){
+  var color = '#E74C3C';
+  var el = document.getElementById('dz-c18-trailer');
+  if (!el) return;
+
+  el.innerHTML = [
+    '<div style="font-weight:900;color:', color, ';font-size:13px;text-transform:uppercase;',
+    'letter-spacing:.07em;margin-bottom:14px;display:flex;align-items:center;gap:8px;">',
+      '<span>🎬</span> Entrega — Sube tu Tráiler Oficial',
+    '</div>',
+    '<p style="color:rgba(30,37,71,.75);font-size:13px;font-weight:600;margin:-8px 0 14px;">',
+      'Sube tu tráiler a YouTube y pega el link aquí para completar la entrega',
+    '</p>',
+    '<div id="dz18-form" style="background:rgba(36,10,10,.75);border-radius:16px;padding:28px 20px;',
+    'border:2px dashed rgba(231,76,60,.4);">',
+      '<div style="font-size:40px;text-align:center;margin-bottom:12px;">🎬</div>',
+      '<label style="display:block;color:rgba(255,255,255,.7);font-size:13px;font-weight:700;margin-bottom:8px;">',
+        'Link de YouTube de tu tráiler</label>',
+      '<input id="dz18-input" type="url" placeholder="https://www.youtube.com/watch?v=..." ',
+        'style="width:100%;box-sizing:border-box;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.15);',
+        'border-radius:10px;padding:12px 14px;color:#fff;font-size:14px;font-family:inherit;outline:none;" />',
+      '<button id="dz18-btn" type="button" ',
+        'style="width:100%;margin-top:12px;background:', color, ';color:#fff;font-weight:800;font-size:15px;',
+        'padding:13px;border-radius:10px;border:none;cursor:pointer;">',
+        'Guardar entrega ↑</button>',
+      '<div id="dz18-st" style="display:none;margin-top:10px;font-size:13px;font-weight:600;text-align:center;"></div>',
+    '</div>',
+    '<div id="dz18-ok" style="display:none;margin-top:14px;background:rgba(34,194,104,.1);',
+    'border:1.5px solid rgba(34,194,104,.3);border-radius:14px;padding:16px 18px;text-align:center;">',
+      '<div style="color:#22C268;font-weight:800;font-size:16px;">✅ ¡Tráiler entregado!</div>',
+      '<a id="dz18-link" href="#" target="_blank" rel="noopener" ',
+        'style="display:inline-block;margin-top:8px;color:#4A90D9;font-size:13px;font-weight:700;">',
+        'Ver en YouTube ↗</a>',
+      '<div><button id="dz18-chg" type="button" style="margin-top:10px;background:transparent;',
+        'border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.5);font-size:12px;',
+        'padding:6px 14px;border-radius:8px;cursor:pointer;">Cambiar URL</button></div>',
+    '</div>',
+  ].join('');
+
+  var form  = document.getElementById('dz18-form');
+  var input = document.getElementById('dz18-input');
+  var btn   = document.getElementById('dz18-btn');
+  var st    = document.getElementById('dz18-st');
+  var ok    = document.getElementById('dz18-ok');
+  var link  = document.getElementById('dz18-link');
+  var chg   = document.getElementById('dz18-chg');
+
+  function showOk(url) {
+    form.style.display = 'none';
+    ok.style.display = 'block';
+    link.href = url; link.textContent = url.length > 50 ? url.slice(0, 50) + '…' : url;
+    window._entregaDone = true;
+    if (window.checkBadgeUnlock) window.checkBadgeUnlock();
+  }
+
+  chg.addEventListener('click', function() {
+    ok.style.display = 'none'; form.style.display = 'block';
+  });
+
+  btn.addEventListener('click', async function() {
+    var url = (input.value || '').trim();
+    if (!url) { st.style.display='block'; st.style.color='#E74C3C'; st.textContent='Pega el link de YouTube primero.'; return; }
+    if (!/youtu/.test(url)) { st.style.display='block'; st.style.color='#E74C3C'; st.textContent='El link debe ser de YouTube (youtube.com o youtu.be).'; return; }
+    var sb = window._supabase;
+    if (!sb) { st.style.display='block'; st.style.color='#F39C12'; st.textContent='Inicia sesión para guardar.'; return; }
+    btn.disabled = true; btn.textContent = 'Guardando...';
+    st.style.display = 'block'; st.style.color = 'rgba(255,255,255,.45)'; st.textContent = 'Guardando...';
+    try {
+      var user = (await sb.auth.getUser()).data.user;
+      if (!user) throw new Error('Inicia sesión para guardar.');
+      var row = (await sb.from('entregas').select('id')
+        .eq('user_id', user.id).eq('clase_num', 18).eq('tipo', 'video_url').maybeSingle()).data;
+      if (row) {
+        await sb.from('entregas').update({ youtube_url: url }).eq('id', row.id);
+      } else {
+        await sb.from('entregas').insert({ user_id: user.id, clase_num: 18, tipo: 'video_url', youtube_url: url });
+      }
+      showOk(url);
+    } catch(e) {
+      st.style.color = '#E74C3C'; st.textContent = 'Error: ' + (e.message || 'Intenta de nuevo');
+      btn.disabled = false; btn.textContent = 'Guardar entrega ↑';
+    }
+  });
+
+  function checkExisting() {
+    var sb = window._supabase;
+    if (!sb) return;
+    sb.auth.getUser().then(function(r) {
+      var user = r.data && r.data.user;
+      if (!user) return;
+      sb.from('entregas').select('youtube_url')
+        .eq('user_id', user.id).eq('clase_num', 18).eq('tipo', 'video_url').maybeSingle()
+        .then(function(r2) {
+          if (r2.data && r2.data.youtube_url) showOk(r2.data.youtube_url);
+        });
+    });
+  }
+
+  var _iv = setInterval(function() { if (window._supabase) { clearInterval(_iv); checkExisting(); } }, 500);
+})();
+</script>
 
 <!-- Badge lock: requiere entrega + quiz -->
 <script>
