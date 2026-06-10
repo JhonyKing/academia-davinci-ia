@@ -67,7 +67,7 @@
       <img src="robotsin/robotsin_completo.png" alt="D-IA Vinci Robotsin" class="login-robot" onerror="this.style.display='none'">
     </div>
     <div class="name">Genios <span>Creativos</span></div>
-    <div class="sub">¡Bienvenido de vuelta, genio! 🚀</div>
+    <div class="sub" id="brand-sub">¡Bienvenido de vuelta, genio! 🚀</div>
   </div>
 
   <div class="alert alert-error" id="error-alert">
@@ -89,6 +89,18 @@
       <input type="password" id="password" class="form-input" placeholder="••••••••" autocomplete="current-password" required>
     </div>
     <button type="submit" class="btn btn-lg" id="login-btn">▶ Entrar a la aventura</button>
+  </form>
+
+  <form id="reset-form" novalidate style="display:none">
+    <div class="form-group">
+      <label class="form-label" for="new-password">Nueva contraseña</label>
+      <input type="password" id="new-password" class="form-input" placeholder="Mínimo 6 caracteres" autocomplete="new-password" required>
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="confirm-password">Confirmar contraseña</label>
+      <input type="password" id="confirm-password" class="form-input" placeholder="Repite tu contraseña" autocomplete="new-password" required>
+    </div>
+    <button type="submit" class="btn btn-lg" id="reset-btn">🔑 Guardar contraseña</button>
   </form>
 
   <hr class="divider">
@@ -115,7 +127,40 @@ if (ES_PRODUCCION) {
   add('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js', () => {
     add('js/supabase-client.js', () => {
       const sb = window._supabase;
-      sb.auth.getSession().then(({ data:{ session } }) => { if (session) location.href = 'index.html'; });
+
+      // Detectar flujo de recovery/invitación por hash de URL (antes de que el SDK lo consuma)
+      const hashParams = new URLSearchParams(location.hash.slice(1));
+      const isRecovery = hashParams.get('type') === 'recovery' || hashParams.get('type') === 'invite';
+
+      function showResetMode() {
+        document.getElementById('login-form').style.display = 'none';
+        document.getElementById('forgot-btn').style.display = 'none';
+        document.getElementById('reset-form').style.display = 'block';
+        document.getElementById('brand-sub').textContent = 'Elige tu nueva contraseña 🔑';
+      }
+
+      if (isRecovery) showResetMode();
+
+      sb.auth.getSession().then(({ data:{ session } }) => { if (session && !isRecovery) location.href = 'index.html'; });
+
+      // Backup: el SDK dispara PASSWORD_RECOVERY cuando procesa el token del hash
+      sb.auth.onAuthStateChange((event) => { if (event === 'PASSWORD_RECOVERY') showResetMode(); });
+
+      document.getElementById('reset-form').addEventListener('submit', async (e) => {
+        e.preventDefault(); hideAlerts();
+        const np = document.getElementById('new-password').value;
+        const cp = document.getElementById('confirm-password').value;
+        if (!np || np.length < 6) { showError('La contraseña debe tener al menos 6 caracteres.'); return; }
+        if (np !== cp) { showError('Las contraseñas no coinciden. Verifica e intenta de nuevo.'); document.getElementById('confirm-password').classList.add('error-field'); return; }
+        const btn = document.getElementById('reset-btn'); btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> Guardando...';
+        const { error } = await sb.auth.updateUser({ password: np });
+        btn.disabled = false; btn.innerHTML = '🔑 Guardar contraseña';
+        if (error) { showError('No pudimos actualizar la contraseña: ' + error.message); return; }
+        showSuccess('¡Contraseña actualizada! Redirigiendo...');
+        setTimeout(() => location.href = 'index.html', 1500);
+      });
+
+      ['new-password', 'confirm-password'].forEach(id => document.getElementById(id).addEventListener('input', () => { document.getElementById(id).classList.remove('error-field'); hideAlerts(); }));
 
       document.getElementById('login-form').addEventListener('submit', async (e) => {
         e.preventDefault(); hideAlerts();
