@@ -13,6 +13,94 @@ Ver también: [[project-academia-davinci]] para reglas de completado, URLs, esta
 
 ---
 
+## ⚠️ DESIGN SYSTEM — LEER ANTES DE ESCRIBIR CUALQUIER CSS O ESTILO
+
+**El sitio usa tema CLARO. NUNCA usar fondos oscuros como `#0F1830`, `#1A2540`, `#141E35`.**
+
+### Variables CSS (definidas en `css/genios.css`, disponibles en todo el sitio)
+```css
+/* Colores de marca */
+--blue:   #2F7BF6;   --blue-d: #1B5FD6;
+--red:    #FF4D5E;
+--gold:   #FFB020;
+--green:  #22C268;
+--purple: #8C5CF0;
+--teal:   #15C2C9;
+--pink:   #FF5DA2;
+
+/* Tinta y fondos — SIEMPRE usar estas, nunca hardcodear */
+--ink:   #1E2547;   /* texto principal */
+--ink-2: #4B5478;   /* texto secundario */
+--ink-3: #8C93B4;   /* texto tenue, labels */
+--line:  #E6E9F7;   /* bordes */
+--paper: #EEF2FF;   /* fondo de página */
+--card:  #FFFFFF;   /* fondo de tarjetas */
+
+/* Bordes redondeados */
+--r-sm: 14px;   --r: 22px;   --r-lg: 30px;
+
+/* Sombras */
+--shadow:    0 18px 40px -18px rgba(30,37,71,.45);
+--shadow-sm: 0 10px 24px -14px rgba(30,37,71,.4);
+
+/* Colores por módulo */
+--m1:#2F7BF6; --m2:#8C5CF0; --m3:#FF9F1C;
+--m4:#22C268; --m5:#15C2C9; --m6:#FF4D5E;
+```
+
+### Tipografías — SIEMPRE usar estas variables, NUNCA hardcodear font-family
+```css
+--font-display: 'Fredoka'   /* títulos, números grandes, badges */
+--font-body:    'Nunito'    /* párrafos, etiquetas, botones */
+```
+**NUNCA usar**: `Space Grotesk`, `Inter`, `system-ui` solos, ni ninguna fuente que no sea Fredoka/Nunito.
+
+### Estilos de tarjeta estándar — SIEMPRE seguir este patrón
+```css
+.cualquier-card {
+  background: var(--card);          /* blanco */
+  border: 2px solid var(--line);    /* borde lavanda suave */
+  border-radius: var(--r);          /* 22px */
+  box-shadow: var(--shadow-sm);
+  padding: 26px;
+}
+/* Acento de color: franja de 4px arriba */
+.cualquier-card::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:4px;
+  background: var(--blue); /* o --gold, --green, --red según contexto */
+}
+/* Hover: elevar */
+.cualquier-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
+```
+
+### Overlays / modales — fondo semitransparente sobre blanco
+```css
+/* Fondo del overlay */
+background: rgba(30,37,71,.55);
+backdrop-filter: blur(6px);
+
+/* Tarjeta dentro del modal */
+background: var(--card);
+border: 2px solid var(--line);
+border-radius: var(--r-lg);
+box-shadow: var(--shadow);
+```
+
+### Texto en tarjetas y etiquetas
+```css
+/* Número/valor grande */
+font-family: var(--font-display); font-weight: 700; color: var(--blue); /* o var(--gold), var(--green)... */
+
+/* Etiqueta uppercase pequeña */
+font-family: var(--font-body); font-size: 11px; font-weight: 800;
+color: var(--ink-3); text-transform: uppercase; letter-spacing: .06em;
+
+/* Texto secundario */
+color: var(--ink-2); font-family: var(--font-body);
+```
+
+---
+
 ## Sitio web: cómo funciona
 
 - **Stack**: HTML estático + Vanilla JS + Supabase Auth/DB/Storage + Vercel hosting
