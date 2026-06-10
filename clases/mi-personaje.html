@@ -53,6 +53,9 @@
   <!-- Contenido principal (oculto hasta cargar) -->
   <div id="portafolio-content" style="display:none;">
 
+    <!-- ═══ PRIMERA IMAGEN CON IA ═══ -->
+    <div id="primera-imagen-section"></div>
+
     <!-- ═══ SECCIÓN 1: MI PROTAGONISTA ═══ -->
     <div class="section-head">
       <div class="icon icon-blue">🦸</div>
@@ -146,18 +149,32 @@
         <div class="empty-state">
           <div class="ico">🎭</div>
           <p>Aún no has creado tu personaje.<br>
-          Completa la <a href="clase2_nace_el_personaje.html">Clase 2 — Nace el Personaje</a> para verlo aquí.</p>
+          Completa la Clase 2 — Nace el Personaje para verlo aquí.</p>
         </div>`
       return
     }
 
     const nombre      = personaje?.nombre || perfil?.nombre || 'Mi Personaje'
-    const arquetipo   = personaje?.arquetipo || entrega5?.arquetipo_nombre || null
+    const arquetipo   = personaje?.arquetipo || entrega5?.contenido_texto || null
     const descripcion = entrega2?.contenido_texto || personaje?.descripcion || null
 
     // Imagen principal: retrato (clase3) > primera imagen IA (clase1) > inicial
     const retratoUrl  = entrega3?.archivo_url ? await getSignedUrl(entrega3.archivo_url) : null
     const primeraUrl  = entrega1?.archivo_url ? await getSignedUrl(entrega1.archivo_url) : null
+
+    // Mostrar primera imagen con IA (clase1) arriba del todo
+    const primerImgEl = document.getElementById('primera-imagen-section')
+    if (primerImgEl && primeraUrl) {
+      primerImgEl.innerHTML = `
+        <div style="margin-bottom:8px;text-align:center;">
+          <div style="font-size:11px;font-weight:800;color:var(--ink-3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px;">🖼️ Mi primera imagen con IA</div>
+          <div style="display:inline-block;border-radius:20px;overflow:hidden;border:2px solid var(--line);background:#fff;box-shadow:var(--shadow);max-width:380px;width:100%;">
+            <img src="${primeraUrl}" alt="Primera imagen con IA" style="width:100%;display:block;object-fit:cover;" onerror="this.parentElement.parentElement.style.display='none'">
+            <div style="padding:12px 16px;font-size:12px;font-weight:700;color:var(--ink-3);">✨ Clase 1 — Tu primera creación con IA</div>
+          </div>
+        </div>`
+    }
+
     const avatarUrl   = retratoUrl || primeraUrl
     const inicial     = nombre.charAt(0).toUpperCase()
 
@@ -183,8 +200,8 @@
         </div>` : ''
 
       html += `
-        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:6px 20px 4px;margin:16px 0;">
-          <div style="font-size:11px;font-weight:800;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.08em;padding:12px 0 6px;">📋 Ficha del personaje</div>
+        <div style="background:linear-gradient(135deg,#0F1830,#1A2540);border:1px solid rgba(74,144,217,.3);border-radius:16px;padding:6px 20px 4px;margin:16px 0;box-shadow:0 4px 20px rgba(0,0,0,.15);">
+          <div style="font-size:11px;font-weight:800;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.08em;padding:12px 0 6px;">📋 Ficha del personaje</div>
           ${filaFicha('Nombre', personaje.nombre)}
           ${filaFicha('Origen', personaje.origen)}
           ${filaFicha('Misión', personaje.mision)}
@@ -197,33 +214,37 @@
     if (descripcion) {
       html += `
         <div style="margin:12px 0;">
-          <div style="font-size:11px;font-weight:800;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;">📝 Descripción</div>
-          <div class="protagonist-desc" id="desc-protagonista" style="max-height:80px;overflow:hidden;color:rgba(255,255,255,.8);font-size:14px;line-height:1.6;">${descripcion}</div>
+          <div style="font-size:11px;font-weight:800;color:var(--ink-3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;">📝 Descripción</div>
+          <div class="protagonist-desc" id="desc-protagonista" style="max-height:80px;overflow:hidden;font-size:14px;line-height:1.6;">${descripcion}</div>
           <button class="expand-btn" onclick="expandirDesc()" style="margin-top:6px;">Ver completa ▼</button>
         </div>`
     }
 
-    // ── GALERÍA DE IMÁGENES ──
-    const imagenes = []
-    if (primeraUrl) imagenes.push({ url: primeraUrl, label: '🖼️ Primera imagen con IA', sub: 'Clase 1' })
-    if (retratoUrl) imagenes.push({ url: retratoUrl, label: '🎨 Retrato Oficial', sub: 'Clase 3' })
-    if (entrega4?.archivo_url) {
-      const tarjetaUrl = await getSignedUrl(entrega4.archivo_url)
-      if (tarjetaUrl) imagenes.push({ url: tarjetaUrl, label: '🃏 Tarjeta Oficial', sub: 'Clase 4' })
+    // ── RETRATO OFICIAL (clase 3) ──
+    if (retratoUrl) {
+      html += `
+        <div style="margin-top:16px;text-align:center;">
+          <div style="font-size:11px;font-weight:800;color:var(--ink-3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;">🎨 Retrato Oficial</div>
+          <div style="display:inline-block;border-radius:20px;overflow:hidden;border:2px solid var(--line);background:#fff;box-shadow:var(--shadow);max-width:380px;width:100%;">
+            <img src="${retratoUrl}" alt="Retrato Oficial" style="width:100%;display:block;object-fit:cover;" onerror="this.parentElement.parentElement.style.display='none'">
+            <div style="padding:12px 16px;font-size:12px;font-weight:700;color:var(--ink-3);">🎨 Clase 3 — Retrato de tu personaje</div>
+          </div>
+        </div>`
     }
 
-    if (imagenes.length > 0) {
-      html += `<div style="margin-top:16px;"><div style="font-size:11px;font-weight:800;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;">🖼️ Imágenes</div>`
-      html += `<div class="retratos-grid">`
-      imagenes.forEach(img => {
+    // ── TARJETA OFICIAL (clase 4) ──
+    if (entrega4?.archivo_url) {
+      const tarjetaUrl = await getSignedUrl(entrega4.archivo_url)
+      if (tarjetaUrl) {
         html += `
-          <div class="retrato-card">
-            <img src="${img.url}" alt="${img.label}" onerror="this.parentElement.style.background='rgba(255,255,255,.03)'">
-            <div class="retrato-label">${img.label}</div>
-            <div style="font-size:10px;color:rgba(255,255,255,.3);margin-top:2px;">${img.sub}</div>
+          <div style="margin-top:16px;text-align:center;">
+            <div style="font-size:11px;font-weight:800;color:var(--ink-3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;">🃏 Tarjeta Oficial</div>
+            <div style="display:inline-block;border-radius:20px;overflow:hidden;border:2px solid var(--line);background:#fff;box-shadow:var(--shadow);max-width:420px;width:100%;">
+              <img src="${tarjetaUrl}" alt="Tarjeta Oficial" style="width:100%;display:block;object-fit:cover;" onerror="this.parentElement.parentElement.style.display='none'">
+              <div style="padding:12px 16px;font-size:12px;font-weight:700;color:var(--ink-3);">🃏 Clase 4 — Tarjeta de identidad de tu personaje</div>
+            </div>
           </div>`
-      })
-      html += `</div></div>`
+      }
     }
 
     // ── BOTÓN NUEVO PERSONAJE ──
@@ -258,7 +279,7 @@
         <div class="empty-state">
           <div class="ico">👥</div>
           <p>Aún no tienes personajes secundarios.<br>
-          Completa la <a href="clase7_aliados_villanos.html">Clase 7 — Aliados y Villanos</a> para crearlos.</p>
+          Completa la Clase 7 — Aliados y Villanos para crearlos.</p>
         </div>`
       return
     }
@@ -343,8 +364,8 @@
           </div>`
         }
       }
-      if (e.tipo === 'eleccion' && e.arquetipo_nombre) {
-        return `<div style="margin-top:4px;font-size:12px;color:#4A90D9;font-weight:600;">⚡ ${e.arquetipo_nombre}</div>`
+      if (e.tipo === 'eleccion' && e.contenido_texto) {
+        return `<div style="margin-top:4px;font-size:12px;color:#4A90D9;font-weight:600;">⚡ ${e.contenido_texto}</div>`
       }
       if ((e.tipo === 'imagen' || e.tipo === 'imagen_multiple') && (e.archivo_url || e.archivos_urls?.length)) {
         return `<div style="margin-top:4px;font-size:12px;color:#27AE60;">✅ Imagen subida</div>`
@@ -500,7 +521,7 @@
       const nombre     = personaje?.nombre
                       || entrega2?.contenido_texto?.split('\n')[0]?.slice(0, 40)
                       || 'Personaje anterior'
-      const arquetipo  = personaje?.arquetipo || entrega5?.arquetipo_nombre || ''
+      const arquetipo  = personaje?.arquetipo || entrega5?.contenido_texto || ''
       const descripcion = personaje?.descripcion || entrega2?.contenido_texto || ''
       const imagen_retrato_url = personaje?.imagen_retrato_url || entrega3?.archivo_url || null
 
@@ -523,7 +544,7 @@
       }
 
       alert('¡Listo! Tu personaje anterior está guardado como secundario.\nAhora puedes crear tu nuevo personaje.')
-      window.location.href = 'clase2_nace_el_personaje.html'
+      window.location.href = 'index.html'
     } catch (err) {
       alert('Error inesperado: ' + err.message)
     }

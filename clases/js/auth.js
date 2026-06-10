@@ -240,11 +240,35 @@
     // Obtener perfil del alumno
     const { data: profile } = await sb
       .from('profiles')
-      .select('nombre, rol')
+      .select('nombre, rol, activo')
       .eq('id', user.id)
       .single()
 
     const nombre = profile?.nombre || user.email.split('@')[0]
+
+    // ── Paywall: clases 5+ requieren acceso activo ───────────────────────────
+    const CLASES_GRATIS = 4
+    if (CLASE_NUM && CLASE_NUM > CLASES_GRATIS && profile?.rol !== 'instructor') {
+      if (!profile?.activo) {
+        window.location.href = 'pago.html?clase=' + CLASE_NUM
+        return
+      }
+    }
+
+    // ── Bloqueo secuencial: clase N requiere clase N-1 completada ────────────
+    if (CLASE_NUM && CLASE_NUM > 1 && profile?.rol !== 'instructor') {
+      const { data: prevProgress } = await sb
+        .from('progress')
+        .select('completada')
+        .eq('user_id', user.id)
+        .eq('clase_num', CLASE_NUM - 1)
+        .maybeSingle()
+
+      if (!prevProgress?.completada) {
+        window.location.href = 'index.html'
+        return
+      }
+    }
 
     // Inyectar saludo en nav
     injectGreeting(nombre)
