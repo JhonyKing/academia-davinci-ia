@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+<script>/*dv-guard*/if(/vercel\.app$|academiadavinci|genioscreativos/.test(location.hostname)){document.documentElement.style.visibility='hidden';setTimeout(function(){if(!window._dvAuthOk)location.href='login.html'},9000)}</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Checkpoint Mundo 4 — El Genio en Movimiento · Academia Da Vinci IA</title>
@@ -205,6 +206,16 @@ window.QUIZ_DATA = {
 };
 </script>
 <script src="js/quiz.js"></script>
+
+<!-- ── Supabase + auth (sólo producción) ── -->
+<script>
+if (/vercel\.app$|academiadavinci|genioscreativos/.test(location.hostname)) {
+  const add=(src,cb)=>{const s=document.createElement('script');s.src=src;s.onload=cb;document.head.appendChild(s);};
+  add('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js',()=>{
+    add('js/supabase-client.js',()=>{ add('js/auth.js', ()=>{ add('js/session-tracker.js'); }); });
+  });
+}
+</script>
 
 </body>
 </html>

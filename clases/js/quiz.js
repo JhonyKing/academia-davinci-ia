@@ -111,6 +111,23 @@
           '</div>';
         if (window.GCSound) try { window.GCSound.win(); } catch (e) {}
         if (window.GCConfetti) window.GCConfetti(70);
+
+        // Registrar checkpoint completado en Supabase (clase_num = 100 + mundo).
+        // Desbloquea la primera clase del siguiente mundo (ver auth.js e index.html).
+        var mm = location.pathname.match(/checkpoint_mundo(\d+)/i);
+        if (mm && window._supabase) {
+          var ckNum = 100 + parseInt(mm[1], 10);
+          window._supabase.auth.getUser().then(function (r) {
+            if (!r.data || !r.data.user) return;
+            window._supabase.from('progress').upsert(
+              { user_id: r.data.user.id, clase_num: ckNum, completada: true, completada_at: new Date().toISOString() },
+              { onConflict: 'user_id,clase_num' }
+            ).then(function (res) {
+              if (res.error) console.warn('[Checkpoint] Error guardando:', res.error.message);
+              else console.log('[Checkpoint] Mundo ' + mm[1] + ' registrado ✓');
+            });
+          });
+        }
       } else {
         // No pasó — mostrar mensaje de reintento
         card.innerHTML =

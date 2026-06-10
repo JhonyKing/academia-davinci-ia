@@ -57,6 +57,18 @@ M6 (El Genio al Mundo,   --m6 #16A085): Clases 23–26 → Checkpoint M6
 
 4. **`REQUIEREN_ENTREGA`** en `auth.js`: `new Set([1, 2, 3, 4, 5, 10, 11, 14, 18, 23])`
 
+5. **Checkpoints (Reto del Mundo) son parte de la secuencia obligatoria**:
+   - Cada mundo termina con `checkpoint_mundoN.html` (quiz de 20 preguntas, motor `quiz.js`, ≥80%)
+   - Al pasarlo, `quiz.js` guarda en `progress` con **`clase_num = 100 + mundo`** (101-106)
+   - La PRIMERA clase de cada mundo requiere el checkpoint del mundo anterior:
+     `REQUIERE_CHECKPOINT = { 6:101, 10:102, 14:103, 19:104, 23:105 }` (en auth.js)
+   - Entrar a un checkpoint requiere la última clase de su mundo:
+     `ULTIMA_DE_MUNDO = { 1:5, 2:9, 3:13, 4:18, 5:22, 6:26 }` (en auth.js)
+   - `index.html` arma la secuencia SEQ = [1..5, 101, 6..9, 102, ...] y `current` es el primer
+     elemento no completado — si es checkpoint, "Continuar aventura" apunta al checkpoint
+   - El constraint de `progress.clase_num` permite 1-26 y 101-106 (migración aplicada 2026-06-10)
+   - Los checkpoints también tienen dv-guard + cadena Supabase (login obligatorio)
+
 ## Bloqueo secuencial — CRÍTICO
 ```javascript
 // En auth.js — init()

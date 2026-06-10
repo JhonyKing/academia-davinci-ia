@@ -31,7 +31,8 @@ create table if not exists public.progress (
   user_id         uuid        not null
                               references public.profiles(id) on delete cascade,
   clase_num       integer     not null
-                              check (clase_num between 1 and 26),
+                              -- 1-26 clases | 101-106 checkpoints de mundo (100 + mundo)
+                              check ((clase_num between 1 and 26) or (clase_num between 101 and 106)),
   completada      boolean     not null default true,
   tiempo_segundos integer     not null default 0,
   completada_at   timestamptz not null default now(),

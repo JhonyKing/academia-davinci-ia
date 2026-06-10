@@ -22,8 +22,21 @@
   const CLASE_NUM       = detectClaseNum()
   const TOTAL_CLASES    = 26
 
+  // Detectar página de checkpoint (checkpoint_mundoN.html)
+  function detectCheckpointNum() {
+    const filename = window.location.pathname.split('/').pop()
+    const match    = filename.match(/checkpoint_mundo(\d+)/i)
+    return match ? parseInt(match[1], 10) : null
+  }
+  const CHECKPOINT_NUM = detectCheckpointNum()
+
   // Clases que requieren entrega además del quiz para completarse
   const REQUIEREN_ENTREGA = new Set([1, 2, 3, 4, 5, 10, 11, 14, 18, 23])
+
+  // Primera clase de cada mundo → checkpoint del mundo anterior (clase_num 100+N)
+  const REQUIERE_CHECKPOINT = { 6: 101, 10: 102, 14: 103, 19: 104, 23: 105 }
+  // Última clase de cada mundo (requisito para entrar a su checkpoint)
+  const ULTIMA_DE_MUNDO = { 1: 5, 2: 9, 3: 13, 4: 18, 5: 22, 6: 26 }
 
   // ── 1b. Carga celebration.js de forma diferida ──────────────────────────
   function loadCelebration() {
@@ -268,6 +281,36 @@
         .maybeSingle()
 
       if (!prevProgress?.completada) {
+        window.location.href = 'index.html'
+        return
+      }
+    }
+
+    // ── Primera clase de un mundo: además requiere el Reto del mundo anterior ─
+    if (CLASE_NUM && REQUIERE_CHECKPOINT[CLASE_NUM] && profile?.rol !== 'instructor') {
+      const { data: ckProgress } = await sb
+        .from('progress')
+        .select('completada')
+        .eq('user_id', user.id)
+        .eq('clase_num', REQUIERE_CHECKPOINT[CLASE_NUM])
+        .maybeSingle()
+
+      if (!ckProgress?.completada) {
+        window.location.href = 'index.html'
+        return
+      }
+    }
+
+    // ── Checkpoint: requiere la última clase de su mundo completada ──────────
+    if (CHECKPOINT_NUM && profile?.rol !== 'instructor') {
+      const { data: lastProgress } = await sb
+        .from('progress')
+        .select('completada')
+        .eq('user_id', user.id)
+        .eq('clase_num', ULTIMA_DE_MUNDO[CHECKPOINT_NUM])
+        .maybeSingle()
+
+      if (!lastProgress?.completada) {
         window.location.href = 'index.html'
         return
       }

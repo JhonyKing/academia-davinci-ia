@@ -290,8 +290,12 @@ const claseById = n => CLASES.find(c => c.n === n);
 
 function render(completadas, userId) {
   const done = new Set(completadas);
+  // Secuencia real de avance: las clases de cada mundo y su Reto (checkpoint,
+  // guardado como clase_num 100+mundo). La clase 6 solo abre tras el Reto 1, etc.
+  const SEQ = [];
+  MUNDOS.forEach(m => { m.clases.forEach(n => SEQ.push(n)); SEQ.push(100 + m.id); });
   let current = null;
-  for (let i = 1; i <= TOTAL; i++) { if (!done.has(i)) { current = i; break; } }
+  for (const s of SEQ) { if (!done.has(s)) { current = s; break; } }
 
   // ── Mundos + nodos ──
   const cont = document.getElementById('worlds');
@@ -317,13 +321,14 @@ function render(completadas, userId) {
           </div>
         </a>`;
     }).join('');
-    const allDoneW = hechos === m.clases.length;
+    const ckId = 100 + m.id;
+    const ckSt = done.has(ckId) ? 'done' : (ckId === current ? 'open' : 'locked');
     const retoNodo = `
-        <a class="node-link${allDoneW ? '' : ' is-locked'}" href="${allDoneW ? 'checkpoint_mundo' + m.id + '.html' : 'javascript:void(0)'}">
-          <div class="node reto ${allDoneW ? 'open' : 'locked'}">
-            <div class="node-top"><span class="node-dot">🎯</span><span class="node-state">${allDoneW ? '🎯' : '🔒'}</span></div>
-            <div class="node-title">Reto del Mundo</div>
-            <div class="node-meta">${allDoneW ? '¡Disponible!' : 'Completa el mundo'}</div>
+        <a class="node-link${ckSt === 'locked' ? ' is-locked' : ''}" href="${ckSt === 'locked' ? 'javascript:void(0)' : 'checkpoint_mundo' + m.id + '.html'}">
+          <div class="node reto ${ckSt === 'locked' ? 'locked' : 'open'}">
+            <div class="node-top"><span class="node-dot">🎯</span><span class="node-state">${ckSt === 'done' ? '⭐' : (ckSt === 'open' ? '🎯' : '🔒')}</span></div>
+            <div class="node-title">Reto del Mundo ${m.id}</div>
+            <div class="node-meta">${ckSt === 'done' ? 'Completado' : (ckSt === 'open' ? '¡Disponible!' : 'Completa el mundo')}</div>
             <span class="play-tag">▶ Jugar</span>
           </div>
         </a>`;
@@ -344,18 +349,26 @@ function render(completadas, userId) {
   }).join('');
 
   // ── XP / nivel ──
-  const total = done.size;
+  const total = [...done].filter(n => n <= TOTAL).length;  // solo clases, no checkpoints
   const pct = Math.round((total / TOTAL) * 100);
-  const mundoActual = MUNDOS.find(m => m.clases.includes(current || TOTAL)) || MUNDOS[5];
-  document.getElementById('xpLevel').textContent = total >= TOTAL ? '🏆' : mundoActual.id;
+  const mundoActual =
+    current == null      ? MUNDOS[5] :
+    current > 100        ? MUNDOS.find(m => m.id === current - 100) :
+    MUNDOS.find(m => m.clases.includes(current)) || MUNDOS[5];
+  document.getElementById('xpLevel').textContent = current == null ? '🏆' : mundoActual.id;
   document.getElementById('xpPct').textContent = pct + '%';
   document.getElementById('xpLabel').textContent =
-    total === 0     ? '¡Empieza tu primera misión!' :
-    total >= TOTAL  ? '🎓 ¡Aventura completada! Eres un Genio Creativo.' :
+    total === 0       ? '¡Empieza tu primera misión!' :
+    current == null   ? '🎓 ¡Aventura completada! Eres un Genio Creativo.' :
     `${total} de ${TOTAL} misiones completadas`;
   const nextBox = document.getElementById('xpNext');
   const contBtn = document.getElementById('continueBtn');
-  if (current && total < TOTAL) {
+  if (current && current > 100) {
+    // Lo que sigue es el Reto del mundo
+    nextBox.innerHTML = `🎯 Siguiente: <b>Reto del Mundo ${mundoActual.id} — ${mundoActual.nombre}</b>`;
+    contBtn.href = 'checkpoint_mundo' + mundoActual.id + '.html';
+    contBtn.textContent = '🎯 Hacer el Reto del Mundo ' + mundoActual.id;
+  } else if (current) {
     const c = claseById(current);
     nextBox.innerHTML = `▶ Siguiente: <b>Clase ${current} — ${c.t}</b>`;
     contBtn.href = c.h;
@@ -393,7 +406,7 @@ function cargarProgreso() {
   if (ES_PRODUCCION && window._supabase) {
     const sb = window._supabase;
     sb.auth.getSession().then(async ({ data:{ session } }) => {
-      if (!session) { render([1], null); return; }
+      if (!session) { location.href = 'login.html'; return; }
       // Mostrar nombre y botón salir
       const { data: profile } = await sb.from('profiles').select('nombre').eq('id', session.user.id).single();
       const nombre = profile?.nombre || session.user.email.split('@')[0];
@@ -407,7 +420,7 @@ function cargarProgreso() {
       sb.from('progress').select('clase_num')
         .eq('user_id', session.user.id).eq('completada', true)
         .then(({ data }) => render((data||[]).map(r => r.clase_num), session.user.id));
-    }).catch(() => render([1]));
+    }).catch(() => render([], null));
   } else {
     // Modo demo para la vista previa (muestra el diseño "con avance")
     render([1,2,3,4,5,6,7]);
