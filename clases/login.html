@@ -112,7 +112,7 @@
 
 <script src="js/juice.js"></script>
 <script>
-const ES_PRODUCCION = /vercel\.app$|academiadavinci/.test(location.hostname);
+const ES_PRODUCCION = /vercel\.app$|academiadavinci|genioscreativos/.test(location.hostname);
 
 function showError(msg){ document.getElementById('error-msg').textContent=msg; document.getElementById('error-alert').classList.add('show'); document.getElementById('success-alert').classList.remove('show'); }
 function showSuccess(msg){ document.getElementById('success-msg').textContent=msg; document.getElementById('success-alert').classList.add('show'); document.getElementById('error-alert').classList.remove('show'); }

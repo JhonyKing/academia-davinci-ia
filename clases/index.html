@@ -23,7 +23,9 @@
       <img src="robotsin/robotsin_artista.png" alt="Robotsin" class="brand-robot">
       <span class="brand-blue">Creativos</span>
     </div>
-    <div class="topbar-right">
+    <div class="topbar-right" style="display:flex;align-items:center;gap:8px;">
+      <span id="dv-nombre" style="font-family:var(--font-body);font-size:13px;font-weight:700;color:var(--ink-2);"></span>
+      <button id="dv-logout" style="background:transparent;border:1.5px solid var(--line);color:var(--ink-2);padding:6px 14px;border-radius:20px;font-family:var(--font-body);font-size:12px;font-weight:700;cursor:pointer;display:none;" onmouseover="this.style.borderColor='var(--red)';this.style.color='var(--red)'" onmouseout="this.style.borderColor='var(--line)';this.style.color='var(--ink-2)'">Salir</button>
       <button class="icon-btn" id="soundBtn" title="Sonido" aria-label="Activar/silenciar sonido">🔊</button>
     </div>
   </div>
@@ -386,12 +388,22 @@ function render(completadas, userId) {
 }
 
 // ── Cargar progreso real (Supabase, sólo producción) o demo (preview) ──
-const ES_PRODUCCION = /vercel\.app$|academiadavinci/.test(location.hostname);
+const ES_PRODUCCION = /vercel\.app$|academiadavinci|genioscreativos/.test(location.hostname);
 function cargarProgreso() {
   if (ES_PRODUCCION && window._supabase) {
     const sb = window._supabase;
-    sb.auth.getSession().then(({ data:{ session } }) => {
+    sb.auth.getSession().then(async ({ data:{ session } }) => {
       if (!session) { render([1], null); return; }
+      // Mostrar nombre y botón salir
+      const { data: profile } = await sb.from('profiles').select('nombre').eq('id', session.user.id).single();
+      const nombre = profile?.nombre || session.user.email.split('@')[0];
+      const nombreEl = document.getElementById('dv-nombre');
+      const logoutBtn = document.getElementById('dv-logout');
+      if (nombreEl) nombreEl.textContent = '👤 ' + nombre;
+      if (logoutBtn) {
+        logoutBtn.style.display = 'inline-block';
+        logoutBtn.addEventListener('click', async () => { await sb.auth.signOut(); location.href = 'login.html'; });
+      }
       sb.from('progress').select('clase_num')
         .eq('user_id', session.user.id).eq('completada', true)
         .then(({ data }) => render((data||[]).map(r => r.clase_num), session.user.id));
