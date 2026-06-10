@@ -3,12 +3,12 @@
 
   // ── Estructura de módulos ─────────────────────────────────────────────────
   const MODULES = [
-    { num: 1, name: 'El Genio Creativo',     color: '#4A90D9', classes: [1,2,3,4,5]        },
-    { num: 2, name: 'El Mundo del Genio',    color: '#8E44AD', classes: [6,7,8,9]           },
-    { num: 3, name: 'La Historia del Genio', color: '#F39C12', classes: [10,11,12,13]       },
-    { num: 4, name: 'El Genio en Movimiento',color: '#27AE60', classes: [14,15,16,17,18]    },
-    { num: 5, name: 'La Voz del Genio',      color: '#16A085', classes: [19,20,21,22]       },
-    { num: 6, name: 'El Genio al Mundo',     color: '#E74C3C', classes: [23,24,25,26]       },
+    { num: 1, name: 'El Genio Creativo',     color: '#2F7BF6', classes: [1,2,3,4,5]        },
+    { num: 2, name: 'El Mundo del Genio',    color: '#8C5CF0', classes: [6,7,8,9]           },
+    { num: 3, name: 'La Historia del Genio', color: '#FF9F1C', classes: [10,11,12,13]       },
+    { num: 4, name: 'El Genio en Movimiento',color: '#22C268', classes: [14,15,16,17,18]    },
+    { num: 5, name: 'La Voz del Genio',      color: '#15C2C9', classes: [19,20,21,22]       },
+    { num: 6, name: 'El Genio al Mundo',     color: '#FF4D5E', classes: [23,24,25,26]       },
   ]
 
   function getModule(claseNum) { return MODULES.find(m => m.classes.includes(claseNum)) }
@@ -27,7 +27,7 @@
       .dv-ov {
         position: fixed; inset: 0; z-index: 99999;
         display: flex; align-items: center; justify-content: center;
-        background: rgba(10,16,34,0.85);
+        background: rgba(30,37,71,0.55);
         backdrop-filter: blur(6px);
         cursor: pointer;
         animation: dv-ov-in .25s ease both;
@@ -36,14 +36,14 @@
 
       .dv-modal {
         position: relative; overflow: hidden;
-        background: #1A2540;
-        border: 1px solid rgba(255,255,255,0.1);
-        border-top: 3px solid var(--dv-accent, #4A90D9);
-        border-radius: 24px;
+        background: var(--card, #fff);
+        border: 2px solid var(--line, #E6E9F7);
+        border-top: 4px solid var(--dv-accent, var(--blue, #2F7BF6));
+        border-radius: var(--r-lg, 30px);
         padding: 40px 40px 32px;
         text-align: center;
         min-width: 300px; max-width: 460px; width: 90vw;
-        box-shadow: 0 24px 80px rgba(0,0,0,0.6), 0 0 60px rgba(74,144,217,0.15);
+        box-shadow: var(--shadow, 0 18px 40px -18px rgba(30,37,71,.45));
         animation: dv-modal-in .35s cubic-bezier(.34,1.56,.64,1) both;
       }
       @keyframes dv-modal-in {
@@ -65,7 +65,7 @@
 
       .dv-robotsin-face {
         width: 80px; height: 80px; object-fit: contain;
-        filter: drop-shadow(0 0 16px var(--dv-accent, #4A90D9));
+        filter: drop-shadow(0 8px 14px rgba(30,37,71,.25));
         margin-bottom: 8px;
         animation: dv-bob 2s ease-in-out infinite;
       }
@@ -75,27 +75,27 @@
                    animation: dv-pop .4s cubic-bezier(.34,1.56,.64,1) .1s both; }
       @keyframes dv-pop { from{transform:scale(0)} to{transform:scale(1)} }
 
-      .dv-title  { font-family:'Poppins',sans-serif; font-size: clamp(18px,4vw,24px);
-                   font-weight: 900; color: #fff; margin: 8px 0 6px; line-height: 1.2; }
-      .dv-sub    { font-family:'Poppins',sans-serif; font-size: 14px;
-                   color: rgba(232,234,240,0.6); margin-bottom: 20px; }
+      .dv-title  { font-family: var(--font-display, 'Fredoka', sans-serif); font-size: clamp(20px,4vw,26px);
+                   font-weight: 700; color: var(--ink, #1E2547); margin: 8px 0 6px; line-height: 1.2; }
+      .dv-sub    { font-family: var(--font-body, 'Nunito', sans-serif); font-size: 14px; font-weight: 600;
+                   color: var(--ink-2, #4B5478); margin-bottom: 20px; }
 
-      .dv-bar-wrap { height: 4px; background: rgba(255,255,255,0.08); border-radius: 4px; overflow: hidden; }
-      .dv-bar      { height: 100%; background: var(--dv-accent, #4A90D9); border-radius: 4px;
+      .dv-bar-wrap { height: 5px; background: var(--line, #E6E9F7); border-radius: 4px; overflow: hidden; }
+      .dv-bar      { height: 100%; background: var(--dv-accent, var(--blue, #2F7BF6)); border-radius: 4px;
                      width: 100%; animation: dv-shrink linear both; transform-origin: left; }
       @keyframes dv-shrink { from{transform:scaleX(1)} to{transform:scaleX(0)} }
 
-      .dv-hint { font-family:'Poppins',sans-serif; font-size: 11px;
-                 color: rgba(255,255,255,0.2); margin-top: 10px; }
+      .dv-hint { font-family: var(--font-body, 'Nunito', sans-serif); font-size: 11px; font-weight: 700;
+                 color: var(--ink-3, #8C93B4); margin-top: 10px; }
       .dv-close {
         position: absolute; top: 14px; right: 14px;
-        background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
-        color: rgba(255,255,255,0.5); border-radius: 50%;
+        background: #fff; border: 2px solid var(--line, #E6E9F7);
+        color: var(--ink-3, #8C93B4); border-radius: 50%;
         width: 32px; height: 32px; font-size: 14px; line-height: 1;
         cursor: pointer; display: flex; align-items: center; justify-content: center;
-        transition: all .2s; font-family: sans-serif;
+        transition: all .2s; font-family: var(--font-body, 'Nunito', sans-serif);
       }
-      .dv-close:hover { background: rgba(255,255,255,0.18); color: #fff; }
+      .dv-close:hover { border-color: var(--red, #FF4D5E); color: var(--red, #FF4D5E); }
     `
     document.head.appendChild(s)
   }
@@ -146,7 +146,7 @@
   ]
 
   // ── Confetti ──────────────────────────────────────────────────────────────
-  const COLORS = ['#4A90D9','#8E44AD','#F39C12','#27AE60','#16A085','#E74C3C','#ffffff','#74B9FF']
+  const COLORS = ['#2F7BF6','#8C5CF0','#FF9F1C','#22C268','#15C2C9','#FF4D5E','#FFD23F','#FF5DA2']
   function spawnConfetti(wrap) {
     for (let i = 0; i < 28; i++) {
       const el  = document.createElement('div')
@@ -221,7 +221,7 @@
           emoji: '⭐',
           title: `¡Clase ${claseNum} completada!`,
           subtitle: 'Sigue avanzando. Tu proyecto está tomando forma.',
-          color: '#4A90D9',
+          color: '#2F7BF6',
           robotsinSrc: 'robotsin/robotsin_completo.png',
           ms: 15000,
         })
@@ -234,7 +234,7 @@
         emoji: '📬',
         title: '¡Robotsin recibió tu entrega!',
         subtitle: mensaje || 'Tu trabajo quedó guardado. ¡Misión cumplida, genio!',
-        color: '#27AE60',
+        color: '#22C268',
         robotsinSrc: 'robotsin/robotsin_artista.png',
         ms: 15000,
       })
