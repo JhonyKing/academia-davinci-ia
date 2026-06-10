@@ -184,7 +184,7 @@ if (ES_PRODUCCION) {
         const email = document.getElementById('email').value.trim();
         if (!email) { showError('Primero escribe tu correo arriba, luego haz clic aquí.'); document.getElementById('email').focus(); return; }
         const btn = document.getElementById('forgot-btn'); btn.textContent='Enviando...'; btn.disabled=true;
-        const { error } = await sb.auth.resetPasswordForEmail(email, { redirectTo: location.origin + '/clases/login.html' });
+        const { error } = await sb.auth.resetPasswordForEmail(email, { redirectTo: location.origin + '/login.html' });
         btn.disabled=false; btn.textContent='¿Olvidaste tu contraseña?';
         if (error) showError('No pudimos enviar el correo: ' + error.message);
         else showSuccess('Te enviamos un enlace para restablecer tu contraseña. Revisa tu correo (y spam).');
