@@ -36,10 +36,25 @@
   <span class="spark" style="top:24px;left:18%;font-size:22px;">✦</span>
   <span class="spark" style="top:60px;right:20%;font-size:16px;animation-delay:1s;">✧</span>
   <span class="eyebrow">🎨 Tu portafolio creativo</span>
-  <div class="mascot-stage studio-mascot"><img src="robotsin/robotsin_maestro.png" alt="Robotsin Maestro"></div>
+  <div class="mascot-stage studio-mascot" style="margin-top:32px;"><img src="robotsin/robotsin_maestro.png" alt="Robotsin Maestro"></div>
   <h1>Mi <span>Estudio</span></h1>
   <p class="sub">Todo lo que has creado en la aventura, en un solo lugar.</p>
 </section>
+
+<div id="tiempo-ia-widget" style="display:none; text-align:center; padding:0 16px 8px;">
+  <div style="
+    display:inline-flex; align-items:center; gap:12px;
+    background:linear-gradient(135deg,#0F1830,#1A2540);
+    border:1px solid rgba(74,144,217,.25); border-radius:16px;
+    padding:14px 24px; box-shadow:0 4px 20px rgba(0,0,0,.2);
+  ">
+    <span style="font-size:22px;">⏱️</span>
+    <div style="text-align:left;">
+      <div style="font-size:10px;font-weight:800;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.08em;">Tiempo invertido aprendiendo IA</div>
+      <div id="tiempo-ia-valor" style="font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:900;color:#4A90D9;letter-spacing:.02em;">—</div>
+    </div>
+  </div>
+</div>
 
 <!-- ═══ MAIN CONTENT ═══ -->
 <div class="container">
@@ -92,9 +107,89 @@
     </div>
     <div id="progreso-section"></div>
 
+    <!-- ═══ SECCIÓN 5: TIEMPO DE ESTUDIO ═══ -->
+    <div class="section-head">
+      <div class="icon icon-blue">⏱️</div>
+      <div>
+        <h2>Tiempo <span>Aprendiendo</span></h2>
+      </div>
+    </div>
+    <div class="tiempo-records-grid">
+      <div class="tiempo-record-card tc-total">
+        <div class="tiempo-record-value" id="tcard-total">—</div>
+        <div class="tiempo-record-label">Total en el sitio</div>
+      </div>
+      <div class="tiempo-record-card tc-mes">
+        <div class="tiempo-record-value" id="tcard-mes">—</div>
+        <div class="tiempo-record-label">Este mes</div>
+      </div>
+      <div class="tiempo-record-card tc-semana">
+        <div class="tiempo-record-value" id="tcard-semana">—</div>
+        <div class="tiempo-record-label">Esta semana</div>
+      </div>
+      <div class="tiempo-record-card tc-hoy">
+        <div class="tiempo-record-value" id="tcard-hoy">—</div>
+        <div class="tiempo-record-label">Hoy</div>
+      </div>
+    </div>
+
   </div><!-- /portafolio-content -->
 
 </div><!-- /container -->
+
+<!-- ═══ MODAL TIEMPO IA ═══ -->
+<div id="tiempo-modal" style="
+  display:none; position:fixed; inset:0; z-index:9999;
+  background:rgba(0,0,0,.65); backdrop-filter:blur(4px);
+  align-items:center; justify-content:center;
+">
+  <div style="
+    background:linear-gradient(160deg,#0F1830 0%,#1A2540 100%);
+    border:1px solid rgba(74,144,217,.35); border-radius:24px;
+    padding:40px 36px 32px; max-width:380px; width:90%; text-align:center;
+    box-shadow:0 24px 60px rgba(0,0,0,.6);
+    animation:modalIn .35s cubic-bezier(.22,1,.36,1) both;
+    position:relative;
+  ">
+    <button id="tiempo-modal-close" style="
+      position:absolute; top:14px; right:16px;
+      background:transparent; border:none; color:rgba(255,255,255,.35);
+      font-size:20px; cursor:pointer; line-height:1; padding:4px 8px;
+      transition:color .15s;
+    " onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.35)'">✕</button>
+
+    <div style="font-size:48px; margin-bottom:12px;">⏱️</div>
+    <div style="font-size:11px;font-weight:800;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;">Tiempo invertido aprendiendo IA</div>
+    <div id="tiempo-modal-valor" style="font-family:'Space Grotesk',sans-serif;font-size:clamp(32px,8vw,52px);font-weight:900;color:#4A90D9;letter-spacing:.02em;line-height:1.1;margin:12px 0 8px;">—</div>
+    <div id="tiempo-modal-desglose" style="font-size:13px;color:rgba(255,255,255,.4);margin-bottom:20px;">cargando...</div>
+
+    <div style="font-size:12px;color:rgba(255,255,255,.3);">
+      Se cierra en <span id="tiempo-modal-countdown" style="font-weight:700;color:rgba(255,255,255,.5);">10</span>s
+    </div>
+  </div>
+</div>
+<style>
+@keyframes modalIn {
+  from { opacity:0; transform:scale(.92) translateY(12px); }
+  to   { opacity:1; transform:none; }
+}
+/* ── Tiempo Records ── */
+.tiempo-records-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:32px;}
+@media(max-width:640px){.tiempo-records-grid{grid-template-columns:repeat(2,1fr);}}
+.tiempo-record-card{background:linear-gradient(145deg,#0F1830,#141E35);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:24px 16px 20px;text-align:center;position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s;}
+.tiempo-record-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:16px 16px 0 0;}
+.tiempo-record-card:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.3);}
+.tc-total::before{background:linear-gradient(90deg,#F39C12,#E67E22);}
+.tc-mes::before{background:linear-gradient(90deg,#4A90D9,#7B68EE);}
+.tc-semana::before{background:linear-gradient(90deg,#27AE60,#2ECC71);}
+.tc-hoy::before{background:linear-gradient(90deg,#E74C3C,#FF6B6B);}
+.tiempo-record-value{font-family:'Space Grotesk',sans-serif;font-size:clamp(20px,4.5vw,34px);font-weight:900;line-height:1;margin-bottom:10px;}
+.tc-total .tiempo-record-value{color:#F39C12;}
+.tc-mes .tiempo-record-value{color:#4A90D9;}
+.tc-semana .tiempo-record-value{color:#27AE60;}
+.tc-hoy .tiempo-record-value{color:#E74C3C;}
+.tiempo-record-label{font-size:11px;font-weight:700;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.08em;}
+</style>
 
 <footer>
   <strong>Academia Da Vinci IA</strong> · Tu Portafolio Creativo<br>
@@ -619,12 +714,13 @@
 
     try {
       // Cargar todos los datos en paralelo
-      const [perfilRes, personajeRes, secundariosRes, entregasRes, progressRes] = await Promise.all([
+      const [perfilRes, personajeRes, secundariosRes, entregasRes, progressRes, sesionesRes] = await Promise.all([
         sb.from('profiles').select('*').eq('id', userId).single(),
         sb.from('personaje').select('*').eq('user_id', userId).maybeSingle(),
         sb.from('personajes_secundarios').select('*').eq('user_id', userId),
         sb.from('entregas').select('*').eq('user_id', userId),
         sb.from('progress').select('*').eq('user_id', userId).eq('completada', true),
+        sb.from('sesiones').select('duracion_segundos').eq('user_id', userId),
       ])
 
       const perfil       = perfilRes.data
@@ -643,6 +739,8 @@
       document.getElementById('loading').style.display         = 'none'
       document.getElementById('portafolio-content').style.display = 'block'
 
+      if (window.__mostrarTiempoIA) window.__mostrarTiempoIA(sesionesRes.data || [])
+
     } catch (err) {
       console.error('[Da Vinci IA] Error cargando portafolio:', err)
       document.getElementById('loading').innerHTML = `
@@ -656,6 +754,68 @@
 
   // Arrancar cuando el DOM esté listo
   window.__miPersonajeInit = cargarPortafolio;
+
+  window.__mostrarTiempoIA = function(sesiones) {
+    const totalSecs = (sesiones || []).reduce((s, r) => s + (r.duracion_segundos || 0), 0)
+    const h = Math.floor(totalSecs / 3600)
+    const m = Math.floor((totalSecs % 3600) / 60)
+    const s = totalSecs % 60
+
+    let fmt = ''
+    if (h) fmt = `${h}h ${String(m).padStart(2,'0')}m ${String(s).padStart(2,'0')}s`
+    else if (m) fmt = `${m}m ${String(s).padStart(2,'0')}s`
+    else fmt = `${s}s`
+
+    let desglose = []
+    if (h) desglose.push(`${h} hora${h!==1?'s':''}`)
+    if (m) desglose.push(`${m} minuto${m!==1?'s':''}`)
+    if (s || totalSecs===0) desglose.push(`${s} segundo${s!==1?'s':''}`)
+
+    const wid = document.getElementById('tiempo-ia-widget')
+    const val = document.getElementById('tiempo-ia-valor')
+    if (wid && val) { val.textContent = fmt; wid.style.display = 'block'; }
+
+    const modal    = document.getElementById('tiempo-modal')
+    const mVal     = document.getElementById('tiempo-modal-valor')
+    const mDesg    = document.getElementById('tiempo-modal-desglose')
+    const mCount   = document.getElementById('tiempo-modal-countdown')
+    const mClose   = document.getElementById('tiempo-modal-close')
+    if (!modal) return
+
+    if (mVal)  mVal.textContent  = fmt
+    if (mDesg) mDesg.textContent = desglose.join(' · ')
+    modal.style.display = 'flex'
+
+    let secs = 10
+    const tick = setInterval(() => {
+      secs--
+      if (mCount) mCount.textContent = secs
+      if (secs <= 0) { clearInterval(tick); modal.style.display = 'none' }
+    }, 1000)
+
+    const cerrar = () => { clearInterval(tick); modal.style.display = 'none' }
+    if (mClose) mClose.addEventListener('click', cerrar)
+    modal.addEventListener('click', e => { if (e.target === modal) cerrar() })
+
+    // ── Poblar tarjetas de records de tiempo ──────────────────
+    const now2 = new Date()
+    const todayStr = now2.toISOString().slice(0,10)
+    const monthStr = now2.toISOString().slice(0,7)
+    const dow = now2.getDay()
+    const monday = new Date(now2); monday.setDate(now2.getDate() - (dow === 0 ? 6 : dow - 1)); monday.setHours(0,0,0,0)
+
+    const fmtT = secs => {
+      if (secs < 60) return secs + 's'
+      const hh = Math.floor(secs/3600), mm = Math.floor((secs%3600)/60)
+      return hh ? `${hh}h ${mm}m` : `${mm}m`
+    }
+    const arr = sesiones || []
+    const setCard = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = fmtT(v) }
+    setCard('tcard-total',  arr.reduce((a,r)=>a+(r.duracion_segundos||0),0))
+    setCard('tcard-mes',    arr.filter(r=>r.inicio?.startsWith(monthStr)).reduce((a,r)=>a+(r.duracion_segundos||0),0))
+    setCard('tcard-semana', arr.filter(r=>{ const d=new Date(r.inicio); return d>=monday }).reduce((a,r)=>a+(r.duracion_segundos||0),0))
+    setCard('tcard-hoy',    arr.filter(r=>r.inicio?.startsWith(todayStr)).reduce((a,r)=>a+(r.duracion_segundos||0),0))
+  }
 
 })()
 </script>
@@ -671,7 +831,7 @@ if (ES_PRODUCCION) {
   const add = (s, cb) => { const e = document.createElement('script'); e.src = s; if (cb) e.onload = cb; document.head.appendChild(e); };
   add('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js', () => {
     add('js/supabase-client.js', () => {
-      add('js/auth.js', () => { if (window.__miPersonajeInit) window.__miPersonajeInit(); });
+      add('js/auth.js', () => { add('js/session-tracker.js', () => { if (window.__miPersonajeInit) window.__miPersonajeInit(); }); });
     });
   });
 } else {

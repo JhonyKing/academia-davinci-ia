@@ -7,7 +7,25 @@
   <link rel="icon" type="image/svg+xml" href="robotsin/favicon.svg">
   <link rel="stylesheet" href="css/genios.css">
   <link rel="stylesheet" href="css/progreso.css">
-  
+  <style>
+/* ── Tiempo Records ── */
+.tiempo-records-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:32px;}
+@media(max-width:640px){.tiempo-records-grid{grid-template-columns:repeat(2,1fr);}}
+.tiempo-record-card{background:linear-gradient(145deg,#0F1830,#141E35);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:24px 16px 20px;text-align:center;position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s;}
+.tiempo-record-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:16px 16px 0 0;}
+.tiempo-record-card:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.3);}
+.tc-total::before{background:linear-gradient(90deg,#F39C12,#E67E22);}
+.tc-mes::before{background:linear-gradient(90deg,#4A90D9,#7B68EE);}
+.tc-semana::before{background:linear-gradient(90deg,#27AE60,#2ECC71);}
+.tc-hoy::before{background:linear-gradient(90deg,#E74C3C,#FF6B6B);}
+.tiempo-record-value{font-family:'Space Grotesk',sans-serif;font-size:clamp(20px,4.5vw,34px);font-weight:900;line-height:1;margin-bottom:10px;}
+.tc-total .tiempo-record-value{color:#F39C12;}
+.tc-mes .tiempo-record-value{color:#4A90D9;}
+.tc-semana .tiempo-record-value{color:#27AE60;}
+.tc-hoy .tiempo-record-value{color:#E74C3C;}
+.tiempo-record-label{font-size:11px;font-weight:700;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.08em;}
+  </style>
+
 </head>
 <body class="page-padres">
 
@@ -161,6 +179,27 @@
         <div class="section-title">Actividad reciente</div>
         <div id="actividad-container">
           <p class="actividad-empty">Sin actividad registrada aún.</p>
+        </div>
+      </div>
+
+      <!-- TIEMPO DE ESTUDIO: RECORDS -->
+      <div class="section-title" style="margin-bottom:14px;">⏱️ Tiempo de estudio</div>
+      <div class="tiempo-records-grid" style="margin-bottom:32px;">
+        <div class="tiempo-record-card tc-total">
+          <div class="tiempo-record-value" id="tcard-total">—</div>
+          <div class="tiempo-record-label">Total en el sitio</div>
+        </div>
+        <div class="tiempo-record-card tc-mes">
+          <div class="tiempo-record-value" id="tcard-mes">—</div>
+          <div class="tiempo-record-label">Este mes</div>
+        </div>
+        <div class="tiempo-record-card tc-semana">
+          <div class="tiempo-record-value" id="tcard-semana">—</div>
+          <div class="tiempo-record-label">Esta semana</div>
+        </div>
+        <div class="tiempo-record-card tc-hoy">
+          <div class="tiempo-record-value" id="tcard-hoy">—</div>
+          <div class="tiempo-record-label">Hoy</div>
         </div>
       </div>
 
@@ -366,13 +405,16 @@
 
       // Tiempo de estudio
       const sesiones = sesionesRes.data || []
-      const totalSecs = sesiones.reduce((s, r) => s + (r.duracion_segundos || 0), 0)
-      const secsHoy   = sesiones.filter(r => r.inicio?.startsWith(new Date().toISOString().slice(0,10)))
-                                .reduce((s, r) => s + (r.duracion_segundos || 0), 0)
-      const secsHoy7  = sesiones.filter(r => {
-        const d = new Date(r.inicio); const now = new Date()
-        return (now - d) / 864e5 <= 7
-      }).reduce((s, r) => s + (r.duracion_segundos || 0), 0)
+      const now = new Date()
+      const todayStr = now.toISOString().slice(0,10)
+      const monthStr = now.toISOString().slice(0,7)
+      const dow = now.getDay()
+      const monday = new Date(now); monday.setDate(now.getDate() - (dow === 0 ? 6 : dow - 1)); monday.setHours(0,0,0,0)
+
+      const totalSecs  = sesiones.reduce((s,r)=>s+(r.duracion_segundos||0),0)
+      const secsMes    = sesiones.filter(r=>r.inicio?.startsWith(monthStr)).reduce((s,r)=>s+(r.duracion_segundos||0),0)
+      const secsSemana = sesiones.filter(r=>{ const d=new Date(r.inicio); return d>=monday }).reduce((s,r)=>s+(r.duracion_segundos||0),0)
+      const secsHoy    = sesiones.filter(r=>r.inicio?.startsWith(todayStr)).reduce((s,r)=>s+(r.duracion_segundos||0),0)
 
       function fmtTiempo(secs) {
         if (secs < 60) return secs + 's'
@@ -385,7 +427,14 @@
       const tiempoHoyEl = document.getElementById('stat-tiempo-hoy')
       if (tiempoHoyEl) tiempoHoyEl.textContent = fmtTiempo(secsHoy)
       const tiempo7El = document.getElementById('stat-tiempo-7d')
-      if (tiempo7El) tiempo7El.textContent = fmtTiempo(secsHoy7)
+      if (tiempo7El) tiempo7El.textContent = fmtTiempo(secsSemana)
+
+      // Poblar tarjetas de records de tiempo
+      const setCard = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = fmtTiempo(v) }
+      setCard('tcard-total',  totalSecs)
+      setCard('tcard-mes',    secsMes)
+      setCard('tcard-semana', secsSemana)
+      setCard('tcard-hoy',    secsHoy)
 
       // Módulos, logros y actividad
       renderModulos(completadasSet)
