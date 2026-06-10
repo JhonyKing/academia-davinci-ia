@@ -502,7 +502,7 @@ const ES_PRODUCCION = /vercel\.app$|academiadavinci|genioscreativos/.test(locati
 if (ES_PRODUCCION) {
   const add = (s, cb) => { const e = document.createElement('script'); e.src = s; if (cb) e.onload = cb; document.head.appendChild(e); };
   add('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js', () => {
-    add('js/supabase-client.js', () => { if (window.__progresoInit) window.__progresoInit(); });
+    add('js/supabase-client.js', () => { if (window.__progresoInit) window.__progresoInit(); add('js/session-tracker.js'); });
   });
 } else {
   document.addEventListener('DOMContentLoaded', () => {

@@ -154,5 +154,15 @@ document.getElementById('filters').addEventListener('click', (e) => {
 })();
 </script>
 
+<!-- ── Tracker de tiempo (solo produccion, requiere sesion activa) ── -->
+<script>
+if (/vercel\.app$|academiadavinci|genioscreativos/.test(location.hostname)) {
+  const add=(src,cb)=>{const e=document.createElement('script');e.src=src;if(cb)e.onload=cb;document.head.appendChild(e);};
+  add('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js',()=>{
+    add('js/supabase-client.js',()=>{ add('js/session-tracker.js'); });
+  });
+}
+</script>
+
 </body>
 </html>

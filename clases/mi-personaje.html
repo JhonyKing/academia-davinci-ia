@@ -561,10 +561,23 @@
 
   // ── RENDER: Progreso ──────────────────────────────────────────────────
   function renderProgresoSection(progressRows) {
-    const el        = document.getElementById('progreso-section')
-    const completadas = new Set((progressRows || []).map(p => p.clase_num))
-    const count     = completadas.size
-    const pct       = Math.round((count / TOTAL_CLASES) * 100)
+    const el   = document.getElementById('progreso-section')
+    const done = new Set((progressRows || []).map(p => p.clase_num))  // incluye checkpoints 101-106
+    const completadas = new Set([...done].filter(n => n <= TOTAL_CLASES))
+    const count = completadas.size
+    const pct   = Math.round((count / TOTAL_CLASES) * 100)
+
+    // Misma secuencia que el mapa: clases + checkpoint (100+mundo) al final de cada mundo.
+    // Solo UNA clase puede estar disponible; si lo que toca es un checkpoint, ninguna.
+    const MUNDOS_CLASES = [[1,2,3,4,5],[6,7,8,9],[10,11,12,13],[14,15,16,17,18],[19,20,21,22],[23,24,25,26]]
+    let current = null
+    outer:
+    for (let w = 0; w < MUNDOS_CLASES.length; w++) {
+      for (const n of MUNDOS_CLASES[w]) {
+        if (!done.has(n)) { current = n; break outer }
+      }
+      if (!done.has(101 + w)) break  // toca el Reto del Mundo — ninguna clase disponible
+    }
 
     let html = `
       <div class="card">
@@ -581,7 +594,7 @@
       if (completadas.has(i)) {
         cls   = 'completada'
         title = `Clase ${i} — Completada ✓`
-      } else if (i <= count + 2) { // Las 2 siguientes al progreso están disponibles
+      } else if (i === current) {
         cls   = 'disponible'
         title = `Clase ${i} — Disponible`
       } else {

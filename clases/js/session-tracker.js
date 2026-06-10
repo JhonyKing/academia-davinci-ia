@@ -5,35 +5,49 @@
    Registra cuánto tiempo pasa cada alumno en el sitio.
    Se carga automáticamente después de auth.js.
    Los padres pueden ver el resumen en progreso.html.
+
+   Una "sesión" abarca toda la visita (sessionStorage comparte el
+   id entre páginas). Al cambiar de página se reanuda la misma fila
+   sumando sobre lo ya acumulado (baseline) — nunca se sobreescribe.
    ============================================================ */
 
 (function () {
   'use strict';
 
-  var HEARTBEAT_MS  = 60 * 1000;   // actualiza la BD cada 60 segundos
+  var HEARTBEAT_MS  = 30 * 1000;   // actualiza la BD cada 30 segundos
   var SESSION_KEY   = 'dv_session_id';
   var sessionId     = null;
   var sessionStart  = null;
+  var baseline      = 0;           // segundos ya acumulados en páginas anteriores
+  var cachedToken   = null;        // JWT del usuario para el guardado keepalive
   var heartbeatTimer = null;
   var paused        = false;
   var pausedAt      = null;
   var totalPaused   = 0;
 
-  /* ── Tiempo activo (excluye tiempo con pestaña oculta) ── */
+  /* ── Tiempo activo de ESTA página (excluye pestaña oculta) ── */
   function activeSecs() {
+    if (!sessionStart) return 0;
     var elapsed = (Date.now() - sessionStart) / 1000;
     var extra   = (paused && pausedAt) ? (Date.now() - pausedAt) / 1000 : 0;
     return Math.max(0, Math.round(elapsed - totalPaused / 1000 - extra));
   }
 
+  /* ── Total de la sesión: lo acumulado antes + esta página ── */
+  function totalSecs() { return baseline + activeSecs(); }
+
   /* ── Crea o reanuda sesión en Supabase ── */
   async function startSession(sb, user) {
     try {
-      // Intenta reanudar sesión de esta pestaña (misma sesión de browser)
+      // Reanudar la sesión de esta visita (mismo tab), conservando lo acumulado
       var existingId = sessionStorage.getItem(SESSION_KEY);
       if (existingId) {
-        var check = await sb.from('sesiones').select('id').eq('id', existingId).maybeSingle();
-        if (check.data) { sessionId = existingId; }
+        var check = await sb.from('sesiones')
+          .select('id, duracion_segundos').eq('id', existingId).maybeSingle();
+        if (check.data) {
+          sessionId = existingId;
+          baseline  = check.data.duracion_segundos || 0;
+        }
       }
 
       if (!sessionId) {
@@ -46,6 +60,9 @@
         if (sessionId) sessionStorage.setItem(SESSION_KEY, sessionId);
       }
 
+      var s = await sb.auth.getSession();
+      cachedToken = s.data && s.data.session && s.data.session.access_token;
+
       sessionStart = Date.now();
       heartbeatTimer = setInterval(heartbeat, HEARTBEAT_MS);
     } catch (e) {
@@ -53,22 +70,53 @@
     }
   }
 
-  /* ── Actualiza duración en la BD ── */
+  /* ── Actualiza duración en la BD (y refresca el token) ── */
   async function heartbeat() {
     if (!sessionId || !window._supabase) return;
     try {
-      await window._supabase.from('sesiones').update({
-        duracion_segundos : activeSecs(),
+      var sb = window._supabase;
+      await sb.from('sesiones').update({
+        duracion_segundos : totalSecs(),
         fin               : new Date().toISOString()
       }).eq('id', sessionId);
+      var s = await sb.auth.getSession();
+      if (s.data && s.data.session) cachedToken = s.data.session.access_token;
     } catch (_) {}
   }
 
-  /* ── Visibilidad: pausa cuando la pestaña está oculta ── */
+  /* ── Guardado inmediato y confiable (sobrevive al cierre de página).
+        sendBeacon no sirve aquí: no permite PATCH ni headers de Supabase. ── */
+  function saveNow() {
+    if (!sessionId || !cachedToken) return;
+    var url = (typeof SUPABASE_URL !== 'undefined' ? SUPABASE_URL
+              : 'https://joiuvopzkorvmxegnjqg.supabase.co')
+              + '/rest/v1/sesiones?id=eq.' + sessionId;
+    var key = (typeof SUPABASE_ANON_KEY !== 'undefined') ? SUPABASE_ANON_KEY : null;
+    if (!key) return;
+    try {
+      fetch(url, {
+        method: 'PATCH',
+        keepalive: true,
+        headers: {
+          'apikey'        : key,
+          'Authorization' : 'Bearer ' + cachedToken,
+          'Content-Type'  : 'application/json',
+          'Prefer'        : 'return=minimal'
+        },
+        body: JSON.stringify({
+          duracion_segundos : totalSecs(),
+          fin               : new Date().toISOString()
+        })
+      });
+    } catch (e) {}
+  }
+
+  /* ── Visibilidad: pausa cuando la pestaña está oculta + guarda ── */
   document.addEventListener('visibilitychange', function () {
     if (document.hidden) {
       paused = true;
       pausedAt = Date.now();
+      saveNow();  // guardar lo que va, por si la pestaña no regresa
     } else {
       if (paused && pausedAt) totalPaused += Date.now() - pausedAt;
       paused = false;
@@ -76,20 +124,10 @@
     }
   });
 
-  /* ── Guarda al salir de la página ── */
+  /* ── Guarda al salir de la página (navegación o cierre) ── */
   window.addEventListener('pagehide', function () {
     clearInterval(heartbeatTimer);
-    // Intento síncrono (no espera Promise)
-    var sb = window._supabase;
-    if (!sb || !sessionId) return;
-    var secs = activeSecs();
-    // sendBeacon para garantizar el envío aunque la página se cierre
-    var url = sb.supabaseUrl + '/rest/v1/sesiones?id=eq.' + sessionId;
-    var body = JSON.stringify({ duracion_segundos: secs, fin: new Date().toISOString() });
-    navigator.sendBeacon && navigator.sendBeacon(
-      url,
-      new Blob([body], { type: 'application/json' })
-    );
+    saveNow();
   });
 
   /* ── Init: espera a que Supabase esté listo ── */
@@ -104,6 +142,6 @@
   }, 500);
 
   /* ── API pública: devuelve segundos activos de esta sesión ── */
-  window.dvSessionSecs = function () { return activeSecs(); };
+  window.dvSessionSecs = function () { return totalSecs(); };
 
 })();
