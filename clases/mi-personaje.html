@@ -272,7 +272,7 @@
     const primerImgEl = document.getElementById('primera-imagen-section')
     if (primerImgEl && primeraUrl) {
       primerImgEl.innerHTML = `
-        <div style="margin-bottom:8px;text-align:center;">
+        <div style="margin:28px 0 8px;text-align:center;">
           <div style="font-size:11px;font-weight:800;color:var(--ink-3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px;">🖼️ Mi primera imagen con IA</div>
           <div style="display:inline-block;border-radius:20px;overflow:hidden;border:2px solid var(--line);background:#fff;box-shadow:var(--shadow);max-width:380px;width:100%;">
             <img src="${primeraUrl}" alt="Primera imagen con IA" style="width:100%;display:block;object-fit:cover;" onerror="this.parentElement.parentElement.style.display='none'">
@@ -300,14 +300,14 @@
     // ── FICHA DEL PERSONAJE ──
     if (personaje && (personaje.origen || personaje.mision || personaje.poder || personaje.debilidad)) {
       const filaFicha = (label, valor) => valor ? `
-        <div style="display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.06);">
-          <span style="font-size:11px;font-weight:700;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.06em;min-width:120px;flex-shrink:0;padding-top:2px;">${label}</span>
-          <span style="color:#fff;font-weight:600;font-size:14px;line-height:1.4;">${valor}</span>
+        <div style="display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--line);">
+          <span style="font-size:11px;font-weight:800;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em;min-width:120px;flex-shrink:0;padding-top:2px;font-family:var(--font-body);">${label}</span>
+          <span style="color:var(--ink);font-weight:600;font-size:14px;line-height:1.5;font-family:var(--font-body);">${valor}</span>
         </div>` : ''
 
       html += `
-        <div style="background:linear-gradient(135deg,#0F1830,#1A2540);border:1px solid rgba(74,144,217,.3);border-radius:16px;padding:6px 20px 4px;margin:16px 0;box-shadow:0 4px 20px rgba(0,0,0,.15);">
-          <div style="font-size:11px;font-weight:800;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.08em;padding:12px 0 6px;">📋 Ficha del personaje</div>
+        <div style="background:var(--card);border:2px solid var(--line);border-radius:var(--r);padding:6px 20px 4px;margin:16px 0;box-shadow:var(--shadow-sm);">
+          <div style="font-size:11px;font-weight:800;color:var(--ink-3);text-transform:uppercase;letter-spacing:.08em;padding:12px 0 6px;font-family:var(--font-body);">📋 Ficha del personaje</div>
           ${filaFicha('Nombre', personaje.nombre)}
           ${filaFicha('Origen', personaje.origen)}
           ${filaFicha('Misión', personaje.mision)}
@@ -357,11 +357,11 @@
     html += `
       <div style="margin-top:20px;text-align:right;">
         <button onclick="window.iniciarNuevoPersonaje()"
-          style="background:transparent;border:1px solid rgba(231,76,60,.4);
-                 color:#E74C3C;padding:9px 20px;border-radius:8px;
-                 font-family:'Poppins',sans-serif;font-size:13px;font-weight:600;
+          style="background:transparent;border:2px solid rgba(255,77,94,.35);
+                 color:var(--red);padding:9px 20px;border-radius:var(--r-sm);
+                 font-family:var(--font-body);font-size:13px;font-weight:700;
                  cursor:pointer;transition:all .2s;"
-          onmouseover="this.style.background='rgba(231,76,60,.1)'"
+          onmouseover="this.style.background='rgba(255,77,94,.08)'"
           onmouseout="this.style.background='transparent'">
           🔄 Crear nuevo personaje
         </button>
@@ -731,7 +731,7 @@
         sb.from('personajes_secundarios').select('*').eq('user_id', userId),
         sb.from('entregas').select('*').eq('user_id', userId),
         sb.from('progress').select('*').eq('user_id', userId).eq('completada', true),
-        sb.from('sesiones').select('duracion_segundos').eq('user_id', userId),
+        sb.from('sesiones').select('duracion_segundos, inicio').eq('user_id', userId),
       ])
 
       const perfil       = perfilRes.data
