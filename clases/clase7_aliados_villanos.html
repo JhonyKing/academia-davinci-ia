@@ -314,6 +314,20 @@ nav.lessonnav .lnav-btn.next-btn .ti  { font-size: 16px; font-weight: 900; color
       </div>
     </div>
 
+    <!-- Herramientas de IA -->
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin:0 0 28px;justify-content:center;">
+      <a href="https://chatgpt.com" target="_blank" rel="noopener noreferrer"
+         style="display:inline-flex;align-items:center;gap:10px;background:#10a37f;color:#fff;font-weight:800;font-size:14px;padding:14px 24px;border-radius:14px;text-decoration:none;box-shadow:0 4px 18px rgba(16,163,127,.4);">
+        <span style="font-size:22px;">🤖</span>
+        <div><div style="font-size:12px;font-weight:600;opacity:.8;letter-spacing:.04em;">ABRIR</div>ChatGPT</div>
+      </a>
+      <a href="https://labs.google.com/flow" target="_blank" rel="noopener noreferrer"
+         style="display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#4285f4,#34a853);color:#fff;font-weight:800;font-size:14px;padding:14px 24px;border-radius:14px;text-decoration:none;box-shadow:0 4px 18px rgba(66,133,244,.35);">
+        <span style="font-size:22px;">🎬</span>
+        <div><div style="font-size:12px;font-weight:600;opacity:.8;letter-spacing:.04em;">OPCIÓN 2</div>Google Flow</div>
+      </a>
+    </div>
+
     <ul class="acts" data-reveal>
       <li class="act c1">
         <div class="num">1</div>
@@ -335,7 +349,7 @@ nav.lessonnav .lnav-btn.next-btn .ti  { font-size: 16px; font-weight: 900; color
         <div class="num">3</div>
         <div>
           <h4>⚡ "La Confrontación" — Escena del primer encuentro</h4>
-          <p>Escribe en 5 líneas la escena donde tu héroe y villano se ven por primera vez. ¿Qué se dicen? ¿Qué sienten? Comparte tu escena con el grupo.</p>
+          <p>Escribe en 5 líneas la escena donde tu héroe y villano se ven por primera vez. ¿Qué se dicen? ¿Qué sienten? Guárdala en tu cuaderno — la usarás en tus próximas clases.</p>
         </div>
         <span class="t">15 min</span>
       </li>
@@ -394,6 +408,133 @@ nav.lessonnav .lnav-btn.next-btn .ti  { font-size: 16px; font-weight: 900; color
 
 <!-- ══ MINI QUIZ ══ -->
 <div id="lesson-quiz-container"></div>
+
+<!-- ═══════════ ENTREGA — REGISTRO DE PERSONAJES ═══════════ -->
+<section class="block" data-reveal>
+  <div style="max-width:760px;margin:0 auto;">
+    <div style="font-weight:900;color:var(--purple);font-size:13px;text-transform:uppercase;letter-spacing:.07em;margin-bottom:6px;">📦 Tu Entrega — Registra a tus personajes</div>
+    <p style="color:var(--ink-2);font-size:14px;font-weight:600;margin:0 0 18px;">Crea al menos <b>1 aliado y 1 villano</b> con su ficha y su retrato. Aparecerán en tu página de Mi Personaje. Puedes agregar todos los que quieras.</p>
+
+    <div id="dz-personajes" style="background:var(--card);border:2px solid var(--line);border-radius:var(--r);padding:24px;box-shadow:var(--shadow-sm);">
+      <div style="display:grid;gap:14px;">
+        <div>
+          <label style="font-size:11px;font-weight:800;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em;">Nombre del personaje</label>
+          <input id="sec-nombre" type="text" maxlength="40" placeholder="Ej: Tornillo, Doña Óxido…" style="width:100%;box-sizing:border-box;margin-top:6px;padding:12px 14px;border:2px solid var(--line);border-radius:12px;font-family:var(--font-body);font-size:15px;font-weight:600;color:var(--ink);outline:none;">
+        </div>
+        <div>
+          <label style="font-size:11px;font-weight:800;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em;">¿Es aliado o villano?</label>
+          <div style="display:flex;gap:10px;margin-top:6px;">
+            <button type="button" id="sec-tipo-aliado" class="sec-tipo-btn" data-tipo="aliado" style="flex:1;padding:12px;border:2px solid var(--line);border-radius:12px;background:#fff;font-family:var(--font-body);font-weight:800;font-size:14px;color:var(--ink-2);cursor:pointer;">✅ Aliado</button>
+            <button type="button" id="sec-tipo-villano" class="sec-tipo-btn" data-tipo="villano" style="flex:1;padding:12px;border:2px solid var(--line);border-radius:12px;background:#fff;font-family:var(--font-body);font-weight:800;font-size:14px;color:var(--ink-2);cursor:pointer;">😈 Villano</button>
+          </div>
+        </div>
+        <div>
+          <label style="font-size:11px;font-weight:800;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em;">Su historia corta (poder, debilidad, motivación)</label>
+          <textarea id="sec-desc" rows="3" maxlength="400" placeholder="Ej: Robot ayudante que repara todo, le teme al agua, sueña con volar…" style="width:100%;box-sizing:border-box;margin-top:6px;padding:12px 14px;border:2px solid var(--line);border-radius:12px;font-family:var(--font-body);font-size:14px;font-weight:600;color:var(--ink);outline:none;resize:vertical;"></textarea>
+        </div>
+        <div>
+          <label style="font-size:11px;font-weight:800;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em;">Retrato (generado con ChatGPT o Google Flow)</label>
+          <div style="display:flex;align-items:center;gap:12px;margin-top:6px;">
+            <button type="button" id="sec-foto-btn" style="padding:11px 20px;border:2px dashed var(--purple);border-radius:12px;background:transparent;font-family:var(--font-body);font-weight:800;font-size:13px;color:var(--purple);cursor:pointer;">📷 Elegir imagen</button>
+            <span id="sec-foto-nombre" style="font-size:12px;color:var(--ink-3);font-weight:600;"></span>
+            <img id="sec-foto-prev" alt="" style="display:none;width:54px;height:54px;border-radius:12px;object-fit:cover;border:2px solid var(--line);">
+          </div>
+          <input id="sec-foto" type="file" accept="image/*" style="display:none;">
+        </div>
+        <button type="button" id="sec-guardar" style="padding:14px;border:none;border-radius:14px;background:var(--purple);color:#fff;font-family:var(--font-body);font-weight:800;font-size:15px;cursor:pointer;box-shadow:0 4px 0 #6E40D6;">💾 Guardar personaje</button>
+        <div id="sec-status" style="display:none;font-size:13px;font-weight:700;text-align:center;"></div>
+      </div>
+    </div>
+
+    <div id="sec-lista" style="margin-top:18px;display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;"></div>
+    <div id="sec-resumen" style="margin-top:12px;text-align:center;font-size:13px;font-weight:800;color:var(--ink-3);"></div>
+  </div>
+</section>
+<script>
+(function(){
+  var tipoSel = null, foto = null;
+
+  function $(id){ return document.getElementById(id); }
+
+  function pintaTipo(){
+    document.querySelectorAll('.sec-tipo-btn').forEach(function(b){
+      var on = b.dataset.tipo === tipoSel;
+      b.style.borderColor = on ? 'var(--purple)' : 'var(--line)';
+      b.style.background  = on ? 'rgba(140,92,240,.08)' : '#fff';
+      b.style.color       = on ? 'var(--purple)' : 'var(--ink-2)';
+    });
+  }
+
+  function status(msg, ok){
+    var s = $('sec-status'); s.style.display = 'block';
+    s.style.color = ok ? 'var(--green)' : 'var(--red)';
+    s.textContent = msg;
+  }
+
+  async function cargarLista(){
+    var sb = window._supabase; if (!sb) return;
+    var u = (await sb.auth.getUser()).data.user; if (!u) return;
+    var r = await sb.from('personajes_secundarios').select('id,nombre,tipo,imagen_retrato_url').eq('user_id', u.id);
+    var rows = (r.data || []).filter(function(x){ return x.tipo === 'aliado' || x.tipo === 'villano'; });
+    var cont = $('sec-lista'); cont.innerHTML = '';
+    for (var i = 0; i < rows.length; i++) {
+      var p = rows[i];
+      var img = '';
+      if (p.imagen_retrato_url) {
+        var s = await sb.storage.from('portafolio').createSignedUrl(p.imagen_retrato_url, 3600);
+        if (s.data && s.data.signedUrl) img = '<img src="' + s.data.signedUrl + '" style="width:100%;height:120px;object-fit:cover;border-radius:12px 12px 0 0;" alt="">';
+      }
+      cont.innerHTML += '<div style="background:var(--card);border:2px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:var(--shadow-sm);">' + img +
+        '<div style="padding:10px 12px;"><div style="font-family:var(--font-display);font-weight:700;font-size:15px;color:var(--ink);">' + p.nombre + '</div>' +
+        '<div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:' + (p.tipo === 'aliado' ? 'var(--green)' : 'var(--red)') + ';">' + (p.tipo === 'aliado' ? '✅ Aliado' : '😈 Villano') + '</div></div></div>';
+    }
+    var nAli = rows.filter(function(x){ return x.tipo === 'aliado'; }).length;
+    var nVil = rows.filter(function(x){ return x.tipo === 'villano'; }).length;
+    $('sec-resumen').textContent = nAli + ' aliado(s) · ' + nVil + ' villano(s)' + (nAli >= 1 && nVil >= 1 ? ' — ¡Entrega completa! 🎉' : ' — necesitas al menos 1 de cada uno');
+    if (nAli >= 1 && nVil >= 1) { window._entregaDone = true; if (window.checkBadgeUnlock) window.checkBadgeUnlock(); }
+  }
+
+  function init(){
+    document.querySelectorAll('.sec-tipo-btn').forEach(function(b){
+      b.addEventListener('click', function(){ tipoSel = b.dataset.tipo; pintaTipo(); });
+    });
+    $('sec-foto-btn').addEventListener('click', function(){ $('sec-foto').click(); });
+    $('sec-foto').addEventListener('change', function(){
+      foto = this.files[0] || null;
+      $('sec-foto-nombre').textContent = foto ? foto.name : '';
+      if (foto) { var pv = $('sec-foto-prev'); pv.src = URL.createObjectURL(foto); pv.style.display = 'block'; }
+    });
+    $('sec-guardar').addEventListener('click', async function(){
+      var sb = window._supabase;
+      if (!sb) { status('Inicia sesión para guardar.', false); return; }
+      var nombre = $('sec-nombre').value.trim();
+      var desc   = $('sec-desc').value.trim();
+      if (!nombre) { status('Ponle nombre a tu personaje.', false); return; }
+      if (!tipoSel) { status('Elige si es aliado o villano.', false); return; }
+      if (!foto)   { status('Sube el retrato de tu personaje.', false); return; }
+      var btn = $('sec-guardar'); btn.disabled = true; btn.textContent = '⏳ Guardando…';
+      try {
+        var u = (await sb.auth.getUser()).data.user;
+        if (!u) throw new Error('Inicia sesión.');
+        var ext  = (foto.name.split('.').pop() || 'png').toLowerCase();
+        var path = u.id + '/clase7/secundarios/' + Date.now() + '.' + ext;
+        var up = await sb.storage.from('portafolio').upload(path, foto, { upsert: true });
+        if (up.error) throw up.error;
+        var ins = await sb.from('personajes_secundarios').insert({ user_id: u.id, nombre: nombre, tipo: tipoSel, descripcion: desc, imagen_retrato_url: path });
+        if (ins.error) throw ins.error;
+        status('¡' + nombre + ' guardado! 🎉', true);
+        $('sec-nombre').value = ''; $('sec-desc').value = ''; $('sec-foto').value = '';
+        $('sec-foto-nombre').textContent = ''; $('sec-foto-prev').style.display = 'none';
+        foto = null; tipoSel = null; pintaTipo();
+        cargarLista();
+      } catch (e) { status('Error: ' + (e.message || 'intenta de nuevo'), false); }
+      btn.disabled = false; btn.textContent = '💾 Guardar personaje';
+    });
+    var iv = setInterval(function(){ if (window._supabase) { clearInterval(iv); cargarLista(); } }, 500);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+})();
+</script>
 
 <!-- ═══════════ INSIGNIA ═══════════ -->
 <section class="block badge-sec" id="badgeSec">

@@ -13,7 +13,7 @@ metadata:
 - ✅ **Dominio de producción**: https://genioscreativos.com (Namecheap + Vercel)
 - ✅ **26 lecciones HTML** en `clases/clase1_bienvenido_genio.html` … `clase26_graduacion_genios.html`
 - ✅ **Mini-quiz obligatorio** en TODAS las clases (`lesson-quiz.js` + `LESSON_QUIZ_DATA`)
-- ✅ **Sistema de entregas** (upload a Supabase Storage) en clases: 1, 2, 3, 4, 5, 10, 11, 14, 18, 23
+- ✅ **Sistema de entregas** (upload a Supabase Storage) en clases: 1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 14, 18, 23
 - ✅ **Bloqueo secuencial**: clase N bloqueada hasta completar clase N-1
 - ✅ **Paywall**: clases 5+ requieren `profile.activo = true`
 - ✅ **Stripe + webhook** en `api/webhook.js` → `inviteUserByEmail` al comprar
@@ -47,7 +47,10 @@ M6 (El Genio al Mundo,   --m6 #16A085): Clases 23–26 → Checkpoint M6
    - El flag `window.LESSON_HAS_QUIZ = true` es seteado por `lesson-quiz.js` al cargar.
 
 2. **Las clases con entrega TAMBIÉN requieren la entrega** además del quiz:
-   - Clases con entrega: **1, 2, 3, 4, 5, 10, 11, 14, 18, 23**
+   - Clases con entrega: **1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 14, 18, 23**
+   - Clase 6: 3 imágenes obligatorias (universo_principal, universo_version_b, universo_zona) — multi-zona con onUploaded
+   - Clase 7: formulario propio (#dz-personajes) que guarda en `personajes_secundarios` (nombre, tipo, descripcion, imagen_retrato_url=path storage); entrega completa con ≥1 aliado y ≥1 villano
+   - Clase 8: 1 imagen (mapa_mundo) — el mapa oficial hecho en Canva
    - "Entrega" = cualquier contenido que se sube o guarda en la BD (imagen, texto, video URL, selección)
    - En estas clases, el botón de badge/insignia solo se desbloquea cuando `_entregaDone = true` Y `_quizPassed = true`
    - El botón de badge llama `window.dvMarkClassComplete()` al hacer clic
@@ -55,7 +58,7 @@ M6 (El Genio al Mundo,   --m6 #16A085): Clases 23–26 → Checkpoint M6
 3. **NO hay auto-completado por scroll ni por timer** (esos fueron eliminados de `auth.js`).
    - `injectCompletionButton()` solo inyecta un botón "Completar" en clases de puro contenido sin quiz ni entrega (actualmente ninguna — todas tienen quiz)
 
-4. **`REQUIEREN_ENTREGA`** en `auth.js`: `new Set([1, 2, 3, 4, 5, 10, 11, 14, 18, 23])`
+4. **`REQUIEREN_ENTREGA`** en `auth.js`: `new Set([1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 14, 18, 23])`
 
 5. **Checkpoints (Reto del Mundo) son parte de la secuencia obligatoria**:
    - Cada mundo termina con `checkpoint_mundoN.html` (quiz de 20 preguntas, motor `quiz.js`, ≥80%)

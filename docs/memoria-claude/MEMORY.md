@@ -41,7 +41,7 @@
 Remotion cannot process audio. For audio cleanup (noise reduction), use FFmpeg pre-processing before rendering.
 
 ## Academia Da Vinci IA (proyecto curso online)
-- [Academia Da Vinci IA — estado, URLs, pedagogía, Robotsin](project_academia_davinci.md) — Vercel + Supabase + **26 clases** + quiz OBLIGATORIO en todas + REQUIEREN_ENTREGA=[1,2,3,4,5,10,11,14,18,23] + bloqueo secuencial + paywall clase 5+
+- [Academia Da Vinci IA — estado, URLs, pedagogía, Robotsin](project_academia_davinci.md) — Vercel + Supabase + **26 clases** + quiz OBLIGATORIO en todas + REQUIEREN_ENTREGA=[1-8,10,11,14,18,23] + bloqueo secuencial + paywall clase 5+
 - [Arquitectura técnica del sitio — cómo construir clases](project_academia_arquitectura_tecnica.md) — estructura HTML por clase, cadena de carga JS, checklist para nueva clase, reglas absolutas. LEER ANTES de crear/modificar clases.
 - [Skill: insertar-quizes-en-curso](~/.claude/skills/insertar-quizes-en-curso/SKILL.md) — sistema reutilizable de mini-quiz para cursos HTML
 - [Principios de diseño: luz, sonido y movimiento](project_academia_diseno_principios.md) — Los 3 pilares sensoriales que deben guiar TODO el diseño del sitio

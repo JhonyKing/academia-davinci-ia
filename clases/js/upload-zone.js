@@ -142,18 +142,24 @@ window.DvUploadZone = function (cfg) {
       var path = user.id + '/clase' + cfg.claseNum + '/' + cfg.tipo + '/' + Date.now() + '.' + ext;
       var uErr = (await sb.storage.from(bucket).upload(path, file, { upsert: true })).error;
       if (uErr) throw uErr;
-      var sign = (await sb.storage.from(bucket).createSignedUrl(path, 60 * 60 * 24 * 365)).data;
-      var url  = (sign && sign.signedUrl) || '';
       var row  = (await sb.from('entregas').select('id')
         .eq('user_id', user.id).eq('clase_num', cfg.claseNum).eq('tipo', cfg.tipo).maybeSingle()).data;
+      var dbResult;
       if (row) {
-        await sb.from('entregas').update({ archivo_url: url, archivo_nombre: file.name, metadata: { storage_path: path } }).eq('id', row.id);
+        dbResult = await sb.from('entregas').update({ archivo_url: path, archivo_nombre: file.name, metadata: { storage_path: path } }).eq('id', row.id);
       } else {
-        await sb.from('entregas').insert({ user_id: user.id, clase_num: cfg.claseNum, tipo: cfg.tipo, archivo_url: url, archivo_nombre: file.name, metadata: { storage_path: path } });
+        dbResult = await sb.from('entregas').insert({ user_id: user.id, clase_num: cfg.claseNum, tipo: cfg.tipo, archivo_url: path, archivo_nombre: file.name, metadata: { storage_path: path } });
       }
+      if (dbResult.error) throw dbResult.error;
       prev.style.display = 'none';
       okEl.style.display = 'block';
       oknm.textContent   = file.name;
+      // Notificar entrega para desbloqueo de insignia.
+      // Con onUploaded la página decide cuándo está completa (varias zonas);
+      // sin él, una sola subida completa la entrega.
+      if (cfg.onUploaded) cfg.onUploaded(cfg.tipo);
+      else window._entregaDone = true;
+      if (window.checkBadgeUnlock) window.checkBadgeUnlock();
     } catch (e) {
       st.style.color = '#E74C3C';
       st.textContent = 'Error: ' + (e.message || 'Intenta de nuevo');
@@ -175,6 +181,10 @@ window.DvUploadZone = function (cfg) {
             prev.style.display = 'none';
             okEl.style.display = 'block';
             oknm.textContent   = r2.data.archivo_nombre || '';
+            // Ya había entrega — notificar igual que en subida nueva
+            if (cfg.onUploaded) cfg.onUploaded(cfg.tipo);
+            else window._entregaDone = true;
+            if (window.checkBadgeUnlock) window.checkBadgeUnlock();
           }
         });
     });

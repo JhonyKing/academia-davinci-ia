@@ -248,7 +248,10 @@ Secciones de texto, video embed de YouTube, diagramas, interactividades.
 1. **Nunca auto-completar** por scroll o por timer — violación crítica de las reglas de Jhony.
 2. **Siempre incluir quiz** en TODAS las clases (`LESSON_QUIZ_DATA` + `lesson-quiz.js`).
 3. **`LESSON_HAS_QUIZ = true`** lo setea `lesson-quiz.js` automáticamente; no hardcodearlo a mano.
-4. **Clases con entrega** (1, 2, 3, 4, 5, 10, 11, 14, 18, 23): requieren AMBOS quiz + entrega.
+4. **Clases con entrega** (1-8, 10, 11, 14, 18, 23): requieren AMBOS quiz + entrega.
+   - `DvUploadZone` (js/upload-zone.js): containerId DEBE empezar con "dz" (el badge-lock detecta `[id^="dz"]`).
+   - Param opcional `onUploaded(tipo)`: para entregas multi-zona la página acumula y decide `_entregaDone` (ej. clase 6 con 3 zonas); sin él, una subida completa la entrega.
+   - Clase 7 no usa DvUploadZone: formulario propio que inserta en `personajes_secundarios` (path de storage en imagen_retrato_url, bucket portafolio).
 5. **`window._entregaDone = true`** debe llamarse dentro del callback de éxito al guardar entrega.
 6. **`window.dvMarkClassComplete()`** SOLO se llama desde el badge claim button (clic del alumno).
 7. **Cadena de carga**: el orden de scripts importa — supabase → supabase-client → auth → logros → session-tracker.

@@ -31,7 +31,7 @@
   const CHECKPOINT_NUM = detectCheckpointNum()
 
   // Clases que requieren entrega además del quiz para completarse
-  const REQUIEREN_ENTREGA = new Set([1, 2, 3, 4, 5, 10, 11, 14, 18, 23])
+  const REQUIEREN_ENTREGA = new Set([1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 14, 18, 23])
 
   // Primera clase de cada mundo → checkpoint del mundo anterior (clase_num 100+N)
   const REQUIERE_CHECKPOINT = { 6: 101, 10: 102, 14: 103, 19: 104, 23: 105 }

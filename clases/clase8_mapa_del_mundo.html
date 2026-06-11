@@ -286,6 +286,25 @@ nav.lessonnav .lnav-btn.next-btn .ti  { font-size: 16px; font-weight: 900; color
       </div>
     </div>
 
+    <!-- Herramientas de IA -->
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin:0 0 28px;justify-content:center;">
+      <a href="https://chatgpt.com" target="_blank" rel="noopener noreferrer"
+         style="display:inline-flex;align-items:center;gap:10px;background:#10a37f;color:#fff;font-weight:800;font-size:14px;padding:14px 24px;border-radius:14px;text-decoration:none;box-shadow:0 4px 18px rgba(16,163,127,.4);">
+        <span style="font-size:22px;">🤖</span>
+        <div><div style="font-size:12px;font-weight:600;opacity:.8;letter-spacing:.04em;">ABRIR</div>ChatGPT</div>
+      </a>
+      <a href="https://labs.google.com/flow" target="_blank" rel="noopener noreferrer"
+         style="display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#4285f4,#34a853);color:#fff;font-weight:800;font-size:14px;padding:14px 24px;border-radius:14px;text-decoration:none;box-shadow:0 4px 18px rgba(66,133,244,.35);">
+        <span style="font-size:22px;">🎬</span>
+        <div><div style="font-size:12px;font-weight:600;opacity:.8;letter-spacing:.04em;">OPCIÓN 2</div>Google Flow</div>
+      </a>
+      <a href="https://www.canva.com" target="_blank" rel="noopener noreferrer"
+         style="display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#00C4CC,#7D2AE8);color:#fff;font-weight:800;font-size:14px;padding:14px 24px;border-radius:14px;text-decoration:none;box-shadow:0 4px 18px rgba(125,42,232,.35);">
+        <span style="font-size:22px;">🎨</span>
+        <div><div style="font-size:12px;font-weight:600;opacity:.8;letter-spacing:.04em;">DISEÑAR EN</div>Canva</div>
+      </a>
+    </div>
+
     <ul class="acts" data-reveal>
       <li class="act c1">
         <div class="num">1</div>
@@ -349,7 +368,7 @@ nav.lessonnav .lnav-btn.next-btn .ti  { font-size: 16px; font-weight: 900; color
       <span class="em">✏️</span>
       <div>
         <h3>Guarda el mapa digital como imagen</h3>
-        <p>Exporta el mapa de Canva como imagen PNG o JPG y guárdalo en tu carpeta del proyecto. <strong>Trae el mapa a la Clase 9</strong> — será la pieza central de la Galería del Mundo donde presentarás tu universo completo ante el grupo.</p>
+        <p>Exporta el mapa de Canva como imagen PNG o JPG y guárdalo en tu carpeta del proyecto. <strong>Súbelo aquí abajo como tu entrega</strong> — será la pieza central de la Galería del Mundo donde mostrarás tu universo al mundo.</p>
       </div>
     </div>
 
@@ -366,6 +385,22 @@ nav.lessonnav .lnav-btn.next-btn .ti  { font-size: 16px; font-weight: 900; color
 
 <!-- ══ MINI QUIZ ══ -->
 <div id="lesson-quiz-container"></div>
+
+<!-- ═══════════ ENTREGA ═══════════ -->
+<section class="block" data-reveal>
+  <div style="max-width:680px;margin:0 auto;">
+    <div id="dz-mapa"></div>
+  </div>
+</section>
+<script src="js/upload-zone.js"></script>
+<script>
+(function(){
+  function init(){
+    new DvUploadZone({ containerId:'dz-mapa', claseNum:8, tipo:'mapa_mundo', label:'📦 Tu Entrega — El Mapa Oficial del Mundo', sublabel:'Exporta tu mapa de Canva como PNG o JPG y súbelo aquí (con tus 5 ubicaciones)', icon:'🗺️', color:'#8C5CF0' });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+})();
+</script>
 
 <!-- ═══════════ INSIGNIA ═══════════ -->
 <section class="block badge-sec" id="badgeSec">

@@ -329,7 +329,7 @@ function render(completadas, userId) {
             <div class="node-top"><span class="node-dot">🎯</span><span class="node-state">${ckSt === 'done' ? '⭐' : (ckSt === 'open' ? '🎯' : '🔒')}</span></div>
             <div class="node-title">Reto del Mundo ${m.id}</div>
             <div class="node-meta">${ckSt === 'done' ? 'Completado' : (ckSt === 'open' ? '¡Disponible!' : 'Completa el mundo')}</div>
-            <span class="play-tag">▶ Jugar</span>
+            ${ckSt === 'done' ? '' : '<span class="play-tag">▶ Jugar</span>'}
           </div>
         </a>`;
     return `

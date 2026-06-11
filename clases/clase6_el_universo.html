@@ -90,7 +90,7 @@ nav.lessonnav .lnav-btn.next-btn .ti  { font-size: 16px; font-weight: 900; color
     <div class="chips">
       <span class="chip">🌍 World-building</span>
       <span class="chip">⏱️ 60 minutos</span>
-      <span class="chip">🛠️ ChatGPT + Midjourney</span>
+      <span class="chip">🛠️ ChatGPT + Google Flow</span>
       <span class="chip">📊 STEAM</span>
     </div>
   </div>
@@ -284,6 +284,20 @@ nav.lessonnav .lnav-btn.next-btn .ti  { font-size: 16px; font-weight: 900; color
       </div>
     </div>
 
+    <!-- Herramientas de IA -->
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin:0 0 28px;justify-content:center;">
+      <a href="https://chatgpt.com" target="_blank" rel="noopener noreferrer"
+         style="display:inline-flex;align-items:center;gap:10px;background:#10a37f;color:#fff;font-weight:800;font-size:14px;padding:14px 24px;border-radius:14px;text-decoration:none;box-shadow:0 4px 18px rgba(16,163,127,.4);">
+        <span style="font-size:22px;">🤖</span>
+        <div><div style="font-size:12px;font-weight:600;opacity:.8;letter-spacing:.04em;">ABRIR</div>ChatGPT</div>
+      </a>
+      <a href="https://labs.google.com/flow" target="_blank" rel="noopener noreferrer"
+         style="display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#4285f4,#34a853);color:#fff;font-weight:800;font-size:14px;padding:14px 24px;border-radius:14px;text-decoration:none;box-shadow:0 4px 18px rgba(66,133,244,.35);">
+        <span style="font-size:22px;">🎬</span>
+        <div><div style="font-size:12px;font-weight:600;opacity:.8;letter-spacing:.04em;">OPCIÓN 2</div>Google Flow</div>
+      </a>
+    </div>
+
     <ul class="acts" data-reveal>
       <li class="act c1">
         <div class="num">1</div>
@@ -297,7 +311,7 @@ nav.lessonnav .lnav-btn.next-btn .ti  { font-size: 16px; font-weight: 900; color
         <div class="num">2</div>
         <div>
           <h4>🖼️ "El Primer Escenario" — Genera tu mundo con IA</h4>
-          <p>Usa los 4 ingredientes para construir un prompt y genera una imagen de tu escenario principal en ChatGPT o Midjourney. Ej: "Ciudad flotante futurista con tormenta de rayos permanente, año 3000, estilo Pixar 3D, 9:16"</p>
+          <p>Usa los 4 ingredientes para construir un prompt y genera una imagen de tu escenario principal en ChatGPT o Google Flow. Ej: "Ciudad flotante futurista con tormenta de rayos permanente, año 3000, estilo Pixar 3D, 9:16"</p>
         </div>
         <span class="t">25 min</span>
       </li>
@@ -305,7 +319,7 @@ nav.lessonnav .lnav-btn.next-btn .ti  { font-size: 16px; font-weight: 900; color
         <div class="num">3</div>
         <div>
           <h4>🎨 "La Galería del Universo" — Comparte tus 3 escenarios</h4>
-          <p>Genera 3 versiones distintas del mismo mundo (día/noche, zona central/zona peligrosa) y muéstralos al grupo. Robotsin elige el más épico.</p>
+          <p>Genera 3 versiones distintas del mismo mundo (día/noche, zona central/zona peligrosa) y muéstralos al mundo. Elige tú el más épico.</p>
         </div>
         <span class="t">10 min</span>
       </li>
@@ -364,6 +378,32 @@ nav.lessonnav .lnav-btn.next-btn .ti  { font-size: 16px; font-weight: 900; color
 
 <!-- ══ MINI QUIZ ══ -->
 <div id="lesson-quiz-container"></div>
+
+<!-- ═══════════ ENTREGA ═══════════ -->
+<section class="block" data-reveal>
+  <div style="max-width:760px;margin:0 auto;">
+    <div style="font-weight:900;color:var(--purple);font-size:13px;text-transform:uppercase;letter-spacing:.07em;margin-bottom:6px;">📦 Tu Entrega — Las 3 caras de tu universo</div>
+    <p style="color:var(--ink-2);font-size:14px;font-weight:600;margin:0 0 18px;">Sube las <b>3 imágenes de tu mundo</b> para completar la misión: tu escenario principal, su versión día/noche y otra zona de tu universo.</p>
+    <div style="background:var(--card);border:2px solid var(--line);border-radius:var(--r);padding:24px;box-shadow:var(--shadow-sm);">
+      <div id="dz-universo-1"></div>
+      <div id="dz-universo-2" style="margin-top:24px;"></div>
+      <div id="dz-universo-3" style="margin-top:24px;"></div>
+    </div>
+  </div>
+</section>
+<script src="js/upload-zone.js"></script>
+<script>
+(function(){
+  var hechas = new Set();
+  function marca(tipo){ hechas.add(tipo); if (hechas.size >= 3) window._entregaDone = true; if (window.checkBadgeUnlock) window.checkBadgeUnlock(); }
+  function init(){
+    new DvUploadZone({ containerId:'dz-universo-1', claseNum:6, tipo:'universo_principal', label:'1. Tu escenario principal', sublabel:'La imagen oficial de tu universo', icon:'🌍', color:'#8C5CF0', onUploaded:marca });
+    new DvUploadZone({ containerId:'dz-universo-2', claseNum:6, tipo:'universo_version_b', label:'2. Versión día / noche', sublabel:'El mismo mundo en otro momento', icon:'🌗', color:'#8C5CF0', onUploaded:marca });
+    new DvUploadZone({ containerId:'dz-universo-3', claseNum:6, tipo:'universo_zona', label:'3. Zona central o peligrosa', sublabel:'Otra zona de tu mundo', icon:'⚡', color:'#8C5CF0', onUploaded:marca });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+})();
+</script>
 
 <!-- ═══════════ INSIGNIA ═══════════ -->
 <section class="block badge-sec" id="badgeSec">
