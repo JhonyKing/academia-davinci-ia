@@ -50,10 +50,49 @@
     })
   }
 
+  // ── 2a. Validar en BD que la entrega de la clase realmente existe ────────
+  // Defensa en profundidad: aunque el front marque flags, la clase NO se
+  // completa si la entrega no está guardada en Supabase.
+  async function entregaCompletaEnBD(userId) {
+    if (!REQUIEREN_ENTREGA.has(CLASE_NUM)) return true
+    const sb = window._supabase
+    try {
+      if (CLASE_NUM === 7) {
+        // Clase 7: requiere ≥1 aliado y ≥1 villano en personajes_secundarios
+        const { data } = await sb.from('personajes_secundarios')
+          .select('tipo').eq('user_id', userId)
+        const tipos = (data || []).map(r => r.tipo)
+        return tipos.includes('aliado') && tipos.includes('villano')
+      }
+      if (CLASE_NUM === 6) {
+        // Clase 6: requiere las 3 imágenes del universo
+        const { data } = await sb.from('entregas')
+          .select('tipo').eq('user_id', userId).eq('clase_num', 6)
+        const tipos = new Set((data || []).map(r => r.tipo))
+        return tipos.has('universo_principal') && tipos.has('universo_version_b') && tipos.has('universo_zona')
+      }
+      // Resto: al menos una entrega registrada para esta clase
+      const { count } = await sb.from('entregas')
+        .select('id', { count: 'exact', head: true })
+        .eq('user_id', userId).eq('clase_num', CLASE_NUM)
+      return (count || 0) > 0
+    } catch (_) {
+      return false  // ante la duda, no completar
+    }
+  }
+
   // ── 2. Marcar clase como completada en Supabase ─────────────────────────
   async function markClassComplete(userId) {
     if (!CLASE_NUM) return
     const sb = window._supabase
+
+    // Verificar la entrega en BD antes de marcar (no confiar solo en flags del front)
+    const entregaOk = await entregaCompletaEnBD(userId)
+    if (!entregaOk) {
+      console.warn('[Da Vinci IA] Clase', CLASE_NUM, 'NO completada: falta la entrega.')
+      nudgeEntrega()
+      return
+    }
 
     // Verificar si ya estaba completada (para mostrar celebración solo la primera vez)
     const { data: existing } = await sb
@@ -74,6 +113,8 @@
       console.warn('[Da Vinci IA] Error guardando progreso:', error.message)
     } else {
       console.log('[Da Vinci IA] Clase', CLASE_NUM, 'marcada como completada ✓')
+      // Desbloquear el botón "Siguiente misión" (bloqueado por lesson-quiz.js)
+      if (window.lqUnlockNext) window.lqUnlockNext()
       // Marcar visualmente el botón de navegación siguiente si existe
       const badge = document.getElementById('dv-progress-badge')
       if (badge) {

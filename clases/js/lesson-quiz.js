@@ -39,7 +39,8 @@
   const { claseNum, preguntas } = window.LESSON_QUIZ_DATA;
   const PASS_RATE = 0.8;
   const startTime = Date.now();
-  const REQUIEREN_ENTREGA = new Set([1, 2, 3, 4, 5, 10, 11, 14, 18, 23]);
+  // Mantener sincronizado con REQUIEREN_ENTREGA de auth.js
+  const REQUIEREN_ENTREGA = new Set([1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 14, 18, 23]);
 
   let nextBtn = null;
   let nextBtnHref = null;
@@ -80,6 +81,8 @@
     if (overlay) overlay.remove();
     if (nextBtn._lockedClick) nextBtn.removeEventListener('click', nextBtn._lockedClick);
   }
+  // auth.js lo llama cuando la clase se completa de verdad (insignia reclamada)
+  window.lqUnlockNext = unlockNextBtn;
 
   /* ── Supabase ── */
 
@@ -217,7 +220,9 @@
         <div class="lq-result-pct">${pct}%</div>
         <div class="lq-result-msg">
           ${passed
-            ? '¡Aprobado! Ya puedes continuar a la siguiente lección.'
+            ? (REQUIEREN_ENTREGA.has(claseNum)
+                ? '¡Aprobado! Ahora completa tu entrega para terminar la clase.'
+                : '¡Aprobado! Ya puedes continuar a la siguiente lección.')
             : `Necesitas al menos ${passMark} correctas (80%). ¡Inténtalo de nuevo!`}
         </div>
         ${!passed ? `<button class="lq-btn-retry" id="lq-retry">🔄 Volver a intentar</button>` : ''}
@@ -228,9 +233,17 @@
       </div>`;
 
     if (passed) {
-      if (window.dvMarkClassComplete) window.dvMarkClassComplete();
-      setTimeout(() => {
+      if (REQUIEREN_ENTREGA.has(claseNum)) {
+        // Clases con entrega: el quiz NO completa la clase por sí solo.
+        // Solo marca el flag; la clase se completa al reclamar la insignia
+        // (botón gateado por _entregaDone && _quizPassed).
+        window._quizPassed = true;
+        if (window.checkBadgeUnlock) window.checkBadgeUnlock();
+      } else {
+        if (window.dvMarkClassComplete) window.dvMarkClassComplete();
         unlockNextBtn();
+      }
+      setTimeout(() => {
         S.fanfare();
         if (window.GCConfetti) window.GCConfetti(80);
       }, 300);
