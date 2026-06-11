@@ -435,15 +435,34 @@
   }
 
   // ── RENDER: Portafolio por módulo ─────────────────────────────────────
-  async function renderPortafolioSection(entregas) {
+  async function renderPortafolioSection(entregas, secundarios) {
     const el = document.getElementById('portafolio-section')
+    const lista = entregas || []
 
-    // Mapa de entregas por clase_num
-    const em = {}
-    if (entregas) entregas.forEach(e => { em[e.clase_num] = e })
+    // Una clase puede tener VARIAS entregas (distintos `tipo`) — p.ej. clase 6 tiene 3
+    function findEntrega(claseNum, tipo) {
+      return lista.find(e => e.clase_num === claseNum && (!tipo || e.tipo === tipo))
+    }
 
-    function entregaItem(claseNum, label) {
-      const e = em[claseNum]
+    // Aliados y villanos (clase 7) viven en personajes_secundarios, no en entregas
+    const secs = secundarios || []
+    const nAliados  = secs.filter(s => s.tipo === 'aliado').length
+    const nVillanos = secs.filter(s => s.tipo === 'villano').length
+    const secundariosDone = nAliados >= 1 && nVillanos >= 1
+
+    function entregaItem(claseNum, label, tipo) {
+      // Entrada especial: registro de aliados/villanos de la clase 7
+      if (claseNum === 'sec') {
+        return `
+        <div class="entrega-item">
+          <div class="entrega-dot ${secundariosDone ? 'dot-done' : 'dot-pending'}"></div>
+          <div class="entrega-label ${secundariosDone ? 'done' : ''}">
+            <div>${label}</div>
+            ${secs.length ? `<div style="margin-top:4px;font-size:12px;color:${secundariosDone ? '#27AE60' : '#8C93B4'};font-weight:700;">${nAliados} aliado(s) · ${nVillanos} villano(s)</div>` : ''}
+          </div>
+        </div>`
+      }
+      const e = findEntrega(claseNum, tipo)
       const done = !!e
       return `
         <div class="entrega-item">
@@ -453,6 +472,11 @@
             ${buildEntregaPreview(e, claseNum)}
           </div>
         </div>`
+    }
+
+    function itemDone([claseNum, , tipo]) {
+      if (claseNum === 'sec') return secundariosDone
+      return !!findEntrega(claseNum, tipo)
     }
 
     function buildEntregaPreview(e, claseNum) {
@@ -484,6 +508,7 @@
       {
         num: 1, clase: 'm1', titulo: 'El Genio Creativo',
         items: [
+          [1,  'Tu primera imagen con IA'],
           [2,  'Descripción del personaje'],
           [3,  'Retrato del personaje'],
           [4,  'Tarjeta oficial'],
@@ -493,7 +518,11 @@
       {
         num: 2, clase: 'm2', titulo: 'El Mundo del Genio',
         items: [
-          [7,  'Retratos de personajes secundarios'],
+          [6,  'Escenario principal del universo', 'universo_principal'],
+          [6,  'Universo — versión día/noche',     'universo_version_b'],
+          [6,  'Universo — otra zona',             'universo_zona'],
+          ['sec', 'Aliados y villanos (mínimo 1 y 1)'],
+          [8,  'Mapa oficial del mundo (Canva)',   'mapa_mundo'],
         ]
       },
       {
@@ -525,7 +554,7 @@
     let html = `<div class="modulos-grid">`
     for (const mod of modulos) {
       const total     = mod.items.length
-      const completas = mod.items.filter(([num]) => !!em[num]).length
+      const completas = mod.items.filter(itemDone).length
       const allDone   = total > 0 && completas === total
       const headerColor = allDone ? 'rgba(39,174,96,.2)' : ''
 
@@ -545,7 +574,7 @@
           </div>`
 
       if (mod.items.length > 0) {
-        mod.items.forEach(([num, label]) => { html += entregaItem(num, label) })
+        mod.items.forEach(([num, label, tipo]) => { html += entregaItem(num, label, tipo) })
       } else {
         html += `<div class="entrega-item">
           <div class="entrega-dot dot-pending"></div>
@@ -757,7 +786,7 @@
       // Renderizar todas las secciones
       await renderProtagonistaSection(perfil, personaje, entregas)
       await renderSecundariosSection(secundarios)
-      await renderPortafolioSection(entregas)
+      await renderPortafolioSection(entregas, secundarios)
       renderProgresoSection(progressData)
 
       // Mostrar contenido y ocultar spinner
@@ -892,8 +921,12 @@ if (ES_PRODUCCION) {
           <div class="entrega-item"><div class="entrega-dot dot-done"></div><div class="entrega-label done">Arquetipo elegido<div style="margin-top:4px;font-size:12px;color:var(--blue);font-weight:700;">⚡ La Creadora</div></div></div>
         </div>
         <div class="modulo-card m2">
-          <div class="modulo-header"><div class="modulo-num">2</div><div><div class="modulo-title">El Mundo del Genio</div><div class="modulo-sub">1/1 entregas</div></div><span style="margin-left:auto;font-size:18px;">✅</span></div>
-          <div class="entrega-item"><div class="entrega-dot dot-done"></div><div class="entrega-label done">Retratos de personajes secundarios</div></div>
+          <div class="modulo-header"><div class="modulo-num">2</div><div><div class="modulo-title">El Mundo del Genio</div><div class="modulo-sub">2/5 entregas</div></div></div>
+          <div class="entrega-item"><div class="entrega-dot dot-done"></div><div class="entrega-label done">Escenario principal del universo</div></div>
+          <div class="entrega-item"><div class="entrega-dot dot-pending"></div><div class="entrega-label">Universo — versión día/noche</div></div>
+          <div class="entrega-item"><div class="entrega-dot dot-pending"></div><div class="entrega-label">Universo — otra zona</div></div>
+          <div class="entrega-item"><div class="entrega-dot dot-done"></div><div class="entrega-label done">Aliados y villanos (mínimo 1 y 1)</div></div>
+          <div class="entrega-item"><div class="entrega-dot dot-pending"></div><div class="entrega-label">Mapa oficial del mundo (Canva)</div></div>
         </div>
         <div class="modulo-card m4">
           <div class="modulo-header"><div class="modulo-num">4</div><div><div class="modulo-title">En Movimiento</div><div class="modulo-sub">0/2 entregas</div></div></div>
