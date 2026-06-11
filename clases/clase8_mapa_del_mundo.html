@@ -335,6 +335,24 @@ nav.lessonnav .lnav-btn.next-btn .ti  { font-size: 16px; font-weight: 900; color
 </section>
 
 <!-- ═══════════ CIERRE ═══════════ -->
+<!-- ═══════════ ENTREGA ═══════════ -->
+<section class="block" data-reveal>
+  <div style="max-width:680px;margin:0 auto;">
+    <div id="dz-mapa"></div>
+  </div>
+</section>
+<script src="js/upload-zone.js"></script>
+<script>
+(function(){
+  function init(){
+    new DvUploadZone({ containerId:'dz-mapa', claseNum:8, tipo:'mapa_mundo', label:'📦 Tu Entrega — El Mapa Oficial del Mundo', sublabel:'Exporta tu mapa de Canva como PNG o JPG y súbelo aquí (con tus 5 ubicaciones)', icon:'🗺️', color:'#8C5CF0' });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+})();
+</script>
+
+<!-- ═══════════ INSIGNIA ═══════════ -->
+
 <section class="block tint">
   <div class="lread">
     <div class="shead">
@@ -386,23 +404,6 @@ nav.lessonnav .lnav-btn.next-btn .ti  { font-size: 16px; font-weight: 900; color
 <!-- ══ MINI QUIZ ══ -->
 <div id="lesson-quiz-container"></div>
 
-<!-- ═══════════ ENTREGA ═══════════ -->
-<section class="block" data-reveal>
-  <div style="max-width:680px;margin:0 auto;">
-    <div id="dz-mapa"></div>
-  </div>
-</section>
-<script src="js/upload-zone.js"></script>
-<script>
-(function(){
-  function init(){
-    new DvUploadZone({ containerId:'dz-mapa', claseNum:8, tipo:'mapa_mundo', label:'📦 Tu Entrega — El Mapa Oficial del Mundo', sublabel:'Exporta tu mapa de Canva como PNG o JPG y súbelo aquí (con tus 5 ubicaciones)', icon:'🗺️', color:'#8C5CF0' });
-  }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
-})();
-</script>
-
-<!-- ═══════════ INSIGNIA ═══════════ -->
 <section class="block badge-sec" id="badgeSec">
   <span class="spark" style="top:24px;left:18%;font-size:22px;">✦</span>
   <span class="spark" style="bottom:24px;right:20%;font-size:18px;animation-delay:.7s;">✧</span>
