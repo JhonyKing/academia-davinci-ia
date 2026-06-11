@@ -581,24 +581,21 @@
     <div class="container">
       <div class="inscripcion-wrap">
         <div class="inscripcion-card">
-          <div class="coming-badge">🔔 Próximamente</div>
+          <div class="coming-badge" style="background:rgba(34,194,104,.12); color:var(--green); border-color:rgba(34,194,104,.35);">✅ Inscripciones abiertas</div>
           <h2>¡Asegura el lugar de tu hijo!</h2>
-          <p>Deja tu email y te avisamos primero cuando abran las inscripciones. Los primeros en registrarse tendrán acceso a precio especial de lanzamiento.</p>
-          <div class="email-form">
-            <input
-              type="email"
-              class="email-input"
-              placeholder="email@ejemplo.com"
-              id="waitlistEmail"
-            >
-            <button class="btn-waitlist" onclick="handleWaitlist()">
-              Unirme a la lista 🚀
-            </button>
+          <p>Acceso inmediato a las 26 misiones del curso. Tu hijo empieza a crear con IA hoy mismo, a su ritmo y con acompañamiento.</p>
+          <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin:24px 0 8px;">
+            <div style="background:var(--card); border:2px solid var(--line); border-radius:var(--r-sm,14px); padding:14px 22px; text-align:center;">
+              <div style="font-family:var(--font-display); font-size:26px; font-weight:700; color:var(--ink);">$30 <span style="font-size:13px; color:var(--ink-3);">USD/mes</span></div>
+              <div style="font-family:var(--font-body); font-size:12px; font-weight:800; color:var(--ink-3); text-transform:uppercase; letter-spacing:.06em;">Mensual</div>
+            </div>
+            <div style="background:var(--card); border:2px solid var(--gold); border-radius:var(--r-sm,14px); padding:14px 22px; text-align:center; box-shadow:var(--shadow-sm);">
+              <div style="font-family:var(--font-display); font-size:26px; font-weight:700; color:var(--gold);">$147 <span style="font-size:13px; color:var(--ink-3);">USD único</span></div>
+              <div style="font-family:var(--font-body); font-size:12px; font-weight:800; color:var(--gold); text-transform:uppercase; letter-spacing:.06em;">⭐ De por vida</div>
+            </div>
           </div>
-          <p class="form-note">Sin spam. Solo te avisamos cuando abran inscripciones.</p>
-          <div id="waitlist-msg" style="display:none; margin-top:20px; padding:16px 24px; background:rgba(39,174,96,0.12); border:1px solid rgba(39,174,96,0.3); border-radius:12px; font-size:14px; color:var(--green);">
-            ✅ ¡Listo! Te avisamos cuando abran las inscripciones.
-          </div>
+          <a href="pago.html" class="btn btn-primary" style="margin-top:18px; font-size:18px; padding:16px 40px;">🚀 Inscribir a mi hijo</a>
+          <p class="form-note">Pago seguro con Stripe · Acceso inmediato al curso</p>
         </div>
       </div>
     </div>
@@ -621,21 +618,6 @@
       document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
       // Abrir el clicado si estaba cerrado
       if (!isOpen) item.classList.add('open');
-    }
-
-    // ── Waitlist mock ──
-    function handleWaitlist() {
-      const input = document.getElementById('waitlistEmail');
-      const msg   = document.getElementById('waitlist-msg');
-      if (!input.value || !input.value.includes('@')) {
-        input.style.borderColor = 'var(--red)';
-        setTimeout(() => { input.style.borderColor = ''; }, 2000);
-        return;
-      }
-      input.disabled = true;
-      document.querySelector('.btn-waitlist').disabled = true;
-      document.querySelector('.btn-waitlist').textContent = '¡Registrado!';
-      msg.style.display = 'block';
     }
 
     // ── Smooth appear on scroll ──
