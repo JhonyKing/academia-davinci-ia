@@ -6,9 +6,11 @@
       "has": [{ "type": "host", "value": "academia-davinci-ia.vercel.app" }],
       "destination": "https://genioscreativos.com/$1",
       "permanent": false
+    },
+    {
+      "source": "/",
+      "destination": "/landing.html",
+      "permanent": false
     }
-  ],
-  "rewrites": [
-    { "source": "/", "destination": "/landing.html" }
   ]
 }
