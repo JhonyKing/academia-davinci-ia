@@ -29,7 +29,13 @@ metadata:
 - ✅ **Racha diaria por usuario**: calculada desde tabla sesiones (días consecutivos); NUNCA usar localStorage para racha
 - ✅ **Mi Estudio**: mi-estudio.html (antes mi-personaje.html, hay stub de redirect); 4 arquetipos en clase 7 (aliado/mentor/villano/comico)
 - ✅ **Stripe en MODO LIVE** (2026-06-11): productos live creados via MCP (lifetime $147 price_1ThM2hPhfkPSIEOQm0lpWCeE, monthly $30 price_1ThM4pPhfkPSIEOQLEqrhlUR), webhook live en genioscreativos.com/api/webhook, 4 env vars actualizadas en Vercel, ambos planes generan cs_live verificado
-- ⏳ **Pendiente**: compra real de $30 de prueba (mañana 2026-06-12, luego reembolsar), videos de clases 6-26, Meta Pixel para Meta Ads, páginas legales (privacidad/términos)
+- ✅ **COMPRA REAL VALIDADA E2E** (2026-06-12): $529 MXN cobrados → webhook → acceso → reembolsada y suscripción cancelada. SISTEMA LISTO PARA VENDER.
+- ⚠️ **PRECIOS: base en MXN, no USD** — cuenta Stripe mexicana: las tarjetas de débito MX rechazan cargos en USD (currency_not_supported) y Adaptive Pricing solo convierte desde la divisa de liquidación. Precios live activos: mensual $529 MXN `price_1ThW88PhfkPSIEOQNvDjwRkG`, de por vida $2,599 MXN `price_1ThW8FPhfkPSIEOQmhBBb536`. Adaptive Pricing ON → extranjeros pagan en su moneda. La landing muestra "$30 USD" como ancla psicológica (decisión de Jhony).
+- ✅ **Plantillas de correo Supabase** en `docs/email-templates/` (invite/recovery/confirm, español, diseño del sitio) — pegadas en Dashboard → Auth → Email Templates. Email = tablas + CSS inline, sin fuentes web.
+- ⚠️ **Guard de tokens**: index.html Y landing.html reenvían `#access_token|type=recovery|type=invite` a login.html (la raíz redirige a landing y los enlaces de Supabase caían ahí).
+- ✅ **Galería OCULTA** (no eliminada): comentada en topbar de 31 páginas hasta que haya trabajos de alumnos; descomentar para reactivar.
+- 📋 **Alta manual de alumnos**: Authentication → Users → Invite user (el trigger crea el profile) y luego poner `activo=true` en profiles. Suspender = activo=false; eliminar = Delete user (irreversible).
+- ⏳ **Pendiente**: videos de clases 6-26, campaña Meta Ads (MCP facebook-ads configurado, falta autenticar /mcp cuando Meta se recupere), regenerar backup code de Stripe (Jhony)
 
 **Correo oficial de contacto/soporte**: ganaconinteligenciaartificial@gmail.com (usado en páginas legales; NO usar el hotmail personal)
 **Meta Pixel**: 2057118591823317 (dataset "Genioscreativos") — PageView en landing/pago/bienvenida, InitiateCheckout en pago, Purchase en bienvenida (dedupe por session_id)
