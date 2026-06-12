@@ -233,3 +233,15 @@ create index if not exists idx_profiles_rol
 --       • Project URL  → SUPABASE_URL
 --       • anon public  → SUPABASE_ANON_KEY
 -- ══════════════════════════════════════════════════════════════════
+
+-- ══════════════════════════════════════════════════════════════════
+--  MIGRACIÓN 2026-06-11: relajar entregas_tipo_check
+--  El check original solo permitía una lista fija de tipos
+--  (texto, imagen, video_url, imagen_multiple, eleccion, tarjeta)
+--  y bloqueaba los tipos de clases nuevas (dibujo, guion, dialogo,
+--  animacion, episodio, universo_*, mapa_mundo...).
+--  Ahora acepta cualquier slug en minúsculas (ya aplicada en prod):
+-- ══════════════════════════════════════════════════════════════════
+-- alter table public.entregas drop constraint entregas_tipo_check;
+-- alter table public.entregas add constraint entregas_tipo_check
+--   check (tipo ~ '^[a-z][a-z0-9_]{1,39}$');
