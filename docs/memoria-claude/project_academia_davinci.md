@@ -31,6 +31,8 @@ metadata:
 - ✅ **Stripe en MODO LIVE** (2026-06-11): productos live creados via MCP (lifetime $147 price_1ThM2hPhfkPSIEOQm0lpWCeE, monthly $30 price_1ThM4pPhfkPSIEOQLEqrhlUR), webhook live en genioscreativos.com/api/webhook, 4 env vars actualizadas en Vercel, ambos planes generan cs_live verificado
 - ⏳ **Pendiente**: compra real de $30 de prueba (mañana 2026-06-12, luego reembolsar), videos de clases 6-26, Meta Pixel para Meta Ads, páginas legales (privacidad/términos)
 
+**Correo oficial de contacto/soporte**: ganaconinteligenciaartificial@gmail.com (usado en páginas legales; NO usar el hotmail personal)
+**Meta Pixel**: 2057118591823317 (dataset "Genioscreativos") — PageView en landing/pago/bienvenida, InitiateCheckout en pago, Purchase en bienvenida (dedupe por session_id)
 **GitHub**: https://github.com/JhonyKing/academia-davinci-ia
 **Supabase**: https://supabase.com/dashboard/project/joiuvopzkorvmxegnjqg
 **Vercel project**: `jhonykings-projects/academia-davinci-ia`
