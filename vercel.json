@@ -2,9 +2,9 @@
   "outputDirectory": "clases",
   "redirects": [
     {
-      "source": "/:path*",
+      "source": "/((?!api/).*)",
       "has": [{ "type": "host", "value": "academia-davinci-ia.vercel.app" }],
-      "destination": "https://genioscreativos.com/:path*",
+      "destination": "https://genioscreativos.com/$1",
       "permanent": false
     }
   ],
