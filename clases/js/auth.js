@@ -213,7 +213,7 @@
   // Las clases en REQUIEREN_ENTREGA se completan desde el widget de entrega.
   // Esta función agrega un botón visible para las demás clases de solo contenido.
   function injectCompletionButton(userId) {
-    if (!CLASE_NUM) return  // No inyectar en páginas que no son clases (mi-personaje, etc.)
+    if (!CLASE_NUM) return  // No inyectar en páginas que no son clases (mi-estudio, etc.)
     if (window.LESSON_HAS_QUIZ) return
     if (REQUIEREN_ENTREGA.has(CLASE_NUM)) return
     if (document.getElementById('dv-complete-btn-wrap')) return
