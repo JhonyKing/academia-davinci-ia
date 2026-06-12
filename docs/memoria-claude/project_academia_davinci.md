@@ -35,7 +35,12 @@ metadata:
 - ⚠️ **Guard de tokens**: index.html Y landing.html reenvían `#access_token|type=recovery|type=invite` a login.html (la raíz redirige a landing y los enlaces de Supabase caían ahí).
 - ✅ **Galería OCULTA** (no eliminada): comentada en topbar de 31 páginas hasta que haya trabajos de alumnos; descomentar para reactivar.
 - 📋 **Alta manual de alumnos**: Authentication → Users → Invite user (el trigger crea el profile) y luego poner `activo=true` en profiles. Suspender = activo=false; eliminar = Delete user (irreversible).
-- ⏳ **Pendiente**: videos de clases 6-26, campaña Meta Ads (MCP facebook-ads configurado, falta autenticar /mcp cuando Meta se recupere), regenerar backup code de Stripe (Jhony)
+- ✅ **Campaña Meta Ads CREADA (en pausa, 2026-06-12)** via MCP facebook-ads (autenticado):
+  - Cuenta publicitaria: Loomin Lab `1916871642053741` (MXN) · Página: "Genios Creativos - Academia Da Vinci IA" `1160987287096430`
+  - Campaña `120245924069300178` OUTCOME_SALES, CBO $200 MXN/día → AdSet `120245924105120178` (MX amplio Advantage+ 25-55, Purchase pixel 2057118591823317) → 2 ads: A "Su primera película" (mundo_robotsin.jpg) y B "¿Consumidores o creadores?" (robotsin PNG)
+  - Jhony la activa manualmente tras revisarla; no activar sin su OK
+- ✅ **Tutor Robotsin con IA** (2026-06-12): `api/tutor.js` (Claude Haiku 4.5, persona kid-safe, system cacheable, 300 max_tokens) + `robotsin-tutor.js` llama /api/tutor con fallback. FALTA: `ANTHROPIC_API_KEY` en Vercel (Jhony la va a dar) — sin ella responde mensaje de respaldo
+- ⏳ **Pendiente**: ANTHROPIC_API_KEY (Jhony), activar campaña Meta (Jhony revisa), videos de clases 6-26, regenerar backup code de Stripe (Jhony), publicar 3 posts en la página de FB (textos ya entregados)
 
 **Correo oficial de contacto/soporte**: ganaconinteligenciaartificial@gmail.com (usado en páginas legales; NO usar el hotmail personal)
 **Meta Pixel**: 2057118591823317 (dataset "Genioscreativos") — PageView en landing/pago/bienvenida, InitiateCheckout en pago, Purchase en bienvenida (dedupe por session_id)
