@@ -1,5 +1,13 @@
 {
   "outputDirectory": "clases",
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "academia-davinci-ia.vercel.app" }],
+      "destination": "https://genioscreativos.com/:path*",
+      "permanent": false
+    }
+  ],
   "rewrites": [
     { "source": "/", "destination": "/index.html" }
   ]
