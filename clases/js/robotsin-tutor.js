@@ -170,8 +170,21 @@
   }
 
   // ── Llamada a la IA ──
-  // Vista previa: window.claude.complete. Producción: reemplaza por tu backend.
+  // Producción: backend propio en /api/tutor (Claude Haiku via Vercel function).
+  // Vista previa local: window.claude.complete si existe.
   async function askAI() {
+    try {
+      var r = await fetch('/api/tutor', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ context: CTX, messages: convo })
+      });
+      if (r.ok) {
+        var data = await r.json();
+        if (data && data.reply) return data.reply;
+      }
+    } catch (e) { /* sigue al fallback */ }
+
     if (window.claude && window.claude.complete) {
       var messages = [
         { role: 'user', content: PERSONA },
@@ -180,7 +193,7 @@
       var out = await window.claude.complete({ messages: messages });
       return (out || '').trim() || '¡Cuéntame un poco más, genio! 😄';
     }
-    // Fallback sin IA (p. ej. en tu sitio sin backend conectado)
-    return 'Para hablar conmigo de verdad, conecta el tutor a tu IA. Mientras tanto: ¡recuerda usar los 4 ingredientes del prompt — ¿Qué?, ¿Cómo?, ¿Dónde? y ¿Extras? 🎨';
+    // Fallback sin IA
+    return '¡Uy! Ahorita no puedo pensar bien 🤖⚡ Mientras tanto: recuerda los 4 ingredientes del prompt — ¿Qué?, ¿Cómo?, ¿Dónde? y ¿Extras? 🎨';
   }
 })();
