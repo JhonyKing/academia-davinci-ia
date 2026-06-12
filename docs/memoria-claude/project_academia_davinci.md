@@ -37,8 +37,11 @@ metadata:
 - 📋 **Alta manual de alumnos**: Authentication → Users → Invite user (el trigger crea el profile) y luego poner `activo=true` en profiles. Suspender = activo=false; eliminar = Delete user (irreversible).
 - ✅ **Campaña Meta Ads CREADA (en pausa, 2026-06-12)** via MCP facebook-ads (autenticado):
   - Cuenta publicitaria: Loomin Lab `1916871642053741` (MXN) · Página: "Genios Creativos - Academia Da Vinci IA" `1160987287096430`
-  - Campaña `120245924069300178` OUTCOME_SALES, CBO $200 MXN/día → AdSet `120245924105120178` (MX amplio Advantage+ 25-55, Purchase pixel 2057118591823317) → 2 ads: A "Su primera película" (mundo_robotsin.jpg) y B "¿Consumidores o creadores?" (robotsin PNG)
-  - Jhony la activa manualmente tras revisarla; no activar sin su OK
+  - Campaña `120245924069300178` OUTCOME_SALES, CBO $200 MXN/día → AdSet `120245926964210178` "Registro gratis" (MX amplio Advantage+ 25-55, optimiza COMPLETE_REGISTRATION pixel 2057118591823317; el adset viejo Purchase fue ELIMINADO — Meta no permite cambiar evento de conversión post-creación) → 3 ads → registro.html: A "IA gratis" (mundo), B "Crear gratis" (Robotsin), C "Verano gratis" (dragón). CTA SIGN_UP.
+  - Jhony la activa manualmente tras revisarla; no activar sin su OK. Cuando haya ≥30 compras/sem, crear adset Purchase.
+- ✅ **FUNNEL GRATIS (2026-06-12)**: estrategia validada con Ads Library (62 ads MX; competidores ofrecen "primera clase gratis", Algonova; verano = temporada alta). Oferta: 4 misiones gratis sin tarjeta.
+  - `registro.html` (pitch + form + pixel Lead/CompleteRegistration) + `api/registro.js` (inviteUserByEmail, activo=false → paywall 5+ existente hace el upsell)
+  - Landing: CTA hero verde "🎁 Empieza GRATIS — 4 misiones" → registro.html; ruta gratis también en sección inscripción
 - ✅ **Tutor Robotsin con IA** (2026-06-12): `api/tutor.js` (Claude Haiku 4.5, persona kid-safe, system cacheable, 300 max_tokens) + `robotsin-tutor.js` llama /api/tutor con fallback. FALTA: `ANTHROPIC_API_KEY` en Vercel (Jhony la va a dar) — sin ella responde mensaje de respaldo
 - ⏳ **Pendiente**: ANTHROPIC_API_KEY (Jhony), activar campaña Meta (Jhony revisa), videos de clases 6-26, regenerar backup code de Stripe (Jhony), publicar 3 posts en la página de FB (textos ya entregados)
 
