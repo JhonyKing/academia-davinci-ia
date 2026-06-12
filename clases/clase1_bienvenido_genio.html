@@ -418,6 +418,52 @@ nav.lessonnav .lnav-btn.next-btn .ti  { font-size: 16px; font-weight: 900; color
   </div>
 </section>
 
+<!-- ═══════════ ENTREGA ═══════════ -->
+<section class="block tint">
+  <div class="lread">
+    <div id="entrega-c1" style="margin:8px 0;">
+      <div style="font-weight:900;color:#E74C3C;font-size:13px;text-transform:uppercase;letter-spacing:.07em;margin-bottom:14px;display:flex;align-items:center;gap:8px;">
+        <span>📸</span> Entrega — sube tu imagen creada con IA
+      </div>
+
+      <!-- Drop zone con borde animado estilo "marching ants" -->
+      <div id="dz1-box" style="position:relative;border-radius:16px;padding:38px 20px;text-align:center;cursor:pointer;background:rgba(36,10,10,.75);min-height:150px;display:flex;flex-direction:column;align-items:center;justify-content:center;box-sizing:border-box;">
+        <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;">
+          <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="#E74C3C" stroke-width="2" stroke-dasharray="9 6" stroke-linecap="round" vector-effect="non-scaling-stroke">
+            <animate attributeName="stroke-dashoffset" from="0" to="-15" dur="1.2s" repeatCount="indefinite"/>
+          </rect>
+        </svg>
+        <div id="dz1-icon" style="font-size:46px;margin-bottom:10px;line-height:1;">🖼️</div>
+        <div style="color:rgba(255,255,255,.85);font-weight:700;font-size:15px;">Arrastra tu imagen aquí</div>
+        <div style="color:rgba(255,255,255,.35);font-size:13px;margin:6px 0 14px;">— o —</div>
+        <button id="dz1-select" type="button" style="background:rgba(231,76,60,.15);border:1.5px solid rgba(231,76,60,.55);color:#ff7675;font-weight:800;font-size:14px;padding:10px 26px;border-radius:10px;cursor:pointer;">
+          Seleccionar imagen
+        </button>
+        <input id="dz1-input" type="file" accept="image/*" style="display:none;">
+      </div>
+
+      <!-- Preview tras seleccionar -->
+      <div id="dz1-preview" style="display:none;margin-top:14px;border-radius:16px;overflow:hidden;background:#1a1f35;border:1px solid rgba(255,255,255,.08);">
+        <img id="dz1-img" alt="Vista previa" style="width:100%;max-height:300px;object-fit:cover;display:block;">
+        <div style="padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+          <div id="dz1-filename" style="color:rgba(255,255,255,.5);font-size:12px;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"></div>
+          <button id="dz1-upload-btn" type="button" style="background:#2F7BF6;color:#fff;font-weight:800;font-size:14px;padding:11px 24px;border-radius:10px;border:none;cursor:pointer;white-space:nowrap;">
+            Subir imagen ↑
+          </button>
+        </div>
+        <div id="dz1-status" style="display:none;padding:0 16px 14px;font-size:13px;font-weight:600;"></div>
+      </div>
+
+      <!-- Estado: ya subida -->
+      <div id="dz1-success" style="display:none;margin-top:14px;background:rgba(34,194,104,.1);border:1.5px solid rgba(34,194,104,.3);border-radius:14px;padding:16px 18px;text-align:center;">
+        <div style="color:#22C268;font-weight:800;font-size:16px;">✅ ¡Imagen entregada!</div>
+        <div id="dz1-success-name" style="color:rgba(255,255,255,.4);font-size:12px;margin-top:4px;"></div>
+        <button id="dz1-change" type="button" style="margin-top:10px;background:transparent;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.5);font-size:12px;padding:6px 14px;border-radius:8px;cursor:pointer;">Cambiar imagen</button>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ═══════════ CIERRE ═══════════ -->
 <section class="block tint">
   <div class="lread">
@@ -462,52 +508,6 @@ nav.lessonnav .lnav-btn.next-btn .ti  { font-size: 16px; font-weight: 900; color
       <div>
         <div class="who">Robotsin te dice</div>
         <div class="say">"¡No te preocupes si no dibujas bien! <strong>Yo tampoco sabía antes de usar IA.</strong> Un palito con capa ya es un superhéroe. Lo que importa es la idea que vive en tu cabeza. <em>¡Nos vemos en la Clase 2! 🎨</em>"</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════ ENTREGA ═══════════ -->
-<section class="block tint">
-  <div class="lread">
-    <div id="entrega-c1" style="margin:8px 0;">
-      <div style="font-weight:900;color:#E74C3C;font-size:13px;text-transform:uppercase;letter-spacing:.07em;margin-bottom:14px;display:flex;align-items:center;gap:8px;">
-        <span>📸</span> Entrega — sube tu imagen creada con IA
-      </div>
-
-      <!-- Drop zone con borde animado estilo "marching ants" -->
-      <div id="dz1-box" style="position:relative;border-radius:16px;padding:38px 20px;text-align:center;cursor:pointer;background:rgba(36,10,10,.75);min-height:150px;display:flex;flex-direction:column;align-items:center;justify-content:center;box-sizing:border-box;">
-        <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;">
-          <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="#E74C3C" stroke-width="2" stroke-dasharray="9 6" stroke-linecap="round" vector-effect="non-scaling-stroke">
-            <animate attributeName="stroke-dashoffset" from="0" to="-15" dur="1.2s" repeatCount="indefinite"/>
-          </rect>
-        </svg>
-        <div id="dz1-icon" style="font-size:46px;margin-bottom:10px;line-height:1;">🖼️</div>
-        <div style="color:rgba(255,255,255,.85);font-weight:700;font-size:15px;">Arrastra tu imagen aquí</div>
-        <div style="color:rgba(255,255,255,.35);font-size:13px;margin:6px 0 14px;">— o —</div>
-        <button id="dz1-select" type="button" style="background:rgba(231,76,60,.15);border:1.5px solid rgba(231,76,60,.55);color:#ff7675;font-weight:800;font-size:14px;padding:10px 26px;border-radius:10px;cursor:pointer;">
-          Seleccionar imagen
-        </button>
-        <input id="dz1-input" type="file" accept="image/*" style="display:none;">
-      </div>
-
-      <!-- Preview tras seleccionar -->
-      <div id="dz1-preview" style="display:none;margin-top:14px;border-radius:16px;overflow:hidden;background:#1a1f35;border:1px solid rgba(255,255,255,.08);">
-        <img id="dz1-img" alt="Vista previa" style="width:100%;max-height:300px;object-fit:cover;display:block;">
-        <div style="padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
-          <div id="dz1-filename" style="color:rgba(255,255,255,.5);font-size:12px;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"></div>
-          <button id="dz1-upload-btn" type="button" style="background:#2F7BF6;color:#fff;font-weight:800;font-size:14px;padding:11px 24px;border-radius:10px;border:none;cursor:pointer;white-space:nowrap;">
-            Subir imagen ↑
-          </button>
-        </div>
-        <div id="dz1-status" style="display:none;padding:0 16px 14px;font-size:13px;font-weight:600;"></div>
-      </div>
-
-      <!-- Estado: ya subida -->
-      <div id="dz1-success" style="display:none;margin-top:14px;background:rgba(34,194,104,.1);border:1.5px solid rgba(34,194,104,.3);border-radius:14px;padding:16px 18px;text-align:center;">
-        <div style="color:#22C268;font-weight:800;font-size:16px;">✅ ¡Imagen entregada!</div>
-        <div id="dz1-success-name" style="color:rgba(255,255,255,.4);font-size:12px;margin-top:4px;"></div>
-        <button id="dz1-change" type="button" style="margin-top:10px;background:transparent;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.5);font-size:12px;padding:6px 14px;border-radius:8px;cursor:pointer;">Cambiar imagen</button>
       </div>
     </div>
   </div>
