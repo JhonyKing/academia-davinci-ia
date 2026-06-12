@@ -380,9 +380,9 @@ fbq('track', 'PageView');
       <a class="tlink" href="landing.html"><span class="ic">🏠</span><span>Inicio</span></a>
     </nav>
     <div class="topbar-brand">
-      <span>Academia</span>
+      <span>Genios</span>
       <img src="robotsin/robotsin_artista.png" alt="Robotsin" class="brand-robot">
-      <span class="brand-blue">Da Vinci IA</span>
+      <span class="brand-blue">Creativos</span>
     </div>
     <div class="topbar-right">
       <!-- sin botón de logout — página pública -->
@@ -404,6 +404,23 @@ fbq('track', 'PageView');
 </section>
 
 <!-- ═══════════ GRID PAGO ═══════════ -->
+
+<!-- ═══════════ MI AVENTURA (solo con sesión: aversión a la pérdida) ═══════════ -->
+<section id="av-sec" style="display:none; padding: 6px 0 26px;">
+  <div class="wrap" style="max-width: 900px;">
+    <div style="background: var(--card); border: 2px solid var(--line); border-radius: var(--r-lg); box-shadow: var(--shadow-sm); padding: 30px 28px; position: relative; overflow: hidden;">
+      <div style="position:absolute; top:0; left:0; right:0; height:5px; background: linear-gradient(90deg, var(--gold), var(--purple));"></div>
+      <div style="text-align:center;">
+        <span style="display:inline-block; background: rgba(255,176,32,.12); color: #B8780A; border: 2px solid rgba(255,176,32,.35); border-radius: 999px; font-family: var(--font-body); font-weight: 800; font-size: 12px; padding: 6px 16px; text-transform: uppercase; letter-spacing: .05em;">⭐ Su aventura hasta hoy</span>
+        <h2 style="font-family: var(--font-display); font-weight: 700; font-size: clamp(22px, 4vw, 32px); color: var(--ink); margin: 12px 0 6px;">Mira todo lo que <span id="av-nombre" style="color: var(--blue);"></span> ya creó 🎨</h2>
+        <p style="font-family: var(--font-body); font-weight: 600; font-size: 14.5px; color: var(--ink-2); margin: 0;">Todo esto lo logró en sus primeras misiones gratis…</p>
+      </div>
+      <div id="av-grid" style="display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin: 22px 0 18px;"></div>
+      <p style="text-align:center; font-family: var(--font-body); font-weight: 700; font-size: 15px; color: var(--ink); margin: 0; line-height: 1.7;">Pero su personaje aún no tiene mundo, ni aliados, ni música…<br><span style="color: var(--purple);">ni su propia película. 🎬</span><br><span style="font-weight: 800;">No dejes su historia a medias.</span></p>
+    </div>
+  </div>
+</section>
+
 <main class="wrap pago-grid">
 
   <!-- ─── COLUMNA IZQUIERDA: precio + beneficios ─── -->
@@ -582,5 +599,59 @@ fbq('track', 'PageView');
   })
 </script>
 
+
+<!-- ── Sección "Mi Aventura": muestra lo creado por el alumno (si hay sesión) ── -->
+<script>
+if (/vercel\.app$|academiadavinci|genioscreativos/.test(location.hostname)) {
+  (function () {
+    var add = function (src, cb) { var t = document.createElement('script'); t.src = src; t.onload = cb; document.head.appendChild(t); };
+    add('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js', function () {
+      add('js/supabase-client.js', async function () {
+        try {
+          var sb = window._supabase;
+          if (!sb) return;
+          var sess = (await sb.auth.getSession()).data.session;
+          if (!sess) return;
+          var uid = sess.user.id;
+
+          var perfil = (await sb.from('profiles').select('nombre').eq('id', uid).maybeSingle()).data;
+          var nombre = (perfil && perfil.nombre) ? perfil.nombre.split(' ')[0] : 'tu genio';
+
+          var entregas = (await sb.from('entregas').select('clase_num,tipo,archivo_url')
+            .eq('user_id', uid).in('clase_num', [1, 2, 3, 4]).order('clase_num')).data || [];
+
+          var LABELS = { 1: 'Su primera imagen con IA', 2: 'Su personaje', 3: 'Retrato oficial', 4: 'Tarjeta oficial' };
+          var grid = document.getElementById('av-grid');
+          var count = 0;
+
+          for (var i = 0; i < entregas.length; i++) {
+            var e = entregas[i];
+            if (!e.archivo_url) continue;
+            var url = e.archivo_url;
+            if (url.indexOf('http') !== 0) {
+              var signed = await sb.storage.from('portafolio').createSignedUrl(url, 3600);
+              url = signed.data && signed.data.signedUrl;
+            }
+            if (!url) continue;
+            count++;
+            var card = document.createElement('div');
+            card.style.cssText = 'width:150px; background:#fff; border:2px solid var(--line); border-radius:14px; overflow:hidden; box-shadow:var(--shadow-sm);';
+            card.innerHTML = '<img src="' + url + '" alt="" style="width:100%; height:120px; object-fit:cover; object-position:top; display:block;">' +
+              '<div style="padding:8px 10px; font-family:var(--font-body); font-size:11.5px; font-weight:800; color:var(--ink-2); text-align:center;">' + (LABELS[e.clase_num] || 'Su creación') + '</div>';
+            grid.appendChild(card);
+          }
+
+          if (count > 0) {
+            document.getElementById('av-nombre').textContent = nombre;
+            document.getElementById('av-sec').style.display = 'block';
+            var h1pop = document.querySelector('.pago-hero h1');
+            if (h1pop) h1pop.innerHTML = 'El personaje de <span class="pop">' + nombre + '</span> está listo…<br>su mundo lo espera';
+          }
+        } catch (err) { /* página sigue funcionando sin personalización */ }
+      });
+    });
+  })();
+}
+</script>
 </body>
 </html>

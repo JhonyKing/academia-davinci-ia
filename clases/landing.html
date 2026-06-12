@@ -40,15 +40,24 @@ fbq('track', 'PageView');
 <body class="page-landing">
 
   <!-- ════════════════ NAV ════════════════ -->
-  <nav class="nav">
-    <a href="landing.html" class="nav-logo" style="display:flex;align-items:center;gap:7px;">Genios <img src="robotsin/robotsin_artista.png" alt="Robotsin" style="height:34px;width:34px;object-fit:contain;"> <span>Creativos</span></a>
-    <div class="nav-spacer"></div>
-    <a href="#modulos" class="nav-link">El curso</a>
-    <a href="#requisitos" class="nav-link">Requisitos</a>
-    <a href="#faq" class="nav-link">FAQ</a>
-    <a href="landing-ninos.html" class="nav-link">👀 Para niños</a>
-    <a href="login.html" class="nav-cta">Ingresar al curso →</a>
-  </nav>
+  <header class="topbar">
+  <div class="wrap">
+    <nav class="topbar-nav">
+      <a class="tlink" href="#modulos"><span>El curso</span></a>
+      <a class="tlink" href="#requisitos"><span>Requisitos</span></a>
+      <a class="tlink" href="#faq"><span>FAQ</span></a>
+      <a class="tlink" href="landing-ninos.html"><span>👀 Para niños</span></a>
+    </nav>
+    <div class="topbar-brand">
+      <span>Genios</span>
+      <img src="robotsin/robotsin_artista.png" alt="Robotsin" class="brand-robot">
+      <span class="brand-blue">Creativos</span>
+    </div>
+    <div class="topbar-right">
+      <a href="login.html" class="nav-cta">Ingresar al curso →</a>
+    </div>
+  </div>
+</header>
 
   <!-- ════════════════ HERO ════════════════ -->
   <section class="hero">

@@ -54,9 +54,18 @@ fbq('track', 'PageView');
 <body>
 
 <header class="topbar">
-  <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;padding:14px 22px;">
-    <a href="landing.html" style="font-family:var(--font-display);font-weight:700;font-size:18px;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:7px;">Genios <img src="robotsin/robotsin_artista.png" alt="Robotsin" style="height:32px;width:32px;object-fit:contain;"> <span style="color:var(--blue);">Creativos</span></a>
-    <a href="login.html" style="font-family:var(--font-body);font-weight:800;font-size:13px;color:var(--blue);text-decoration:none;">Ya tengo cuenta →</a>
+  <div class="wrap">
+    <nav class="topbar-nav">
+      <a class="tlink" href="landing.html"><span class="ic">🏠</span><span>Inicio</span></a>
+    </nav>
+    <div class="topbar-brand">
+      <span>Genios</span>
+      <img src="robotsin/robotsin_artista.png" alt="Robotsin" class="brand-robot">
+      <span class="brand-blue">Creativos</span>
+    </div>
+    <div class="topbar-right">
+      <a class="tlink" href="login.html"><span>Ya tengo cuenta →</span></a>
+    </div>
   </div>
 </header>
 
