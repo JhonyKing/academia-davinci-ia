@@ -303,20 +303,28 @@
 
     const nombre = profile?.nombre || user.email.split('@')[0]
 
-    // ── Paywall: clases 5+ requieren acceso activo ───────────────────────────
+    // Destino al toparse con un candado en clase de paga (regla de Jhony):
+    // cuenta gratis CON entregas → página de pago (momento de venta: ahí ve
+    // todo lo que ya creó). Cuenta gratis sin entregas, o cuenta pagada → mapa.
     const CLASES_GRATIS = 4
+    async function lockDestino() {
+      if (CLASE_NUM && CLASE_NUM > CLASES_GRATIS && !profile?.activo) {
+        const { count } = await sb
+          .from('entregas')
+          .select('id', { count: 'exact', head: true })
+          .eq('user_id', user.id)
+        if ((count || 0) > 0) return 'pago.html?clase=' + CLASE_NUM
+      }
+      return 'index.html'
+    }
+
+    // ── Paywall: clases 5+ requieren acceso activo ───────────────────────────
     if (CLASE_NUM && CLASE_NUM > CLASES_GRATIS && profile?.rol !== 'instructor') {
       if (!profile?.activo) {
-        window.location.href = 'pago.html?clase=' + CLASE_NUM
+        window.location.href = await lockDestino()
         return
       }
     }
-
-    // Destino al toparse con un candado: cuenta gratis en clase de paga → página
-    // de pago (momento de venta, ahí ve todo lo que ya creó); si ya pagó → mapa.
-    const lockRedirect = (CLASE_NUM && CLASE_NUM > CLASES_GRATIS && !profile?.activo)
-      ? 'pago.html?clase=' + CLASE_NUM
-      : 'index.html'
 
     // ── Bloqueo secuencial: clase N requiere clase N-1 completada ────────────
     if (CLASE_NUM && CLASE_NUM > 1 && profile?.rol !== 'instructor') {
@@ -328,7 +336,7 @@
         .maybeSingle()
 
       if (!prevProgress?.completada) {
-        window.location.href = lockRedirect
+        window.location.href = await lockDestino()
         return
       }
     }
@@ -343,7 +351,7 @@
         .maybeSingle()
 
       if (!ckProgress?.completada) {
-        window.location.href = lockRedirect
+        window.location.href = await lockDestino()
         return
       }
     }
