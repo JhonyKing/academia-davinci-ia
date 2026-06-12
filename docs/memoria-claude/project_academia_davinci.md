@@ -21,7 +21,14 @@ metadata:
 - ✅ **Contador de tiempo**: `session-tracker.js` guarda en tabla `sesiones`; visible en `progreso.html` y en `mi-estudio.html` (modal de bienvenida + widget inline)
 - ✅ **Panel de Papás**: `progreso.html` — tiempo total, tiempo hoy, últimos 7 días, logros, actividad
 - ✅ **Mi Personaje**: `mi-estudio.html` — portafolio del alumno con todas sus entregas
-- ⏳ **Pendiente**: videos de clases 6-26, modo live de Stripe, verificación dominio Resend
+- ✅ **Resend verificado** (2026-06-11): dominio genioscreativos.com listo; el MX de send. era el faltante
+- ✅ **Compra E2E validada** (2026-06-11): pago test → webhook (genioscreativos.com/api/webhook) → invite → login → activo=true
+  - ⚠️ El redirect vercel.app→genioscreativos en vercel.json EXCLUYE /api/ (Stripe no sigue 307)
+  - ⚠️ El upsert de profiles DEBE incluir email (columna NOT NULL; un upsert es INSERT y valida NOT NULL aunque la fila exista)
+- ✅ **Landing con botón de compra** → pago.html (dos planes); la lista de espera falsa se eliminó
+- ✅ **Racha diaria por usuario**: calculada desde tabla sesiones (días consecutivos); NUNCA usar localStorage para racha
+- ✅ **Mi Estudio**: mi-estudio.html (antes mi-personaje.html, hay stub de redirect); 4 arquetipos en clase 7 (aliado/mentor/villano/comico)
+- ⏳ **Pendiente**: videos de clases 6-26, modo live de Stripe (llaves reales + webhook en modo live)
 
 **GitHub**: https://github.com/JhonyKing/academia-davinci-ia
 **Supabase**: https://supabase.com/dashboard/project/joiuvopzkorvmxegnjqg
