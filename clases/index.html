@@ -3,6 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<script>
+// Si un enlace de recuperación/invitación de Supabase cae aquí (Site URL),
+// reenviar a login.html con el token intacto para mostrar el form de contraseña.
+(function(){
+  var h = location.hash || '';
+  if (/type=recovery|type=invite/.test(h)) location.replace('login.html' + h);
+})();
+</script>
 <title>Genios Creativos — Tu Mapa de Aventura</title>
 <link rel="icon" type="image/svg+xml" href="robotsin/favicon.svg">
 <link rel="stylesheet" href="css/genios.css">
