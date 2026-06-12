@@ -239,29 +239,51 @@
      10) RACHA DIARIA  (localStorage, sin backend)
   ───────────────────────────────────────────── */
   function streak() {
-    const KEY = 'gc_streak';
+    // La racha REAL se calcula desde la tabla `sesiones` de Supabase (por cuenta).
+    // localStorage solo es caché visual del último valor calculado para ese usuario;
+    // NUNCA contar visitas con localStorage — es por navegador, no por alumno.
+    const DAY = 864e5;
     const today = new Date(); today.setHours(0, 0, 0, 0);
-    const ts = today.getTime(), DAY = 864e5;
-    let st = {};
-    try { st = JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) {}
-    if (st.last === ts) { /* ya contó hoy */ }
-    else if (st.last === ts - DAY) { st.count = (st.count || 0) + 1; st.last = ts; }
-    else { st.count = 1; st.last = ts; }
-    localStorage.setItem(KEY, JSON.stringify(st));
-    window.GCStreak = st.count;
-    // pintar widgets
-    document.querySelectorAll('[data-streak-num]').forEach(e => e.textContent = st.count);
-    const strip = document.querySelector('[data-streak-days]');
-    if (strip) {
-      const NAMES = ['L', 'M', 'M', 'J', 'V', 'S', 'D'];
-      let dow = today.getDay(); dow = dow === 0 ? 6 : dow - 1; // L=0..D=6
-      strip.innerHTML = NAMES.map((nm, i) => {
-        const on = i <= dow && (dow - i) < st.count;
-        const isToday = i === dow;
-        return `<div class="sd ${on ? 'on' : ''} ${isToday ? 'today' : ''}"><div class="dot">${on ? '🔥' : (isToday ? '⭐' : '·')}</div>${nm}</div>`;
-      }).join('');
+    const ts = today.getTime();
+
+    function paint(count) {
+      window.GCStreak = count;
+      document.querySelectorAll('[data-streak-num]').forEach(e => e.textContent = count);
+      const strip = document.querySelector('[data-streak-days]');
+      if (strip) {
+        const NAMES = ['L', 'M', 'M', 'J', 'V', 'S', 'D'];
+        let dow = today.getDay(); dow = dow === 0 ? 6 : dow - 1; // L=0..D=6
+        strip.innerHTML = NAMES.map((nm, i) => {
+          const on = i <= dow && (dow - i) < count;
+          const isToday = i === dow;
+          return `<div class="sd ${on ? 'on' : ''} ${isToday ? 'today' : ''}"><div class="dot">${on ? '🔥' : (isToday ? '⭐' : '·')}</div>${nm}</div>`;
+        }).join('');
+      }
     }
-    return st.count;
+
+    // Pintado inicial conservador (1 = hoy); se corrige al llegar el dato real
+    paint(1);
+
+    let tries = 0;
+    const iv = setInterval(async () => {
+      if (!window._supabase) { if (++tries > 24) clearInterval(iv); return; }
+      clearInterval(iv);
+      try {
+        const sb = window._supabase;
+        const { data: { user } } = await sb.auth.getUser();
+        if (!user) return;
+        const desde = new Date(ts - 60 * DAY).toISOString();
+        const { data } = await sb.from('sesiones')
+          .select('inicio').eq('user_id', user.id).gte('inicio', desde);
+        const dias = new Set((data || []).map(r => {
+          const d = new Date(r.inicio); d.setHours(0, 0, 0, 0); return d.getTime();
+        }));
+        dias.add(ts); // la visita actual cuenta aunque el tracker aún no haya guardado
+        let count = 0, t = ts;
+        while (dias.has(t)) { count++; t -= DAY; }
+        paint(count);
+      } catch (e) { /* dejar el valor conservador */ }
+    }, 500);
   }
 
   /* ─────────────────────────────────────────────
