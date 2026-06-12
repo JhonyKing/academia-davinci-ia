@@ -3,6 +3,7 @@ Allow: /$
 Allow: /landing.html
 Allow: /landing-ninos.html
 Allow: /pago.html
+Allow: /registro.html
 Allow: /login.html
 Allow: /terminos.html
 Allow: /privacidad.html
