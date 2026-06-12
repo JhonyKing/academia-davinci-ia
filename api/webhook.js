@@ -123,13 +123,25 @@ export default async function handler(req, res) {
     }
 
     // Crear/actualizar perfil en tabla profiles
-    await sb.from('profiles').upsert({
+    const { error: upsertError } = await sb.from('profiles').upsert({
       id:                    userId,
       nombre:                nombre_alumno || email.split('@')[0],
+      email:                 email,
       rol:                   'alumno',
       stripe_subscription_id: subscription_id,
       activo:                true,
     }, { onConflict: 'id' })
+
+    if (upsertError) {
+      console.error('[DaVinci/webhook] Error en upsert de profile:', upsertError.message)
+      // Fallback: lo crítico es activar el acceso del alumno que ya pagó
+      const { error: updError } = await sb.from('profiles')
+        .update({ activo: true }).eq('id', userId)
+      if (updError) console.error('[DaVinci/webhook] Fallback update también falló:', updError.message)
+      else console.log('[DaVinci/webhook] Fallback: activo=true aplicado a', email)
+    } else {
+      console.log('[DaVinci/webhook] Profile activado para', email)
+    }
   }
 
   // ── Suscripción cancelada ─────────────────────────────────────────────────
