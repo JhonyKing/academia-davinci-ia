@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <script>
+  // Si un enlace de recuperación/invitación de Supabase cae aquí (raíz → landing),
+  // reenviar a login.html con el token intacto para mostrar el form de contraseña.
+  (function(){
+    var h = location.hash || '';
+    if (/access_token=|type=recovery|type=invite/.test(h)) location.replace('login.html' + h);
+  })();
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Academia Da Vinci IA — Curso de IA Creativa para Niños</title>
