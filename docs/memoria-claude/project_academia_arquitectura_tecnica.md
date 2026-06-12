@@ -260,6 +260,7 @@ Secciones de texto, video embed de YouTube, diagramas, interactividades.
    Si falta, no marca y muestra nudgeEntrega(). `window.lqUnlockNext` desbloquea el
    botón "Siguiente misión" solo cuando la clase se completa de verdad.
 4. **Clases con entrega** (1-8, 10, 11, 14, 18, 23): requieren AMBOS quiz + entrega.
+   - **ORDEN OBLIGATORIO de secciones**: práctica → **ENTREGA** → Resumen → Tarea → quiz → insignia → siguiente misión. La entrega SIEMPRE va al final de la parte práctica, antes del "Resumen · 5 min" (regla de Jhony, aplicada a todas las clases 2026-06-12).
    - `DvUploadZone` (js/upload-zone.js): containerId DEBE empezar con "dz" (el badge-lock detecta `[id^="dz"]`).
    - Param opcional `onUploaded(tipo)`: para entregas multi-zona la página acumula y decide `_entregaDone` (ej. clase 6 con 3 zonas); sin él, una subida completa la entrega.
    - Clase 7 no usa DvUploadZone: formulario propio que inserta en `personajes_secundarios` (path de storage en imagen_retrato_url, bucket portafolio).
