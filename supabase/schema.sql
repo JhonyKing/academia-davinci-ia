@@ -245,3 +245,13 @@ create index if not exists idx_profiles_rol
 -- alter table public.entregas drop constraint entregas_tipo_check;
 -- alter table public.entregas add constraint entregas_tipo_check
 --   check (tipo ~ '^[a-z][a-z0-9_]{1,39}$');
+
+-- ══════════════════════════════════════════════════════════════════
+--  MIGRACIÓN 2026-06-11 (2): unicidad de entregas por tipo
+--  El unique original (user_id, clase_num) solo permitía UNA entrega
+--  por clase — la clase 6 necesita 3 (universo_principal/version_b/zona).
+--  Ahora la unicidad es por tipo dentro de cada clase (ya aplicada en prod):
+-- ══════════════════════════════════════════════════════════════════
+-- alter table public.entregas drop constraint entregas_user_id_clase_num_key;
+-- alter table public.entregas add constraint entregas_user_id_clase_num_tipo_key
+--   unique (user_id, clase_num, tipo);
