@@ -395,11 +395,11 @@
     for (const sec of secundarios) {
       const tipo      = (sec.tipo || 'neutro').toLowerCase()
       const tipoLabel = {
-        aliado: '✅ Aliado', villano: '⚠️ Villano',
+        aliado: '🤝 Aliado', mentor: '🦉 Mentor', villano: '⚠️ Villano', comico: '😂 Cómico',
         neutro: '◎ Neutro', neutral: '◎ Neutro',
         protagonista_anterior: '🌟 Protagonista Anterior'
       }[tipo] || tipo
-      const tipoClass = ['aliado','villano','neutro'].includes(tipo) ? tipo : 'neutro'
+      const tipoClass = ['aliado','villano','neutro'].includes(tipo) ? tipo : (tipo === 'mentor' || tipo === 'comico' ? 'aliado' : 'neutro')
       const inicial   = (sec.nombre || '?').charAt(0).toUpperCase()
 
       let imgHTML = inicial
@@ -407,7 +407,7 @@
         const signedUrl = await getSignedUrl(sec.imagen_retrato_url)
         if (signedUrl) {
           imgHTML = `<img src="${signedUrl}" alt="${sec.nombre || ''}"
-                         style="width:100%;height:100%;object-fit:cover;border-radius:50%;"
+                         style="width:100%;height:100%;object-fit:cover;object-position:top;border-radius:50%;"
                          onerror="this.style.display='none';this.parentElement.textContent='${inicial}'">`
         }
       }
@@ -458,7 +458,7 @@
           <div class="entrega-dot ${secundariosDone ? 'dot-done' : 'dot-pending'}"></div>
           <div class="entrega-label ${secundariosDone ? 'done' : ''}">
             <div>${label}</div>
-            ${secs.length ? `<div style="margin-top:4px;font-size:12px;color:${secundariosDone ? '#27AE60' : '#8C93B4'};font-weight:700;">${nAliados} aliado(s) · ${nVillanos} villano(s)</div>` : ''}
+            ${secs.length ? `<div style="margin-top:4px;font-size:12px;color:${secundariosDone ? '#27AE60' : '#8C93B4'};font-weight:700;">${nAliados} aliado(s) · ${nVillanos} villano(s)${secs.length - nAliados - nVillanos > 0 ? ` · ${secs.length - nAliados - nVillanos} más` : ''}</div>` : ''}
           </div>
         </div>`
       }

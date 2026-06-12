@@ -362,7 +362,7 @@ nav.lessonnav .lnav-btn.next-btn .ti  { font-size: 16px; font-weight: 900; color
 <section class="block" data-reveal>
   <div style="max-width:760px;margin:0 auto;">
     <div style="font-weight:900;color:var(--purple);font-size:13px;text-transform:uppercase;letter-spacing:.07em;margin-bottom:6px;">📦 Tu Entrega — Registra a tus personajes</div>
-    <p style="color:var(--ink-2);font-size:14px;font-weight:600;margin:0 0 18px;">Crea al menos <b>1 aliado y 1 villano</b> con su ficha y su retrato. Aparecerán en tu página de Mi Estudio. Puedes agregar todos los que quieras.</p>
+    <p style="color:var(--ink-2);font-size:14px;font-weight:600;margin:0 0 18px;">Crea al menos <b>1 aliado y 1 villano</b> con su ficha y su retrato — y si quieres, agrega también un <b>🦉 mentor</b> o un <b>😂 cómico</b> (los 4 arquetipos de la teoría). Todos aparecerán en tu página de Mi Estudio.</p>
 
     <div id="dz-personajes" style="background:var(--card);border:2px solid var(--line);border-radius:var(--r);padding:24px;box-shadow:var(--shadow-sm);">
       <div style="display:grid;gap:14px;">
@@ -371,10 +371,12 @@ nav.lessonnav .lnav-btn.next-btn .ti  { font-size: 16px; font-weight: 900; color
           <input id="sec-nombre" type="text" maxlength="40" placeholder="Ej: Tornillo, Doña Óxido…" style="width:100%;box-sizing:border-box;margin-top:6px;padding:12px 14px;border:2px solid var(--line);border-radius:12px;font-family:var(--font-body);font-size:15px;font-weight:600;color:var(--ink);outline:none;">
         </div>
         <div>
-          <label style="font-size:11px;font-weight:800;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em;">¿Es aliado o villano?</label>
-          <div style="display:flex;gap:10px;margin-top:6px;">
-            <button type="button" id="sec-tipo-aliado" class="sec-tipo-btn" data-tipo="aliado" style="flex:1;padding:12px;border:2px solid var(--line);border-radius:12px;background:#fff;font-family:var(--font-body);font-weight:800;font-size:14px;color:var(--ink-2);cursor:pointer;">✅ Aliado</button>
-            <button type="button" id="sec-tipo-villano" class="sec-tipo-btn" data-tipo="villano" style="flex:1;padding:12px;border:2px solid var(--line);border-radius:12px;background:#fff;font-family:var(--font-body);font-weight:800;font-size:14px;color:var(--ink-2);cursor:pointer;">😈 Villano</button>
+          <label style="font-size:11px;font-weight:800;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em;">¿Qué arquetipo es? (los 4 de la teoría)</label>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-top:6px;">
+            <button type="button" class="sec-tipo-btn" data-tipo="aliado" style="padding:12px;border:2px solid var(--line);border-radius:12px;background:#fff;font-family:var(--font-body);font-weight:800;font-size:14px;color:var(--ink-2);cursor:pointer;">🤝 Aliado</button>
+            <button type="button" class="sec-tipo-btn" data-tipo="mentor" style="padding:12px;border:2px solid var(--line);border-radius:12px;background:#fff;font-family:var(--font-body);font-weight:800;font-size:14px;color:var(--ink-2);cursor:pointer;">🦉 Mentor</button>
+            <button type="button" class="sec-tipo-btn" data-tipo="villano" style="padding:12px;border:2px solid var(--line);border-radius:12px;background:#fff;font-family:var(--font-body);font-weight:800;font-size:14px;color:var(--ink-2);cursor:pointer;">😈 Villano</button>
+            <button type="button" class="sec-tipo-btn" data-tipo="comico" style="padding:12px;border:2px solid var(--line);border-radius:12px;background:#fff;font-family:var(--font-body);font-weight:800;font-size:14px;color:var(--ink-2);cursor:pointer;">😂 Cómico</button>
           </div>
         </div>
         <div>
@@ -424,22 +426,30 @@ nav.lessonnav .lnav-btn.next-btn .ti  { font-size: 16px; font-weight: 900; color
     var sb = window._supabase; if (!sb) return;
     var u = (await sb.auth.getUser()).data.user; if (!u) return;
     var r = await sb.from('personajes_secundarios').select('id,nombre,tipo,imagen_retrato_url').eq('user_id', u.id);
-    var rows = (r.data || []).filter(function(x){ return x.tipo === 'aliado' || x.tipo === 'villano'; });
+    var TIPOS = {
+      aliado:  { label: '🤝 Aliado',  color: 'var(--green)'  },
+      mentor:  { label: '🦉 Mentor',  color: 'var(--blue)'   },
+      villano: { label: '😈 Villano', color: 'var(--red)'    },
+      comico:  { label: '😂 Cómico',  color: 'var(--gold)'   }
+    };
+    var rows = (r.data || []).filter(function(x){ return TIPOS[x.tipo]; });
     var cont = $('sec-lista'); cont.innerHTML = '';
     for (var i = 0; i < rows.length; i++) {
       var p = rows[i];
       var img = '';
       if (p.imagen_retrato_url) {
         var s = await sb.storage.from('portafolio').createSignedUrl(p.imagen_retrato_url, 3600);
-        if (s.data && s.data.signedUrl) img = '<img src="' + s.data.signedUrl + '" style="width:100%;height:120px;object-fit:cover;border-radius:12px 12px 0 0;" alt="">';
+        // object-fit:contain — el retrato completo, sin recortar el rostro
+        if (s.data && s.data.signedUrl) img = '<img src="' + s.data.signedUrl + '" style="width:100%;max-height:220px;object-fit:contain;background:#EEF2FF;border-radius:12px 12px 0 0;display:block;" alt="">';
       }
       cont.innerHTML += '<div style="background:var(--card);border:2px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:var(--shadow-sm);">' + img +
         '<div style="padding:10px 12px;"><div style="font-family:var(--font-display);font-weight:700;font-size:15px;color:var(--ink);">' + p.nombre + '</div>' +
-        '<div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:' + (p.tipo === 'aliado' ? 'var(--green)' : 'var(--red)') + ';">' + (p.tipo === 'aliado' ? '✅ Aliado' : '😈 Villano') + '</div></div></div>';
+        '<div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:' + TIPOS[p.tipo].color + ';">' + TIPOS[p.tipo].label + '</div></div></div>';
     }
     var nAli = rows.filter(function(x){ return x.tipo === 'aliado'; }).length;
     var nVil = rows.filter(function(x){ return x.tipo === 'villano'; }).length;
-    $('sec-resumen').textContent = nAli + ' aliado(s) · ' + nVil + ' villano(s)' + (nAli >= 1 && nVil >= 1 ? ' — ¡Entrega completa! 🎉' : ' — necesitas al menos 1 de cada uno');
+    var nOtros = rows.length - nAli - nVil;
+    $('sec-resumen').textContent = nAli + ' aliado(s) · ' + nVil + ' villano(s)' + (nOtros ? ' · ' + nOtros + ' más' : '') + (nAli >= 1 && nVil >= 1 ? ' — ¡Entrega completa! 🎉' : ' — necesitas al menos 1 aliado y 1 villano');
     if (nAli >= 1 && nVil >= 1) { window._entregaDone = true; if (window.checkBadgeUnlock) window.checkBadgeUnlock(); }
   }
 
@@ -459,7 +469,7 @@ nav.lessonnav .lnav-btn.next-btn .ti  { font-size: 16px; font-weight: 900; color
       var nombre = $('sec-nombre').value.trim();
       var desc   = $('sec-desc').value.trim();
       if (!nombre) { status('Ponle nombre a tu personaje.', false); return; }
-      if (!tipoSel) { status('Elige si es aliado o villano.', false); return; }
+      if (!tipoSel) { status('Elige el arquetipo de tu personaje.', false); return; }
       if (!foto)   { status('Sube el retrato de tu personaje.', false); return; }
       var btn = $('sec-guardar'); btn.disabled = true; btn.textContent = '⏳ Guardando…';
       try {

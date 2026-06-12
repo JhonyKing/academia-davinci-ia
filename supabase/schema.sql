@@ -255,3 +255,12 @@ create index if not exists idx_profiles_rol
 -- alter table public.entregas drop constraint entregas_user_id_clase_num_key;
 -- alter table public.entregas add constraint entregas_user_id_clase_num_tipo_key
 --   unique (user_id, clase_num, tipo);
+
+-- ══════════════════════════════════════════════════════════════════
+--  MIGRACIÓN 2026-06-11 (3): arquetipos mentor y comico
+--  La clase 7 enseña 4 arquetipos; el check solo permitía aliado/villano
+--  (+neutral/neutro/protagonista_anterior). Ya aplicada en prod:
+-- ══════════════════════════════════════════════════════════════════
+-- alter table public.personajes_secundarios drop constraint personajes_secundarios_tipo_check;
+-- alter table public.personajes_secundarios add constraint personajes_secundarios_tipo_check
+--   check (tipo = any (array['aliado','mentor','villano','comico','neutral','neutro','protagonista_anterior']));
