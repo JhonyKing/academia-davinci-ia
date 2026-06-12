@@ -312,6 +312,12 @@
       }
     }
 
+    // Destino al toparse con un candado: cuenta gratis en clase de paga → página
+    // de pago (momento de venta, ahí ve todo lo que ya creó); si ya pagó → mapa.
+    const lockRedirect = (CLASE_NUM && CLASE_NUM > CLASES_GRATIS && !profile?.activo)
+      ? 'pago.html?clase=' + CLASE_NUM
+      : 'index.html'
+
     // ── Bloqueo secuencial: clase N requiere clase N-1 completada ────────────
     if (CLASE_NUM && CLASE_NUM > 1 && profile?.rol !== 'instructor') {
       const { data: prevProgress } = await sb
@@ -322,7 +328,7 @@
         .maybeSingle()
 
       if (!prevProgress?.completada) {
-        window.location.href = 'index.html'
+        window.location.href = lockRedirect
         return
       }
     }
@@ -337,7 +343,7 @@
         .maybeSingle()
 
       if (!ckProgress?.completada) {
-        window.location.href = 'index.html'
+        window.location.href = lockRedirect
         return
       }
     }
