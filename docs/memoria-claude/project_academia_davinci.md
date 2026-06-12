@@ -18,9 +18,9 @@ metadata:
 - ✅ **Paywall**: clases 5+ requieren `profile.activo = true`
 - ✅ **Stripe + webhook** en `api/webhook.js` → `inviteUserByEmail` al comprar
 - ✅ **Email SMTP**: Resend vía `smtp.resend.com:465`, usuario=`resend`, pw=API key
-- ✅ **Contador de tiempo**: `session-tracker.js` guarda en tabla `sesiones`; visible en `progreso.html` y en `mi-personaje.html` (modal de bienvenida + widget inline)
+- ✅ **Contador de tiempo**: `session-tracker.js` guarda en tabla `sesiones`; visible en `progreso.html` y en `mi-estudio.html` (modal de bienvenida + widget inline)
 - ✅ **Panel de Papás**: `progreso.html` — tiempo total, tiempo hoy, últimos 7 días, logros, actividad
-- ✅ **Mi Personaje**: `mi-personaje.html` — portafolio del alumno con todas sus entregas
+- ✅ **Mi Personaje**: `mi-estudio.html` — portafolio del alumno con todas sus entregas
 - ⏳ **Pendiente**: videos de clases 6-26, modo live de Stripe, verificación dominio Resend
 
 **GitHub**: https://github.com/JhonyKing/academia-davinci-ia

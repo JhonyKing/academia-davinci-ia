@@ -125,7 +125,7 @@ clases/
 ├── login.html              ← Login + recuperar contraseña + nueva contraseña
 ├── pago.html               ← Checkout Stripe
 ├── progreso.html           ← Panel de papás: tiempo, logros, actividad
-├── mi-personaje.html       ← Portafolio del alumno (sus entregas visualizadas)
+├── mi-estudio.html       ← Portafolio del alumno (sus entregas visualizadas)
 ├── bienvenida.html         ← Página de bienvenida post-registro
 ├── mapa.html               ← Mapa visual del curso (alternativo a index)
 ├── clase1_bienvenido_genio.html
@@ -280,7 +280,7 @@ Secciones de texto, video embed de YouTube, diagramas, interactividades.
 | `login.html` | Auth: login + recuperar contraseña + nueva contraseña (flujo de invite) |
 | `pago.html` | Checkout Stripe: botón que redirige a Stripe Checkout |
 | `progreso.html` | Panel de papás: tiempo total/hoy/7d, logros, clases, actividad |
-| `mi-personaje.html` | Portafolio del alumno: todas sus entregas, personaje, tiempo de estudio |
+| `mi-estudio.html` | Portafolio del alumno: todas sus entregas, personaje, tiempo de estudio |
 | `bienvenida.html` | Mostrada al nuevo alumno después de registrarse |
 
 **Estas páginas NO deben tener `dvMarkClassComplete`, quiz, ni entrega-widget.**
@@ -317,7 +317,7 @@ Secciones de texto, video embed de YouTube, diagramas, interactividades.
 - Expone `window.dvSessionSecs()` → segundos totales de la sesión
 - DEBE cargarse en TODAS las páginas donde el alumno pasa tiempo: 26 clases, checkpoints,
   index, galeria, mi-personaje, progreso
-- `progreso.html` y `mi-personaje.html` suman las filas de `sesiones` (campos: duracion_segundos, inicio)
+- `progreso.html` y `mi-estudio.html` suman las filas de `sesiones` (campos: duracion_segundos, inicio)
 
 ---
 
