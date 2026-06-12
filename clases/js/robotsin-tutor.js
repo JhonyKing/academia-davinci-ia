@@ -174,9 +174,15 @@
   // Vista previa local: window.claude.complete si existe.
   async function askAI() {
     try {
+      var headers = { 'Content-Type': 'application/json' };
+      // Adjuntar token de sesión para que el backend valide que es un alumno real
+      if (window._supabase) {
+        var s = (await window._supabase.auth.getSession()).data.session;
+        if (s && s.access_token) headers['Authorization'] = 'Bearer ' + s.access_token;
+      }
       var r = await fetch('/api/tutor', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: headers,
         body: JSON.stringify({ context: CTX, messages: convo })
       });
       if (r.ok) {

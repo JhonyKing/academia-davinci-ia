@@ -740,14 +740,13 @@ if (/vercel\.app$|academiadavinci|genioscreativos/.test(location.hostname)) {
       var path = user.id + '/clase1/' + Date.now() + '.' + ext;
       var upErr = (await sb.storage.from('portafolio').upload(path, selectedFile, { upsert: true })).error;
       if (upErr) throw upErr;
-      var signData = (await sb.storage.from('portafolio').createSignedUrl(path, 60*60*24*365)).data;
-      var publicUrl = (signData && signData.signedUrl) || '';
-      // check existing
+      // Guardar el PATH del storage, no una URL firmada de 1 año (privacidad
+      // de menores): mi-estudio/pago re-firman al vuelo por 1h al mostrar.
       var existingRow = (await sb.from('entregas').select('id').eq('user_id', user.id).eq('clase_num', 1).eq('tipo', 'imagen').maybeSingle()).data;
       if (existingRow) {
-        await sb.from('entregas').update({ archivo_url: publicUrl, archivo_nombre: selectedFile.name, metadata: { storage_path: path } }).eq('id', existingRow.id);
+        await sb.from('entregas').update({ archivo_url: path, archivo_nombre: selectedFile.name, metadata: { storage_path: path } }).eq('id', existingRow.id);
       } else {
-        await sb.from('entregas').insert({ user_id: user.id, clase_num: 1, tipo: 'imagen', archivo_url: publicUrl, archivo_nombre: selectedFile.name, metadata: { storage_path: path } });
+        await sb.from('entregas').insert({ user_id: user.id, clase_num: 1, tipo: 'imagen', archivo_url: path, archivo_nombre: selectedFile.name, metadata: { storage_path: path } });
       }
       prev.style.display = 'none';
       succ.style.display = 'block';

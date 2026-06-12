@@ -9,9 +9,31 @@
 // ──────────────────────────────────────────────────────────────────────────
 
 import Anthropic from '@anthropic-ai/sdk'
+import { createClient } from '@supabase/supabase-js'
 
 const MAX_TURNOS = 12          // solo se envían los últimos N mensajes
 const MAX_CHARS_MSG = 500      // recorte defensivo por mensaje
+
+const SUPABASE_URL = process.env.SUPABASE_URL || 'https://joiuvopzkorvmxegnjqg.supabase.co'
+const SUPABASE_ANON = process.env.SUPABASE_ANON_KEY ||
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpvaXV2b3B6a29ydm14ZWduanFnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAyOTc3OTEsImV4cCI6MjA5NTg3Mzc5MX0.Xf9wf5zngrvpaeZTbee0zd0LL5YoFtX8hwoYxCwrWnc'
+
+// Verifica que el token JWT pertenezca a un usuario real (alumno logueado).
+// Evita que cualquiera en internet gaste la API key de Anthropic.
+async function usuarioValido(req) {
+  const auth = req.headers.authorization || ''
+  const token = auth.startsWith('Bearer ') ? auth.slice(7) : ''
+  if (!token) return false
+  try {
+    const sb = createClient(SUPABASE_URL, SUPABASE_ANON, {
+      auth: { autoRefreshToken: false, persistSession: false },
+    })
+    const { data, error } = await sb.auth.getUser(token)
+    return !error && !!data?.user
+  } catch (_) {
+    return false
+  }
+}
 
 function personaDe(contexto) {
   return (
@@ -37,6 +59,11 @@ export default async function handler(req, res) {
 
   const apiKey = process.env.ANTHROPIC_API_KEY
   if (!apiKey) return res.status(503).json({ error: 'Tutor no configurado' })
+
+  // Solo alumnos con sesión válida (protege la API key contra abuso externo)
+  if (!(await usuarioValido(req))) {
+    return res.status(401).json({ error: 'Inicia sesión para hablar con Robotsin' })
+  }
 
   const { context = 'una clase de creatividad con IA', messages = [] } = req.body || {}
 
