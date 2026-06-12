@@ -198,6 +198,17 @@
       .bienvenida-wrap { padding: 0 16px 60px; }
     }
   </style>
+<!-- Meta Pixel -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '2057118591823317');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=2057118591823317&ev=PageView&noscript=1"></noscript>
 </head>
 <body>
 
@@ -292,5 +303,22 @@
   <b>Academia Da Vinci IA</b> — Curso de cine digital con IA para niños
 </footer>
 
+<script>
+// Meta Pixel: compra confirmada (llegamos aqui desde el checkout de Stripe).
+// Dedupe con localStorage para no contar recargas de la misma sesion de pago.
+(function(){
+  var q = new URLSearchParams(location.search)
+  var sid = q.get('session_id')
+  if (!sid || !window.fbq) return
+  var KEY = 'fb_purchase_' + sid
+  try { if (localStorage.getItem(KEY)) return; localStorage.setItem(KEY, '1') } catch(e){}
+  var monthly = q.get('plan') === 'monthly'
+  fbq('track', 'Purchase', {
+    value: monthly ? 30 : 147,
+    currency: 'USD',
+    content_name: monthly ? 'Plan Mensual' : 'Acceso de por vida'
+  })
+})()
+</script>
 </body>
 </html>

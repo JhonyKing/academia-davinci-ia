@@ -43,7 +43,7 @@ export default async function handler(req, res) {
       line_items: [{ price: priceId, quantity: 1 }],
       customer_email: email,
       metadata: { nombre_alumno, edad_alumno, email, plan, source: 'academia-davinci-ia' },
-      success_url: `${siteUrl}/bienvenida.html?session_id={CHECKOUT_SESSION_ID}`,
+      success_url: `${siteUrl}/bienvenida.html?session_id={CHECKOUT_SESSION_ID}&plan=${plan}`,
       cancel_url:  `${siteUrl}/pago.html?cancelado=1`,
       locale: 'es',
       allow_promotion_codes: true,

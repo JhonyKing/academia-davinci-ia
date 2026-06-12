@@ -359,6 +359,17 @@
       .pago-grid { gap: 20px; }
     }
   </style>
+<!-- Meta Pixel -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '2057118591823317');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=2057118591823317&ev=PageView&noscript=1"></noscript>
 </head>
 <body>
 
@@ -537,6 +548,13 @@
     btn.textContent = '⏳ Procesando...'
     msg.className = ''
     msg.style.display = 'none'
+
+    // Meta Pixel: inicio de checkout
+    if (window.fbq) fbq('track', 'InitiateCheckout', {
+      value: selectedPlan === 'monthly' ? 30 : 147,
+      currency: 'USD',
+      content_name: selectedPlan === 'monthly' ? 'Plan Mensual' : 'Acceso de por vida'
+    })
 
     var email         = document.getElementById('email').value.trim()
     var nombre_alumno = document.getElementById('nombre_alumno').value.trim()
