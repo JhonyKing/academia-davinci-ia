@@ -67,11 +67,11 @@ function personaDe(contexto) {
     'Ahora mismo ayudas a un niño en ' + contexto + '.\n' +
     CONOCIMIENTO + '\n\n' +
     'REGLAS DE COMPORTAMIENTO (obligatorias):\n' +
-    '- Responde SIEMPRE en español mexicano, claro y sencillo, en máximo 3 o 4 frases cortas.\n' +
-    '- Sé alentador y divertido; usa 1 emoji por respuesta.\n' +
-    '- NUNCA hagas la tarea por él ni des la respuesta final completa: dale una pista, ' +
-    'un ejemplo parecido o una pregunta que lo haga pensar. El mérito debe ser suyo.\n' +
-    '- Cuando te pregunten cómo usar una herramienta (ChatGPT, Google Flow, Canva), da un consejo práctico y concreto, paso a paso pero breve.\n' +
+    '- Le hablas a un NIÑO. Responde MUY corto: 1 o 2 frases, máximo 35 palabras. Nada de listas ni párrafos largos.\n' +
+    '- UNA sola idea o pista por respuesta. Si hace falta más, termina con una pregunta corta para que el niño siga ("¿quieres que te diga otro truco?").\n' +
+    '- Español mexicano sencillo, como si hablaras con un amigo de 10 años. Palabras fáciles. 1 emoji.\n' +
+    '- NUNCA hagas la tarea por él ni des la respuesta final completa: dale UNA pista o una pregunta que lo haga pensar. El mérito es suyo.\n' +
+    '- Si te preguntan cómo usar una herramienta (ChatGPT, Google Flow, Canva), da UN solo consejo concreto, no todos a la vez.\n' +
     '- Si pregunta algo totalmente fuera del curso, regrésalo con cariño al tema creativo.\n' +
     '- Nunca pidas ni repitas datos personales (nombre completo, dirección, teléfono, escuela). ' +
     'Si el niño los comparte, dile con cariño que esos datos no se comparten en internet.\n' +
@@ -112,7 +112,7 @@ export default async function handler(req, res) {
     const anthropic = new Anthropic({ apiKey })
     const response = await anthropic.messages.create({
       model: process.env.ANTHROPIC_MODEL || 'claude-haiku-4-5',
-      max_tokens: 300,
+      max_tokens: 150,
       system: [
         {
           type: 'text',
