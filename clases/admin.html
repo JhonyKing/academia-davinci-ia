@@ -423,7 +423,9 @@
         <thead>
           <tr>
             <th>Alumno</th>
+            <th>Plan</th>
             <th>Clase actual</th>
+            <th>Material</th>
             <th>Completadas</th>
             <th>Progreso</th>
             <th>Último acceso</th>
@@ -432,7 +434,7 @@
         </thead>
         <tbody id="alumnos-tbody">
           <tr class="loading-row">
-            <td colspan="6">
+            <td colspan="8">
               <span class="spinner-inline"></span>
               Cargando alumnos...
             </td>
@@ -539,22 +541,22 @@
     const tbody = document.getElementById('alumnos-tbody')
     tbody.innerHTML = `
       <tr class="loading-row">
-        <td colspan="6"><span class="spinner-inline"></span> Cargando alumnos...</td>
+        <td colspan="8"><span class="spinner-inline"></span> Cargando alumnos...</td>
       </tr>`
 
     // 1. Obtener todos los perfiles que son alumnos
     const { data: profiles, error: pErr } = await sb
       .from('profiles')
-      .select('id, nombre, email, fecha_inicio, ultimo_acceso')
+      .select('id, nombre, email, fecha_inicio, ultimo_acceso, activo')
       .eq('rol', 'alumno')
       .order('fecha_inicio', { ascending: false })
 
     if (pErr) {
-      tbody.innerHTML = `<tr class="loading-row"><td colspan="6" style="color:#E74C3C">Error al cargar: ${pErr.message}</td></tr>`
+      tbody.innerHTML = `<tr class="loading-row"><td colspan="8" style="color:#E74C3C">Error al cargar: ${pErr.message}</td></tr>`
       return
     }
     if (!profiles || profiles.length === 0) {
-      tbody.innerHTML = `<tr class="loading-row"><td colspan="6" style="color:rgba(255,255,255,0.3)">No hay alumnos registrados aún.</td></tr>`
+      tbody.innerHTML = `<tr class="loading-row"><td colspan="8" style="color:rgba(255,255,255,0.3)">No hay alumnos registrados aún.</td></tr>`
       updateStats([], [])
       return
     }
@@ -570,13 +572,26 @@
     const progressByUser = {}
     ;(progress || []).forEach(row => {
       if (!progressByUser[row.user_id]) progressByUser[row.user_id] = []
-      progressByUser[row.user_id].push(row.clase_num)
+      if (row.clase_num <= TOTAL_CLASES) progressByUser[row.user_id].push(row.clase_num)
     })
+
+    // 2b. Contar material subido (entregas) por alumno
+    const entregasByUser = {}
+    try {
+      const { data: entregas } = await sb
+        .from('entregas')
+        .select('user_id, clase_num')
+        .in('user_id', userIds)
+      ;(entregas || []).forEach(row => {
+        entregasByUser[row.user_id] = (entregasByUser[row.user_id] || 0) + 1
+      })
+    } catch (_) { /* si falta la política RLS, queda en 0 */ }
 
     // 3. Renderizar tabla
     window._alumnos = profiles.map(p => ({
       ...p,
       clases: progressByUser[p.id] || [],
+      entregas: entregasByUser[p.id] || 0,
     }))
 
     updateStats(window._alumnos, progress || [])
@@ -606,7 +621,7 @@
   function renderTable(alumnos) {
     const tbody = document.getElementById('alumnos-tbody')
     if (alumnos.length === 0) {
-      tbody.innerHTML = `<tr class="loading-row"><td colspan="6" style="color:rgba(255,255,255,0.3)">Ningún alumno coincide con la búsqueda.</td></tr>`
+      tbody.innerHTML = `<tr class="loading-row"><td colspan="8" style="color:rgba(255,255,255,0.3)">Ningún alumno coincide con la búsqueda.</td></tr>`
       return
     }
 
@@ -627,9 +642,17 @@
             </div>
           </td>
           <td>
+            ${a.activo
+              ? `<span class="clase-badge" style="background:rgba(34,194,104,.18);color:#7DF0A8;border-color:rgba(34,194,104,.4)">💳 Pagó</span>`
+              : `<span class="clase-badge" style="background:rgba(255,176,32,.15);color:#FFD86E;border-color:rgba(255,176,32,.35)">🎁 Gratis</span>`}
+          </td>
+          <td>
             ${claseActual > 0
               ? `<span class="clase-badge">Clase ${claseActual}</span>`
               : `<span style="color:rgba(255,255,255,0.25);font-size:12px">Sin inicio</span>`}
+          </td>
+          <td style="font-weight:700; color: ${a.entregas > 0 ? 'var(--blue,#4A90D9)' : 'rgba(255,255,255,0.3)'}">
+            ${a.entregas > 0 ? `📎 ${a.entregas}` : '—'}
           </td>
           <td style="font-weight:700; color: ${completadas > 0 ? 'var(--green)' : 'rgba(255,255,255,0.3)'}">
             ${completadas} / ${TOTAL_CLASES}

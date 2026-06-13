@@ -264,3 +264,12 @@ create index if not exists idx_profiles_rol
 -- alter table public.personajes_secundarios drop constraint personajes_secundarios_tipo_check;
 -- alter table public.personajes_secundarios add constraint personajes_secundarios_tipo_check
 --   check (tipo = any (array['aliado','mentor','villano','comico','neutral','neutro','protagonista_anterior']));
+
+-- ══════════════════════════════════════════════════════════════════
+--  MIGRACIÓN 2026-06-13: instructor puede ver entregas y secundarios
+--  (panel admin.html — columna "Material"). Aplicar en SQL Editor:
+-- ══════════════════════════════════════════════════════════════════
+-- create policy "instructor_ver_entregas" on public.entregas for select
+--   using (exists (select 1 from public.profiles where id = auth.uid() and rol = 'instructor'));
+-- create policy "instructor_ver_secundarios" on public.personajes_secundarios for select
+--   using (exists (select 1 from public.profiles where id = auth.uid() and rol = 'instructor'));
